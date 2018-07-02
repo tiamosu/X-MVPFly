@@ -19,7 +19,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation global.appcompat_v7()
+    compileOnly global.appcompat_v7()
+    //常用的util库
+    api global.utilcode()
 }
 
 tasks.withType(Javadoc) {

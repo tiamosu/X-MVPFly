@@ -18,7 +18,9 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':x-baseproject')
+
     implementation global.appcompat_v7()
     implementation global.constraintLayout()
 }
