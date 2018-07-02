@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion global.compileSdkVersion()
@@ -19,4 +20,19 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation global.appcompat_v7()
+}
+
+tasks.withType(Javadoc) {
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
+}
+
+publish {
+    userOrg = 'weixia'//bintray.com用户名
+    groupId = 'com.xia'//jcenter上的路径
+    artifactId = 'x-baseproject'//项目名称
+    publishVersion = '1.0.0'//版本号
+    desc = 'Oh hi, this is a nice description for a project, right?'//描述，不重要
+    website = 'https://github.com/wexia/X-BaseProject'//网站，不重要；尽量模拟github上的地址，例如我这样的；当然你有地址最好了
 }
