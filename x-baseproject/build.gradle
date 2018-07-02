@@ -19,7 +19,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    compileOnly global.appcompat_v7()
+    implementation global.appcompat_v7()
     //常用的util库
     api global.utilcode()
 }
