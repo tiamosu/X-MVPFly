@@ -1,4 +1,4 @@
-package com.xia.baseproject.demo;
+package com.xia.baseproject.demo.ui.fragments;
 
 import android.content.Intent;
 import android.util.Log;
@@ -6,8 +6,9 @@ import android.util.Log;
 import com.blankj.utilcode.constant.PermissionConstants;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.PermissionUtils;
+import com.xia.baseproject.demo.R;
+import com.xia.baseproject.demo.base.AbstractHeadViewDelegate;
 import com.xia.baseproject.demo.helper.DialogHelper;
-import com.xia.baseproject.fragments.BaseDelegate;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ import butterknife.OnClick;
  * @author xia
  * @date 2018/7/3.
  */
-public class MainDelegate extends BaseDelegate {
+public class MainDelegate extends AbstractHeadViewDelegate {
 
     @Override
     public int getLayoutId() {
@@ -58,7 +59,7 @@ public class MainDelegate extends BaseDelegate {
     private boolean mIsToAppSetting = false;
 
     private void permission() {
-        PermissionUtils.permission(PermissionConstants.PHONE, PermissionConstants.STORAGE)
+        PermissionUtils.permission(PermissionConstants.CAMERA, PermissionConstants.STORAGE)
                 .rationale(shouldRequest -> {
                     LogUtils.dTag("weixi", "rationale");
                     DialogHelper.showRationaleDialog(MainDelegate.this, shouldRequest);

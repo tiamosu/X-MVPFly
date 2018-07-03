@@ -33,7 +33,7 @@ public abstract class BaseDelegate extends AbstractSupportFragment {
         return true;
     }
 
-    protected void onCreateHeadView(View rootView) {
+    protected void onCreateHeadView(FrameLayout rootView) {
     }
 
     @Nullable

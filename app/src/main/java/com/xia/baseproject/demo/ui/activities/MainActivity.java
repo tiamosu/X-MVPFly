@@ -1,4 +1,4 @@
-package com.xia.baseproject.demo;
+package com.xia.baseproject.demo.ui.activities;
 
 import android.content.pm.ActivityInfo;
 import android.view.MotionEvent;
@@ -6,6 +6,7 @@ import android.view.Window;
 import android.widget.EditText;
 
 import com.xia.baseproject.activities.ProxyActivity;
+import com.xia.baseproject.demo.ui.fragments.MainDelegate;
 import com.xia.baseproject.fragments.BaseDelegate;
 
 /**
