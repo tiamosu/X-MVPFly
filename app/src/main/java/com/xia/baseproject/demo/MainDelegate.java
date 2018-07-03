@@ -61,7 +61,7 @@ public class MainDelegate extends BaseDelegate {
         PermissionUtils.permission(PermissionConstants.PHONE, PermissionConstants.STORAGE)
                 .rationale(shouldRequest -> {
                     LogUtils.dTag("weixi", "rationale");
-                    DialogHelper.showRationaleDialog(getContext(), shouldRequest);
+                    DialogHelper.showRationaleDialog(MainDelegate.this, shouldRequest);
                 })
                 .callback(new PermissionUtils.FullCallback() {
                     @Override
@@ -72,7 +72,7 @@ public class MainDelegate extends BaseDelegate {
                     @Override
                     public void onDenied(List<String> permissionsDeniedForever,
                                          List<String> permissionsDenied) {
-                        DialogHelper.showOpenAppSettingDialog(getContext());
+                        DialogHelper.showOpenAppSettingDialog(MainDelegate.this);
                         LogUtils.dTag("weixi", permissionsDeniedForever, permissionsDenied);
                     }
                 })
@@ -82,9 +82,8 @@ public class MainDelegate extends BaseDelegate {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.e("weixi", "zzzzz:");
-//        if (requestCode == DialogHelper.APP_SETTINGS_CODE) {
-//            mIsToAppSetting = true;
-//        }
+        if (requestCode == DialogHelper.APP_SETTINGS_CODE) {
+            mIsToAppSetting = true;
+        }
     }
 }
