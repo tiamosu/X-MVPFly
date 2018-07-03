@@ -19,9 +19,12 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation global.appcompat_v7()
+    api global.appcompat_v7()
+    api global.multidex()
     //常用的util库
     api global.utilcode()
+    //fragment框架
+    implementation global.fragmentation_core()
 }
 
 tasks.withType(Javadoc) {
@@ -34,7 +37,7 @@ publish {
     userOrg = 'weixia'//bintray.com用户名
     groupId = 'com.xia'//jcenter上的路径
     artifactId = 'x-baseproject'//项目名称
-    publishVersion = '1.0.0'//版本号
+    publishVersion = '1.0.2'//版本号
     desc = 'Oh hi, this is a nice description for a project, right?'//描述，不重要
     website = 'https://github.com/wexia/X-BaseProject'//网站，不重要；尽量模拟github上的地址，例如我这样的；当然你有地址最好了
 }

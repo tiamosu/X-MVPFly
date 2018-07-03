@@ -8,6 +8,9 @@ android {
         targetSdkVersion global.targetSdkVersion()
         versionCode version_code
         versionName version_name
+
+        //启用multiDex的支持
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -15,12 +18,44 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    dexOptions {
+        //最大堆内存
+        setJavaMaxHeapSize("4g")
+        //是否支持大工程模式
+        setJumboMode(true)
+        //预编译
+        setPreDexLibraries(true)
+        //线程数
+        setThreadCount(8)
+    }
+    packagingOptions {
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/LGPL2.1'
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+        ignoreWarnings true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':x-baseproject')
 
-    implementation global.appcompat_v7()
     implementation global.constraintLayout()
 }

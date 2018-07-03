@@ -10,7 +10,9 @@ public class MyApp extends BaseApp {
 
     @Override
     public void onCreate() {
+        if (!isMainThread()) {
+            return;
+        }
         super.onCreate();
-
     }
 }
