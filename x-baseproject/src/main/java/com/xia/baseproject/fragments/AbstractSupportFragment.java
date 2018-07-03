@@ -5,10 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.animation.Animation;
+
+import com.trello.rxlifecycle2.components.support.RxFragment;
 
 import me.yokeyword.fragmentation.ExtraTransaction;
 import me.yokeyword.fragmentation.ISupportFragment;
@@ -21,7 +22,7 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator;
  * @date 2018/7/3.
  */
 @SuppressWarnings("all")
-public abstract class AbstractSupportFragment extends Fragment implements ISupportFragment {
+public abstract class AbstractSupportFragment extends RxFragment implements ISupportFragment {
     private final SupportFragmentDelegate mDelegate = new SupportFragmentDelegate(this);
     protected FragmentActivity _mActivity;
 

@@ -31,6 +31,8 @@ dependencies {
     //butterknife
     api global.butterknife()
     annotationProcessor global.butterknife_apt()
+    //rx
+    api global.rxlifecycle2_components()
 }
 
 tasks.withType(Javadoc) {
