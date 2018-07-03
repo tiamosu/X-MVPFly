@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
 apply plugin: 'com.novoda.bintray-release'
 
 android {
@@ -19,12 +20,17 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    api global.appcompat_v7()
-    api global.multidex()
+    //support
+    implementation global.multidex()
+    implementation global.appcompat_v7()
+    implementation global.constraintLayout()
     //常用的util库
     api global.utilcode()
     //fragment框架
-    implementation global.fragmentation_core()
+    api global.fragmentation_core()
+    //butterknife
+    api global.butterknife()
+    annotationProcessor global.butterknife_apt()
 }
 
 tasks.withType(Javadoc) {

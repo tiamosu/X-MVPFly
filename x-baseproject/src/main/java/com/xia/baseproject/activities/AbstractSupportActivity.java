@@ -20,7 +20,7 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator;
  * @author xia
  * @date 2018/7/3.
  */
-public class AbstractSupportActivity extends AppCompatActivity implements ISupportActivity {
+public abstract class AbstractSupportActivity extends AppCompatActivity implements ISupportActivity {
     final SupportActivityDelegate mDelegate = new SupportActivityDelegate(this);
 
     @Override
