@@ -13,8 +13,8 @@ import com.xia.baseproject.fragments.BaseDelegate;
 public abstract class AbstractHeadViewDelegate extends BaseDelegate {
 
     @Override
-    protected void onCreateHeadView(FrameLayout rootView) {
+    protected void onCreateHeadView(FrameLayout headContainer) {
         final View headView = View.inflate(getContext(), R.layout.layout_head_view, null);
-        rootView.addView(headView);
+        headContainer.addView(headView);
     }
 }

@@ -33,13 +33,13 @@ public abstract class BaseDelegate extends AbstractSupportFragment {
         return true;
     }
 
-    protected void onCreateHeadView(FrameLayout rootView) {
+    protected void onCreateHeadView(FrameLayout headContainer) {
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.layout_root_view, container, false);
+        final View rootView = inflater.inflate(R.layout.base_layout_root_view, container, false);
         if (isLoadHeadView()) {
             final FrameLayout headContainer = rootView.findViewById(R.id.layout_root_view_head_container);
             onCreateHeadView(headContainer);
