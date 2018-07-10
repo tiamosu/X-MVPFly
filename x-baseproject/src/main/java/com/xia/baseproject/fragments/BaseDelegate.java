@@ -86,8 +86,9 @@ public abstract class BaseDelegate extends AbstractSupportFragment {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public static <T extends ISupportFragment> T newInstance(
-            final Class<?> cls, final Bundle bundle) {
+            final Class cls, final Bundle bundle) {
         try {
             final T t = (T) cls.newInstance();
             if (bundle != null && !bundle.isEmpty()) {

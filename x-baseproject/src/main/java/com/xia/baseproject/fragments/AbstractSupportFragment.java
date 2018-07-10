@@ -31,6 +31,7 @@ public abstract class AbstractSupportFragment extends RxFragment implements ISup
         return _mActivity;
     }
 
+    @SuppressWarnings("unchecked")
     public <T extends AbstractSupportFragment> T getParentDelegate() {
         return (T) getParentFragment();
     }
