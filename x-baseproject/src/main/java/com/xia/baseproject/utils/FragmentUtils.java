@@ -9,7 +9,12 @@ import me.yokeyword.fragmentation.ISupportFragment;
  * @author xia
  * @date 2018/7/10.
  */
+@SuppressWarnings("WeakerAccess")
 public final class FragmentUtils {
+
+    public static <T extends ISupportFragment> T newInstance(final Class cls) {
+        return newInstance(cls, null);
+    }
 
     @SuppressWarnings("unchecked")
     public static <T extends ISupportFragment> T newInstance(
