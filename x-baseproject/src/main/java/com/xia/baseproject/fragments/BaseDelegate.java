@@ -71,8 +71,8 @@ public abstract class BaseDelegate extends AbstractSupportFragment {
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    public void onDestroy() {
+        super.onDestroy();
         if (mUnbinder != null) {
             mUnbinder.unbind();
         }
