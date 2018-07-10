@@ -36,6 +36,13 @@ public abstract class ProxyActivity extends AbstractSupportActivity {
         initContainer(savedInstanceState);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        System.gc();
+        System.runFinalization();
+    }
+
     /**
      * before the setContentView(view)
      */

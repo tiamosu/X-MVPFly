@@ -3,6 +3,7 @@ package com.xia.baseproject.fragments;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import com.xia.baseproject.R;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import me.yokeyword.fragmentation.ISupportFragment;
 
 /**
  * @author xia
@@ -36,6 +38,9 @@ public abstract class BaseDelegate extends AbstractSupportFragment {
     protected void onCreateHeadView(FrameLayout headContainer) {
     }
 
+    protected void getBundleExtras(Bundle bundle) {
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -55,9 +60,16 @@ public abstract class BaseDelegate extends AbstractSupportFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        getBundle(getArguments());
         initData();
         initView();
         initEvent();
+    }
+
+    @Override
+    public void onNewBundle(Bundle args) {
+        super.onNewBundle(args);
+        getBundle(args);
     }
 
     @Override
@@ -66,5 +78,26 @@ public abstract class BaseDelegate extends AbstractSupportFragment {
         if (mUnbinder != null) {
             mUnbinder.unbind();
         }
+    }
+
+    private void getBundle(Bundle bundle) {
+        if (bundle != null && !bundle.isEmpty()) {
+            getBundleExtras(bundle);
+        }
+    }
+
+    public static <T extends ISupportFragment> T newInstance(
+            final Class<?> cls, final Bundle bundle) {
+        try {
+            final T t = (T) cls.newInstance();
+            if (bundle != null && !bundle.isEmpty()) {
+                ((Fragment) t).setArguments(bundle);
+                t.putNewBundle(bundle);
+            }
+            return t;
+        } catch (IllegalAccessException ignored) {
+        } catch (java.lang.InstantiationException ignored) {
+        }
+        return null;
     }
 }
