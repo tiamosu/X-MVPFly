@@ -9,6 +9,9 @@ import com.xia.baseproject.activities.ProxyActivity;
 import com.xia.baseproject.demo.ui.fragments.MainDelegate;
 import com.xia.baseproject.fragments.BaseDelegate;
 
+import me.yokeyword.fragmentation.anim.DefaultNoAnimator;
+import me.yokeyword.fragmentation.anim.FragmentAnimator;
+
 /**
  * @author xia
  */
@@ -28,5 +31,10 @@ public class MainActivity extends ProxyActivity {
     @Override
     protected void dispatchTouchHideKeyboard(EditText editText, MotionEvent event) {
         editText.setFocusable(false);
+    }
+
+    @Override
+    public FragmentAnimator onCreateFragmentAnimator() {
+        return new DefaultNoAnimator();
     }
 }

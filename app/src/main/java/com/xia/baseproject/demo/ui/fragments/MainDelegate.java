@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.blankj.utilcode.constant.PermissionConstants;
-import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.PermissionUtils;
 import com.xia.baseproject.demo.R;
 import com.xia.baseproject.demo.base.AbstractHeadViewDelegate;
@@ -27,6 +26,7 @@ public class MainDelegate extends AbstractHeadViewDelegate {
 
     @Override
     public void initData() {
+        Log.e("weixi", "initData");
     }
 
     @Override
@@ -35,6 +35,11 @@ public class MainDelegate extends AbstractHeadViewDelegate {
 
     @Override
     public void initEvent() {
+    }
+
+    @Override
+    public void onVisibleLazyLoadData() {
+        Log.e("weixi", "onVisibleLazyLoadData");
     }
 
     @OnClick(R.id.main_btn)
@@ -60,21 +65,16 @@ public class MainDelegate extends AbstractHeadViewDelegate {
 
     private void permission() {
         PermissionUtils.permission(PermissionConstants.CAMERA, PermissionConstants.STORAGE)
-                .rationale(shouldRequest -> {
-                    LogUtils.dTag("weixi", "rationale");
-                    DialogHelper.showRationaleDialog(MainDelegate.this, shouldRequest);
-                })
+                .rationale(shouldRequest -> DialogHelper.showRationaleDialog(MainDelegate.this, shouldRequest))
                 .callback(new PermissionUtils.FullCallback() {
                     @Override
                     public void onGranted(List<String> permissionsGranted) {
-                        LogUtils.dTag("weixi", permissionsGranted);
                     }
 
                     @Override
                     public void onDenied(List<String> permissionsDeniedForever,
                                          List<String> permissionsDenied) {
                         DialogHelper.showOpenAppSettingDialog(MainDelegate.this);
-                        LogUtils.dTag("weixi", permissionsDeniedForever, permissionsDenied);
                     }
                 })
                 .request();

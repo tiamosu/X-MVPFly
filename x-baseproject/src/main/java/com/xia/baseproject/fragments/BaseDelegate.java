@@ -21,6 +21,11 @@ import butterknife.Unbinder;
 public abstract class BaseDelegate extends AbstractSupportFragment {
     private Unbinder mUnbinder = null;
 
+    /**
+     * 初始化显示页面时，不执行{@link #onSupportVisible()}方法，保证转场动画的流畅性
+     */
+    private boolean mIsInitPage = true;
+
     public abstract int getLayoutId();
 
     public abstract void initData();
@@ -28,6 +33,12 @@ public abstract class BaseDelegate extends AbstractSupportFragment {
     public abstract void initView();
 
     public abstract void initEvent();
+
+    /**
+     * 该方法用来替代{@link #onSupportVisible()}，保证转场动画的流畅性
+     */
+    public void onVisibleLazyLoadData() {
+    }
 
     protected boolean isLoadHeadView() {
         return true;
@@ -56,12 +67,22 @@ public abstract class BaseDelegate extends AbstractSupportFragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onEnterAnimationEnd(Bundle savedInstanceState) {
         getBundle(getArguments());
         initData();
         initView();
         initEvent();
+        onVisibleLazyLoadData();
+    }
+
+    @Override
+    public void onSupportVisible() {
+        if (!mIsInitPage) {
+            onVisibleLazyLoadData();
+        }
+        if (mIsInitPage) {
+            mIsInitPage = false;
+        }
     }
 
     @Override
