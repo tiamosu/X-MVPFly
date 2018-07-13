@@ -78,8 +78,7 @@ public abstract class BaseDelegate extends AbstractSupportFragment {
     public void onEnterAnimationEnd(Bundle savedInstanceState) {
         mIsOnEnterAnimationEnd = true;
         if (mIsOnSupportVisible) {
-            init();
-            onVisibleLazyLoadData();
+            initAll();
         }
     }
 
@@ -87,12 +86,11 @@ public abstract class BaseDelegate extends AbstractSupportFragment {
     public void onSupportVisible() {
         mIsOnSupportVisible = true;
         if (mIsOnEnterAnimationEnd) {
-            init();
-            onVisibleLazyLoadData();
+            initAll();
         }
     }
 
-    private void init() {
+    private void initAll() {
         if (mNeedInit) {
             mNeedInit = false;
             getBundle(getArguments());
@@ -100,6 +98,7 @@ public abstract class BaseDelegate extends AbstractSupportFragment {
             initView();
             initEvent();
         }
+        onVisibleLazyLoadData();
     }
 
     @Override
