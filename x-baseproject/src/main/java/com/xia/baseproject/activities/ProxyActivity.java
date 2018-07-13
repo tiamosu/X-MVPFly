@@ -20,8 +20,14 @@ import com.xia.baseproject.fragments.BaseDelegate;
  */
 public abstract class ProxyActivity extends AbstractSupportActivity {
 
+    /**
+     * @return 设置根Fragment
+     */
     public abstract BaseDelegate setRootDelegate();
 
+    /**
+     * @return 是否点击空白区域隐藏软键盘
+     */
     protected boolean isDispatchTouchHideKeyboard() {
         return true;
     }
