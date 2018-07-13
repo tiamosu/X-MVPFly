@@ -12,6 +12,7 @@ import com.xia.baseproject.R;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import me.yokeyword.fragmentation.ISupportFragment;
 
 /**
  * @author xia
@@ -22,9 +23,11 @@ public abstract class BaseDelegate extends AbstractSupportFragment {
     private Unbinder mUnbinder = null;
 
     /**
-     * 初始化显示页面时，不执行{@link #onSupportVisible()}方法，保证转场动画的流畅性
+     * 保证转场动画的流畅性
      */
-    private boolean mIsInitPage = true;
+    private boolean mIsOnSupportVisible;
+    private boolean mIsOnEnterAnimationEnd;
+    private boolean mNeedInit = true;
 
     public abstract int getLayoutId();
 
@@ -66,22 +69,36 @@ public abstract class BaseDelegate extends AbstractSupportFragment {
         return rootView;
     }
 
+    /**
+     * 在{@link #loadMultipleRootFragment(int, int, ISupportFragment...)}的情况下，
+     * <p>
+     * {@link #onEnterAnimationEnd(Bundle)}方法，将会先于{@link #onSupportVisible()}先执行
+     */
     @Override
     public void onEnterAnimationEnd(Bundle savedInstanceState) {
-        getBundle(getArguments());
-        initData();
-        initView();
-        initEvent();
-        onVisibleLazyLoadData();
+        mIsOnEnterAnimationEnd = true;
+        if (mIsOnSupportVisible) {
+            init();
+            onVisibleLazyLoadData();
+        }
     }
 
     @Override
     public void onSupportVisible() {
-        if (!mIsInitPage) {
+        mIsOnSupportVisible = true;
+        if (mIsOnEnterAnimationEnd) {
+            init();
             onVisibleLazyLoadData();
         }
-        if (mIsInitPage) {
-            mIsInitPage = false;
+    }
+
+    private void init() {
+        if (mNeedInit) {
+            mNeedInit = false;
+            getBundle(getArguments());
+            initData();
+            initView();
+            initEvent();
         }
     }
 
