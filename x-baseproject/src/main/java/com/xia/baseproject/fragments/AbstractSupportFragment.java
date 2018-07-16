@@ -3,7 +3,6 @@ package com.xia.baseproject.fragments;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
@@ -75,7 +74,7 @@ public abstract class AbstractSupportFragment extends RxFragment implements ISup
     }
 
     @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
+    public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         mDelegate.onSaveInstanceState(outState);
     }
@@ -125,7 +124,6 @@ public abstract class AbstractSupportFragment extends RxFragment implements ISup
      *
      * @deprecated Use {@link #post(Runnable)} instead.
      */
-    @SuppressWarnings("deprecation")
     @Deprecated
     @Override
     public void enqueueAction(Runnable runnable) {

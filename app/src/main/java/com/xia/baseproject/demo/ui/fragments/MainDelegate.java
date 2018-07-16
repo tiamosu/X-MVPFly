@@ -12,12 +12,15 @@ import com.xia.baseproject.demo.helper.DialogHelper;
 import java.util.List;
 
 import butterknife.OnClick;
+import me.yokeyword.fragmentation.ISupportFragment;
 
 /**
  * @author xia
  * @date 2018/7/3.
  */
 public class MainDelegate extends AbstractHeadViewDelegate {
+
+    private ISupportFragment[] mFragments = new ISupportFragment[1];
 
     @Override
     public int getLayoutId() {
@@ -26,7 +29,13 @@ public class MainDelegate extends AbstractHeadViewDelegate {
 
     @Override
     public void initData() {
-        Log.e("weixi", "initData");
+        final ISupportFragment firstFragment = findChildFragment(TestDelegate.class);
+        if (firstFragment == null) {
+            mFragments[0] = new TestDelegate();
+            loadMultipleRootFragment(R.id.main_fl, 0, mFragments);
+        } else {
+            mFragments[0] = firstFragment;
+        }
     }
 
     @Override
@@ -39,7 +48,6 @@ public class MainDelegate extends AbstractHeadViewDelegate {
 
     @Override
     public void onVisibleLazyLoadData() {
-        Log.e("weixi", "onVisibleLazyLoadData");
     }
 
     @OnClick(R.id.main_btn)

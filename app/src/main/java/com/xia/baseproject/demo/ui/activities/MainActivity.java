@@ -9,7 +9,7 @@ import com.xia.baseproject.activities.ProxyActivity;
 import com.xia.baseproject.demo.ui.fragments.MainDelegate;
 import com.xia.baseproject.fragments.BaseDelegate;
 
-import me.yokeyword.fragmentation.anim.DefaultNoAnimator;
+import me.yokeyword.fragmentation.anim.DefaultVerticalAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
 /**
@@ -35,6 +35,6 @@ public class MainActivity extends ProxyActivity {
 
     @Override
     public FragmentAnimator onCreateFragmentAnimator() {
-        return new DefaultNoAnimator();
+        return new DefaultVerticalAnimator();
     }
 }

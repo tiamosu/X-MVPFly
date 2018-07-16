@@ -20,8 +20,9 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator;
  * @author xia
  * @date 2018/7/3.
  */
+@SuppressWarnings("all")
 public abstract class AbstractSupportActivity extends RxAppCompatActivity implements ISupportActivity {
-    final SupportActivityDelegate mDelegate = new SupportActivityDelegate(this);
+    private final SupportActivityDelegate mDelegate = new SupportActivityDelegate(this);
 
     @Override
     public SupportActivityDelegate getSupportDelegate() {
