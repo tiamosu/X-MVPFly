@@ -1,5 +1,4 @@
 buildscript {
-
     repositories {
         maven { url 'http://maven.aliyun.com/nexus/content/repositories/google' }
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
@@ -11,7 +10,7 @@ buildscript {
         //noinspection GradleDependency
         classpath 'com.jakewharton:butterknife-gradle-plugin:8.4.0'
         classpath 'com.novoda:bintray-release:0.8.1'
-        classpath 'com.xia:x-plugin:1.0.6'
+        classpath 'com.xia:x-plugin:1.0.8'
     }
 }
 
