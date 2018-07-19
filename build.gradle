@@ -1,8 +1,7 @@
 buildscript {
     repositories {
-        maven { url 'http://maven.aliyun.com/nexus/content/repositories/google' }
-        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
-        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+        google()
+        jcenter()
         maven { url 'https://dl.bintray.com/weixia/maven' }
     }
     dependencies {
@@ -17,9 +16,8 @@ buildscript {
 allprojects {
     apply plugin: 'com.xia.global.plugin'
     repositories {
-        maven { url 'http://maven.aliyun.com/nexus/content/repositories/google' }
-        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
-        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+        google()
+        jcenter()
         maven { url 'https://dl.bintray.com/weixia/maven' }
     }
 
