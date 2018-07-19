@@ -15,6 +15,11 @@ public class TestDelegate extends AbstractHeadViewDelegate {
     }
 
     @Override
+    public Object newP() {
+        return null;
+    }
+
+    @Override
     public int getLayoutId() {
         return R.layout.fragment_test;
     }

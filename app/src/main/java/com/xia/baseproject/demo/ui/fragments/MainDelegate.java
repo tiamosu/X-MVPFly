@@ -23,6 +23,11 @@ public class MainDelegate extends AbstractHeadViewDelegate {
     private ISupportFragment[] mFragments = new ISupportFragment[1];
 
     @Override
+    public Object newP() {
+        return null;
+    }
+
+    @Override
     public int getLayoutId() {
         return R.layout.fragment_main;
     }

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.xia.baseproject.R;
+import com.xia.baseproject.mvp.BaseMvpPresenter;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -19,7 +20,7 @@ import me.yokeyword.fragmentation.ISupportFragment;
  * @date 2018/7/3.
  */
 @SuppressWarnings("all")
-public abstract class BaseDelegate extends AbstractSupportFragment {
+public abstract class BaseDelegate<P extends BaseMvpPresenter> extends AbstractMvpFragment<P> {
     private Unbinder mUnbinder = null;
 
     /**
@@ -28,14 +29,6 @@ public abstract class BaseDelegate extends AbstractSupportFragment {
     private boolean mIsOnSupportVisible;
     private boolean mIsOnEnterAnimationEnd;
     private boolean mNeedInit = true;
-
-    public abstract int getLayoutId();
-
-    public abstract void initData();
-
-    public abstract void initView();
-
-    public abstract void initEvent();
 
     /**
      * 该方法用来替代{@link #onSupportVisible()}，保证转场动画的流畅性
