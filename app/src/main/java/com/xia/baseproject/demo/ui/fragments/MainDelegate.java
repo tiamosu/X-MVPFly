@@ -48,10 +48,6 @@ public class MainDelegate extends AbstractHeadViewDelegate {
     }
 
     @Override
-    public void initEvent() {
-    }
-
-    @Override
     public void onVisibleLazyLoadData() {
     }
 

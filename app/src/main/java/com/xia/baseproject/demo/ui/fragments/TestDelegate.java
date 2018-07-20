@@ -38,12 +38,6 @@ public class TestDelegate extends AbstractHeadViewDelegate<TestPresenter> implem
 
     @Override
     public void initView() {
-
-    }
-
-    @Override
-    public void initEvent() {
-
     }
 
     @Override

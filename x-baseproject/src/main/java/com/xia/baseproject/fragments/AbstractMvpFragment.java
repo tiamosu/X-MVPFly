@@ -2,7 +2,6 @@ package com.xia.baseproject.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 
 import com.trello.rxlifecycle2.LifecycleTransformer;
@@ -14,7 +13,9 @@ import com.xia.baseproject.mvp.BaseMvpView;
  * @author xia
  * @date 2018/7/19.
  */
-public abstract class AbstractMvpFragment<P extends BaseMvpPresenter> extends AbstractSupportFragment implements BaseMvpView<P> {
+public abstract class AbstractMvpFragment<P extends BaseMvpPresenter>
+        extends AbstractSupportFragment implements BaseMvpView<P> {
+
     private P mPresenter;
 
     @Override
@@ -79,13 +80,12 @@ public abstract class AbstractMvpFragment<P extends BaseMvpPresenter> extends Ab
         }
     }
 
-    protected P getP() {
-        return mPresenter == null ? newP() : mPresenter;
+    @Override
+    public void initEvent() {
     }
 
-    @Override
-    public Fragment getBaseFragment() {
-        return this;
+    protected P getP() {
+        return mPresenter == null ? newP() : mPresenter;
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.xia.baseproject.mvp.common;
 
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 
 import com.trello.rxlifecycle2.LifecycleTransformer;
@@ -22,8 +21,6 @@ public interface IMvpView<P> {
     void initView();
 
     void initEvent();
-
-    Fragment getBaseFragment();
 
     FragmentActivity getContext();
 
