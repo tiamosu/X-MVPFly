@@ -3,8 +3,8 @@ package com.xia.baseproject.mvp.nullobject;
 import android.support.annotation.NonNull;
 import android.support.annotation.UiThread;
 
-import com.xia.baseproject.mvp.IMvpPresenter;
-import com.xia.baseproject.mvp.IMvpView;
+import com.xia.baseproject.mvp.common.IMvpPresenter;
+import com.xia.baseproject.mvp.common.IMvpView;
 
 import java.lang.ref.WeakReference;
 import java.lang.reflect.ParameterizedType;

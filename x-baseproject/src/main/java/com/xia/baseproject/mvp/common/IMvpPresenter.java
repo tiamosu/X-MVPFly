@@ -1,4 +1,4 @@
-package com.xia.baseproject.mvp;
+package com.xia.baseproject.mvp.common;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.UiThread;
