@@ -5,12 +5,13 @@ import android.widget.FrameLayout;
 
 import com.xia.baseproject.demo.R;
 import com.xia.baseproject.fragments.BaseDelegate;
+import com.xia.baseproject.mvp.BaseMvpPresenter;
 
 /**
  * @author xia
  * @date 2018/7/3.
  */
-public abstract class AbstractHeadViewDelegate extends BaseDelegate {
+public abstract class AbstractHeadViewDelegate<P extends BaseMvpPresenter> extends BaseDelegate<P> {
 
     @Override
     protected void onCreateHeadView(FrameLayout headContainer) {

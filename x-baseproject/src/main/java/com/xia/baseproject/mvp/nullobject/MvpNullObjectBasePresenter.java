@@ -90,7 +90,7 @@ public class MvpNullObjectBasePresenter<V extends IMvpView> implements IMvpPrese
 
     @UiThread
     @NonNull
-    protected V getView() {
+    protected V getV() {
         if (mView != null) {
             final V realView = mView.get();
             if (realView != null) {
