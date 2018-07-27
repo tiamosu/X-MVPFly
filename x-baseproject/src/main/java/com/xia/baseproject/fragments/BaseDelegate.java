@@ -103,7 +103,7 @@ public abstract class BaseDelegate<P extends BaseMvpPresenter> extends AbstractM
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (mUnbinder != null) {
+        if (mUnbinder != null && mUnbinder != Unbinder.EMPTY) {
             mUnbinder.unbind();
         }
     }

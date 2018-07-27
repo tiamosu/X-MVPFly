@@ -1,5 +1,6 @@
 package com.xia.baseproject.demo;
 
+import com.blankj.utilcode.util.ThreadUtils;
 import com.xia.baseproject.BaseApp;
 
 /**
@@ -10,7 +11,7 @@ public class MyApp extends BaseApp {
 
     @Override
     public void onCreate() {
-        if (!isMainThread()) {
+        if (!ThreadUtils.isMainThread()) {
             return;
         }
         super.onCreate();
