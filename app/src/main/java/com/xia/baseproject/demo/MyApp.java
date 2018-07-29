@@ -2,6 +2,7 @@ package com.xia.baseproject.demo;
 
 import com.blankj.utilcode.util.ThreadUtils;
 import com.xia.baseproject.BaseApp;
+import com.xia.baseproject.rxhttp.config.Rest;
 
 /**
  * @author xia
@@ -15,5 +16,9 @@ public class MyApp extends BaseApp {
             return;
         }
         super.onCreate();
+
+        Rest.init()
+                .withApiHost("http://www.wanandroid.com")
+                .config();
     }
 }

@@ -25,6 +25,7 @@ public final class RestConfigurator {
 
     private RestConfigurator() {
         CONFIGS.put(RestConfigKeys.CONFIG_READY, false);
+        CONFIGS.put(RestConfigKeys.INTERCEPTOR, INTERCEPTORS);
     }
 
     public final RestConfigurator withApiHost(String host) {

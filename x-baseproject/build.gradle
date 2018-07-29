@@ -49,6 +49,8 @@ dependencies {
     implementation global.rxandroid2()
     implementation global.retrofit2()
     implementation global.retrofit_adapter_rxjava2()
+    //loadingIndicatorView
+    api global.loading_indicator_view()
 }
 
 tasks.withType(Javadoc) {

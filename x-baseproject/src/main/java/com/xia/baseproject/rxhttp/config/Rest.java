@@ -9,6 +9,10 @@ import com.xia.baseproject.rxhttp.config.RestConfigKeys.ConfigKey;
 @SuppressWarnings("WeakerAccess")
 public final class Rest {
 
+    public static RestConfigurator init() {
+        return getConfigurator();
+    }
+
     public static RestConfigurator getConfigurator() {
         return RestConfigurator.getInstance();
     }

@@ -1,5 +1,7 @@
 package com.xia.baseproject.rxhttp.callback;
 
+import android.content.Context;
+
 import com.blankj.utilcode.util.CloseUtils;
 
 import java.io.BufferedReader;
@@ -14,6 +16,10 @@ import okhttp3.ResponseBody;
  * @date 2018/7/28.
  */
 public abstract class AbstractTextCallback extends Callback<String> {
+
+    public AbstractTextCallback(Context context) {
+        super(context);
+    }
 
     @Override
     public String parseNetworkResponse(ResponseBody responseBody) throws Exception {

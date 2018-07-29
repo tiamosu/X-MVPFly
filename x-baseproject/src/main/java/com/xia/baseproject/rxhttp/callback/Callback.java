@@ -1,5 +1,7 @@
 package com.xia.baseproject.rxhttp.callback;
 
+import android.content.Context;
+
 import io.reactivex.disposables.Disposable;
 import okhttp3.ResponseBody;
 
@@ -9,6 +11,15 @@ import okhttp3.ResponseBody;
  */
 @SuppressWarnings("WeakerAccess")
 public abstract class Callback<T> {
+    private Context mContext;
+
+    public Callback(Context context) {
+        mContext = context;
+    }
+
+    public Context getContext() {
+        return mContext;
+    }
 
     public void inProgress(float progress, long total) {
     }

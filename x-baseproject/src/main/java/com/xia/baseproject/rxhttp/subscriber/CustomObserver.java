@@ -18,13 +18,14 @@ import okhttp3.ResponseBody;
 public class CustomObserver extends BaseObserver<ResponseBody> {
     private WeakReference<Callback> mCallback;
 
+    public CustomObserver(Callback callback) {
+        super(callback == null ? null : callback.getContext());
+        this.mCallback = new WeakReference<>(callback);
+    }
+
     private Callback getCallback() {
         final boolean isNull = mCallback == null || mCallback.get() == null;
         return isNull ? null : mCallback.get();
-    }
-
-    public CustomObserver(Callback callback) {
-        this.mCallback = new WeakReference<>(callback);
     }
 
     @Override

@@ -7,6 +7,8 @@ import com.xia.baseproject.demo.R;
 import com.xia.baseproject.demo.base.AbstractHeadViewDelegate;
 import com.xia.baseproject.demo.mvp.presenter.TestPresenter;
 import com.xia.baseproject.demo.mvp.view.TestView;
+import com.xia.baseproject.rxhttp.CustomClient;
+import com.xia.baseproject.rxhttp.callback.AbstractStringCallback;
 
 /**
  * @author xia
@@ -34,6 +36,16 @@ public class TestDelegate extends AbstractHeadViewDelegate<TestPresenter> implem
 //        getP().detachView();
 //        getP().load();
         new Handler().postDelayed(() -> getP().load(), 3000);
+        test();
+    }
+
+    private void test() {
+        CustomClient.get("/friend/json", new AbstractStringCallback(getContext()) {
+            @Override
+            public void onResponse(String response) {
+                Log.e("weixi", "response:" + response);
+            }
+        });
     }
 
     @Override
