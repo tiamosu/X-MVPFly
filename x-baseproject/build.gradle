@@ -20,6 +20,10 @@ android {
         abortOnError false
         ignoreWarnings true
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -36,7 +40,15 @@ dependencies {
     api global.butterknife()
     annotationProcessor global.butterknife_apt()
     //rx
-    api global.rxlifecycle2_components()
+    api(global.rxlifecycle2_components()) {
+        exclude group: 'io.reactivex.rxjava2'
+    }
+    api global.okhttp()
+    compileOnly global.okhttp_log()
+    api global.rxjava2()
+    implementation global.rxandroid2()
+    implementation global.retrofit2()
+    implementation global.retrofit_adapter_rxjava2()
 }
 
 tasks.withType(Javadoc) {
