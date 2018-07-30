@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion global.compileSdkVersion()
+    compileSdkVersion Android.compileSdkVersion
     defaultConfig {
         applicationId "com.xia.baseproject.demo"
-        minSdkVersion global.minSdkVersion()
-        targetSdkVersion global.targetSdkVersion()
-        versionCode version_code
-        versionName version_name
+        minSdkVersion Android.minSdkVersion
+        targetSdkVersion Android.targetSdkVersion
+        versionCode Android.versionCode
+        versionName Android.versionName
 
         //启用multiDex的支持
         multiDexEnabled true
@@ -28,20 +28,6 @@ android {
         //线程数
         threadCount = 8
     }
-    packagingOptions {
-        exclude 'LICENSE.txt'
-        exclude 'META-INF/DEPENDENCIES'
-        exclude 'META-INF/DEPENDENCIES.txt'
-        exclude 'META-INF/dependencies.txt'
-        exclude 'META-INF/NOTICE'
-        exclude 'META-INF/NOTICE.txt'
-        exclude 'META-INF/notice.txt'
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/license.txt'
-        exclude 'META-INF/ASL2.0'
-        exclude 'META-INF/LGPL2.1'
-    }
     lintOptions {
         checkReleaseBuilds false
         abortOnError false
@@ -57,7 +43,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':x-baseproject')
 
-    implementation global.appcompat_v7()
-    implementation global.constraintLayout()
-    annotationProcessor global.butterknife_apt()
+    implementation Deps.appcompat_v7
+    implementation Deps.constraint_layout
+    annotationProcessor Deps.butterknife_apt
 }

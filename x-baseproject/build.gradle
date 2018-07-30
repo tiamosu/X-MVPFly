@@ -3,12 +3,12 @@ apply plugin: 'com.jakewharton.butterknife'
 apply plugin: 'com.novoda.bintray-release'
 
 android {
-    compileSdkVersion global.compileSdkVersion()
+    compileSdkVersion Android.compileSdkVersion
     defaultConfig {
-        minSdkVersion global.minSdkVersion()
-        targetSdkVersion global.targetSdkVersion()
-        versionCode version_code
-        versionName version_name
+        minSdkVersion Android.minSdkVersion
+        targetSdkVersion Android.targetSdkVersion
+        versionCode Android.versionCode
+        versionName Android.versionName
     }
     buildTypes {
         release {
@@ -29,28 +29,28 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     //support
-    api global.multidex()
-    implementation global.appcompat_v7()
-    implementation global.constraintLayout()
+    api Deps.multidex
+    implementation Deps.appcompat_v7
+    implementation Deps.constraint_layout
     //常用的util库
-    api global.utilcode()
+    api Deps.utilcode
     //fragment框架
-    api global.fragmentation_core()
+    api Deps.fragmentation_core
     //butterknife
-    api global.butterknife()
-    annotationProcessor global.butterknife_apt()
+    api Deps.butterknife
+    annotationProcessor Deps.butterknife_apt
     //rx
-    api(global.rxlifecycle2_components()) {
+    api(Deps.rxlifecycle2_components) {
         exclude group: 'io.reactivex.rxjava2'
     }
-    api global.okhttp()
-    compileOnly global.okhttp_log()
-    api global.rxjava2()
-    implementation global.rxandroid2()
-    implementation global.retrofit2()
-    implementation global.retrofit_adapter_rxjava2()
+    api Deps.okhttp3
+    compileOnly Deps.okhttp3_logging_interceptor
+    api Deps.rxjava2
+    implementation Deps.rxandroid2
+    implementation Deps.retrofit2
+    implementation Deps.retrofit_adapter_rxjava2
     //loadingIndicatorView
-    api global.loading_indicator_view()
+    api Deps.loading_indicator_view
 }
 
 tasks.withType(Javadoc) {
