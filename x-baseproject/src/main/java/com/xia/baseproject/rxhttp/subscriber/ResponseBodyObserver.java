@@ -15,10 +15,10 @@ import okhttp3.ResponseBody;
  * @date 2018/7/27.
  */
 @SuppressWarnings("WeakerAccess")
-public class CustomObserver extends BaseObserver<ResponseBody> {
+public class ResponseBodyObserver extends BaseObserver<ResponseBody> {
     private WeakReference<Callback> mCallback;
 
-    public CustomObserver(Callback callback) {
+    public ResponseBodyObserver(Callback callback) {
         super(callback == null ? null : callback.getContext());
         this.mCallback = new WeakReference<>(callback);
     }

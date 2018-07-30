@@ -7,7 +7,7 @@ import com.xia.baseproject.demo.R;
 import com.xia.baseproject.demo.base.AbstractHeadViewDelegate;
 import com.xia.baseproject.demo.mvp.presenter.TestPresenter;
 import com.xia.baseproject.demo.mvp.view.TestView;
-import com.xia.baseproject.rxhttp.CustomClient;
+import com.xia.baseproject.rxhttp.RxHttp;
 import com.xia.baseproject.rxhttp.callback.AbstractStringCallback;
 
 /**
@@ -40,7 +40,7 @@ public class TestDelegate extends AbstractHeadViewDelegate<TestPresenter> implem
     }
 
     private void test() {
-        CustomClient.get("/friend/json", new AbstractStringCallback(getContext()) {
+        RxHttp.get("/friend/json", new AbstractStringCallback(getContext()) {
             @Override
             public void onResponse(String response) {
                 Log.e("weixi", "response:" + response);

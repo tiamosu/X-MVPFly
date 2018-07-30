@@ -1,7 +1,7 @@
 package com.xia.baseproject.rxhttp;
 
 import com.xia.baseproject.rxhttp.callback.Callback;
-import com.xia.baseproject.rxhttp.subscriber.CustomObserver;
+import com.xia.baseproject.rxhttp.subscriber.ResponseBodyObserver;
 
 import java.io.File;
 import java.util.Map;
@@ -10,7 +10,7 @@ import java.util.Map;
  * @author xia
  * @date 2018/7/29.
  */
-public final class CustomClient {
+public final class RxHttp {
 
     public static void get(String url, Callback callback) {
         get(url, null, true, callback);
@@ -26,10 +26,15 @@ public final class CustomClient {
                 .url(url)
                 .params(params)
                 .build()
-                .request(new CustomObserver(callback) {
+                .request(new ResponseBodyObserver(callback) {
                     @Override
                     protected boolean isShowDialog() {
                         return isShowDialog;
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
                     }
                 });
     }
@@ -48,7 +53,7 @@ public final class CustomClient {
                 .url(url)
                 .params(params)
                 .build()
-                .request(new CustomObserver(callback) {
+                .request(new ResponseBodyObserver(callback) {
                     @Override
                     protected boolean isShowDialog() {
                         return isShowDialog;
@@ -63,7 +68,7 @@ public final class CustomClient {
                 .url(url)
                 .params(params)
                 .build()
-                .request(new CustomObserver(callback) {
+                .request(new ResponseBodyObserver(callback) {
                     @Override
                     protected boolean isShowDialog() {
                         return isShowDialog;
@@ -77,6 +82,6 @@ public final class CustomClient {
                 .url(url)
                 .fileParams(fileParams)
                 .build()
-                .request(new CustomObserver(callback));
+                .request(new ResponseBodyObserver(callback));
     }
 }
