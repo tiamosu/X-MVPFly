@@ -1,6 +1,7 @@
-package com.xia.baseproject.rxhttp.config;
+package com.xia.baseproject.app;
 
-import com.xia.baseproject.rxhttp.config.RestConfigKeys.ConfigKey;
+import com.blankj.utilcode.util.Utils;
+import com.xia.baseproject.app.RestConfigKeys.ConfigKey;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,6 +29,10 @@ public final class RestConfigurator {
         CONFIGS.put(RestConfigKeys.INTERCEPTOR, INTERCEPTORS);
     }
 
+    public final HashMap<Object, Object> getConfigs() {
+        return CONFIGS;
+    }
+
     public final RestConfigurator withApiHost(String host) {
         CONFIGS.put(RestConfigKeys.API_HOST, host);
         return this;
@@ -47,6 +52,7 @@ public final class RestConfigurator {
 
     public final void config() {
         CONFIGS.put(RestConfigKeys.CONFIG_READY, true);
+        Utils.init(Rest.getApplicationContext());
     }
 
     @SuppressWarnings("unchecked")

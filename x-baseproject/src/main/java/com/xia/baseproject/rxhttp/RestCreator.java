@@ -1,8 +1,8 @@
 package com.xia.baseproject.rxhttp;
 
 import com.xia.baseproject.rxhttp.api.RestService;
-import com.xia.baseproject.rxhttp.config.Rest;
-import com.xia.baseproject.rxhttp.config.RestConfigKeys;
+import com.xia.baseproject.app.Rest;
+import com.xia.baseproject.app.RestConfigKeys;
 import com.xia.baseproject.rxhttp.cookie.CookieJarImpl;
 import com.xia.baseproject.rxhttp.cookie.store.MemoryCookieStore;
 import com.xia.baseproject.rxhttp.utils.HttpsUtils;

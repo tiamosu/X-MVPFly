@@ -1,4 +1,4 @@
-package com.xia.baseproject.rxhttp.config;
+package com.xia.baseproject.app;
 
 import android.support.annotation.StringDef;
 
@@ -14,8 +14,9 @@ public final class RestConfigKeys {
     public static final String CONFIG_READY = "config_ready";
     public static final String INTERCEPTOR = "interceptor";
     public static final String API_HOST = "api_host";
+    public static final String APPLICATION_CONTEXT = "application_context";
 
-    @StringDef({CONFIG_READY, INTERCEPTOR, API_HOST})
+    @StringDef({CONFIG_READY, INTERCEPTOR, API_HOST, APPLICATION_CONTEXT})
     @Retention(RetentionPolicy.SOURCE)
     public @interface ConfigKey {
     }
