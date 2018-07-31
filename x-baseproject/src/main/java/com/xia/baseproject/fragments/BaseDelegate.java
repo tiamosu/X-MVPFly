@@ -3,13 +3,19 @@ package com.xia.baseproject.fragments;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import com.blankj.rxbus.RxBus;
+import com.blankj.utilcode.util.NetworkUtils;
 import com.xia.baseproject.R;
 import com.xia.baseproject.mvp.BaseMvpPresenter;
+import com.xia.baseproject.rxbus.RxBusHelper;
+import com.xia.baseproject.rxbus.RxBusManager;
+import com.xia.baseproject.rxbus.event.NetworkChangeEvent;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -28,7 +34,7 @@ public abstract class BaseDelegate<P extends BaseMvpPresenter> extends AbstractM
      */
     private boolean mIsOnSupportVisible;
     private boolean mIsOnEnterAnimationEnd;
-    private boolean mNeedInit = true;
+    private boolean mIsInitAll = true;
 
     /**
      * 该方法用来替代{@link #onSupportVisible()}，保证转场动画的流畅性
@@ -36,13 +42,29 @@ public abstract class BaseDelegate<P extends BaseMvpPresenter> extends AbstractM
     public void onVisibleLazyLoadData() {
     }
 
+    /**
+     * @return 是否加载头部标题栏
+     */
     protected boolean isLoadHeadView() {
         return true;
     }
 
+    /**
+     * @return 是否检查网络状态
+     */
+    protected boolean isCheckNetWork() {
+        return true;
+    }
+
+    /**
+     * @param headContainer 头部标题栏容器，可用于自定义添加视图
+     */
     protected void onCreateHeadView(FrameLayout headContainer) {
     }
 
+    /**
+     * @param bundle 用于获取页面跳转传参数据
+     */
     protected void getBundleExtras(Bundle bundle) {
     }
 
@@ -84,12 +106,16 @@ public abstract class BaseDelegate<P extends BaseMvpPresenter> extends AbstractM
     }
 
     private void initAll() {
-        if (mNeedInit) {
-            mNeedInit = false;
+        if (isCheckNetWork()) {
+            hasNetWork(NetworkUtils.isAvailableByPing());
+        }
+        if (mIsInitAll) {
+            mIsInitAll = false;
             getBundle(getArguments());
             initData();
             initView();
             initEvent();
+            netWorkChangeEvent();
         }
         onVisibleLazyLoadData();
     }
@@ -103,6 +129,7 @@ public abstract class BaseDelegate<P extends BaseMvpPresenter> extends AbstractM
     @Override
     public void onDestroy() {
         super.onDestroy();
+        RxBusManager.unregister(this);
         if (mUnbinder != null && mUnbinder != Unbinder.EMPTY) {
             mUnbinder.unbind();
         }
@@ -111,6 +138,28 @@ public abstract class BaseDelegate<P extends BaseMvpPresenter> extends AbstractM
     private void getBundle(Bundle bundle) {
         if (bundle != null && !bundle.isEmpty()) {
             getBundleExtras(bundle);
+        }
+    }
+
+    private void netWorkChangeEvent() {
+        if (isCheckNetWork()) {
+            RxBusManager.subscribe(this,
+                    RxBusHelper.NET_CHANGE_TAG, new RxBus.Callback<NetworkChangeEvent>() {
+                        @Override
+                        public void onEvent(NetworkChangeEvent event) {
+                            hasNetWork(event.isAvailable);
+                        }
+                    });
+        }
+    }
+
+    private int mLastNetStatus = -1;
+
+    private void hasNetWork(boolean isAvailable) {
+        final int currentNetStatus = isAvailable ? 1 : 0;
+        if (currentNetStatus != mLastNetStatus) {
+            mLastNetStatus = currentNetStatus;
+            Log.e("weixi", "hasNetWork: " + isAvailable);
         }
     }
 }

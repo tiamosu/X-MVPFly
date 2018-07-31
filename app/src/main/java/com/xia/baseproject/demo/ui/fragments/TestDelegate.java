@@ -1,7 +1,6 @@
 package com.xia.baseproject.demo.ui.fragments;
 
 import android.os.Handler;
-import android.util.Log;
 
 import com.xia.baseproject.demo.R;
 import com.xia.baseproject.demo.base.AbstractHeadViewDelegate;
@@ -43,7 +42,7 @@ public class TestDelegate extends AbstractHeadViewDelegate<TestPresenter> implem
         RxHttp.get("/friend/json", new AbstractStringCallback(getContext()) {
             @Override
             public void onResponse(String response) {
-                Log.e("weixi", "response:" + response);
+//                Log.e("weixi", "response:" + response);
             }
         });
     }
@@ -54,7 +53,7 @@ public class TestDelegate extends AbstractHeadViewDelegate<TestPresenter> implem
 
     @Override
     public void setData(String content) {
-        Log.e("weixi", "content:" + content);
+//        Log.e("weixi", "content:" + content);
     }
 
     @Override

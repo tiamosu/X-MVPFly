@@ -44,7 +44,7 @@ public abstract class BaseObserver<T> implements Observer<T>, ISubscriber<T> {
 
     @Override
     public void onSubscribe(Disposable d) {
-        if (!NetworkUtils.isConnected()) {
+        if (!NetworkUtils.isAvailableByPing()) {
             d.dispose();
             doOnError("无网络连接~！");
             return;

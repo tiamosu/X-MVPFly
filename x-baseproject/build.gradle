@@ -34,6 +34,7 @@ dependencies {
     implementation Deps.constraint_layout
     //常用的util库
     api Deps.utilcode
+    api Deps.rxbus
     //fragment框架
     api Deps.fragmentation_core
     //butterknife

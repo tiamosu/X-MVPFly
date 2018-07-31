@@ -23,6 +23,11 @@ public class MainDelegate extends AbstractHeadViewDelegate {
     private ISupportFragment[] mFragments = new ISupportFragment[1];
 
     @Override
+    protected boolean isCheckNetWork() {
+        return false;
+    }
+
+    @Override
     public Object newP() {
         return null;
     }
