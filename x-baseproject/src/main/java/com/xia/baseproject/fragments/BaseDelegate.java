@@ -12,6 +12,8 @@ import android.widget.FrameLayout;
 import com.blankj.rxbus.RxBus;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.xia.baseproject.R;
+import com.xia.baseproject.app.Rest;
+import com.xia.baseproject.app.RestConfigKeys;
 import com.xia.baseproject.mvp.BaseMvpPresenter;
 import com.xia.baseproject.rxbus.RxBusHelper;
 import com.xia.baseproject.rxbus.RxBusManager;
@@ -29,12 +31,13 @@ import me.yokeyword.fragmentation.ISupportFragment;
 public abstract class BaseDelegate<P extends BaseMvpPresenter> extends AbstractMvpFragment<P> {
     private Unbinder mUnbinder = null;
 
-    /**
-     * 保证转场动画的流畅性
-     */
+    //保证转场动画的流畅性
     private boolean mIsOnSupportVisible;
     private boolean mIsOnEnterAnimationEnd;
+
+    //防止多次初始化
     private boolean mIsInitAll = true;
+    private int mLastNetStatus = -1;
 
     /**
      * 该方法用来替代{@link #onSupportVisible()}，保证转场动画的流畅性
@@ -106,7 +109,7 @@ public abstract class BaseDelegate<P extends BaseMvpPresenter> extends AbstractM
     }
 
     private void initAll() {
-        if (isCheckNetWork()) {
+        if (isGlobalCheckNetWork()) {
             hasNetWork(NetworkUtils.isAvailableByPing());
         }
         if (mIsInitAll) {
@@ -142,7 +145,7 @@ public abstract class BaseDelegate<P extends BaseMvpPresenter> extends AbstractM
     }
 
     private void netWorkChangeEvent() {
-        if (isCheckNetWork()) {
+        if (isGlobalCheckNetWork()) {
             RxBusManager.subscribe(this,
                     RxBusHelper.NET_CHANGE_TAG, new RxBus.Callback<NetworkChangeEvent>() {
                         @Override
@@ -153,13 +156,16 @@ public abstract class BaseDelegate<P extends BaseMvpPresenter> extends AbstractM
         }
     }
 
-    private int mLastNetStatus = -1;
-
     private void hasNetWork(boolean isAvailable) {
         final int currentNetStatus = isAvailable ? 1 : 0;
         if (currentNetStatus != mLastNetStatus) {
             mLastNetStatus = currentNetStatus;
             Log.e("weixi", "hasNetWork: " + isAvailable);
         }
+    }
+
+    private boolean isGlobalCheckNetWork() {
+        final boolean isCheckNetWork = Rest.getConfiguration(RestConfigKeys.NETWORK_CHECK);
+        return isCheckNetWork && isCheckNetWork();
     }
 }

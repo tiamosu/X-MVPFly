@@ -19,6 +19,7 @@ public class MyApp extends BaseApp {
 
         Rest.init(this)
                 .withApiHost("http://www.wanandroid.com")
+                .withNetWorkCheck(true)
                 .config();
     }
 }

@@ -15,6 +15,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.xia.baseproject.R;
+import com.xia.baseproject.app.Rest;
+import com.xia.baseproject.app.RestConfigKeys;
 import com.xia.baseproject.fragments.BaseDelegate;
 import com.xia.baseproject.receiver.NetBroadcastReceiver;
 
@@ -45,7 +47,10 @@ public abstract class ProxyActivity extends AbstractSupportActivity {
         super.onCreate(savedInstanceState);
         systemConfiguration();
         initContainer(savedInstanceState);
-        netWorkChangeReceiver();
+
+        if (Rest.getConfiguration(RestConfigKeys.NETWORK_CHECK)) {
+            netWorkChangeReceiver();
+        }
     }
 
     private void netWorkChangeReceiver() {
