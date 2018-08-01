@@ -118,10 +118,19 @@ public class SupportFragmentDelegate {
         return isCheckNetWork && mFragment.isCheckNetWork();
     }
 
+    /**
+     * 这边Callback不能使用lambda语句，否则解析报错
+     */
+    @SuppressWarnings("Convert2Lambda")
     private void checkNetwork() {
         if (isGlobalCheckNetWork()) {
             RxBusManager.subscribe(mFragment, NetworkChangeEvent.NET_CHANGE_TAG,
-                    (RxBus.Callback<NetworkChangeEvent>) (tag, event) -> hasNetWork(event.isAvailable));
+                    new RxBus.Callback<NetworkChangeEvent>() {
+                        @Override
+                        public void onEvent(String tag, NetworkChangeEvent event) {
+                            hasNetWork(event.isAvailable);
+                        }
+                    });
         }
     }
 
@@ -133,13 +142,23 @@ public class SupportFragmentDelegate {
         }
     }
 
+    @SuppressWarnings("Convert2Lambda")
     public void subscribeWithTags(final String... tags) {
-        RxBusManager.subscribeWithTags(mFragment, (RxBus.Callback<RxBusMessage>)
-                (tag, rxBusMessage) -> mFragment.handleRxBusMessage(tag, rxBusMessage), tags);
+        RxBusManager.subscribeWithTags(mFragment, new RxBus.Callback<RxBusMessage>() {
+            @Override
+            public void onEvent(String tag, RxBusMessage rxBusMessage) {
+                mFragment.handleRxBusMessage(tag, rxBusMessage);
+            }
+        }, tags);
     }
 
+    @SuppressWarnings("Convert2Lambda")
     public void subscribeStickyWithTags(final String... tags) {
-        RxBusManager.subscribeStickyWithTags(mFragment, (RxBus.Callback<RxBusMessage>)
-                (tag, rxBusMessage) -> mFragment.handleRxBusMessage(tag, rxBusMessage), tags);
+        RxBusManager.subscribeStickyWithTags(mFragment, new RxBus.Callback<RxBusMessage>() {
+            @Override
+            public void onEvent(String tag, RxBusMessage rxBusMessage) {
+                mFragment.handleRxBusMessage(tag, rxBusMessage);
+            }
+        }, tags);
     }
 }
