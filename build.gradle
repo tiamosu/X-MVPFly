@@ -2,19 +2,16 @@ buildscript {
     repositories {
         google()
         jcenter()
-        maven { url 'https://dl.bintray.com/weixia/maven' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.3'
         //noinspection GradleDependency
         classpath 'com.jakewharton:butterknife-gradle-plugin:8.4.0'
         classpath 'com.novoda:bintray-release:0.8.1'
-        classpath 'com.xia:x-plugin:1.0.8'
     }
 }
 
 allprojects {
-    apply plugin: 'com.xia.global.plugin'
     repositories {
         google()
         jcenter()

@@ -32,9 +32,9 @@ object Deps {
     const val rxjava2 = "io.reactivex.rxjava2:rxjava:2.1.17"
     const val rxandroid2 = "io.reactivex.rxjava2:rxandroid:2.0.2"
     const val rxlifecycle2_components = "com.trello.rxlifecycle2:rxlifecycle-components:2.2.2"
+    const val x_rxbus = "com.xia:x-rxbus:1.0.0"
     //other
     const val utilcode = "com.blankj:utilcode:1.17.4"
-    const val rxbus = "com.blankj:rxbus:1.1"
     const val fragmentation_core = "me.yokeyword:fragmentation-core:1.3.5"
     const val loading_indicator_view = "com.wang.avi:library:2.1.3"
 }

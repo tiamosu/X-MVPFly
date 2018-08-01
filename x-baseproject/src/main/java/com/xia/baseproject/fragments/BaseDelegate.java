@@ -10,14 +10,13 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.blankj.rxbus.RxBus;
+import com.blankj.rxbus.RxBusManager;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.xia.baseproject.R;
 import com.xia.baseproject.app.Rest;
 import com.xia.baseproject.app.RestConfigKeys;
 import com.xia.baseproject.mvp.BaseMvpPresenter;
-import com.xia.baseproject.rxbus.RxBusHelper;
-import com.xia.baseproject.rxbus.RxBusManager;
-import com.xia.baseproject.rxbus.event.NetworkChangeEvent;
+import com.xia.baseproject.rxbus.NetworkChangeEvent;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -147,9 +146,9 @@ public abstract class BaseDelegate<P extends BaseMvpPresenter> extends AbstractM
     private void netWorkChangeEvent() {
         if (isGlobalCheckNetWork()) {
             RxBusManager.subscribe(this,
-                    RxBusHelper.NET_CHANGE_TAG, new RxBus.Callback<NetworkChangeEvent>() {
+                    NetworkChangeEvent.NET_CHANGE_TAG, new RxBus.Callback<NetworkChangeEvent>() {
                         @Override
-                        public void onEvent(NetworkChangeEvent event) {
+                        public void onEvent(String tag, NetworkChangeEvent event) {
                             hasNetWork(event.isAvailable);
                         }
                     });

@@ -1,4 +1,4 @@
-package com.xia.baseproject.rxbus.event;
+package com.xia.baseproject.rxbus;
 
 /**
  * @author xia
@@ -6,6 +6,8 @@ package com.xia.baseproject.rxbus.event;
  */
 @SuppressWarnings("WeakerAccess")
 public class NetworkChangeEvent {
+    public static final String NET_CHANGE_TAG = "NET_CHANGE_TAG";
+
     //是否存在网络
     public boolean isAvailable;
 
