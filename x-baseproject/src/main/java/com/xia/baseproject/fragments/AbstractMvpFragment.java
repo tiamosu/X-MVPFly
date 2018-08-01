@@ -70,7 +70,6 @@ public abstract class AbstractMvpFragment<P extends BaseMvpPresenter>
     }
 
     @SuppressWarnings("unchecked")
-    @Override
     public void initMvp() {
         if (mPresenter == null) {
             mPresenter = newP();
@@ -78,10 +77,6 @@ public abstract class AbstractMvpFragment<P extends BaseMvpPresenter>
                 mPresenter.attachView(this);
             }
         }
-    }
-
-    @Override
-    public void initEvent() {
     }
 
     protected P getP() {

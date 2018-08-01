@@ -17,7 +17,7 @@ import android.widget.EditText;
 import com.xia.baseproject.R;
 import com.xia.baseproject.app.Rest;
 import com.xia.baseproject.app.RestConfigKeys;
-import com.xia.baseproject.fragments.BaseDelegate;
+import com.xia.baseproject.fragments.SupportFragment;
 import com.xia.baseproject.receiver.NetBroadcastReceiver;
 
 /**
@@ -30,7 +30,7 @@ public abstract class ProxyActivity extends AbstractSupportActivity {
     /**
      * @return 设置根Fragment
      */
-    public abstract BaseDelegate setRootDelegate();
+    public abstract SupportFragment setRootFragment();
 
     /**
      * @return 是否点击空白区域隐藏软键盘
@@ -85,7 +85,7 @@ public abstract class ProxyActivity extends AbstractSupportActivity {
         container.setId(R.id.delegate_container);
         setContentView(container);
         if (savedInstanceState == null) {
-            loadRootFragment(R.id.delegate_container, setRootDelegate());
+            loadRootFragment(R.id.delegate_container, setRootFragment());
         }
     }
 

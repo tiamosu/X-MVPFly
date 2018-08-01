@@ -6,7 +6,7 @@ import android.support.v7.app.AlertDialog;
 
 import com.blankj.utilcode.util.PermissionUtils.OnRationaleListener.ShouldRequest;
 import com.blankj.utilcode.util.Utils;
-import com.xia.baseproject.fragments.BaseDelegate;
+import com.xia.baseproject.fragments.SupportFragment;
 
 import java.util.Objects;
 
@@ -16,7 +16,7 @@ import java.util.Objects;
 public class DialogHelper {
     public static final int APP_SETTINGS_CODE = 2;
 
-    public static void showRationaleDialog(final BaseDelegate delegate,
+    public static void showRationaleDialog(final SupportFragment delegate,
                                            final ShouldRequest shouldRequest) {
         new AlertDialog.Builder(Objects.requireNonNull(delegate.getContext()))
                 .setTitle(android.R.string.dialog_alert_title)
@@ -33,7 +33,7 @@ public class DialogHelper {
                 .show();
     }
 
-    public static void showOpenAppSettingDialog(final BaseDelegate delegate) {
+    public static void showOpenAppSettingDialog(final SupportFragment delegate) {
         new AlertDialog.Builder(Objects.requireNonNull(delegate.getContext()))
                 .setTitle(android.R.string.dialog_alert_title)
                 .setMessage("前往设置开启相关权限")

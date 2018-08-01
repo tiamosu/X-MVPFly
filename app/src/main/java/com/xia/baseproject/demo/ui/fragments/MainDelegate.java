@@ -23,7 +23,7 @@ public class MainDelegate extends AbstractHeadViewDelegate {
     private ISupportFragment[] mFragments = new ISupportFragment[1];
 
     @Override
-    protected boolean isCheckNetWork() {
+    public boolean isCheckNetWork() {
         return false;
     }
 
@@ -50,10 +50,6 @@ public class MainDelegate extends AbstractHeadViewDelegate {
 
     @Override
     public void initView() {
-    }
-
-    @Override
-    public void onVisibleLazyLoadData() {
     }
 
     @OnClick(R.id.main_btn)

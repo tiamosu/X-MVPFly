@@ -16,7 +16,7 @@ import com.xia.baseproject.rxhttp.callback.AbstractStringCallback;
 public class TestDelegate extends AbstractHeadViewDelegate<TestPresenter> implements TestView {
 
     @Override
-    protected boolean isLoadHeadView() {
+    public boolean isLoadHeadView() {
         return false;
     }
 

@@ -12,16 +12,6 @@ public interface IMvpView<P> {
 
     P newP();
 
-    int getLayoutId();
-
-    void initMvp();
-
-    void initData();
-
-    void initView();
-
-    void initEvent();
-
     FragmentActivity getContext();
 
     LifecycleTransformer bindUntilEvent();
