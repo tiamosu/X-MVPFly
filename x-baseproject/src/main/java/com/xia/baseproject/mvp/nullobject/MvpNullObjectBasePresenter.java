@@ -14,7 +14,7 @@ import java.lang.reflect.Type;
  * @author xia
  * @date 2018/7/19.
  */
-public class MvpNullObjectBasePresenter<V extends IMvpView> implements IMvpPresenter<V> {
+public abstract class MvpNullObjectBasePresenter<V extends IMvpView> implements IMvpPresenter<V> {
     private WeakReference<V> mView;
     private final V mNullView;
 
@@ -98,35 +98,5 @@ public class MvpNullObjectBasePresenter<V extends IMvpView> implements IMvpPrese
             }
         }
         return mNullView;
-    }
-
-    @UiThread
-    @Override
-    public void onCreate() {
-    }
-
-    @UiThread
-    @Override
-    public void onStart() {
-    }
-
-    @UiThread
-    @Override
-    public void onResume() {
-    }
-
-    @UiThread
-    @Override
-    public void onPause() {
-    }
-
-    @UiThread
-    @Override
-    public void onStop() {
-    }
-
-    @UiThread
-    @Override
-    public void onDestroy() {
     }
 }

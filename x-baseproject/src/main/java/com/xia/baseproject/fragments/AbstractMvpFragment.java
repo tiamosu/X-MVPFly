@@ -4,8 +4,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 
-import com.trello.rxlifecycle2.LifecycleTransformer;
-import com.trello.rxlifecycle2.android.FragmentEvent;
+import com.uber.autodispose.AutoDispose;
+import com.uber.autodispose.AutoDisposeConverter;
+import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
 import com.xia.baseproject.mvp.BaseMvpPresenter;
 import com.xia.baseproject.mvp.BaseMvpView;
 
@@ -22,48 +23,12 @@ public abstract class AbstractMvpFragment<P extends BaseMvpPresenter>
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initMvp();
-        if (mPresenter != null) {
-            mPresenter.onCreate();
-        }
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        if (mPresenter != null) {
-            mPresenter.onStart();
-        }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (mPresenter != null) {
-            mPresenter.onResume();
-        }
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        if (mPresenter != null) {
-            mPresenter.onPause();
-        }
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (mPresenter != null) {
-            mPresenter.onStop();
-        }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         if (mPresenter != null) {
-            mPresenter.onDestroy();
             mPresenter.detachView();
             mPresenter = null;
         }
@@ -75,6 +40,7 @@ public abstract class AbstractMvpFragment<P extends BaseMvpPresenter>
             mPresenter = newP();
             if (mPresenter != null) {
                 mPresenter.attachView(this);
+                getLifecycle().addObserver(mPresenter);
             }
         }
     }
@@ -89,7 +55,7 @@ public abstract class AbstractMvpFragment<P extends BaseMvpPresenter>
     }
 
     @Override
-    public LifecycleTransformer bindUntilEvent() {
-        return bindUntilEvent(FragmentEvent.DESTROY_VIEW);
+    public AutoDisposeConverter bindLifecycle() {
+        return AutoDispose.autoDisposable(AndroidLifecycleScopeProvider.from(this));
     }
 }

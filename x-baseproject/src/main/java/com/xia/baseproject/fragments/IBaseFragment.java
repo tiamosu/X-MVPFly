@@ -16,10 +16,6 @@ public interface IBaseFragment {
 
     boolean isCheckNetWork();
 
-    void onFragmentVisible();
-
-    void onFragmentInvisible();
-
     void onVisibleLazyLoad();
 
     void getBundleExtras(Bundle bundle);

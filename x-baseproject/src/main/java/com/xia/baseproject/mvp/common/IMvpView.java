@@ -2,7 +2,7 @@ package com.xia.baseproject.mvp.common;
 
 import android.support.v4.app.FragmentActivity;
 
-import com.trello.rxlifecycle2.LifecycleTransformer;
+import com.uber.autodispose.AutoDisposeConverter;
 
 /**
  * @author xia
@@ -14,5 +14,5 @@ public interface IMvpView<P> {
 
     FragmentActivity getContext();
 
-    LifecycleTransformer bindUntilEvent();
+    AutoDisposeConverter bindLifecycle();
 }

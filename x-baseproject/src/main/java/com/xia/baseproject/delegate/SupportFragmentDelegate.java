@@ -70,14 +70,9 @@ public class SupportFragmentDelegate {
 
     public void onSupportVisible() {
         mIsOnSupportVisible = true;
-        mFragment.onFragmentVisible();
         if (mIsOnEnterAnimationEnd) {
             initAll();
         }
-    }
-
-    public void onSupportInvisible() {
-        mFragment.onFragmentInvisible();
     }
 
     public void onNewBundle(Bundle args) {

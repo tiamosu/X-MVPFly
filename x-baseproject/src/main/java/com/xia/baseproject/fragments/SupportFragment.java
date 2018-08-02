@@ -47,22 +47,6 @@ public abstract class SupportFragment<P extends BaseMvpPresenter> extends Abstra
     }
 
     /**
-     * 当该Fragment对用户可见时
-     * 用于替换{@link #onSupportVisible()}
-     */
-    @Override
-    public void onFragmentVisible() {
-    }
-
-    /**
-     * 当该Fragment对用户不可见时
-     * 用于替换{@link #onSupportInvisible()}
-     */
-    @Override
-    public void onFragmentInvisible() {
-    }
-
-    /**
      * 该方法确保已执行完{@link #onEnterAnimationEnd(Bundle)}
      * 于Fragment可见时执行，保证转场动画的流畅性。
      */
@@ -117,12 +101,8 @@ public abstract class SupportFragment<P extends BaseMvpPresenter> extends Abstra
 
     @Override
     public void onSupportVisible() {
+        super.onSupportVisible();
         mDelegate.onSupportVisible();
-    }
-
-    @Override
-    public void onSupportInvisible() {
-        mDelegate.onSupportInvisible();
     }
 
     @Override

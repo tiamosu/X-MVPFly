@@ -3,6 +3,7 @@ package com.xia.baseproject.fragments;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.CallSuper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
@@ -168,6 +169,7 @@ public abstract class AbstractSupportFragment extends RxFragment implements ISup
      * <p>
      * Is the combination of  [onHiddenChanged() + onResume()/onPause() + setUserVisibleHint()]
      */
+    @CallSuper
     @Override
     public void onSupportVisible() {
         mDelegate.onSupportVisible();
@@ -178,6 +180,7 @@ public abstract class AbstractSupportFragment extends RxFragment implements ISup
      * <p>
      * Is the combination of  [onHiddenChanged() + onResume()/onPause() + setUserVisibleHint()]
      */
+    @CallSuper
     @Override
     public void onSupportInvisible() {
         mDelegate.onSupportInvisible();
