@@ -29,12 +29,12 @@ object Deps {
     const val retrofit_adapter_rxjava2 = "com.squareup.retrofit2:adapter-rxjava2:${Versions.retrofit2}"
     const val okhttp3 = "com.squareup.okhttp3:okhttp:${Versions.okhttp3}"
     const val okhttp3_logging_interceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp3}"
-    const val rxjava2 = "io.reactivex.rxjava2:rxjava:2.1.17"
+    const val rxjava2 = "io.reactivex.rxjava2:rxjava:2.2.0"
     const val rxandroid2 = "io.reactivex.rxjava2:rxandroid:2.0.2"
     const val rxlifecycle2_components = "com.trello.rxlifecycle2:rxlifecycle-components:2.2.2"
     const val x_rxbus = "com.xia:x-rxbus:1.0.0"
     //other
-    const val utilcode = "com.blankj:utilcode:1.17.4"
+    const val utilcode = "com.blankj:utilcode:1.18.0"
     const val fragmentation_core = "me.yokeyword:fragmentation-core:1.3.5"
     const val loading_indicator_view = "com.wang.avi:library:2.1.3"
 }
