@@ -6,7 +6,7 @@ import android.support.v7.app.AlertDialog;
 
 import com.blankj.utilcode.util.PermissionUtils.OnRationaleListener.ShouldRequest;
 import com.blankj.utilcode.util.Utils;
-import com.xia.baseproject.fragments.SupportFragment;
+import com.xia.baseproject.ui.fragments.SupportFragment;
 
 import java.util.Objects;
 

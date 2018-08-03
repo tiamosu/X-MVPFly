@@ -6,7 +6,7 @@ import android.util.Log;
 import com.blankj.utilcode.constant.PermissionConstants;
 import com.blankj.utilcode.util.PermissionUtils;
 import com.xia.baseproject.demo.R;
-import com.xia.baseproject.demo.base.AbstractHeadViewDelegate;
+import com.xia.baseproject.demo.base.HeadViewFragment;
 import com.xia.baseproject.demo.helper.DialogHelper;
 
 import java.util.List;
@@ -18,7 +18,7 @@ import me.yokeyword.fragmentation.ISupportFragment;
  * @author xia
  * @date 2018/7/3.
  */
-public class MainDelegate extends AbstractHeadViewDelegate {
+public class MainDelegate extends HeadViewFragment {
 
     private ISupportFragment[] mFragments = new ISupportFragment[1];
 

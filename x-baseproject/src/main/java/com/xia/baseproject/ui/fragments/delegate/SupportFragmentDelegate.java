@@ -1,4 +1,4 @@
-package com.xia.baseproject.delegate;
+package com.xia.baseproject.ui.fragments.delegate;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,7 +17,7 @@ import com.blankj.utilcode.util.NetworkUtils;
 import com.xia.baseproject.R;
 import com.xia.baseproject.app.Rest;
 import com.xia.baseproject.app.RestConfigKeys;
-import com.xia.baseproject.fragments.SupportFragment;
+import com.xia.baseproject.ui.fragments.SupportFragment;
 import com.xia.baseproject.rxbus.NetworkChangeEvent;
 
 import butterknife.ButterKnife;

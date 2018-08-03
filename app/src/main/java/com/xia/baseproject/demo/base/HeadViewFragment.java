@@ -4,14 +4,14 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.xia.baseproject.demo.R;
-import com.xia.baseproject.fragments.SupportFragment;
 import com.xia.baseproject.mvp.BaseMvpPresenter;
+import com.xia.baseproject.ui.fragments.SupportFragment;
 
 /**
  * @author xia
  * @date 2018/7/3.
  */
-public abstract class AbstractHeadViewDelegate<P extends BaseMvpPresenter> extends SupportFragment<P> {
+public abstract class HeadViewFragment<P extends BaseMvpPresenter> extends SupportFragment<P> {
 
     @Override
     public void onCreateHeadView(FrameLayout container) {

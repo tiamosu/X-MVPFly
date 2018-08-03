@@ -3,7 +3,7 @@ package com.xia.baseproject.demo.ui.fragments;
 import android.os.Handler;
 
 import com.xia.baseproject.demo.R;
-import com.xia.baseproject.demo.base.AbstractHeadViewDelegate;
+import com.xia.baseproject.demo.base.HeadViewFragment;
 import com.xia.baseproject.demo.mvp.presenter.TestPresenter;
 import com.xia.baseproject.demo.mvp.view.TestView;
 
@@ -11,7 +11,7 @@ import com.xia.baseproject.demo.mvp.view.TestView;
  * @author xia
  * @date 2018/7/16.
  */
-public class TestDelegate extends AbstractHeadViewDelegate<TestPresenter> implements TestView {
+public class TestDelegate extends HeadViewFragment<TestPresenter> implements TestView {
 
     @Override
     public boolean isLoadHeadView() {

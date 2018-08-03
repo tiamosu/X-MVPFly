@@ -1,4 +1,4 @@
-package com.xia.baseproject.fragments;
+package com.xia.baseproject.ui.fragments;
 
 import android.app.Activity;
 import android.content.Intent;

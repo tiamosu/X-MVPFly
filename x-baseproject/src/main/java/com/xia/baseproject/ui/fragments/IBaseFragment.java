@@ -1,4 +1,4 @@
-package com.xia.baseproject.fragments;
+package com.xia.baseproject.ui.fragments;
 
 import android.os.Bundle;
 import android.widget.FrameLayout;

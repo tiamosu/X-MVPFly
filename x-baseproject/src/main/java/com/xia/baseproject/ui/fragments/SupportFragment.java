@@ -1,4 +1,4 @@
-package com.xia.baseproject.fragments;
+package com.xia.baseproject.ui.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.blankj.rxbus.RxBusMessage;
-import com.xia.baseproject.delegate.SupportFragmentDelegate;
+import com.xia.baseproject.ui.fragments.delegate.SupportFragmentDelegate;
 import com.xia.baseproject.mvp.BaseMvpPresenter;
 
 import me.yokeyword.fragmentation.ISupportFragment;

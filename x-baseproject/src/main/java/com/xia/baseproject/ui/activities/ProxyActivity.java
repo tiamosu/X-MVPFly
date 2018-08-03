@@ -1,4 +1,4 @@
-package com.xia.baseproject.activities;
+package com.xia.baseproject.ui.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -17,7 +17,7 @@ import android.widget.EditText;
 import com.xia.baseproject.R;
 import com.xia.baseproject.app.Rest;
 import com.xia.baseproject.app.RestConfigKeys;
-import com.xia.baseproject.fragments.SupportFragment;
+import com.xia.baseproject.ui.fragments.SupportFragment;
 import com.xia.baseproject.receiver.NetBroadcastReceiver;
 
 /**

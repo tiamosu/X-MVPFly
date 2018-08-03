@@ -5,9 +5,9 @@ import android.view.MotionEvent;
 import android.view.Window;
 import android.widget.EditText;
 
-import com.xia.baseproject.activities.ProxyActivity;
+import com.xia.baseproject.ui.activities.ProxyActivity;
 import com.xia.baseproject.demo.ui.fragments.MainDelegate;
-import com.xia.baseproject.fragments.SupportFragment;
+import com.xia.baseproject.ui.fragments.SupportFragment;
 
 import me.yokeyword.fragmentation.anim.DefaultVerticalAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
