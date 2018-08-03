@@ -21,6 +21,9 @@ public class RequestCall {
         this.mBaseRequest = request;
     }
 
+    public RequestCall() {
+    }
+
     @SuppressWarnings("unchecked")
     public final <T> void request(BaseSubscriber<T> baseSubscriber) {
         if (baseSubscriber != null) {

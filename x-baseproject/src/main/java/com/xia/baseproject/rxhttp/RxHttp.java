@@ -1,11 +1,5 @@
 package com.xia.baseproject.rxhttp;
 
-import com.xia.baseproject.rxhttp.callback.Callback;
-import com.xia.baseproject.rxhttp.subscriber.ResponseBodySubscriber;
-
-import java.io.File;
-import java.util.Map;
-
 /**
  * @author xia
  * @date 2018/7/29.

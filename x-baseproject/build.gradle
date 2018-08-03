@@ -52,7 +52,7 @@ dependencies {
     api Deps.autodispose_archcomponents
     //okhttp
     api Deps.okhttp3
-    compileOnly Deps.okhttp3_logging_interceptor
+    api Deps.okhttp3_logging_interceptor
     //view
     api Deps.loading_indicator_view
 }

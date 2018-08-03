@@ -1,11 +1,17 @@
 package com.xia.baseproject.demo.ui.fragments;
 
 import android.os.Handler;
+import android.util.Log;
 
 import com.xia.baseproject.demo.R;
 import com.xia.baseproject.demo.base.HeadViewFragment;
 import com.xia.baseproject.demo.mvp.presenter.TestPresenter;
 import com.xia.baseproject.demo.mvp.view.TestView;
+import com.xia.baseproject.rxhttp.callback.AbstractStringCallback;
+import com.xia.baseproject.rxhttp.request1.GetRequest;
+import com.xia.baseproject.rxhttp.subscriber.CallbackSubscriber;
+
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * @author xia
@@ -37,6 +43,18 @@ public class TestDelegate extends HeadViewFragment<TestPresenter> implements Tes
     }
 
     private void test() {
+        ///friend/json
+        new GetRequest("/api/app/page/home")///api/app/page/home
+                .addParams("action", "banner,activity")
+                .getObservable()
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .subscribe(new CallbackSubscriber(getContext(), new AbstractStringCallback() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.e("weixi", "response:" + response);
+                    }
+                }));
 //        RxHttp.get("/friend/json", new AbstractStringCallback() {
 //            @Override
 //            public void onResponse(String response) {

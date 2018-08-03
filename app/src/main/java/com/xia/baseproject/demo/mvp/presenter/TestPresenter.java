@@ -25,6 +25,6 @@ public class TestPresenter extends BaseMvpPresenter<TestView> {
     @Override
     public void onCreate(@NonNull LifecycleOwner owner) {
         super.onCreate(owner);
-        Log.e("weixi", "onCreate: ");
+//        Log.e("weixi", "onCreate: ");
     }
 }
