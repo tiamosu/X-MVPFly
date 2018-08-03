@@ -1,7 +1,5 @@
 package com.xia.baseproject.rxhttp.callback;
 
-import android.content.Context;
-
 import okhttp3.ResponseBody;
 
 /**
@@ -10,10 +8,6 @@ import okhttp3.ResponseBody;
  */
 @SuppressWarnings("WeakerAccess")
 public abstract class AbstractStringCallback extends Callback<String> {
-
-    public AbstractStringCallback(Context context) {
-        super(context);
-    }
 
     @Override
     public String parseNetworkResponse(ResponseBody responseBody) throws Exception {

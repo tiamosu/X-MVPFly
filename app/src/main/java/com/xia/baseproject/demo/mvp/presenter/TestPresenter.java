@@ -1,5 +1,9 @@
 package com.xia.baseproject.demo.mvp.presenter;
 
+import android.arch.lifecycle.LifecycleOwner;
+import android.support.annotation.NonNull;
+import android.util.Log;
+
 import com.xia.baseproject.demo.mvp.view.TestView;
 import com.xia.baseproject.mvp.BaseMvpPresenter;
 
@@ -16,5 +20,11 @@ public class TestPresenter extends BaseMvpPresenter<TestView> {
 //        Log.e("weixi", "" + getV().getNum());
 
         getV().setData("你好啊！！！");
+    }
+
+    @Override
+    public void onCreate(@NonNull LifecycleOwner owner) {
+        super.onCreate(owner);
+        Log.e("weixi", "onCreate: ");
     }
 }

@@ -1,6 +1,9 @@
 package com.xia.baseproject.rxhttp.request;
 
-import com.xia.baseproject.rxhttp.subscriber.BaseObserver;
+import android.arch.lifecycle.LifecycleOwner;
+
+import com.xia.baseproject.rxhttp.subscriber.BaseSubscriber;
+import com.xia.baseproject.rxhttp.utils.RxLifecycleUtils;
 
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
@@ -19,15 +22,19 @@ public class RequestCall {
     }
 
     @SuppressWarnings("unchecked")
-    public final <T> void request(BaseObserver<T> baseObserver) {
-        Observable observable = null;
-        if (mBaseRequest != null) {
-            observable = mBaseRequest.getObservable();
-        }
-        if (observable != null) {
-            observable.subscribeOn(Schedulers.io())
-                    .unsubscribeOn(Schedulers.io())
-                    .subscribe(baseObserver);
+    public final <T> void request(BaseSubscriber<T> baseSubscriber) {
+        if (baseSubscriber != null) {
+//            final LifecycleOwner lifecycleOwner = baseSubscriber.getLifecycleOwner();
+//            if (lifecycleOwner == null || mBaseRequest == null) {
+//                return;
+//            }
+//            final Observable<T> observable = mBaseRequest.getObservable();
+//            if (observable != null) {
+//                observable.subscribeOn(Schedulers.io())
+//                        .unsubscribeOn(Schedulers.io())
+//                        .as(RxLifecycleUtils.bindLifecycle(lifecycleOwner))
+//                        .subscribe(baseSubscriber);
+//            }
         }
     }
 }

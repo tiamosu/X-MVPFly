@@ -4,16 +4,16 @@ import io.reactivex.disposables.Disposable;
 
 /**
  * @author xia
- * @date 2018/7/27.
+ * @date 2018/8/3.
  */
 public interface ISubscriber<T> {
 
     /**
      * doOnSubscribe 回调
      *
-     * @param d Disposable
+     * @param disposable Disposable
      */
-    void doOnSubscribe(Disposable d);
+    void doOnSubscribe(Disposable disposable);
 
     /**
      * 成功回调
@@ -25,12 +25,12 @@ public interface ISubscriber<T> {
     /**
      * 错误回调
      *
-     * @param message 错误信息
+     * @param error 错误信息
      */
-    void doOnError(String message);
+    void doOnError(String error);
 
     /**
      * 请求完成回调
      */
-    void doOnCompleted();
+    void doonComplete();
 }

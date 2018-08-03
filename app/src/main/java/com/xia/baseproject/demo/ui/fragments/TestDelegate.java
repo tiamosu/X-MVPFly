@@ -6,8 +6,6 @@ import com.xia.baseproject.demo.R;
 import com.xia.baseproject.demo.base.AbstractHeadViewDelegate;
 import com.xia.baseproject.demo.mvp.presenter.TestPresenter;
 import com.xia.baseproject.demo.mvp.view.TestView;
-import com.xia.baseproject.rxhttp.RxHttp;
-import com.xia.baseproject.rxhttp.callback.AbstractStringCallback;
 
 /**
  * @author xia
@@ -39,12 +37,12 @@ public class TestDelegate extends AbstractHeadViewDelegate<TestPresenter> implem
     }
 
     private void test() {
-        RxHttp.get("/friend/json", new AbstractStringCallback(getContext()) {
-            @Override
-            public void onResponse(String response) {
-//                Log.e("weixi", "response:" + response);
-            }
-        });
+//        RxHttp.get("/friend/json", new AbstractStringCallback() {
+//            @Override
+//            public void onResponse(String response) {
+////                Log.e("weixi", "response:" + response);
+//            }
+//        });
     }
 
     @Override
