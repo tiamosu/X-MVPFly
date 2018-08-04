@@ -8,10 +8,7 @@ import com.xia.baseproject.demo.base.HeadViewFragment;
 import com.xia.baseproject.demo.mvp.presenter.TestPresenter;
 import com.xia.baseproject.demo.mvp.view.TestView;
 import com.xia.baseproject.rxhttp.callback.AbstractStringCallback;
-import com.xia.baseproject.rxhttp.request1.GetRequest;
-import com.xia.baseproject.rxhttp.subscriber.CallbackSubscriber;
-
-import io.reactivex.schedulers.Schedulers;
+import com.xia.baseproject.rxhttp.request.GetRequest;
 
 /**
  * @author xia
@@ -45,22 +42,14 @@ public class TestDelegate extends HeadViewFragment<TestPresenter> implements Tes
     private void test() {
         ///friend/json
         new GetRequest("/api/app/page/home")///api/app/page/home
-                .addParams("action", "banner,activity")
-                .getObservable()
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .subscribe(new CallbackSubscriber(getContext(), new AbstractStringCallback() {
+                .addParam("action", "banner,activity")
+                .build()
+                .request(this, new AbstractStringCallback() {
                     @Override
                     public void onResponse(String response) {
-                        Log.e("weixi", "response:" + response);
+                        Log.e("weixi", "onResponse: " + response);
                     }
-                }));
-//        RxHttp.get("/friend/json", new AbstractStringCallback() {
-//            @Override
-//            public void onResponse(String response) {
-////                Log.e("weixi", "response:" + response);
-//            }
-//        });
+                });
     }
 
     @Override

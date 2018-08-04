@@ -1,37 +1,31 @@
 package com.xia.baseproject.rxhttp.request;
 
-import com.xia.baseproject.rxhttp.exception.Exceptions;
+import android.support.annotation.NonNull;
 
 import io.reactivex.Observable;
-import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 
 /**
  * @author xia
- * @date 2018/7/27.
+ * @date 2018/8/3.
  */
-public class GetRequest extends BaseRequest {
-    private String mUrl;
+public class GetRequest extends BaseRequest<GetRequest> {
     private boolean mIsDownload;
 
-    public GetRequest(String url, boolean isDownload) {
-        this.mUrl = url;
-        this.mIsDownload = isDownload;
+    public GetRequest(@NonNull String url) {
+        super(url);
+    }
 
-        if (this.mUrl == null) {
-            Exceptions.illegalArgument("the mUrl can not be null !");
-        }
+    public GetRequest upDownload() {
+        mIsDownload = true;
+        return this;
     }
 
     @Override
-    protected RequestBody buildRequestBody() {
-        return null;
-    }
-
-    @Override
-    protected Observable getObservable() {
+    protected Observable<ResponseBody> generateRequest() {
         if (mIsDownload) {
-            return mRestService.download(mUrl);
+            return mRestService.downloadFile(mUrl);
         }
-        return mRestService.get(mUrl);
+        return mRestService.get(mUrl, mParams);
     }
 }
