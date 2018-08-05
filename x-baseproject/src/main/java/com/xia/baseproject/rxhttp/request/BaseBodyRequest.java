@@ -2,6 +2,8 @@ package com.xia.baseproject.rxhttp.request;
 
 import android.support.annotation.NonNull;
 
+import com.xia.baseproject.rxhttp.body.ProgressResponseCallBack;
+
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
@@ -17,6 +19,7 @@ public abstract class BaseBodyRequest<R extends BaseBodyRequest> extends BaseReq
     protected byte[] mBytes;                              //上传的字节数据
     protected String mString;                             //上传的文本内容
     protected MediaType mMediaType;
+    protected ProgressResponseCallBack mUpdateFileCallback;//上传回调监听
 
     public BaseBodyRequest(@NonNull String url) {
         super(url);
@@ -51,6 +54,11 @@ public abstract class BaseBodyRequest<R extends BaseBodyRequest> extends BaseReq
     public R upString(@NonNull String string, MediaType mediaType) {
         mString = string;
         mMediaType = mediaType != null ? mediaType : MediaType.parse("text/plain; charset=utf-8");
+        return (R) this;
+    }
+
+    public R updateFileCallback(ProgressResponseCallBack updateFileCallback) {
+        mUpdateFileCallback = updateFileCallback;
         return (R) this;
     }
 }

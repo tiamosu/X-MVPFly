@@ -2,6 +2,8 @@ package com.xia.baseproject.rxhttp.request;
 
 import android.support.annotation.NonNull;
 
+import com.xia.baseproject.rxhttp.body.UploadProgressRequestBody;
+
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.FileNameMap;
@@ -84,7 +86,9 @@ public class PostRequest extends BaseBodyRequest<PostRequest> {
                 final File file = mFileParams.get(key);
                 final RequestBody fileBody = RequestBody.create(
                         MediaType.parse(guessMimeType(file.getName())), file);
-                builder.addFormDataPart(key, file.getName(), fileBody);
+                final UploadProgressRequestBody uploadProgressRequestBody
+                        = new UploadProgressRequestBody(fileBody, mUpdateFileCallback);
+                builder.addFormDataPart(key, file.getName(), uploadProgressRequestBody);
             }
         }
         return builder.build();

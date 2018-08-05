@@ -13,6 +13,9 @@ import okio.Sink;
 /**
  * @author xia
  * @date 2018/8/3.
+ * <p>描述：上传请求体</p>
+ * 1.具有上传进度回调通知功能<br>
+ * 2.防止频繁回调，上层无用的刷新<br>
  */
 @SuppressWarnings("WeakerAccess")
 public class UploadProgressRequestBody extends RequestBody {
@@ -77,7 +80,9 @@ public class UploadProgressRequestBody extends RequestBody {
             long curTime = System.currentTimeMillis();
             //每100毫秒刷新一次数据,防止频繁无用的刷新
             if (curTime - lastRefreshUiTime >= 100 || bytesWritten == contentLength) {
-                progressCallBack.onResponseProgress(bytesWritten, contentLength, bytesWritten == contentLength);
+                if (progressCallBack != null) {
+                    progressCallBack.onResponseProgress(bytesWritten, contentLength, bytesWritten == contentLength);
+                }
                 lastRefreshUiTime = System.currentTimeMillis();
             }
         }

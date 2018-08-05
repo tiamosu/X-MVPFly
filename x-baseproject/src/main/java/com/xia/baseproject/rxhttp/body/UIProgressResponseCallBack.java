@@ -36,7 +36,8 @@ public abstract class UIProgressResponseCallBack implements ProgressResponseCall
                         //获得进度实体类
                         final ProgressModel progressModel = (ProgressModel) msg.obj;
                         //回调抽象方法
-                        uiProgressResponseListener.onUIResponseProgress(progressModel.getCurrentBytes(), progressModel.getContentLength(), progressModel.isDone());
+                        uiProgressResponseListener.onUIResponseProgress(progressModel.getCurrentBytes(),
+                                progressModel.getContentLength(), progressModel.isDone());
                     }
                     break;
                 default:
