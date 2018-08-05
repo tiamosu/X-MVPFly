@@ -1,7 +1,8 @@
 package com.xia.baseproject.rxhttp.cookie;
 
+import android.support.annotation.NonNull;
+
 import com.xia.baseproject.rxhttp.cookie.store.CookieStore;
-import com.xia.baseproject.rxhttp.exception.Exceptions;
 
 import java.util.List;
 
@@ -12,10 +13,7 @@ import okhttp3.HttpUrl;
 public class CookieJarImpl implements CookieJar {
     private CookieStore cookieStore;
 
-    public CookieJarImpl(CookieStore cookieStore) {
-        if (cookieStore == null) {
-            Exceptions.illegalArgument("cookieStore can not be null.");
-        }
+    public CookieJarImpl(@NonNull CookieStore cookieStore) {
         this.cookieStore = cookieStore;
     }
 
