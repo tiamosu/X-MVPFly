@@ -4,12 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.animation.Animation;
-
-import com.trello.rxlifecycle2.components.support.RxFragment;
 
 import me.yokeyword.fragmentation.ExtraTransaction;
 import me.yokeyword.fragmentation.ISupportFragment;
@@ -21,8 +21,7 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator;
  * @author xia
  * @date 2018/7/3.
  */
-@SuppressWarnings("all")
-public abstract class AbstractSupportFragment extends RxFragment implements ISupportFragment {
+public abstract class AbstractSupportFragment extends Fragment implements ISupportFragment {
     private final SupportFragmentDelegate mDelegate = new SupportFragmentDelegate(this);
     protected FragmentActivity _mActivity;
 
@@ -50,6 +49,7 @@ public abstract class AbstractSupportFragment extends RxFragment implements ISup
         return mDelegate.extraTransaction();
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -75,7 +75,7 @@ public abstract class AbstractSupportFragment extends RxFragment implements ISup
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         mDelegate.onSaveInstanceState(outState);
     }
@@ -125,6 +125,7 @@ public abstract class AbstractSupportFragment extends RxFragment implements ISup
      *
      * @deprecated Use {@link #post(Runnable)} instead.
      */
+    @SuppressWarnings("deprecation")
     @Deprecated
     @Override
     public void enqueueAction(Runnable runnable) {

@@ -32,7 +32,6 @@ object Deps {
     const val retrofit_adapter_rxjava2 = "com.squareup.retrofit2:adapter-rxjava2:${Versions.retrofit2}"
     const val rxjava2 = "io.reactivex.rxjava2:rxjava:2.2.0"
     const val rxandroid2 = "io.reactivex.rxjava2:rxandroid:2.0.2"
-    const val rxlifecycle2_components = "com.trello.rxlifecycle2:rxlifecycle-components:2.2.2"
     const val x_rxbus = "com.xia:x-rxbus:1.0.0"
     const val autodispose = "com.uber.autodispose:autodispose-android:${Versions.autodispose}"
     const val autodispose_archcomponents = "com.uber.autodispose:autodispose-android-archcomponents:${Versions.autodispose}"

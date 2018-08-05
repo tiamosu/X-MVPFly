@@ -1,14 +1,9 @@
 package com.xia.baseproject.demo.ui.fragments;
 
-import android.os.Handler;
-import android.util.Log;
-
 import com.xia.baseproject.demo.R;
 import com.xia.baseproject.demo.base.HeadViewFragment;
 import com.xia.baseproject.demo.mvp.presenter.TestPresenter;
 import com.xia.baseproject.demo.mvp.view.TestView;
-import com.xia.baseproject.rxhttp.callback.AbstractStringCallback;
-import com.xia.baseproject.rxhttp.request.GetRequest;
 
 /**
  * @author xia
@@ -34,22 +29,8 @@ public class TestDelegate extends HeadViewFragment<TestPresenter> implements Tes
     @Override
     public void initData() {
 //        getP().detachView();
-//        getP().load();
-        new Handler().postDelayed(() -> getP().load(), 3000);
-        test();
-    }
-
-    private void test() {
-        ///friend/json
-        new GetRequest("/api/app/page/home")///api/app/page/home
-                .addParam("action", "banner,activity")
-                .build()
-                .request(this, new AbstractStringCallback() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.e("weixi", "onResponse: " + response);
-                    }
-                });
+        getP().load();
+//        new Handler().postDelayed(() -> getP().load(), 3000);
     }
 
     @Override

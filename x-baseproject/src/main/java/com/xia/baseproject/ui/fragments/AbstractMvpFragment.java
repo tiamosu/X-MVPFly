@@ -4,9 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 
-import com.uber.autodispose.AutoDispose;
-import com.uber.autodispose.AutoDisposeConverter;
-import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
 import com.xia.baseproject.mvp.BaseMvpPresenter;
 import com.xia.baseproject.mvp.BaseMvpView;
 
@@ -52,10 +49,5 @@ public abstract class AbstractMvpFragment<P extends BaseMvpPresenter>
     @Override
     public FragmentActivity getContext() {
         return super.getContext();
-    }
-
-    @Override
-    public AutoDisposeConverter bindLifecycle() {
-        return AutoDispose.autoDisposable(AndroidLifecycleScopeProvider.from(this));
     }
 }

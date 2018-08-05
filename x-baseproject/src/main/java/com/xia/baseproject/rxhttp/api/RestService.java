@@ -8,10 +8,8 @@ import okhttp3.ResponseBody;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
-import retrofit2.http.HEAD;
 import retrofit2.http.HTTP;
 import retrofit2.http.Headers;
-import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.QueryMap;
@@ -72,10 +70,4 @@ public interface RestService {
     @PUT()
     @Headers({"Content-Type: application/json", "Accept: application/json"})
     Observable<ResponseBody> putJson(@Url String url, @Body RequestBody jsonBody);
-
-    @HEAD
-    Observable<ResponseBody> head(@Url String url);
-
-    @PATCH
-    Observable<ResponseBody> patch(@Url String url, @Body RequestBody body);
 }

@@ -40,9 +40,6 @@ dependencies {
     api Deps.butterknife
     annotationProcessor Deps.butterknife_apt
     //rx
-    api(Deps.rxlifecycle2_components) {
-        exclude group: 'io.reactivex.rxjava2'
-    }
     api Deps.rxjava2
     api Deps.rxandroid2
     api Deps.retrofit2
