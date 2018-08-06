@@ -47,8 +47,10 @@ object Deps {
     const val okhttp3 = "com.squareup.okhttp3:okhttp:${Versions.okhttp3}"
     const val okhttp3_logging_interceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp3}"
 
-    //other
-    const val utilcode = "com.blankj:utilcode:1.18.1"
+    //util
+    const val utilcode = "com.blankj:utilcode:1.18.2"
+    //fragment
     const val fragmentation_core = "me.yokeyword:fragmentation-core:1.3.5"
+    //loadingView
     const val loading_indicator_view = "com.wang.avi:library:2.1.3"
 }

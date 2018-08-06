@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.Looper;
 import android.support.annotation.CallSuper;
 
-import com.blankj.utilcode.util.NetworkUtils;
 import com.xia.baseproject.handler.WeakHandler;
 import com.xia.baseproject.ui.dialog.LoadingDialog;
 import com.xia.baseproject.ui.loder.Loader;
@@ -44,10 +43,6 @@ public abstract class ProgressSubscriber<T> extends BaseSubscriber<T> {
     @CallSuper
     @Override
     public void doOnSubscribe(Disposable disposable) {
-        if (!NetworkUtils.isAvailableByPing()) {
-            doonComplete();
-            return;
-        }
         showDialog();
     }
 

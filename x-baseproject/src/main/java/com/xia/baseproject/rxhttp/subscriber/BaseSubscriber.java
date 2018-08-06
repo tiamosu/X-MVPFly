@@ -2,6 +2,7 @@ package com.xia.baseproject.rxhttp.subscriber;
 
 import android.support.annotation.CallSuper;
 
+import com.blankj.utilcode.util.NetworkUtils;
 import com.xia.baseproject.rxhttp.exception.ApiException;
 import com.xia.baseproject.rxhttp.utils.Platform;
 
@@ -18,6 +19,10 @@ public abstract class BaseSubscriber<T> implements Observer<T>, ISubscriber<T> {
     @CallSuper
     @Override
     public void onSubscribe(Disposable d) {
+        if (!NetworkUtils.isAvailableByPing()) {
+            onComplete();
+            return;
+        }
         Platform.post(() -> doOnSubscribe(d));
     }
 
