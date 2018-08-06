@@ -1,8 +1,8 @@
 package com.xia.baseproject.rxhttp;
 
-import com.xia.baseproject.rxhttp.api.RestService;
 import com.xia.baseproject.app.Rest;
 import com.xia.baseproject.app.RestConfigKeys;
+import com.xia.baseproject.rxhttp.api.RestService;
 import com.xia.baseproject.rxhttp.cookie.CookieJarImpl;
 import com.xia.baseproject.rxhttp.cookie.store.MemoryCookieStore;
 import com.xia.baseproject.rxhttp.utils.HttpsUtils;
@@ -15,6 +15,7 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * @author xia
@@ -58,6 +59,7 @@ public final class RestCreator {
                 .baseUrl(BASE_URL)
                 .client(OKHttpHolder.OK_HTTP_CLIENT)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
 

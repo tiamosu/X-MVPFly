@@ -2,7 +2,7 @@ package com.xia.baseproject.rxhttp.subscriber;
 
 import android.support.annotation.CallSuper;
 
-import com.xia.baseproject.rxhttp.exception.ExceptionHandle;
+import com.xia.baseproject.rxhttp.exception.ApiException;
 import com.xia.baseproject.rxhttp.utils.Platform;
 
 import io.reactivex.Observer;
@@ -30,9 +30,8 @@ public abstract class BaseSubscriber<T> implements Observer<T>, ISubscriber<T> {
     @CallSuper
     @Override
     public void onError(Throwable e) {
-        final ExceptionHandle.ResponseThrowable responseThrowable
-                = ExceptionHandle.handleException(e);
-        final String error = responseThrowable.message;
+        final ApiException apiException = ApiException.handleException(e);
+        final String error = apiException.getMessage();
         Platform.post(() -> doOnError(error));
     }
 

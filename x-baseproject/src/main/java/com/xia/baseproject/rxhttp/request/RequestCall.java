@@ -2,12 +2,13 @@ package com.xia.baseproject.rxhttp.request;
 
 import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
 import com.xia.baseproject.rxhttp.callback.Callback;
+import com.xia.baseproject.rxhttp.func.RetryExceptionFunc;
 import com.xia.baseproject.rxhttp.subscriber.CallbackSubscriber;
 import com.xia.baseproject.rxhttp.utils.RxLifecycleUtils;
-import com.xia.baseproject.ui.fragments.SupportFragment;
 
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
@@ -30,7 +31,7 @@ public class RequestCall {
         commonRequest(activity, callback);
     }
 
-    public final void request(final SupportFragment fragment, final Callback callback) {
+    public final void request(final Fragment fragment, final Callback callback) {
         commonRequest(fragment, callback);
     }
 
@@ -45,14 +46,15 @@ public class RequestCall {
             lifecycleOwner = activity;
             context = activity;
         }
-        if (o instanceof SupportFragment) {
-            final SupportFragment fragment = (SupportFragment) o;
+        if (o instanceof Fragment) {
+            final Fragment fragment = (Fragment) o;
             lifecycleOwner = fragment;
             context = fragment.getContext();
         }
         if (lifecycleOwner != null && context != null) {
             mObservable.subscribeOn(Schedulers.io())
                     .unsubscribeOn(Schedulers.io())
+                    .retryWhen(new RetryExceptionFunc())
                     .as(RxLifecycleUtils.bindLifecycle(lifecycleOwner))
                     .subscribe(new CallbackSubscriber(context, callback));
         }

@@ -43,7 +43,8 @@ dependencies {
     api Deps.rxjava2
     api Deps.rxandroid2
     api Deps.retrofit2
-    api Deps.retrofit_adapter_rxjava2
+    api Deps.retrofit2_adapter_rxjava2
+    api Deps.retrofit2_converter_gson
     api Deps.x_rxbus
     api Deps.autodispose
     api Deps.autodispose_archcomponents

@@ -46,4 +46,8 @@ dependencies {
     implementation Deps.appcompat_v7
     implementation Deps.constraint_layout
     annotationProcessor Deps.butterknife_apt
+
+    debugImplementation Deps.leakcanary_android
+    releaseImplementation Deps.leakcanary_android_no_op
+    debugImplementation Deps.leakcanary_support_fragment
 }

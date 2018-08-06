@@ -15,6 +15,7 @@ object Versions {
     const val retrofit2 = "2.4.0"
     const val okhttp3 = "3.11.0"
     const val autodispose = "1.0.0-RC1"
+    const val leakcanary = "1.6.1"
 }
 
 object Deps {
@@ -27,9 +28,15 @@ object Deps {
     const val butterknife = "com.jakewharton:butterknife:${Versions.butterknife}"
     const val butterknife_apt = "com.jakewharton:butterknife-compiler:${Versions.butterknife}"
 
+    //leakcanary
+    const val leakcanary_android = "com.squareup.leakcanary:leakcanary-android:${Versions.leakcanary}"
+    const val leakcanary_android_no_op = "com.squareup.leakcanary:leakcanary-android-no-op:${Versions.leakcanary}"
+    const val leakcanary_support_fragment = "com.squareup.leakcanary:leakcanary-support-fragment:${Versions.leakcanary}"
+
     //rx
     const val retrofit2 = "com.squareup.retrofit2:retrofit:${Versions.retrofit2}"
-    const val retrofit_adapter_rxjava2 = "com.squareup.retrofit2:adapter-rxjava2:${Versions.retrofit2}"
+    const val retrofit2_adapter_rxjava2 = "com.squareup.retrofit2:adapter-rxjava2:${Versions.retrofit2}"
+    const val retrofit2_converter_gson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit2}"
     const val rxjava2 = "io.reactivex.rxjava2:rxjava:2.2.0"
     const val rxandroid2 = "io.reactivex.rxjava2:rxandroid:2.0.2"
     const val x_rxbus = "com.xia:x-rxbus:1.0.0"

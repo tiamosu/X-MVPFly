@@ -26,7 +26,7 @@ public class TestPresenter extends BaseMvpPresenter<TestView> {
         new GetRequest("/api/app/page/home")///friend/json
                 .addParam("action", "banner,activity")
                 .build()
-                .request(mSupportFragment, new AbstractStringCallback() {
+                .request(mFragment, new AbstractStringCallback() {
                     @Override
                     public void onResponse(String response) {
                         Log.e("weixi", "onResponse: " + response);

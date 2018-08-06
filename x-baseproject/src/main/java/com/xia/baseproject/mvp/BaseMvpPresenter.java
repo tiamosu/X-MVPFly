@@ -5,10 +5,10 @@ import android.arch.lifecycle.LifecycleOwner;
 import android.support.annotation.CallSuper;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
 import com.xia.baseproject.mvp.nullobject.MvpNullObjectBasePresenter;
-import com.xia.baseproject.ui.fragments.SupportFragment;
 
 /**
  * @author xia
@@ -16,18 +16,18 @@ import com.xia.baseproject.ui.fragments.SupportFragment;
  */
 @SuppressWarnings("WeakerAccess")
 public abstract class BaseMvpPresenter<V extends BaseMvpView> extends MvpNullObjectBasePresenter<V> {
-    protected SupportFragment mSupportFragment;
-    protected AppCompatActivity mAppCompatActivity;
+    protected Fragment mFragment;
+    protected AppCompatActivity mActivity;
 
     @CallSuper
     @MainThread
     @Override
     public void onCreate(@NonNull LifecycleOwner owner) {
-        if (owner instanceof SupportFragment) {
-            mSupportFragment = (SupportFragment) owner;
+        if (owner instanceof Fragment) {
+            mFragment = (Fragment) owner;
         }
         if (owner instanceof AppCompatActivity) {
-            mAppCompatActivity = (AppCompatActivity) owner;
+            mActivity = (AppCompatActivity) owner;
         }
     }
 
