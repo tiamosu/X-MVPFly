@@ -18,7 +18,7 @@ import me.yokeyword.fragmentation.ISupportFragment;
  * @author xia
  * @date 2018/7/3.
  */
-public class MainDelegate extends HeadViewFragment {
+public class MainFragment extends HeadViewFragment {
 
     private ISupportFragment[] mFragments = new ISupportFragment[1];
 
@@ -39,9 +39,9 @@ public class MainDelegate extends HeadViewFragment {
 
     @Override
     public void initData() {
-        final ISupportFragment firstFragment = findChildFragment(TestDelegate.class);
+        final ISupportFragment firstFragment = findChildFragment(HomeFragment.class);
         if (firstFragment == null) {
-            mFragments[0] = new TestDelegate();
+            mFragments[0] = new HomeFragment();
             loadMultipleRootFragment(R.id.main_fl, 0, mFragments);
         } else {
             mFragments[0] = firstFragment;
@@ -75,7 +75,7 @@ public class MainDelegate extends HeadViewFragment {
 
     private void permission() {
         PermissionUtils.permission(PermissionConstants.CAMERA, PermissionConstants.STORAGE)
-                .rationale(shouldRequest -> DialogHelper.showRationaleDialog(MainDelegate.this, shouldRequest))
+                .rationale(shouldRequest -> DialogHelper.showRationaleDialog(MainFragment.this, shouldRequest))
                 .callback(new PermissionUtils.FullCallback() {
                     @Override
                     public void onGranted(List<String> permissionsGranted) {
@@ -84,7 +84,7 @@ public class MainDelegate extends HeadViewFragment {
                     @Override
                     public void onDenied(List<String> permissionsDeniedForever,
                                          List<String> permissionsDenied) {
-                        DialogHelper.showOpenAppSettingDialog(MainDelegate.this);
+                        DialogHelper.showOpenAppSettingDialog(MainFragment.this);
                     }
                 })
                 .request();

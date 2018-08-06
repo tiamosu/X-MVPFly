@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import com.blankj.utilcode.util.AppUtils;
 import com.xia.baseproject.R;
 import com.xia.baseproject.app.Rest;
 import com.xia.baseproject.app.RestConfigKeys;
@@ -45,8 +46,12 @@ public abstract class ProxyActivity extends AbstractSupportActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            AppUtils.relaunchApp();
+            return;
+        }
         systemConfiguration();
-        initContainer(savedInstanceState);
+        initContainer(null);
 
         if (Rest.getConfiguration(RestConfigKeys.NETWORK_CHECK)) {
             netWorkChangeReceiver();

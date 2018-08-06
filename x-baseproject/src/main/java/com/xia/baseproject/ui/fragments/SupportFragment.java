@@ -3,6 +3,7 @@ package com.xia.baseproject.ui.fragments;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,6 +84,7 @@ public abstract class SupportFragment<P extends BaseMvpPresenter> extends Abstra
      */
     @Override
     public void reConnect() {
+        Log.e("weixi", this + "reConnect: ");
     }
 
     /**
@@ -122,8 +124,8 @@ public abstract class SupportFragment<P extends BaseMvpPresenter> extends Abstra
 
     @Override
     public void onDestroy() {
-        mDelegate.onDestroy();
         super.onDestroy();
+        mDelegate.onDestroy();
     }
 
     protected void subscribeWithTags(final String... tags) {

@@ -4,7 +4,7 @@ import android.arch.lifecycle.LifecycleOwner;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.xia.baseproject.demo.mvp.view.TestView;
+import com.xia.baseproject.demo.mvp.view.HomeView;
 import com.xia.baseproject.mvp.BaseMvpPresenter;
 import com.xia.baseproject.rxhttp.callback.AbstractStringCallback;
 import com.xia.baseproject.rxhttp.request.GetRequest;
@@ -13,7 +13,7 @@ import com.xia.baseproject.rxhttp.request.GetRequest;
  * @author xia
  * @date 2018/7/20.
  */
-public class TestPresenter extends BaseMvpPresenter<TestView> {
+public class HomePresenter extends BaseMvpPresenter<HomeView> {
 
     public void load() {
 //        Log.e("weixi", "load");

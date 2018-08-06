@@ -5,8 +5,8 @@ import android.view.MotionEvent;
 import android.view.Window;
 import android.widget.EditText;
 
+import com.xia.baseproject.demo.ui.fragments.MainFragment;
 import com.xia.baseproject.ui.activities.ProxyActivity;
-import com.xia.baseproject.demo.ui.fragments.MainDelegate;
 import com.xia.baseproject.ui.fragments.SupportFragment;
 
 import me.yokeyword.fragmentation.anim.DefaultVerticalAnimator;
@@ -19,7 +19,7 @@ public class MainActivity extends ProxyActivity {
 
     @Override
     public SupportFragment setRootFragment() {
-        return new MainDelegate();
+        return new MainFragment();
     }
 
     @Override

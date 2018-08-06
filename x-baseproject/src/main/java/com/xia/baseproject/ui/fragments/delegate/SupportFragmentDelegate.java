@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +28,12 @@ import me.yokeyword.fragmentation.ISupportFragment;
  * @date 2018/8/1.
  */
 public class SupportFragmentDelegate {
+
+    //网络连接状态表示
+    private static final int NET_OFF = 0;
+    private static final int NET_ON = 1;
+    private static final int NET_DEFAULT = -1;
+
     private SupportFragment mFragment;
     private Unbinder mUnbinder = null;
 
@@ -38,7 +43,7 @@ public class SupportFragmentDelegate {
 
     //防止多次初始化
     private boolean mIsInitAll = true;
-    private int mLastNetStatus = -1;
+    private int mLastNetStatus = NET_DEFAULT;
 
     //网络是否重新连接
     private boolean mNetReConnect;
@@ -93,9 +98,6 @@ public class SupportFragmentDelegate {
         if (isGlobalCheckNetWork()) {
             hasNetWork(NetworkUtils.isAvailableByPing());
         }
-        if (!mIsInitAll && mNetReConnect) {
-            mFragment.reConnect();
-        }
         if (mIsInitAll) {
             mIsInitAll = false;
             registerNetCheckEvent();
@@ -136,15 +138,20 @@ public class SupportFragmentDelegate {
     }
 
     private void hasNetWork(boolean isAvailable) {
-        final int currentNetStatus = isAvailable ? 1 : 0;
-        if (currentNetStatus != mLastNetStatus) {
-            mLastNetStatus = currentNetStatus;
-            //当网络重新连接时并且只有当前页面才执行方法
-            if (isAvailable && mFragment.isSupportVisible()) {
-                mNetReConnect = true;
-                mFragment.reConnect();
+        final int currentNetStatus = isAvailable ? NET_ON : NET_OFF;
+        if (currentNetStatus != mLastNetStatus || mNetReConnect) {
+            if (isAvailable) {
+                //判断网络是否是重连接的
+                if (mLastNetStatus == NET_OFF) {
+                    mNetReConnect = true;
+                }
+                //当网络重新连接时并且只有当前页面才执行方法
+                if (mFragment.isSupportVisible() && mNetReConnect) {
+                    mFragment.reConnect();
+                    mNetReConnect = false;
+                }
             }
-            Log.e("Net", "网络是否连接: " + isAvailable);
+            mLastNetStatus = currentNetStatus;
         }
     }
 

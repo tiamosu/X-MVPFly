@@ -2,14 +2,14 @@ package com.xia.baseproject.demo.ui.fragments;
 
 import com.xia.baseproject.demo.R;
 import com.xia.baseproject.demo.base.HeadViewFragment;
-import com.xia.baseproject.demo.mvp.presenter.TestPresenter;
-import com.xia.baseproject.demo.mvp.view.TestView;
+import com.xia.baseproject.demo.mvp.presenter.HomePresenter;
+import com.xia.baseproject.demo.mvp.view.HomeView;
 
 /**
  * @author xia
  * @date 2018/7/16.
  */
-public class TestDelegate extends HeadViewFragment<TestPresenter> implements TestView {
+public class HomeFragment extends HeadViewFragment<HomePresenter> implements HomeView {
 
     @Override
     public boolean isLoadHeadView() {
@@ -17,8 +17,8 @@ public class TestDelegate extends HeadViewFragment<TestPresenter> implements Tes
     }
 
     @Override
-    public TestPresenter newP() {
-        return new TestPresenter();
+    public HomePresenter newP() {
+        return new HomePresenter();
     }
 
     @Override
@@ -35,6 +35,14 @@ public class TestDelegate extends HeadViewFragment<TestPresenter> implements Tes
 
     @Override
     public void initView() {
+    }
+
+    @Override
+    public void initEvent() {
+        if (getView() != null) {
+            getView().findViewById(R.id.main_btn).setOnClickListener(v ->
+                    getParentDelegate().start(new SecondFragment()));
+        }
     }
 
     @Override
