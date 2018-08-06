@@ -1,5 +1,8 @@
 package com.xia.baseproject.rxhttp.callback;
 
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+
 import com.blankj.utilcode.util.CloseUtils;
 import com.xia.baseproject.rxhttp.utils.FileUtils;
 import com.xia.baseproject.rxhttp.utils.Platform;
@@ -28,7 +31,14 @@ public abstract class AbstractFileCallback extends Callback<File> {
      */
     private String destFileName;
 
-    public AbstractFileCallback(String destFileDir, String destFileName) {
+    public AbstractFileCallback(AppCompatActivity activity, String destFileDir, String destFileName) {
+        super(activity);
+        this.destFileDir = destFileDir;
+        this.destFileName = destFileName;
+    }
+
+    public AbstractFileCallback(Fragment fragment, String destFileDir, String destFileName) {
+        super(fragment);
         this.destFileDir = destFileDir;
         this.destFileName = destFileName;
     }

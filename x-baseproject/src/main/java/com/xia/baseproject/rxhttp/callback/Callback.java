@@ -1,5 +1,8 @@
 package com.xia.baseproject.rxhttp.callback;
 
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+
 import io.reactivex.disposables.Disposable;
 import okhttp3.ResponseBody;
 
@@ -9,6 +12,16 @@ import okhttp3.ResponseBody;
  */
 @SuppressWarnings("WeakerAccess")
 public abstract class Callback<T> {
+    public AppCompatActivity mActivity;
+    public Fragment mFragment;
+
+    public Callback(AppCompatActivity activity) {
+        mActivity = activity;
+    }
+
+    public Callback(Fragment fragment) {
+        mFragment = fragment;
+    }
 
     public void onSubscribe(Disposable d) {
     }

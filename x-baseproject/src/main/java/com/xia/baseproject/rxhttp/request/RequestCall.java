@@ -27,27 +27,19 @@ public class RequestCall {
         mObservable = observable;
     }
 
-    public final void request(final AppCompatActivity activity, final Callback callback) {
-        commonRequest(activity, callback);
-    }
-
-    public final void request(final Fragment fragment, final Callback callback) {
-        commonRequest(fragment, callback);
-    }
-
-    private void commonRequest(final Object o, Callback callback) {
-        if (o == null || callback == null || mObservable == null) {
+    public final void request(final Callback callback) {
+        if (callback == null || mObservable == null) {
             return;
         }
         LifecycleOwner lifecycleOwner = null;
         Context context = null;
-        if (o instanceof AppCompatActivity) {
-            final AppCompatActivity activity = (AppCompatActivity) o;
+        final AppCompatActivity activity = callback.mActivity;
+        final Fragment fragment = callback.mFragment;
+        if (activity != null) {
             lifecycleOwner = activity;
             context = activity;
         }
-        if (o instanceof Fragment) {
-            final Fragment fragment = (Fragment) o;
+        if (fragment != null) {
             lifecycleOwner = fragment;
             context = fragment.getContext();
         }
