@@ -30,5 +30,7 @@ public interface IBaseFragment {
 
     void initRxBusEvent();
 
+    void reConnect();
+
     void handleRxBusMessage(String tag, RxBusMessage rxBusMessage);
 }

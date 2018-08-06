@@ -21,6 +21,9 @@ import me.yokeyword.fragmentation.ISupportFragment;
 public abstract class SupportFragment<P extends BaseMvpPresenter> extends AbstractMvpFragment<P> implements IBaseFragment {
     private final SupportFragmentDelegate mDelegate = new SupportFragmentDelegate(this);
 
+    /**
+     * @return 加载布局（layout）
+     */
     public abstract int getLayoutId();
 
     /**
@@ -73,6 +76,13 @@ public abstract class SupportFragment<P extends BaseMvpPresenter> extends Abstra
      */
     @Override
     public void initRxBusEvent() {
+    }
+
+    /**
+     * 用于网络连接恢复后加载
+     */
+    @Override
+    public void reConnect() {
     }
 
     /**

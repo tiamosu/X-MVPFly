@@ -17,8 +17,8 @@ import com.blankj.utilcode.util.NetworkUtils;
 import com.xia.baseproject.R;
 import com.xia.baseproject.app.Rest;
 import com.xia.baseproject.app.RestConfigKeys;
-import com.xia.baseproject.ui.fragments.SupportFragment;
 import com.xia.baseproject.rxbus.NetworkChangeEvent;
+import com.xia.baseproject.ui.fragments.SupportFragment;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -39,6 +39,9 @@ public class SupportFragmentDelegate {
     //防止多次初始化
     private boolean mIsInitAll = true;
     private int mLastNetStatus = -1;
+
+    //网络是否重新连接
+    private boolean mNetReConnect;
 
     public SupportFragmentDelegate(ISupportFragment support) {
         if (!(support instanceof Fragment)) {
@@ -90,14 +93,17 @@ public class SupportFragmentDelegate {
         if (isGlobalCheckNetWork()) {
             hasNetWork(NetworkUtils.isAvailableByPing());
         }
+        if (!mIsInitAll && mNetReConnect) {
+            mFragment.reConnect();
+        }
         if (mIsInitAll) {
             mIsInitAll = false;
+            registerNetCheckEvent();
             getBundle(mFragment.getArguments());
             mFragment.initData();
             mFragment.initView();
             mFragment.initEvent();
             mFragment.initRxBusEvent();
-            checkNetwork();
         }
         mFragment.onVisibleLazyLoad();
     }
@@ -117,7 +123,7 @@ public class SupportFragmentDelegate {
      * 这边Callback不能使用lambda语句，否则解析报错
      */
     @SuppressWarnings("Convert2Lambda")
-    private void checkNetwork() {
+    private void registerNetCheckEvent() {
         if (isGlobalCheckNetWork()) {
             RxBusManager.subscribe(mFragment, NetworkChangeEvent.NET_CHANGE_TAG,
                     new RxBus.Callback<NetworkChangeEvent>() {
@@ -133,7 +139,12 @@ public class SupportFragmentDelegate {
         final int currentNetStatus = isAvailable ? 1 : 0;
         if (currentNetStatus != mLastNetStatus) {
             mLastNetStatus = currentNetStatus;
-            Log.e("weixi", "hasNetWork: " + isAvailable);
+            //当网络重新连接时并且只有当前页面才执行方法
+            if (isAvailable && mFragment.isSupportVisible()) {
+                mNetReConnect = true;
+                mFragment.reConnect();
+            }
+            Log.e("Net", "网络是否连接: " + isAvailable);
         }
     }
 
