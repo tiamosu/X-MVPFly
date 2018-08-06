@@ -1,5 +1,6 @@
 package com.xia.baseproject.rxhttp.callback;
 
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
@@ -12,15 +13,15 @@ import okhttp3.ResponseBody;
  */
 @SuppressWarnings("WeakerAccess")
 public abstract class Callback<T> {
-    public AppCompatActivity mActivity;
-    public Fragment mFragment;
+    public Object mObject;
 
-    public Callback(AppCompatActivity activity) {
-        mActivity = activity;
-    }
-
-    public Callback(Fragment fragment) {
-        mFragment = fragment;
+    public Callback(@NonNull Object object) {
+        mObject = object;
+        final boolean a = object instanceof AppCompatActivity;
+        final boolean b = object instanceof Fragment;
+        if (!(a || b)) {
+            throw new IllegalArgumentException("object must be AppCompatActivity or Fragment...！");
+        }
     }
 
     public void onSubscribe(Disposable d) {

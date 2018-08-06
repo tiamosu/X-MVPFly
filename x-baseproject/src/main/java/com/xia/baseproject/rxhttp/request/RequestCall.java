@@ -33,13 +33,14 @@ public class RequestCall {
         }
         LifecycleOwner lifecycleOwner = null;
         Context context = null;
-        final AppCompatActivity activity = callback.mActivity;
-        final Fragment fragment = callback.mFragment;
-        if (activity != null) {
+        final Object o = callback.mObject;
+        if (o instanceof AppCompatActivity) {
+            final AppCompatActivity activity = (AppCompatActivity) o;
             lifecycleOwner = activity;
             context = activity;
         }
-        if (fragment != null) {
+        if (o instanceof Fragment) {
+            final Fragment fragment = (Fragment) o;
             lifecycleOwner = fragment;
             context = fragment.getContext();
         }
