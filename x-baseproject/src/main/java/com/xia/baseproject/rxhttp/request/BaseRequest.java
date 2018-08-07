@@ -31,8 +31,10 @@ public abstract class BaseRequest<R extends BaseRequest> {
         return (R) this;
     }
 
-    public R params(@NonNull Map<String, String> params) {
-        mParams.putAll(params);
+    public R params(Map<String, String> params) {
+        if (params != null) {
+            mParams.putAll(params);
+        }
         return (R) this;
     }
 
@@ -41,8 +43,10 @@ public abstract class BaseRequest<R extends BaseRequest> {
         return (R) this;
     }
 
-    public R fileParams(@NonNull Map<String, File> fileParams) {
-        mFileParams.putAll(fileParams);
+    public R fileParams(Map<String, File> fileParams) {
+        if (fileParams != null) {
+            mFileParams.putAll(fileParams);
+        }
         return (R) this;
     }
 
