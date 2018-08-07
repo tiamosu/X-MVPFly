@@ -1,11 +1,8 @@
 package com.xia.baseproject.rxhttp.request;
 
 import android.arch.lifecycle.LifecycleOwner;
-import android.content.Context;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.NonNull;
 
-import com.xia.baseproject.rxhttp.callback.Callback;
 import com.xia.baseproject.rxhttp.func.RetryExceptionFunc;
 import com.xia.baseproject.rxhttp.subscriber.CallbackSubscriber;
 import com.xia.baseproject.rxhttp.utils.RxLifecycleUtils;
@@ -27,29 +24,17 @@ public class RequestCall {
         mObservable = observable;
     }
 
-    public final void request(final Callback callback) {
-        if (callback == null || mObservable == null) {
+    public final void request(@NonNull CallbackSubscriber subscriber) {
+        if (mObservable == null || subscriber.getCallback() == null) {
             return;
         }
-        LifecycleOwner lifecycleOwner = null;
-        Context context = null;
-        final Object o = callback.mObject;
-        if (o instanceof AppCompatActivity) {
-            final AppCompatActivity activity = (AppCompatActivity) o;
-            lifecycleOwner = activity;
-            context = activity;
-        }
-        if (o instanceof Fragment) {
-            final Fragment fragment = (Fragment) o;
-            lifecycleOwner = fragment;
-            context = fragment.getContext();
-        }
-        if (lifecycleOwner != null && context != null) {
+        final LifecycleOwner lifecycleOwner = subscriber.getCallback().mLifecycleOwner;
+        if (lifecycleOwner != null) {
             mObservable.subscribeOn(Schedulers.io())
                     .unsubscribeOn(Schedulers.io())
                     .retryWhen(new RetryExceptionFunc())
                     .as(RxLifecycleUtils.bindLifecycle(lifecycleOwner))
-                    .subscribe(new CallbackSubscriber(context, callback));
+                    .subscribe(subscriber);
         }
     }
 }

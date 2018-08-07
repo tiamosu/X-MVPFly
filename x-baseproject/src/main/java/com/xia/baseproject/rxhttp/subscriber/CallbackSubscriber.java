@@ -1,6 +1,6 @@
 package com.xia.baseproject.rxhttp.subscriber;
 
-import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.xia.baseproject.rxhttp.callback.Callback;
 import com.xia.baseproject.rxhttp.utils.Platform;
@@ -18,15 +18,13 @@ import okhttp3.ResponseBody;
 public class CallbackSubscriber extends ProgressSubscriber<ResponseBody> {
     private WeakReference<Callback> mCallback;
 
-    protected Callback getCallback() {
+    public Callback getCallback() {
         return mCallback == null ? null : mCallback.get();
     }
 
-    public CallbackSubscriber(Context context, Callback callback) {
-        super(context);
-        if (callback != null) {
-            mCallback = new WeakReference<>(callback);
-        }
+    public CallbackSubscriber(@NonNull Callback callback) {
+        super(callback.mContext);
+        mCallback = new WeakReference<>(callback);
     }
 
     @Override

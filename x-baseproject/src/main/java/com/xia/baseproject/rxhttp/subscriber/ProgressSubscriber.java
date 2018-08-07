@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Looper;
 import android.support.annotation.CallSuper;
+import android.support.annotation.NonNull;
 
 import com.xia.baseproject.handler.WeakHandler;
 import com.xia.baseproject.ui.dialog.LoadingDialog;
@@ -22,10 +23,8 @@ public abstract class ProgressSubscriber<T> extends BaseSubscriber<T> {
     private static final WeakHandler mWeakHandler = new WeakHandler(Looper.getMainLooper());
     private WeakReference<Context> mContext;
 
-    public ProgressSubscriber(Context context) {
-        if (context != null) {
-            mContext = new WeakReference<>(context);
-        }
+    public ProgressSubscriber(@NonNull Context context) {
+        mContext = new WeakReference<>(context);
     }
 
     protected Context getContext() {

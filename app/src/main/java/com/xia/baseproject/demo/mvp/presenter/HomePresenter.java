@@ -1,5 +1,6 @@
 package com.xia.baseproject.demo.mvp.presenter;
 
+import android.app.Dialog;
 import android.arch.lifecycle.LifecycleOwner;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -8,6 +9,7 @@ import com.xia.baseproject.demo.mvp.view.HomeView;
 import com.xia.baseproject.mvp.BaseMvpPresenter;
 import com.xia.baseproject.rxhttp.callback.AbstractStringCallback;
 import com.xia.baseproject.rxhttp.request.GetRequest;
+import com.xia.baseproject.rxhttp.subscriber.CallbackSubscriber;
 
 /**
  * @author xia
@@ -26,10 +28,20 @@ public class HomePresenter extends BaseMvpPresenter<HomeView> {
         new GetRequest("/api/app/page/home")///friend/json
                 .addParam("action", "banner,activity")
                 .build()
-                .request(new AbstractStringCallback(mFragment) {
+                .request(new CallbackSubscriber(new AbstractStringCallback(mFragment) {
                     @Override
                     public void onResponse(String response) {
                         Log.e("weixi", "onResponse: " + response);
+                    }
+                }) {
+                    @Override
+                    protected boolean isShowDialog() {
+                        return super.isShowDialog();
+                    }
+
+                    @Override
+                    protected Dialog getDialog() {
+                        return super.getDialog();
                     }
                 });
     }
