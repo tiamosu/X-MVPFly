@@ -56,7 +56,7 @@ public final class RestConfigurator {
         return this;
     }
 
-    public final void config() {
+    public final void configure() {
         CONFIGS.put(RestConfigKeys.CONFIG_READY, true);
         Utils.init(Rest.getApplicationContext());
     }

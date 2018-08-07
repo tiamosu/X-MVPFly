@@ -49,6 +49,6 @@ public class MyApp extends BaseApp {
                         return chain.proceed(authorised);
                     }
                 })
-                .config();
+                .configure();
     }
 }

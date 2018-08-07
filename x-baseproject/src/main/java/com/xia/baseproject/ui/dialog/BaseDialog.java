@@ -42,6 +42,9 @@ public abstract class BaseDialog extends Dialog {
         if (window != null) {
             final WindowManager.LayoutParams params = window.getAttributes();
             params.width = (int) (ScreenUtils.getScreenWidth() * 0.8);
+            //dimAmount在0.0f和1.0f之间，0.0f完全不暗，即背景是可见的 ，1.0f时候，背景全部变黑暗。
+            //如果要达到背景全部变暗的效果，需要设置  dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            //否则，背景无效果。
             params.flags = WindowManager.LayoutParams.FLAG_DIM_BEHIND;
             window.setAttributes(params);
             //这个函数用来设置 Dialog 周围的颜色。系统默认的是半透明的灰色。值设为0则为完全透明。

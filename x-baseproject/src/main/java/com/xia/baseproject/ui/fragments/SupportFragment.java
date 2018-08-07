@@ -1,6 +1,7 @@
 package com.xia.baseproject.ui.fragments;
 
 import android.os.Bundle;
+import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -54,6 +55,7 @@ public abstract class SupportFragment<P extends BaseMvpPresenter> extends Abstra
      * 该方法确保已执行完{@link #onEnterAnimationEnd(Bundle)}
      * 于Fragment可见时执行，保证转场动画的流畅性。
      */
+    @CallSuper
     @Override
     public void onVisibleLazyLoad() {
     }

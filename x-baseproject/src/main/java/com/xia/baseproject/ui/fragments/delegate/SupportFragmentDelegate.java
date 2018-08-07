@@ -65,7 +65,7 @@ public class SupportFragmentDelegate {
             final FrameLayout contentContainer = rootView.findViewById(R.id.layout_root_view_content_container);
             View.inflate(mFragment.getContext(), mFragment.getLayoutId(), contentContainer);
         }
-        mUnbinder = ButterKnife.bind(this, rootView);
+        mUnbinder = ButterKnife.bind(mFragment, rootView);
         return rootView;
     }
 
