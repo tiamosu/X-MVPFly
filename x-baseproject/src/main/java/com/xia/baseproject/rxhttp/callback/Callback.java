@@ -18,22 +18,14 @@ public abstract class Callback<T> {
     public Context mContext;
     public LifecycleOwner mLifecycleOwner;
 
-    public Callback(@NonNull Object object) {
-        final boolean a = object instanceof AppCompatActivity;
-        final boolean b = object instanceof Fragment;
-        if (!(a || b)) {
-            throw new IllegalArgumentException("object must be AppCompatActivity or Fragment...！");
-        }
-        if (object instanceof AppCompatActivity) {
-            final AppCompatActivity activity = (AppCompatActivity) object;
-            mLifecycleOwner = activity;
-            mContext = activity;
-        }
-        if (object instanceof Fragment) {
-            final Fragment fragment = (Fragment) object;
-            mLifecycleOwner = fragment;
-            mContext = fragment.getContext();
-        }
+    public Callback(@NonNull AppCompatActivity activity) {
+        mLifecycleOwner = activity;
+        mContext = activity;
+    }
+
+    public Callback(@NonNull Fragment fragment) {
+        mLifecycleOwner = fragment;
+        mContext = fragment.getContext();
     }
 
     public void onSubscribe(Disposable d) {
