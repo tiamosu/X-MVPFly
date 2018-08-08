@@ -1,6 +1,5 @@
 package com.xia.baseproject.app;
 
-import com.blankj.utilcode.util.Utils;
 import com.xia.baseproject.app.RestConfigKeys.ConfigKey;
 
 import java.util.ArrayList;
@@ -58,7 +57,6 @@ public final class RestConfigurator {
 
     public final void configure() {
         CONFIGS.put(RestConfigKeys.CONFIG_READY, true);
-        Utils.init(Rest.getApplicationContext());
     }
 
     @SuppressWarnings("unchecked")

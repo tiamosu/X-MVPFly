@@ -25,16 +25,14 @@ public class RequestCall {
     }
 
     public final void request(@NonNull CallbackSubscriber subscriber) {
-        if (mObservable == null || subscriber.getCallback() == null) {
+        if (mObservable == null) {
             return;
         }
-        final LifecycleOwner lifecycleOwner = subscriber.getCallback().mLifecycleOwner;
-        if (lifecycleOwner != null) {
-            mObservable.subscribeOn(Schedulers.io())
-                    .unsubscribeOn(Schedulers.io())
-                    .retryWhen(new RetryExceptionFunc())
-                    .as(RxLifecycleUtils.bindLifecycle(lifecycleOwner))
-                    .subscribe(subscriber);
-        }
+        final LifecycleOwner lifecycleOwner = subscriber.mCallback.mLifecycleOwner;
+        mObservable.subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .retryWhen(new RetryExceptionFunc())
+                .as(RxLifecycleUtils.bindLifecycle(lifecycleOwner))
+                .subscribe(subscriber);
     }
 }

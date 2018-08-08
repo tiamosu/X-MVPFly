@@ -20,7 +20,7 @@ public abstract class BaseSubscriber<T> implements Observer<T>, ISubscriber<T> {
     @Override
     public void onSubscribe(Disposable d) {
         if (!NetworkUtils.isAvailableByPing()) {
-            onComplete();
+            Platform.post(() -> doOnError("无法连接网络"));
             return;
         }
         Platform.post(() -> doOnSubscribe(d));

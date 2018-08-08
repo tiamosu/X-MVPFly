@@ -23,12 +23,12 @@ public abstract class AbstractMvpFragment<P extends BaseMvpPresenter>
     }
 
     @Override
-    public void onDestroyView() {
+    public void onDestroy() {
+        super.onDestroy();
         if (mPresenter != null) {
             mPresenter.detachView();
             mPresenter = null;
         }
-        super.onDestroyView();
     }
 
     @SuppressWarnings("unchecked")

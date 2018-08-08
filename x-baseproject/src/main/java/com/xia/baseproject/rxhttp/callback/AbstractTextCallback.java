@@ -1,8 +1,7 @@
 package com.xia.baseproject.rxhttp.callback;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 
 import com.blankj.utilcode.util.CloseUtils;
 
@@ -19,12 +18,8 @@ import okhttp3.ResponseBody;
  */
 public abstract class AbstractTextCallback extends Callback<String> {
 
-    public AbstractTextCallback(@NonNull AppCompatActivity activity) {
-        super(activity);
-    }
-
-    public AbstractTextCallback(@NonNull Fragment fragment) {
-        super(fragment);
+    public AbstractTextCallback(@NonNull LifecycleOwner lifecycleOwner) {
+        super(lifecycleOwner);
     }
 
     @Override

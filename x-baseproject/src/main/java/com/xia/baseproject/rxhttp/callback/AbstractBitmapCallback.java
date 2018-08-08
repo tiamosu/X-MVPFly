@@ -1,10 +1,9 @@
 package com.xia.baseproject.rxhttp.callback;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 
 import com.blankj.utilcode.util.CloseUtils;
 
@@ -18,12 +17,8 @@ import okhttp3.ResponseBody;
  */
 public abstract class AbstractBitmapCallback extends Callback<Bitmap> {
 
-    public AbstractBitmapCallback(@NonNull AppCompatActivity activity) {
-        super(activity);
-    }
-
-    public AbstractBitmapCallback(@NonNull Fragment fragment) {
-        super(fragment);
+    public AbstractBitmapCallback(@NonNull LifecycleOwner lifecycleOwner) {
+        super(lifecycleOwner);
     }
 
     @Override

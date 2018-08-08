@@ -18,14 +18,13 @@ public abstract class Callback<T> {
     public Context mContext;
     public LifecycleOwner mLifecycleOwner;
 
-    public Callback(@NonNull AppCompatActivity activity) {
-        mLifecycleOwner = activity;
-        mContext = activity;
-    }
-
-    public Callback(@NonNull Fragment fragment) {
-        mLifecycleOwner = fragment;
-        mContext = fragment.getContext();
+    public Callback(@NonNull LifecycleOwner lifecycleOwner) {
+        mLifecycleOwner = lifecycleOwner;
+        if (lifecycleOwner instanceof AppCompatActivity) {
+            mContext = (AppCompatActivity) lifecycleOwner;
+        } else if (lifecycleOwner instanceof Fragment) {
+            mContext = ((Fragment) lifecycleOwner).getContext();
+        }
     }
 
     public void onSubscribe(Disposable d) {

@@ -2,10 +2,9 @@ package com.xia.baseproject.rxhttp.subscriber;
 
 import android.support.annotation.NonNull;
 
+import com.blankj.utilcode.util.CloseUtils;
 import com.xia.baseproject.rxhttp.callback.Callback;
 import com.xia.baseproject.rxhttp.utils.Platform;
-
-import java.lang.ref.WeakReference;
 
 import io.reactivex.disposables.Disposable;
 import okhttp3.ResponseBody;
@@ -16,23 +15,17 @@ import okhttp3.ResponseBody;
  */
 @SuppressWarnings("WeakerAccess")
 public class CallbackSubscriber extends ProgressSubscriber<ResponseBody> {
-    private WeakReference<Callback> mCallback;
-
-    public Callback getCallback() {
-        return mCallback == null ? null : mCallback.get();
-    }
+    public Callback mCallback;
 
     public CallbackSubscriber(@NonNull Callback callback) {
         super(callback.mContext);
-        mCallback = new WeakReference<>(callback);
+        mCallback = callback;
     }
 
     @Override
     public void doOnSubscribe(Disposable disposable) {
         super.doOnSubscribe(disposable);
-        if (getCallback() != null) {
-            getCallback().onSubscribe(disposable);
-        }
+        mCallback.onSubscribe(disposable);
     }
 
     @SuppressWarnings("unchecked")
@@ -40,30 +33,26 @@ public class CallbackSubscriber extends ProgressSubscriber<ResponseBody> {
     public void onNext(ResponseBody responseBody) {
         super.onNext(responseBody);
         try {
-            if (getCallback() != null) {
-                final Object result = getCallback().parseNetworkResponse(responseBody);
-                Platform.post(() -> getCallback().onResponse(result));
+            final Object result = mCallback.parseNetworkResponse(responseBody);
+            if (result != null) {
+                Platform.post(() -> mCallback.onResponse(result));
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            responseBody.close();
+            CloseUtils.closeIO(responseBody);
         }
     }
 
     @Override
     public void doOnError(String error) {
         super.doOnError(error);
-        if (getCallback() != null) {
-            getCallback().onError(error);
-        }
+        mCallback.onError(error);
     }
 
     @Override
     public void doonComplete() {
         super.doonComplete();
-        if (getCallback() != null) {
-            getCallback().onComplete();
-        }
+        mCallback.onComplete();
     }
 }

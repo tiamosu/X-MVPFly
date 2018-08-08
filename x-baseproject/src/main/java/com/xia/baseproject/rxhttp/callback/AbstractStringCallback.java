@@ -1,8 +1,7 @@
 package com.xia.baseproject.rxhttp.callback;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 
 import okhttp3.ResponseBody;
 
@@ -13,12 +12,8 @@ import okhttp3.ResponseBody;
 @SuppressWarnings("WeakerAccess")
 public abstract class AbstractStringCallback extends Callback<String> {
 
-    public AbstractStringCallback(@NonNull AppCompatActivity activity) {
-        super(activity);
-    }
-
-    public AbstractStringCallback(@NonNull Fragment fragment) {
-        super(fragment);
+    public AbstractStringCallback(@NonNull LifecycleOwner lifecycleOwner) {
+        super(lifecycleOwner);
     }
 
     @Override

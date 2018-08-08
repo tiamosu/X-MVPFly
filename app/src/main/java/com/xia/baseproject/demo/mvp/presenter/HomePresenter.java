@@ -28,7 +28,7 @@ public class HomePresenter extends BaseMvpPresenter<HomeView> {
         new GetRequest("/api/app/page/home")///friend/json
                 .addParam("action", "banner,activity")
                 .build()
-                .request(new CallbackSubscriber(new AbstractStringCallback(mFragment) {
+                .request(new CallbackSubscriber(new AbstractStringCallback(mLifecycleOwner) {
                     @Override
                     public void onResponse(String response) {
                         Log.e("weixi", "onResponse: " + response);
