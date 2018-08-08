@@ -1,81 +1,31 @@
 package com.xia.baseproject.rxhttp;
 
+import android.support.annotation.NonNull;
+
+import com.xia.baseproject.rxhttp.request.DeleteRequest;
+import com.xia.baseproject.rxhttp.request.GetRequest;
+import com.xia.baseproject.rxhttp.request.PostRequest;
+import com.xia.baseproject.rxhttp.request.PutRequest;
+
 /**
  * @author xia
  * @date 2018/7/29.
  */
 public final class RxHttp {
 
-//    public static void get(String url, Callback callback) {
-//        get(url, null, true, callback);
-//    }
-//
-//    public static void get(String url, Map<String, String> params, Callback callback) {
-//        get(url, params, true, callback);
-//    }
-//
-//    public static void get(String url, Map<String, String> params,
-//                           boolean isShowDialog, Callback callback) {
-//        RestClient.get()
-//                .url(url)
-//                .params(params)
-//                .build()
-//                .request(new ResponseBodySubscriber(callback) {
-//                    @Override
-//                    protected boolean isShowDialog() {
-//                        return isShowDialog;
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        super.onError(e);
-//                    }
-//                });
-//    }
-//
-//    public static void post(String url, Callback callback) {
-//        post(url, null, true, callback);
-//    }
-//
-//    public static void post(String url, Map<String, String> params, Callback callback) {
-//        post(url, params, true, callback);
-//    }
-//
-//    public static void post(String url, Map<String, String> params,
-//                            boolean isShowDialog, Callback callback) {
-//        RestClient.post()
-//                .url(url)
-//                .params(params)
-//                .build()
-//                .request(new ResponseBodySubscriber(callback) {
-//                    @Override
-//                    protected boolean isShowDialog() {
-//                        return isShowDialog;
-//                    }
-//                });
-//    }
-//
-//    public static void download(String url, Map<String, String> params,
-//                                boolean isShowDialog, Callback callback) {
-//        RestClient
-//                .download()
-//                .url(url)
-//                .params(params)
-//                .build()
-//                .request(new ResponseBodySubscriber(callback) {
-//                    @Override
-//                    protected boolean isShowDialog() {
-//                        return isShowDialog;
-//                    }
-//                });
-//    }
-//
-//    public static void upload(String url, Map<String, File> fileParams, Callback callback) {
-//        RestClient
-//                .post()
-//                .url(url)
-//                .fileParams(fileParams)
-//                .build()
-//                .request(new ResponseBodySubscriber(callback));
-//    }
+    public static GetRequest get(@NonNull String url) {
+        return new GetRequest(url);
+    }
+
+    public static PostRequest post(@NonNull String url) {
+        return new PostRequest(url);
+    }
+
+    public static DeleteRequest delete(@NonNull String url) {
+        return new DeleteRequest(url);
+    }
+
+    public static PutRequest put(@NonNull String url) {
+        return new PutRequest(url);
+    }
 }

@@ -7,8 +7,8 @@ import android.util.Log;
 
 import com.xia.baseproject.demo.mvp.view.HomeView;
 import com.xia.baseproject.mvp.BaseMvpPresenter;
+import com.xia.baseproject.rxhttp.RxHttp;
 import com.xia.baseproject.rxhttp.callback.AbstractStringCallback;
-import com.xia.baseproject.rxhttp.request.GetRequest;
 import com.xia.baseproject.rxhttp.subscriber.CallbackSubscriber;
 
 /**
@@ -25,8 +25,7 @@ public class HomePresenter extends BaseMvpPresenter<HomeView> {
 
         getV().setData("你好啊！！！");
 
-        new GetRequest("/api/app/page/home")///friend/json
-                .addParam("action", "banner,activity")
+        RxHttp.get("/friend/json")
                 .build()
                 .request(new CallbackSubscriber(new AbstractStringCallback(mLifecycleOwner) {
                     @Override
