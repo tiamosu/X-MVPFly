@@ -21,7 +21,7 @@ import retrofit2.HttpException;
  * @author xia
  * @date 2018/3/29.
  */
-@SuppressWarnings({"WeakerAccess", "deprecation"})
+@SuppressWarnings("WeakerAccess")
 public class ApiException extends Exception {
     private static final int UNAUTHORIZED = 401;
     private static final int FORBIDDEN = 403;
@@ -50,6 +50,7 @@ public class ApiException extends Exception {
         this.message = throwable.getMessage();
     }
 
+    @SuppressWarnings("deprecation")
     public static ApiException handleException(Throwable e) {
         ApiException ex;
         if (e instanceof HttpException) {

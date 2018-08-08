@@ -3,6 +3,7 @@ package com.xia.baseproject.rxhttp.request;
 import android.arch.lifecycle.LifecycleOwner;
 import android.support.annotation.NonNull;
 
+import com.xia.baseproject.rxhttp.callback.Callback;
 import com.xia.baseproject.rxhttp.func.RetryExceptionFunc;
 import com.xia.baseproject.rxhttp.subscriber.CallbackSubscriber;
 import com.xia.baseproject.rxhttp.utils.RxLifecycleUtils;
@@ -25,14 +26,17 @@ public class RequestCall {
     }
 
     public final void request(@NonNull CallbackSubscriber subscriber) {
-        if (mObservable == null) {
+        final Callback callback = subscriber.getCallback();
+        if (mObservable == null || callback == null) {
             return;
         }
-        final LifecycleOwner lifecycleOwner = subscriber.mCallback.mLifecycleOwner;
-        mObservable.subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .retryWhen(new RetryExceptionFunc())
-                .as(RxLifecycleUtils.bindLifecycle(lifecycleOwner))
-                .subscribe(subscriber);
+        final LifecycleOwner lifecycleOwner = callback.getLifecycleOwner();
+        if (lifecycleOwner != null) {
+            mObservable.subscribeOn(Schedulers.io())
+                    .unsubscribeOn(Schedulers.io())
+                    .retryWhen(new RetryExceptionFunc())
+                    .as(RxLifecycleUtils.bindLifecycle(lifecycleOwner))
+                    .subscribe(subscriber);
+        }
     }
 }

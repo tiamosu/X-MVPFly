@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.blankj.rxbus.RxBusMessage;
-import com.xia.baseproject.ui.fragments.delegate.SupportFragmentDelegate;
 import com.xia.baseproject.mvp.BaseMvpPresenter;
+import com.xia.baseproject.ui.fragments.delegate.SupportFragmentDelegate;
 
 import me.yokeyword.fragmentation.ISupportFragment;
 

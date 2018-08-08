@@ -6,6 +6,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
+import java.lang.ref.WeakReference;
+
 import io.reactivex.disposables.Disposable;
 import okhttp3.ResponseBody;
 
@@ -15,15 +17,23 @@ import okhttp3.ResponseBody;
  */
 @SuppressWarnings("WeakerAccess")
 public abstract class Callback<T> {
-    public Context mContext;
-    public LifecycleOwner mLifecycleOwner;
+    private WeakReference<Context> mContext;
+    private WeakReference<LifecycleOwner> mLifecycleOwner;
+
+    public Context getContext() {
+        return mContext.get();
+    }
+
+    public LifecycleOwner getLifecycleOwner() {
+        return mLifecycleOwner.get();
+    }
 
     public Callback(@NonNull LifecycleOwner lifecycleOwner) {
-        mLifecycleOwner = lifecycleOwner;
+        mLifecycleOwner = new WeakReference<>(lifecycleOwner);
         if (lifecycleOwner instanceof AppCompatActivity) {
-            mContext = (AppCompatActivity) lifecycleOwner;
+            mContext = new WeakReference<>((AppCompatActivity) lifecycleOwner);
         } else if (lifecycleOwner instanceof Fragment) {
-            mContext = ((Fragment) lifecycleOwner).getContext();
+            mContext = new WeakReference<>(((Fragment) lifecycleOwner).getContext());
         }
     }
 
