@@ -37,18 +37,18 @@ object Deps {
     const val retrofit2 = "com.squareup.retrofit2:retrofit:${Versions.retrofit2}"
     const val retrofit2_adapter_rxjava2 = "com.squareup.retrofit2:adapter-rxjava2:${Versions.retrofit2}"
     const val retrofit2_converter_gson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit2}"
-    const val rxjava2 = "io.reactivex.rxjava2:rxjava:2.2.0"
-    const val rxandroid2 = "io.reactivex.rxjava2:rxandroid:2.0.2"
-    const val x_rxbus = "com.xia:x-rxbus:1.0.0"
     const val autodispose = "com.uber.autodispose:autodispose-android:${Versions.autodispose}"
     const val autodispose_archcomponents = "com.uber.autodispose:autodispose-android-archcomponents:${Versions.autodispose}"
+    const val rxjava2 = "io.reactivex.rxjava2:rxjava:2.2.0"
+    const val rxandroid2 = "io.reactivex.rxjava2:rxandroid:2.0.2"
+    const val x_rxbus = "com.xia:x-rxbus:1.0.1"
 
     //okhttp
     const val okhttp3 = "com.squareup.okhttp3:okhttp:${Versions.okhttp3}"
     const val okhttp3_logging_interceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp3}"
 
     //util
-    const val utilcode = "com.blankj:utilcode:1.18.2"
+    const val utilcode = "com.blankj:utilcode:1.18.4"
     //fragment
     const val fragmentation_core = "me.yokeyword:fragmentation-core:1.3.5"
     //loadingView
