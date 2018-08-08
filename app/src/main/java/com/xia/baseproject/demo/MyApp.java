@@ -1,6 +1,7 @@
 package com.xia.baseproject.demo;
 
 import com.blankj.utilcode.util.ThreadUtils;
+import com.squareup.leakcanary.LeakCanary;
 import com.xia.baseproject.BaseApp;
 import com.xia.baseproject.app.Rest;
 
@@ -18,7 +19,17 @@ public class MyApp extends BaseApp {
             return;
         }
         super.onCreate();
+        initLeakCanary();
+        initHttp();
+    }
 
+    private void initLeakCanary() {
+        if (!LeakCanary.isInAnalyzerProcess(this)) {
+            LeakCanary.install(this);
+        }
+    }
+
+    private void initHttp() {
         final HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 

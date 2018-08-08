@@ -88,6 +88,7 @@ public class SupportFragmentDelegate {
     }
 
     public void onDestroy() {
+        Rest.getHandler().removeCallbacksAndMessages(null);
         RxBusManager.unregister(mFragment);
         if (mUnbinder != null && mUnbinder != Unbinder.EMPTY) {
             mUnbinder.unbind();

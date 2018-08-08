@@ -1,5 +1,7 @@
 package com.xia.baseproject.app;
 
+import android.os.Handler;
+
 import com.xia.baseproject.app.RestConfigKeys.ConfigKey;
 
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ import okhttp3.Interceptor;
 public final class RestConfigurator {
     private static final HashMap<Object, Object> CONFIGS = new HashMap<>();
     private static final ArrayList<Interceptor> INTERCEPTORS = new ArrayList<>();
+    private static final Handler HANDLER = new Handler();
 
     private static class SingleTonHolder {
         private static final RestConfigurator INSTANCE = new RestConfigurator();
@@ -25,6 +28,7 @@ public final class RestConfigurator {
 
     private RestConfigurator() {
         CONFIGS.put(RestConfigKeys.CONFIG_READY, false);
+        CONFIGS.put(RestConfigKeys.HANDLER, HANDLER);
         CONFIGS.put(RestConfigKeys.INTERCEPTOR, INTERCEPTORS);
         CONFIGS.put(RestConfigKeys.NETWORK_CHECK, false);
     }

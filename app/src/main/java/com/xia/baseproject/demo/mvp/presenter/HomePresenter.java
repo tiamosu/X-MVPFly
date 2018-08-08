@@ -18,6 +18,10 @@ import com.xia.baseproject.rxhttp.subscriber.CallbackSubscriber;
 public class HomePresenter extends BaseMvpPresenter<HomeView> {
 
     public void load() {
+        load(0);
+    }
+
+    public void load(int index) {
 //        Log.e("weixi", "load");
 //        Log.e("weixi", "getView:" + getV());
 //        Log.e("weixi", "boolean:" + getV().getBoolean());
@@ -30,7 +34,7 @@ public class HomePresenter extends BaseMvpPresenter<HomeView> {
                 .request(new CallbackSubscriber(new AbstractStringCallback(mLifecycleOwner) {
                     @Override
                     public void onResponse(String response) {
-                        Log.e("weixi", "onResponse: " + response);
+                        Log.e("weixi", "onResponse" + index + " :" + response);
                     }
                 }) {
                     @Override

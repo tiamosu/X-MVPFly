@@ -1,18 +1,18 @@
 package com.xia.baseproject.rxhttp.subscriber;
 
 import android.app.Dialog;
-import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 
 import com.blankj.utilcode.util.CloseUtils;
-import com.xia.baseproject.handler.WeakHandler;
+import com.blankj.utilcode.util.NetworkUtils;
+import com.xia.baseproject.app.Rest;
+import com.xia.baseproject.rxhttp.callback.AbstractFileCallback;
 import com.xia.baseproject.rxhttp.callback.Callback;
-import com.xia.baseproject.rxhttp.utils.Platform;
+import com.xia.baseproject.rxhttp.exception.ApiException;
 import com.xia.baseproject.ui.dialog.LoadingDialog;
 import com.xia.baseproject.ui.loder.Loader;
 
-import java.lang.ref.WeakReference;
-
+import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import okhttp3.ResponseBody;
 
@@ -21,16 +21,11 @@ import okhttp3.ResponseBody;
  * @date 2018/8/3.
  */
 @SuppressWarnings("WeakerAccess")
-public class CallbackSubscriber extends BaseSubscriber<ResponseBody> {
-    private WeakReference<Callback> mCallback;
-    private WeakHandler mWeakHandler = new WeakHandler();
+public class CallbackSubscriber implements Observer<ResponseBody> {
+    public Callback mCallback;
 
     public CallbackSubscriber(@NonNull Callback callback) {
-        mCallback = new WeakReference<>(callback);
-    }
-
-    public Callback getCallback() {
-        return mCallback == null || mCallback.get() == null ? null : mCallback.get();
+        mCallback = callback;
     }
 
     protected boolean isShowDialog() {
@@ -38,72 +33,75 @@ public class CallbackSubscriber extends BaseSubscriber<ResponseBody> {
     }
 
     protected Dialog getDialog() {
-        if (getCallback() != null && getCallback().getContext() != null) {
-            return new LoadingDialog(getCallback().getContext());
+        if (mCallback == null || mCallback.getContext() == null) {
+            return null;
         }
-        return null;
+        return new LoadingDialog(mCallback.getContext());
+    }
+
+    @Override
+    public void onSubscribe(Disposable d) {
+        if (!NetworkUtils.isAvailableByPing()) {
+            onError("无法连接网络");
+            return;
+        }
+        showDialog();
+        if (mCallback != null) {
+            mCallback.onSubscribe(d);
+        }
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public void onNext(ResponseBody responseBody) {
-        super.onNext(responseBody);
-        Platform.post(() -> doOnNext(responseBody));
-        try {
-            if (getCallback() != null) {
-                final Object result = getCallback().parseNetworkResponse(responseBody);
-                if (result != null) {
-                    Platform.post(() -> getCallback().onResponse(result));
-                }
+        if (mCallback != null) {
+            if (mCallback instanceof AbstractFileCallback) {
+                return;
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            CloseUtils.closeIO(responseBody);
+            try {
+                final Object result = mCallback.parseNetworkResponse(responseBody);
+                mCallback.onResponse(result);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                CloseUtils.closeIO(responseBody);
+            }
         }
     }
 
-    @CallSuper
     @Override
-    public void doOnSubscribe(Disposable disposable) {
-        showDialog();
-        if (getCallback() != null) {
-            getCallback().onSubscribe(disposable);
-        }
-    }
-
-    @CallSuper
-    @Override
-    public void doOnNext(ResponseBody responseBody) {
-    }
-
-    @CallSuper
-    @Override
-    public void doOnError(String error) {
+    public void onError(Throwable e) {
         cancelDialog();
-        if (getCallback() != null) {
-            getCallback().onError(error);
+        final ApiException apiException = ApiException.handleException(e);
+        final String error = apiException.getMessage();
+        onError(error);
+    }
+
+    @Override
+    public void onComplete() {
+        cancelDialog();
+        if (mCallback != null) {
+            mCallback.onComplete();
+            mCallback = null;
         }
     }
 
-    @CallSuper
-    @Override
-    public void doonComplete() {
-        cancelDialog();
-        if (getCallback() != null) {
-            getCallback().onComplete();
+    private void onError(String error) {
+        if (mCallback != null) {
+            mCallback.onError(error);
+            mCallback = null;
         }
     }
 
     private void showDialog() {
         if (isShowDialog()) {
-            mWeakHandler.postDelayed(() -> Loader.showLoading(getDialog()), 300);
+            Rest.getHandler().postDelayed(() -> Loader.showLoading(getDialog()), 300);
         }
     }
 
     private void cancelDialog() {
         if (isShowDialog()) {
-            mWeakHandler.removeCallbacksAndMessages(null);
+            Rest.getHandler().removeCallbacksAndMessages(null);
             Loader.stopLoading();
         }
     }
