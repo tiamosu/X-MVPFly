@@ -1,5 +1,6 @@
 package com.xia.baseproject.rxhttp.subscriber;
 
+import android.app.Dialog;
 import android.support.annotation.NonNull;
 
 import com.blankj.utilcode.util.CloseUtils;
@@ -8,6 +9,7 @@ import com.xia.baseproject.app.Rest;
 import com.xia.baseproject.rxhttp.callback.AbstractFileCallback;
 import com.xia.baseproject.rxhttp.callback.Callback;
 import com.xia.baseproject.rxhttp.exception.ApiException;
+import com.xia.baseproject.ui.dialog.LoadingDialog;
 import com.xia.baseproject.ui.loder.Loader;
 
 import io.reactivex.Observer;
@@ -24,6 +26,17 @@ public class CallbackSubscriber implements Observer<ResponseBody> {
 
     public CallbackSubscriber(@NonNull Callback callback) {
         mCallback = callback;
+    }
+
+    protected boolean isShowLoadingDialog() {
+        return true;
+    }
+
+    protected Dialog getLoadingDialog() {
+        if (mCallback == null || mCallback.getContext() == null) {
+            return null;
+        }
+        return new LoadingDialog(mCallback.getContext());
     }
 
     @Override
@@ -83,17 +96,13 @@ public class CallbackSubscriber implements Observer<ResponseBody> {
     }
 
     private void showDialog() {
-        if (mCallback != null && mCallback.isShowLoadingDialog()) {
-            Rest.getHandler().postDelayed(() -> {
-                if (mCallback != null) {
-                    Loader.showLoading(mCallback.getLoadingDialog());
-                }
-            }, 300);
+        if (isShowLoadingDialog()) {
+            Rest.getHandler().postDelayed(() -> Loader.showLoading(getLoadingDialog()), 300);
         }
     }
 
     private void cancelDialog() {
-        if (mCallback != null && mCallback.isShowLoadingDialog()) {
+        if (isShowLoadingDialog()) {
             Rest.getHandler().removeCallbacksAndMessages(null);
             Loader.stopLoading();
         }

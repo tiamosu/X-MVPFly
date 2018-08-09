@@ -10,6 +10,7 @@ import com.xia.baseproject.mvp.BaseMvpPresenter;
 import com.xia.baseproject.rxhttp.RxHttp;
 import com.xia.baseproject.rxhttp.callback.AbstractFileCallback;
 import com.xia.baseproject.rxhttp.callback.AbstractStringCallback;
+import com.xia.baseproject.rxhttp.subscriber.CallbackSubscriber;
 
 import java.io.File;
 
@@ -23,7 +24,7 @@ public class HomePresenter extends BaseMvpPresenter<HomeView> {
         RxHttp.get("https://www.leverking.cn/apk/xry_test.apk")
                 .upDownload()
                 .build()
-                .request(new AbstractFileCallback(mLifecycleOwner, "xry/apk", "test.apk") {
+                .request(new CallbackSubscriber(new AbstractFileCallback(mLifecycleOwner, "xry/apk", "test.apk") {
                     @Override
                     public void onResponse(File response) {
                         Log.e("weixi", "onResponse: " + response.getName());
@@ -33,7 +34,7 @@ public class HomePresenter extends BaseMvpPresenter<HomeView> {
                     public void inProgress(float progress, long total) {
                         Log.e("weixi", "inProgress: " + progress);
                     }
-                });
+                }));
     }
 
     public void load(int index) {
@@ -46,19 +47,19 @@ public class HomePresenter extends BaseMvpPresenter<HomeView> {
 
         RxHttp.get("/friend/json")
                 .build()
-                .request(new AbstractStringCallback(mLifecycleOwner) {
+                .request(new CallbackSubscriber(new AbstractStringCallback(mLifecycleOwner) {
                     @Override
                     public void onResponse(String response) {
                         Log.e("weixi", "onResponse" + index + " :" + response);
                     }
-
+                }) {
                     @Override
-                    public boolean isShowLoadingDialog() {
-                        return true;
+                    protected boolean isShowLoadingDialog() {
+                        return super.isShowLoadingDialog();
                     }
 
                     @Override
-                    public Dialog getLoadingDialog() {
+                    protected Dialog getLoadingDialog() {
                         return super.getLoadingDialog();
                     }
                 });

@@ -1,13 +1,10 @@
 package com.xia.baseproject.rxhttp.callback;
 
-import android.app.Dialog;
 import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-
-import com.xia.baseproject.ui.dialog.LoadingDialog;
 
 import java.lang.ref.WeakReference;
 
@@ -29,17 +26,6 @@ public abstract class Callback<T> {
 
     public LifecycleOwner getLifecycleOwner() {
         return mLifecycleOwner.get();
-    }
-
-    public boolean isShowLoadingDialog() {
-        return true;
-    }
-
-    public Dialog getLoadingDialog() {
-        if (mContext == null || mContext.get() == null) {
-            return null;
-        }
-        return new LoadingDialog(mContext.get());
     }
 
     public Callback(@NonNull LifecycleOwner lifecycleOwner) {
