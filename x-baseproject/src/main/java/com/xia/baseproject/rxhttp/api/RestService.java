@@ -7,6 +7,7 @@ import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
+import retrofit2.http.FieldMap;
 import retrofit2.http.GET;
 import retrofit2.http.HTTP;
 import retrofit2.http.Headers;
@@ -47,10 +48,6 @@ public interface RestService {
 
     //@DELETE()//delete body请求比较特殊 需要自定义
     @HTTP(method = "DELETE",/*path = "",*/hasBody = true)
-    Observable<ResponseBody> deleteBody(@Url String url, @Body Object object);
-
-    //@DELETE()//delete body请求比较特殊 需要自定义
-    @HTTP(method = "DELETE",/*path = "",*/hasBody = true)
     Observable<ResponseBody> deleteBody(@Url String url, @Body RequestBody body);
 
     //@DELETE()//delete body请求比较特殊 需要自定义
@@ -59,7 +56,7 @@ public interface RestService {
     Observable<ResponseBody> deleteJson(@Url String url, @Body RequestBody jsonBody);
 
     @PUT()
-    Observable<ResponseBody> put(@Url String url, @QueryMap Map<String, String> maps);
+    Observable<ResponseBody> put(@Url String url, @FieldMap Map<String, String> maps);
 
     @PUT()
     Observable<ResponseBody> putBody(@Url String url, @Body Object object);

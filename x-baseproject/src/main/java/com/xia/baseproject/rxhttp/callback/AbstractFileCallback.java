@@ -2,8 +2,10 @@ package com.xia.baseproject.rxhttp.callback;
 
 import android.arch.lifecycle.LifecycleOwner;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.blankj.utilcode.util.CloseUtils;
+import com.blankj.utilcode.util.ThreadUtils;
 import com.xia.baseproject.rxhttp.utils.FileUtils;
 import com.xia.baseproject.rxhttp.utils.Platform;
 
@@ -20,6 +22,7 @@ import okhttp3.ResponseBody;
  * @author xia
  * @date 2018/7/28.
  */
+@SuppressWarnings("WeakerAccess")
 public abstract class AbstractFileCallback extends Callback<File> {
 
     /**
@@ -30,6 +33,7 @@ public abstract class AbstractFileCallback extends Callback<File> {
      * 目标文件存储的文件名
      */
     private String destFileName;
+    private DownloadTask mDownloadTask;
 
     public AbstractFileCallback(@NonNull LifecycleOwner lifecycleOwner, String destFileDir, String destFileName) {
         super(lifecycleOwner);
@@ -37,9 +41,33 @@ public abstract class AbstractFileCallback extends Callback<File> {
         this.destFileName = destFileName;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public File parseNetworkResponse(final ResponseBody responseBody) {
-        return saveFile(responseBody);
+        if (mDownloadTask == null) {
+            mDownloadTask = new DownloadTask(responseBody);
+            ThreadUtils.executeByIo(mDownloadTask);
+        }
+        return null;
+    }
+
+    private class DownloadTask extends ThreadUtils.SimpleTask<File> {
+        private ResponseBody mResponseBody;
+
+        DownloadTask(ResponseBody responseBody) {
+            mResponseBody = responseBody;
+        }
+
+        @Nullable
+        @Override
+        public File doInBackground() {
+            return saveFile(mResponseBody);
+        }
+
+        @Override
+        public void onSuccess(@Nullable File result) {
+            onResponse(result);
+        }
     }
 
     private File saveFile(ResponseBody responseBody) {
@@ -73,7 +101,7 @@ public abstract class AbstractFileCallback extends Callback<File> {
         } catch (IOException e) {
             onError(e.getMessage());
         } finally {
-            CloseUtils.closeIO(bos, fos, bis, is);
+            CloseUtils.closeIO(responseBody, bos, fos, bis, is);
         }
         return file;
     }

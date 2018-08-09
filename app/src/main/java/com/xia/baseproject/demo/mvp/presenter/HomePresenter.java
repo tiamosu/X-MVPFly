@@ -8,8 +8,11 @@ import android.util.Log;
 import com.xia.baseproject.demo.mvp.view.HomeView;
 import com.xia.baseproject.mvp.BaseMvpPresenter;
 import com.xia.baseproject.rxhttp.RxHttp;
+import com.xia.baseproject.rxhttp.callback.AbstractFileCallback;
 import com.xia.baseproject.rxhttp.callback.AbstractStringCallback;
 import com.xia.baseproject.rxhttp.subscriber.CallbackSubscriber;
+
+import java.io.File;
 
 /**
  * @author xia
@@ -17,8 +20,21 @@ import com.xia.baseproject.rxhttp.subscriber.CallbackSubscriber;
  */
 public class HomePresenter extends BaseMvpPresenter<HomeView> {
 
-    public void load() {
-        load(0);
+    public void downloadFile() {
+        RxHttp.get("https://www.leverking.cn/apk/xry_test.apk")
+                .upDownload()
+                .build()
+                .request(new CallbackSubscriber(new AbstractFileCallback(mLifecycleOwner, "xry/apk", "test.apk") {
+                    @Override
+                    public void onResponse(File response) {
+                        Log.e("weixi", "onResponse: " + response.getName());
+                    }
+
+                    @Override
+                    public void inProgress(float progress, long total) {
+                        Log.e("weixi", "inProgress: " + progress);
+                    }
+                }));
     }
 
     public void load(int index) {

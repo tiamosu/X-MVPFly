@@ -28,8 +28,7 @@ public class HomeFragment extends HeadViewFragment<HomePresenter> implements Hom
 
     @Override
     public void initData() {
-//        getP().detachView();
-        getP().load();
+        getP().downloadFile();
 //        new Handler().postDelayed(() -> getP().load(), 3000);
     }
 

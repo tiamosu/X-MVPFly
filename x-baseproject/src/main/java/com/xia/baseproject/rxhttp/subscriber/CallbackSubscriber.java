@@ -55,16 +55,18 @@ public class CallbackSubscriber implements Observer<ResponseBody> {
     @Override
     public void onNext(ResponseBody responseBody) {
         if (mCallback != null) {
-            if (mCallback instanceof AbstractFileCallback) {
-                return;
-            }
+            final boolean isFileCallback = mCallback instanceof AbstractFileCallback;
             try {
                 final Object result = mCallback.parseNetworkResponse(responseBody);
-                mCallback.onResponse(result);
+                if (!isFileCallback) {
+                    mCallback.onResponse(result);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
-                CloseUtils.closeIO(responseBody);
+                if (!isFileCallback) {
+                    CloseUtils.closeIO(responseBody);
+                }
             }
         }
     }
