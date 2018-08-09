@@ -7,7 +7,6 @@ import com.xia.baseproject.rxhttp.cookie.CookieJarImpl;
 import com.xia.baseproject.rxhttp.cookie.store.MemoryCookieStore;
 import com.xia.baseproject.rxhttp.utils.HttpsUtils;
 
-import java.net.Proxy;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -42,14 +41,16 @@ public final class RestCreator {
         }
 
         public static final OkHttpClient OK_HTTP_CLIENT = addInterceptor()
+                //设置超时
                 .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .readTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .writeTimeout(TIME_OUT, TimeUnit.SECONDS)
+                //错误重连
                 .retryOnConnectionFailure(true)
+                //cookie认证
                 .cookieJar(new CookieJarImpl(new MemoryCookieStore()))
                 .hostnameVerifier(new HttpsUtils.HOSTNAME_VERIFIER())
                 .sslSocketFactory(SSL_PARAMS.sSLSocketFactory, SSL_PARAMS.trustManager)
-                .proxy(Proxy.NO_PROXY)
                 .build();
     }
 
