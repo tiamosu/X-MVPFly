@@ -1,7 +1,7 @@
 @file:Suppress("unused")
 
 object Android {
-    const val compileSdkVersion = 27
+    const val compileSdkVersion = 28
     const val minSdkVersion = 15
     const val targetSdkVersion = 25
 

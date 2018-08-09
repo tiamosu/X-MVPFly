@@ -26,22 +26,18 @@ public class RequestCall {
         mObservable = observable;
     }
 
-    public final void request(@NonNull CallbackSubscriber subscriber) {
+    public final void request(@NonNull Callback callback) {
         if (mObservable == null) {
             return;
         }
-        final Callback callback = subscriber.mCallback;
-        LifecycleOwner lifecycleOwner = null;
-        if (callback != null) {
-            lifecycleOwner = callback.getLifecycleOwner();
-        }
+        final LifecycleOwner lifecycleOwner = callback.getLifecycleOwner();
         if (lifecycleOwner != null) {
             mObservable.subscribeOn(Schedulers.io())
                     .unsubscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .retryWhen(new RetryExceptionFunc())
                     .as(RxLifecycleUtils.bindLifecycle(lifecycleOwner))
-                    .subscribe(subscriber);
+                    .subscribe(new CallbackSubscriber(callback));
         }
     }
 }
