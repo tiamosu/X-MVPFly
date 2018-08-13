@@ -49,7 +49,7 @@ public class CallbackSubscriber implements Observer<ResponseBody> {
                 RxHttpDisposableManager.getInstance().add(tagName, d);
             }
         }
-        if (!NetworkUtils.isAvailableByPing()) {
+        if (!NetworkUtils.isConnected()) {
             onError("无法连接网络");
             return;
         }

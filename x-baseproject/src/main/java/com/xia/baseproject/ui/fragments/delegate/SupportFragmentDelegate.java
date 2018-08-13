@@ -104,7 +104,7 @@ public class SupportFragmentDelegate {
 
     private void initAll() {
         if (isGlobalCheckNetWork()) {
-            hasNetWork(NetworkUtils.isAvailableByPing());
+            hasNetWork(NetworkUtils.isConnected());
         }
         if (mIsInitAll) {
             mIsInitAll = false;

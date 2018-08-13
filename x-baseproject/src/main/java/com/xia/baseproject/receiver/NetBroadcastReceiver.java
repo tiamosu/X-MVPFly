@@ -17,7 +17,7 @@ public class NetBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         //**判断当前的网络连接状态是否可用*/
-        final boolean isAvailable = NetworkUtils.isAvailableByPing();
+        final boolean isAvailable = NetworkUtils.isConnected();
         RxBusManager.post(new NetworkChangeEvent(isAvailable), NetworkChangeEvent.NET_CHANGE_TAG);
     }
 }
