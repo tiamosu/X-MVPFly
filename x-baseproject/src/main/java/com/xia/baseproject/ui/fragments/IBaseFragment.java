@@ -3,8 +3,6 @@ package com.xia.baseproject.ui.fragments;
 import android.os.Bundle;
 import android.widget.FrameLayout;
 
-import com.blankj.rxbus.RxBusMessage;
-
 /**
  * @author xia
  * @date 2018/8/1.
@@ -28,9 +26,5 @@ public interface IBaseFragment {
 
     void initEvent();
 
-    void initRxBusEvent();
-
     void reConnect();
-
-    void handleRxBusMessage(String tag, RxBusMessage rxBusMessage);
 }

@@ -1,4 +1,4 @@
-package com.xia.baseproject.rxbus;
+package com.xia.baseproject.rxbus.event;
 
 /**
  * @author xia

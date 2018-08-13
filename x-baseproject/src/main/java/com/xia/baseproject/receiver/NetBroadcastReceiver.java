@@ -6,7 +6,7 @@ import android.content.Intent;
 
 import com.blankj.rxbus.RxBusManager;
 import com.blankj.utilcode.util.NetworkUtils;
-import com.xia.baseproject.rxbus.NetworkChangeEvent;
+import com.xia.baseproject.rxbus.event.NetworkChangeEvent;
 
 /**
  * @author xia

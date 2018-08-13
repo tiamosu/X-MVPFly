@@ -16,7 +16,8 @@ import com.blankj.utilcode.util.NetworkUtils;
 import com.xia.baseproject.R;
 import com.xia.baseproject.app.Rest;
 import com.xia.baseproject.app.RestConfigKeys;
-import com.xia.baseproject.rxbus.NetworkChangeEvent;
+import com.xia.baseproject.rxbus.IRxBusCallback;
+import com.xia.baseproject.rxbus.event.NetworkChangeEvent;
 import com.xia.baseproject.rxhttp.RxHttpDisposableManager;
 import com.xia.baseproject.ui.fragments.SupportFragment;
 
@@ -112,7 +113,6 @@ public class SupportFragmentDelegate {
             mFragment.initData();
             mFragment.initView();
             mFragment.initEvent();
-            mFragment.initRxBusEvent();
         }
         mFragment.onVisibleLazyLoad();
     }
@@ -163,21 +163,25 @@ public class SupportFragmentDelegate {
     }
 
     @SuppressWarnings("Convert2Lambda")
-    public void subscribeWithTags(final String... tags) {
+    public void subscribeWithTags(final IRxBusCallback callback, final String... tags) {
         RxBusManager.subscribeWithTags(mFragment, new RxBus.Callback<RxBusMessage>() {
             @Override
             public void onEvent(String tag, RxBusMessage rxBusMessage) {
-                mFragment.handleRxBusMessage(tag, rxBusMessage);
+                if (callback != null) {
+                    callback.callback(tag, rxBusMessage);
+                }
             }
         }, tags);
     }
 
     @SuppressWarnings("Convert2Lambda")
-    public void subscribeStickyWithTags(final String... tags) {
+    public void subscribeStickyWithTags(final IRxBusCallback callback, final String... tags) {
         RxBusManager.subscribeStickyWithTags(mFragment, new RxBus.Callback<RxBusMessage>() {
             @Override
             public void onEvent(String tag, RxBusMessage rxBusMessage) {
-                mFragment.handleRxBusMessage(tag, rxBusMessage);
+                if (callback != null) {
+                    callback.callback(tag, rxBusMessage);
+                }
             }
         }, tags);
     }

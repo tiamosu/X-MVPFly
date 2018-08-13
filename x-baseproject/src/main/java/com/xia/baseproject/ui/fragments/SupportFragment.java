@@ -10,8 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import com.blankj.rxbus.RxBusMessage;
 import com.xia.baseproject.mvp.BaseMvpPresenter;
+import com.xia.baseproject.rxbus.IRxBusCallback;
 import com.xia.baseproject.ui.fragments.delegate.SupportFragmentDelegate;
 
 import me.yokeyword.fragmentation.ISupportFragment;
@@ -75,26 +75,11 @@ public abstract class SupportFragment<P extends BaseMvpPresenter> extends Abstra
     }
 
     /**
-     * 用于订阅RxBus事件
-     */
-    @Override
-    public void initRxBusEvent() {
-    }
-
-    /**
      * 用于网络连接恢复后加载
      */
     @Override
     public void reConnect() {
         Log.e("weixi", this + "reConnect: ");
-    }
-
-    /**
-     * @param tag          RxBus订阅/发送时的标签
-     * @param rxBusMessage 发送事件的信息载体
-     */
-    @Override
-    public void handleRxBusMessage(String tag, RxBusMessage rxBusMessage) {
     }
 
     @Nullable
@@ -136,11 +121,11 @@ public abstract class SupportFragment<P extends BaseMvpPresenter> extends Abstra
         mDelegate.onDestroy();
     }
 
-    protected void subscribeWithTags(final String... tags) {
-        mDelegate.subscribeWithTags(tags);
+    protected void subscribeWithTags(final IRxBusCallback callback, final String... tags) {
+        mDelegate.subscribeWithTags(callback, tags);
     }
 
-    protected void subscribeStickyWithTags(final String... tags) {
-        mDelegate.subscribeStickyWithTags(tags);
+    protected void subscribeStickyWithTags(final IRxBusCallback callback, final String... tags) {
+        mDelegate.subscribeStickyWithTags(callback, tags);
     }
 }
