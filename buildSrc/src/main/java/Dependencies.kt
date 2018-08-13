@@ -41,7 +41,7 @@ object Deps {
     const val autodispose_archcomponents = "com.uber.autodispose:autodispose-android-archcomponents:${Versions.autodispose}"
     const val rxjava2 = "io.reactivex.rxjava2:rxjava:2.2.0"
     const val rxandroid2 = "io.reactivex.rxjava2:rxandroid:2.0.2"
-    const val x_rxbus = "com.xia:x-rxbus:1.0.1"
+    const val x_rxbus = "com.xia:x-rxbus:1.0.2"
 
     //okhttp
     const val okhttp3 = "com.squareup.okhttp3:okhttp:${Versions.okhttp3}"
