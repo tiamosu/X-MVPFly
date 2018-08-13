@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.xia.baseproject.mvp.BaseMvpPresenter;
+import com.xia.baseproject.rxbus.IRxBusCallback;
+import com.xia.baseproject.rxbus.RxBusHelper;
 import com.xia.baseproject.ui.fragments.delegate.SupportFragmentDelegate;
 
 import me.yokeyword.fragmentation.ISupportFragment;
@@ -116,5 +118,13 @@ public abstract class SupportFragment<P extends BaseMvpPresenter> extends Abstra
     public void onDestroy() {
         super.onDestroy();
         mDelegate.onDestroy();
+    }
+
+    protected void subscribeWithTags(final IRxBusCallback callback, final String... tags) {
+        RxBusHelper.subscribeWithTags(this, callback, tags);
+    }
+
+    protected void subscribeStickyWithTags(final IRxBusCallback callback, final String... tags) {
+        RxBusHelper.subscribeStickyWithTags(this, callback, tags);
     }
 }
