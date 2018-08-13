@@ -125,6 +125,12 @@ public abstract class SupportFragment<P extends BaseMvpPresenter> extends Abstra
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mDelegate.onDestroyView();
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         mDelegate.onDestroy();

@@ -87,10 +87,13 @@ public class SupportFragmentDelegate {
         getBundle(args);
     }
 
-    public void onDestroy() {
+    public void onDestroyView() {
         Rest.getHandler().removeCallbacksAndMessages(null);
         RxBusManager.unregister(mFragment);
-        if (mUnbinder != null && mUnbinder != Unbinder.EMPTY) {
+    }
+
+    public void onDestroy() {
+        if (mUnbinder != null) {
             mUnbinder.unbind();
         }
     }
