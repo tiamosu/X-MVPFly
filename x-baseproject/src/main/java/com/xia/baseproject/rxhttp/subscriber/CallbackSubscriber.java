@@ -1,10 +1,12 @@
 package com.xia.baseproject.rxhttp.subscriber;
 
 import android.app.Dialog;
+import android.arch.lifecycle.LifecycleOwner;
 import android.support.annotation.NonNull;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.xia.baseproject.app.Rest;
+import com.xia.baseproject.rxhttp.RxHttpDisposableManager;
 import com.xia.baseproject.rxhttp.callback.Callback;
 import com.xia.baseproject.rxhttp.exception.ApiException;
 import com.xia.baseproject.rxhttp.utils.Platform;
@@ -21,7 +23,7 @@ import okhttp3.ResponseBody;
  */
 @SuppressWarnings("WeakerAccess")
 public class CallbackSubscriber implements Observer<ResponseBody> {
-    public Callback mCallback;
+    private Callback mCallback;
 
     public CallbackSubscriber(@NonNull Callback callback) {
         mCallback = callback;
@@ -40,6 +42,13 @@ public class CallbackSubscriber implements Observer<ResponseBody> {
 
     @Override
     public void onSubscribe(Disposable d) {
+        if (mCallback != null) {
+            final LifecycleOwner owner = mCallback.mLifecycleOwner;
+            if (owner != null) {
+                final String tagName = owner.getClass().getName();
+                RxHttpDisposableManager.getInstance().add(tagName, d);
+            }
+        }
         if (!NetworkUtils.isAvailableByPing()) {
             onError("无法连接网络");
             return;

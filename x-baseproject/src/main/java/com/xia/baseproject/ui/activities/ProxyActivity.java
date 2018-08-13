@@ -18,8 +18,9 @@ import com.blankj.utilcode.util.AppUtils;
 import com.xia.baseproject.R;
 import com.xia.baseproject.app.Rest;
 import com.xia.baseproject.app.RestConfigKeys;
-import com.xia.baseproject.ui.fragments.SupportFragment;
 import com.xia.baseproject.receiver.NetBroadcastReceiver;
+import com.xia.baseproject.rxhttp.RxHttpDisposableManager;
+import com.xia.baseproject.ui.fragments.SupportFragment;
 
 /**
  * @author xia
@@ -70,6 +71,7 @@ public abstract class ProxyActivity extends AbstractSupportActivity {
 
     @Override
     protected void onDestroy() {
+        RxHttpDisposableManager.getInstance().removeAll();
         if (mNetBroadcastReceiver != null) {
             unregisterReceiver(mNetBroadcastReceiver);
         }
