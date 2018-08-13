@@ -4,14 +4,12 @@ import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.xia.baseproject.mvp.BaseMvpPresenter;
-import com.xia.baseproject.rxbus.IRxBusCallback;
 import com.xia.baseproject.ui.fragments.delegate.SupportFragmentDelegate;
 
 import me.yokeyword.fragmentation.ISupportFragment;
@@ -79,7 +77,6 @@ public abstract class SupportFragment<P extends BaseMvpPresenter> extends Abstra
      */
     @Override
     public void reConnect() {
-        Log.e("weixi", this + "reConnect: ");
     }
 
     @Nullable
@@ -119,13 +116,5 @@ public abstract class SupportFragment<P extends BaseMvpPresenter> extends Abstra
     public void onDestroy() {
         super.onDestroy();
         mDelegate.onDestroy();
-    }
-
-    protected void subscribeWithTags(final IRxBusCallback callback, final String... tags) {
-        mDelegate.subscribeWithTags(callback, tags);
-    }
-
-    protected void subscribeStickyWithTags(final IRxBusCallback callback, final String... tags) {
-        mDelegate.subscribeStickyWithTags(callback, tags);
     }
 }

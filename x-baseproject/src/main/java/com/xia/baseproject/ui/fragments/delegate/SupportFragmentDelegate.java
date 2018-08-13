@@ -11,12 +11,10 @@ import android.widget.FrameLayout;
 
 import com.blankj.rxbus.RxBus;
 import com.blankj.rxbus.RxBusManager;
-import com.blankj.rxbus.RxBusMessage;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.xia.baseproject.R;
 import com.xia.baseproject.app.Rest;
 import com.xia.baseproject.app.RestConfigKeys;
-import com.xia.baseproject.rxbus.IRxBusCallback;
 import com.xia.baseproject.rxbus.event.NetworkChangeEvent;
 import com.xia.baseproject.rxhttp.RxHttpDisposableManager;
 import com.xia.baseproject.ui.fragments.SupportFragment;
@@ -90,10 +88,10 @@ public class SupportFragmentDelegate {
     }
 
     public void onDestroyView() {
-        final String tagName = mFragment.getClass().getName();
-        RxHttpDisposableManager.getInstance().remove(tagName);
         Rest.getHandler().removeCallbacksAndMessages(null);
         RxBusManager.unregister(mFragment);
+        final String tagName = mFragment.getClass().getName();
+        RxHttpDisposableManager.getInstance().remove(tagName);
     }
 
     public void onDestroy() {
@@ -160,29 +158,5 @@ public class SupportFragmentDelegate {
             }
             mLastNetStatus = currentNetStatus;
         }
-    }
-
-    @SuppressWarnings("Convert2Lambda")
-    public void subscribeWithTags(final IRxBusCallback callback, final String... tags) {
-        RxBusManager.subscribeWithTags(mFragment, new RxBus.Callback<RxBusMessage>() {
-            @Override
-            public void onEvent(String tag, RxBusMessage rxBusMessage) {
-                if (callback != null) {
-                    callback.callback(tag, rxBusMessage);
-                }
-            }
-        }, tags);
-    }
-
-    @SuppressWarnings("Convert2Lambda")
-    public void subscribeStickyWithTags(final IRxBusCallback callback, final String... tags) {
-        RxBusManager.subscribeStickyWithTags(mFragment, new RxBus.Callback<RxBusMessage>() {
-            @Override
-            public void onEvent(String tag, RxBusMessage rxBusMessage) {
-                if (callback != null) {
-                    callback.callback(tag, rxBusMessage);
-                }
-            }
-        }, tags);
     }
 }

@@ -1,5 +1,6 @@
 package com.xia.baseproject.rxbus;
 
+import com.blankj.rxbus.RxBus;
 import com.blankj.rxbus.RxBusManager;
 import com.blankj.rxbus.RxBusMessage;
 
@@ -24,5 +25,33 @@ public final class RxBusHelper {
 
     public static void postSticky(final RxBusMessage event, final String tag) {
         RxBusManager.postSticky(event, tag);
+    }
+
+    @SuppressWarnings("Convert2Lambda")
+    public static void subscribeWithTags(final Object subscriber,
+                                         final IRxBusCallback callback,
+                                         final String... tags) {
+        RxBusManager.subscribeWithTags(subscriber, new RxBus.Callback<RxBusMessage>() {
+            @Override
+            public void onEvent(String tag, RxBusMessage rxBusMessage) {
+                if (callback != null) {
+                    callback.callback(tag, rxBusMessage);
+                }
+            }
+        }, tags);
+    }
+
+    @SuppressWarnings("Convert2Lambda")
+    public static void subscribeStickyWithTags(final Object subscriber,
+                                               final IRxBusCallback callback,
+                                               final String... tags) {
+        RxBusManager.subscribeStickyWithTags(subscriber, new RxBus.Callback<RxBusMessage>() {
+            @Override
+            public void onEvent(String tag, RxBusMessage rxBusMessage) {
+                if (callback != null) {
+                    callback.callback(tag, rxBusMessage);
+                }
+            }
+        }, tags);
     }
 }
