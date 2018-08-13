@@ -3,12 +3,11 @@ package com.xia.baseproject.rxhttp.subscriber;
 import android.app.Dialog;
 import android.support.annotation.NonNull;
 
-import com.blankj.utilcode.util.CloseUtils;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.xia.baseproject.app.Rest;
-import com.xia.baseproject.rxhttp.callback.AbstractFileCallback;
 import com.xia.baseproject.rxhttp.callback.Callback;
 import com.xia.baseproject.rxhttp.exception.ApiException;
+import com.xia.baseproject.rxhttp.utils.Platform;
 import com.xia.baseproject.ui.dialog.LoadingDialog;
 import com.xia.baseproject.ui.loder.Loader;
 
@@ -45,35 +44,28 @@ public class CallbackSubscriber implements Observer<ResponseBody> {
             onError("无法连接网络");
             return;
         }
-        showDialog();
-        if (mCallback != null) {
-            mCallback.onSubscribe(d);
-        }
+        Platform.post(() -> {
+            showDialog();
+            if (mCallback != null) {
+                mCallback.onSubscribe(d);
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public void onNext(ResponseBody responseBody) {
-        if (mCallback != null) {
-            final boolean isFileCallback = mCallback instanceof AbstractFileCallback;
-            try {
-                final Object result = mCallback.parseNetworkResponse(responseBody);
-                if (!isFileCallback) {
-                    mCallback.onResponse(result);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                if (!isFileCallback) {
-                    CloseUtils.closeIO(responseBody);
-                }
+        try {
+            if (mCallback != null) {
+                mCallback.parseNetworkResponse(responseBody);
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     @Override
     public void onError(Throwable e) {
-        cancelDialog();
         final ApiException apiException = ApiException.handleException(e);
         final String error = apiException.getMessage();
         onError(error);
@@ -81,18 +73,23 @@ public class CallbackSubscriber implements Observer<ResponseBody> {
 
     @Override
     public void onComplete() {
-        cancelDialog();
-        if (mCallback != null) {
-            mCallback.onComplete();
-            mCallback = null;
-        }
+        Platform.post(() -> {
+            cancelDialog();
+            if (mCallback != null) {
+                mCallback.onComplete();
+                mCallback = null;
+            }
+        });
     }
 
     private void onError(String error) {
-        if (mCallback != null) {
-            mCallback.onError(error);
-            mCallback = null;
-        }
+        Platform.post(() -> {
+            cancelDialog();
+            if (mCallback != null) {
+                mCallback.onError(error);
+                mCallback = null;
+            }
+        });
     }
 
     private void showDialog() {

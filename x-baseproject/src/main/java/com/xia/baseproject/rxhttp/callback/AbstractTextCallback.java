@@ -4,6 +4,7 @@ import android.arch.lifecycle.LifecycleOwner;
 import android.support.annotation.NonNull;
 
 import com.blankj.utilcode.util.CloseUtils;
+import com.xia.baseproject.rxhttp.utils.Platform;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -32,7 +33,9 @@ public abstract class AbstractTextCallback extends Callback<String> {
         while ((line = bufferedReader.readLine()) != null) {
             result.append(line);
         }
-        CloseUtils.closeIO(is, reader, bufferedReader);
-        return result.toString();
+        final String text = result.toString();
+        Platform.post(() -> onResponse(text));
+        CloseUtils.closeIO(responseBody, is, reader, bufferedReader);
+        return text;
     }
 }

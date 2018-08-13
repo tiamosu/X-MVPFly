@@ -24,7 +24,6 @@ import okhttp3.ResponseBody;
  */
 @SuppressWarnings("WeakerAccess")
 public abstract class AbstractFileCallback extends Callback<File> {
-
     /**
      * 目标文件存储的文件夹路径
      */

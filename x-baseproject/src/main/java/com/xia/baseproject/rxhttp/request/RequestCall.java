@@ -9,7 +9,6 @@ import com.xia.baseproject.rxhttp.subscriber.CallbackSubscriber;
 import com.xia.baseproject.rxhttp.utils.RxLifecycleUtils;
 
 import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
 
@@ -33,12 +32,11 @@ public class RequestCall {
         final Callback callback = subscriber.mCallback;
         LifecycleOwner lifecycleOwner = null;
         if (callback != null) {
-            lifecycleOwner = callback.getLifecycleOwner();
+            lifecycleOwner = callback.mLifecycleOwner;
         }
         if (lifecycleOwner != null) {
             mObservable.subscribeOn(Schedulers.io())
                     .unsubscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
                     .retryWhen(new RetryExceptionFunc())
                     .as(RxLifecycleUtils.bindLifecycle(lifecycleOwner))
                     .subscribe(subscriber);

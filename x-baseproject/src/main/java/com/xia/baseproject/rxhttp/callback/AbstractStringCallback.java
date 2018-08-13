@@ -3,6 +3,9 @@ package com.xia.baseproject.rxhttp.callback;
 import android.arch.lifecycle.LifecycleOwner;
 import android.support.annotation.NonNull;
 
+import com.blankj.utilcode.util.CloseUtils;
+import com.xia.baseproject.rxhttp.utils.Platform;
+
 import okhttp3.ResponseBody;
 
 /**
@@ -18,6 +21,9 @@ public abstract class AbstractStringCallback extends Callback<String> {
 
     @Override
     public String parseNetworkResponse(ResponseBody responseBody) throws Exception {
-        return responseBody.string();
+        final String data = responseBody.string();
+        Platform.post(() -> onResponse(data));
+        CloseUtils.closeIO(responseBody);
+        return data;
     }
 }
