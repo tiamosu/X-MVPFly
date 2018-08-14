@@ -103,7 +103,7 @@ public class CallbackSubscriber implements Observer<ResponseBody> {
 
     private void showDialog() {
         if (isShowLoadingDialog()) {
-            Rest.getHandler().postDelayed(() -> Loader.showLoading(getLoadingDialog()), 300);
+            Rest.getHandler().postDelayed(() -> Loader.showLoading(getLoadingDialog()), 400);
         }
     }
 
