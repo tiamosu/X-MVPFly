@@ -8,8 +8,8 @@ import okhttp3.ResponseBody;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.FieldMap;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.HTTP;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -23,48 +23,77 @@ import retrofit2.http.Url;
  */
 public interface RestService {
 
+    //==========================//
+    //         POST请求          //
+    // =========================//
+
+    @POST
+    @FormUrlEncoded
+    Observable<ResponseBody> post(@Url String url, @FieldMap Map<String, String> maps);
+
+    @POST
+    Observable<ResponseBody> postBody(@Url String url, @Body Object object);
+
+    @POST
+    Observable<ResponseBody> postBody(@Url String url, @Body RequestBody body);
+
+    @POST
+    @Headers({"Content-Type: application/json", "Accept: application/json"})
+    Observable<ResponseBody> postJson(@Url String url, @Body RequestBody jsonBody);
+
+
+    //==========================//
+    //         GET请求           //
+    // =========================//
+
     @GET
     Observable<ResponseBody> get(@Url String url, @QueryMap Map<String, String> params);
+
+
+    //==========================//
+    //         DELETE请求        //
+    // =========================//
+
+    @DELETE
+    Observable<ResponseBody> delete(@Url String url, @QueryMap Map<String, String> maps);
+
+    @DELETE
+    Observable<ResponseBody> deleteBody(@Url String url, @Body Object object);
+
+    @DELETE
+    Observable<ResponseBody> deleteBody(@Url String url, @Body RequestBody body);
+
+    @DELETE
+    @Headers({"Content-Type: application/json", "Accept: application/json"})
+    Observable<ResponseBody> deleteJson(@Url String url, @Body RequestBody jsonBody);
+
+
+    //==========================//
+    //         PUT请求           //
+    // =========================//
+
+    @PUT
+    Observable<ResponseBody> put(@Url String url, @QueryMap Map<String, String> maps);
+
+    @PUT
+    Observable<ResponseBody> putBody(@Url String url, @Body Object object);
+
+    @PUT
+    Observable<ResponseBody> putBody(@Url String url, @Body RequestBody body);
+
+    @PUT
+    @Headers({"Content-Type: application/json", "Accept: application/json"})
+    Observable<ResponseBody> putJson(@Url String url, @Body RequestBody jsonBody);
+
+
+    //==========================//
+    //       文件上传下载         //
+    // =========================//
+
+    @POST
+    Observable<ResponseBody> uploadFiles(@Url String url, @Body RequestBody body);
 
     @Streaming
     @GET
     Observable<ResponseBody> downloadFile(@Url String url);
-
-    @POST()
-    Observable<ResponseBody> postBody(@Url String url, @Body Object object);
-
-    @POST()
-    @Headers({"Content-Type: application/json", "Accept: application/json"})
-    Observable<ResponseBody> postJson(@Url String url, @Body RequestBody jsonBody);
-
-    @POST()
-    Observable<ResponseBody> postBody(@Url String url, @Body RequestBody body);
-
-    @POST
-    Observable<ResponseBody> post(@Url String url, @Body RequestBody body);
-
-    @DELETE()
-    Observable<ResponseBody> delete(@Url String url, @QueryMap Map<String, String> params);
-
-    //@DELETE()//delete body请求比较特殊 需要自定义
-    @HTTP(method = "DELETE",/*path = "",*/hasBody = true)
-    Observable<ResponseBody> deleteBody(@Url String url, @Body RequestBody body);
-
-    //@DELETE()//delete body请求比较特殊 需要自定义
-    @Headers({"Content-Type: application/json", "Accept: application/json"})
-    @HTTP(method = "DELETE",/*path = "",*/hasBody = true)
-    Observable<ResponseBody> deleteJson(@Url String url, @Body RequestBody jsonBody);
-
-    @PUT()
-    Observable<ResponseBody> put(@Url String url, @FieldMap Map<String, String> maps);
-
-    @PUT()
-    Observable<ResponseBody> putBody(@Url String url, @Body Object object);
-
-    @PUT()
-    Observable<ResponseBody> putBody(@Url String url, @Body RequestBody body);
-
-    @PUT()
-    @Headers({"Content-Type: application/json", "Accept: application/json"})
-    Observable<ResponseBody> putJson(@Url String url, @Body RequestBody jsonBody);
 }

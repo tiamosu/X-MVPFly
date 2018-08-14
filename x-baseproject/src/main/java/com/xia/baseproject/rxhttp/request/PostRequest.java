@@ -11,7 +11,6 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 
 import io.reactivex.Observable;
-import okhttp3.FormBody;
 import okhttp3.Headers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -50,26 +49,14 @@ public class PostRequest extends BaseBodyRequest<PostRequest> {
             return mRestService.postBody(mUrl, body);
         }
 
-        final RequestBody body;
         if (mFileParams == null || mFileParams.isEmpty()) {
-            final FormBody.Builder builder = new FormBody.Builder();
-            body = addParams(builder);
+            return mRestService.post(mUrl, mParams);
         } else {
             final MultipartBody.Builder builder = new MultipartBody.Builder()
                     .setType(MultipartBody.FORM);
-            body = addParams(builder);
+            final RequestBody body = addParams(builder);
+            return mRestService.uploadFiles(mUrl, body);
         }
-        return mRestService.post(mUrl, body);
-    }
-
-    private RequestBody addParams(FormBody.Builder builder) {
-        if (mParams != null && !mParams.isEmpty()) {
-            for (String key : mParams.keySet()) {
-                String value = mParams.get(key);
-                builder.add(key, value);
-            }
-        }
-        return builder.build();
     }
 
     private RequestBody addParams(MultipartBody.Builder builder) {

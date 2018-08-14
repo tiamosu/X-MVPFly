@@ -3,8 +3,7 @@ package com.xia.baseproject.rxhttp;
 import com.xia.baseproject.app.Rest;
 import com.xia.baseproject.app.RestConfigKeys;
 import com.xia.baseproject.rxhttp.api.RestService;
-import com.xia.baseproject.rxhttp.cookie.CookieJarImpl;
-import com.xia.baseproject.rxhttp.cookie.store.MemoryCookieStore;
+import com.xia.baseproject.rxhttp.cookie.CookieManager;
 import com.xia.baseproject.rxhttp.utils.HttpsUtils;
 
 import java.util.ArrayList;
@@ -25,7 +24,7 @@ public final class RestCreator {
     private static final HttpsUtils.SSLParams SSL_PARAMS
             = HttpsUtils.getSslSocketFactory(null, null, null);
 
-    public static final class OKHttpHolder {
+    private static final class OkHttpHolder {
         private static final long TIME_OUT = 10;
         private static final OkHttpClient.Builder BUILDER = new OkHttpClient.Builder();
         private static final ArrayList<Interceptor> INTERCEPTORS = Rest.getConfiguration(RestConfigKeys.INTERCEPTOR);
@@ -40,7 +39,7 @@ public final class RestCreator {
             return BUILDER;
         }
 
-        public static final OkHttpClient OK_HTTP_CLIENT = addInterceptor()
+        private static final OkHttpClient OK_HTTP_CLIENT = addInterceptor()
                 //设置超时
                 .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .readTimeout(TIME_OUT, TimeUnit.SECONDS)
@@ -48,17 +47,17 @@ public final class RestCreator {
                 //错误重连
                 .retryOnConnectionFailure(true)
                 //cookie认证
-                .cookieJar(new CookieJarImpl(new MemoryCookieStore()))
+                .cookieJar(CookieManager.getInstance())
                 .hostnameVerifier(new HttpsUtils.HOSTNAME_VERIFIER())
                 .sslSocketFactory(SSL_PARAMS.sSLSocketFactory, SSL_PARAMS.trustManager)
                 .build();
     }
 
-    public static final class RetrofitHolder {
+    private static final class RetrofitHolder {
         private static final String BASE_URL = Rest.getConfiguration(RestConfigKeys.API_HOST);
         public static final Retrofit RETROFIT_CLIENT = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .client(OKHttpHolder.OK_HTTP_CLIENT)
+                .client(OkHttpHolder.OK_HTTP_CLIENT)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -71,5 +70,13 @@ public final class RestCreator {
 
     public static RestService getRestService() {
         return RestServiceHolder.REST_SERVICE;
+    }
+
+    public static Retrofit getRetrofit() {
+        return RetrofitHolder.RETROFIT_CLIENT;
+    }
+
+    public OkHttpClient getOkHttpClient() {
+        return OkHttpHolder.OK_HTTP_CLIENT;
     }
 }

@@ -28,11 +28,11 @@ public class DeleteRequest extends BaseBodyRequest {
             return mRestService.deleteJson(mUrl, body);
         }
         if (mObject != null) {
-            return mRestService.postBody(mUrl, mObject);
+            return mRestService.deleteBody(mUrl, mObject);
         }
         if (mString != null) {
             final RequestBody body = RequestBody.create(mMediaType, mString);
-            return mRestService.postBody(mUrl, body);
+            return mRestService.deleteBody(mUrl, body);
         }
         return mRestService.delete(mUrl, mParams);
     }
