@@ -99,7 +99,7 @@ public class CallbackSubscriber implements Observer<ResponseBody> {
 
     private void showDialog() {
         if (isShowLoadingDialog()) {
-            if (mDialog == null) {
+            if (mDialog == null || !mDialog.isShowing()) {
                 mDialog = getLoadingDialog();
             }
             Rest.getHandler().postDelayed(() -> BaseDialog.safeShowDialog(mDialog), 400);
