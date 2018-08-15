@@ -76,7 +76,7 @@ public final class RestCreator {
         return RetrofitHolder.RETROFIT_CLIENT;
     }
 
-    public OkHttpClient getOkHttpClient() {
+    public static OkHttpClient getOkHttpClient() {
         return OkHttpHolder.OK_HTTP_CLIENT;
     }
 }
