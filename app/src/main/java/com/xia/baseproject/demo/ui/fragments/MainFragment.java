@@ -52,11 +52,6 @@ public class MainFragment extends HeadViewFragment {
     public void initView() {
     }
 
-    @OnClick(R.id.main_btn)
-    public void onViewClicked() {
-        Log.e("weixi", "zzzzzzz");
-    }
-
     @Override
     public void onSupportVisible() {
         super.onSupportVisible();
@@ -96,5 +91,10 @@ public class MainFragment extends HeadViewFragment {
         if (requestCode == DialogHelper.APP_SETTINGS_CODE) {
             mIsToAppSetting = true;
         }
+    }
+
+    @OnClick(R.id.main_btn)
+    public void onViewClicked() {
+        Log.e("weixi", "zzzzzzz");
     }
 }

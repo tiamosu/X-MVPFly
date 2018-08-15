@@ -1,5 +1,7 @@
 package com.xia.baseproject.demo.ui.fragments;
 
+import android.util.Log;
+
 import com.xia.baseproject.demo.R;
 import com.xia.baseproject.demo.base.HeadViewFragment;
 import com.xia.baseproject.demo.mvp.presenter.HomePresenter;
@@ -42,6 +44,11 @@ public class HomeFragment extends HeadViewFragment<HomePresenter> implements Hom
             getView().findViewById(R.id.main_btn).setOnClickListener(v ->
                     getParentDelegate().start(new SecondFragment()));
         }
+    }
+
+    @Override
+    public void reConnect() {
+        Log.e("weixi", "reConnect: ");
     }
 
     @Override
