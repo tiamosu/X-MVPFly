@@ -1,4 +1,4 @@
-package com.xia.baseproject.ui.loder;
+package com.xia.baseproject.ui.dialog.load;
 
 import com.wang.avi.AVLoadingIndicatorView;
 import com.wang.avi.Indicator;

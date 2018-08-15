@@ -1,4 +1,4 @@
-package com.xia.baseproject.ui.loder;
+package com.xia.baseproject.ui.dialog.load;
 
 import android.support.annotation.StringDef;
 

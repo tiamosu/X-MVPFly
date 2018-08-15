@@ -11,6 +11,8 @@ import android.view.Window;
 import com.wang.avi.AVLoadingIndicatorView;
 import com.xia.baseproject.R;
 import com.xia.baseproject.R2;
+import com.xia.baseproject.ui.dialog.load.LoaderCreator;
+import com.xia.baseproject.ui.dialog.load.LoaderStyles;
 
 import butterknife.BindView;
 
@@ -25,19 +27,22 @@ public class LoadingDialog extends BaseDialog {
     @BindView(R2.id.dialog_loading_show_tv)
     AppCompatTextView mLoadingTv;
 
-    private String message;
+    private static final String DEFAULT_LOADER = LoaderStyles.LineSpinFadeLoaderIndicator;
+
+    private String mMessage;
 
     public LoadingDialog(@NonNull Context context) {
         this(context, "");
     }
 
     public LoadingDialog(@NonNull Context context, String message) {
-        super(context);
-        this.message = message;
+        this(context, DEFAULT_LOADER, message);
     }
 
-    public AVLoadingIndicatorView getAVLoadingIndicatorView() {
-        return mAVLoadingIndicatorView;
+    public LoadingDialog(@NonNull Context context, @LoaderStyles.LoaderStyle String type, String message) {
+        super(context);
+        this.mMessage = message;
+        LoaderCreator.create(type, mAVLoadingIndicatorView);
     }
 
     @Override
@@ -58,8 +63,8 @@ public class LoadingDialog extends BaseDialog {
     @Override
     public void show() {
         super.show();
-        if (!TextUtils.isEmpty(message)) {
-            mLoadingTv.setText(message);
+        if (!TextUtils.isEmpty(mMessage)) {
+            mLoadingTv.setText(mMessage);
             mLoadingTv.setVisibility(View.VISIBLE);
         }
         mAVLoadingIndicatorView.show();
