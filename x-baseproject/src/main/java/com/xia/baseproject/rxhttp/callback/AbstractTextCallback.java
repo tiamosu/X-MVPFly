@@ -29,13 +29,13 @@ public abstract class AbstractTextCallback extends Callback<String> {
         final Reader reader = new InputStreamReader(is);
         final BufferedReader bufferedReader = new BufferedReader(reader);
         String line;
-        final StringBuilder result = new StringBuilder();
+        final StringBuilder builder = new StringBuilder();
         while ((line = bufferedReader.readLine()) != null) {
-            result.append(line);
+            builder.append(line);
         }
-        final String text = result.toString();
-        Platform.post(() -> onResponse(text));
+        final String result = builder.toString();
+        Platform.post(mHttpTag, o -> onResponse(result));
         CloseUtils.closeIO(responseBody, is, reader, bufferedReader);
-        return text;
+        return result;
     }
 }

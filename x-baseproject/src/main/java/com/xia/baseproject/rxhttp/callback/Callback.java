@@ -18,14 +18,14 @@ import okhttp3.ResponseBody;
 @SuppressWarnings("WeakerAccess")
 public abstract class Callback<T> {
     private WeakReference<Context> mContext;
-    public LifecycleOwner mLifecycleOwner;
+    public String mHttpTag;
 
     public Context getContext() {
         return mContext.get();
     }
 
     public Callback(@NonNull LifecycleOwner lifecycleOwner) {
-        mLifecycleOwner = lifecycleOwner;
+        mHttpTag = lifecycleOwner.getClass().getSimpleName();
         if (lifecycleOwner instanceof AppCompatActivity) {
             mContext = new WeakReference<>((AppCompatActivity) lifecycleOwner);
         } else if (lifecycleOwner instanceof Fragment) {

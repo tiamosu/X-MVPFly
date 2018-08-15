@@ -21,9 +21,9 @@ public abstract class AbstractStringCallback extends Callback<String> {
 
     @Override
     public String parseNetworkResponse(ResponseBody responseBody) throws Exception {
-        final String data = responseBody.string();
-        Platform.post(() -> onResponse(data));
+        final String result = responseBody.string();
+        Platform.post(mHttpTag, o -> onResponse(result));
         CloseUtils.closeIO(responseBody);
-        return data;
+        return result;
     }
 }

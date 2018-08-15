@@ -54,4 +54,8 @@ public final class RxBusHelper {
             }
         }, tags);
     }
+
+    public static void unregister(Object subscriber) {
+        RxBusManager.unregister(subscriber);
+    }
 }

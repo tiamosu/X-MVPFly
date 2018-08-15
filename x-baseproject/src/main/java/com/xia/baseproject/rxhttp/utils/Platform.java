@@ -3,6 +3,13 @@ package com.xia.baseproject.rxhttp.utils;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.xia.baseproject.rxhttp.RxHttpDisposableManager;
+
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+
 /**
  * @author xia
  * @date 2018/4/24.
@@ -31,5 +38,13 @@ public class Platform {
         } else {
             runnable.run();
         }
+    }
+
+    @SuppressWarnings("unchecked")
+    public static void post(String httpTag, Consumer consumer) {
+        final Disposable disposable = Observable.just("")
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(consumer);
+        RxHttpDisposableManager.getInstance().add(httpTag, disposable);
     }
 }

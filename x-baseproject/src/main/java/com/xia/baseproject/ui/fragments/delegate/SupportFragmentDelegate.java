@@ -9,13 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import com.blankj.rxbus.RxBus;
-import com.blankj.rxbus.RxBusManager;
+import com.blankj.rxbus.RxBusMessage;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.xia.baseproject.R;
 import com.xia.baseproject.app.Rest;
 import com.xia.baseproject.app.RestConfigKeys;
-import com.xia.baseproject.rxbus.event.NetworkChangeEvent;
+import com.xia.baseproject.rxbus.IRxBusCallback;
+import com.xia.baseproject.rxbus.RxBusEventTag;
+import com.xia.baseproject.rxbus.RxBusHelper;
 import com.xia.baseproject.rxhttp.RxHttpDisposableManager;
 import com.xia.baseproject.ui.fragments.SupportFragment;
 
@@ -88,10 +89,10 @@ public class SupportFragmentDelegate {
     }
 
     public void onDestroyView() {
+        final String httpTag = mFragment.getClass().getSimpleName();
+        RxHttpDisposableManager.getInstance().remove(httpTag);
         Rest.getHandler().removeCallbacksAndMessages(null);
-        RxBusManager.unregister(mFragment);
-        final String tagName = mFragment.getClass().getName();
-        RxHttpDisposableManager.getInstance().remove(tagName);
+        RxBusHelper.unregister(mFragment);
     }
 
     public void onDestroy() {
@@ -132,13 +133,15 @@ public class SupportFragmentDelegate {
     @SuppressWarnings("Convert2Lambda")
     private void registerNetCheckEvent() {
         if (isGlobalCheckNetWork()) {
-            RxBusManager.subscribe(mFragment, NetworkChangeEvent.NET_CHANGE_TAG,
-                    new RxBus.Callback<NetworkChangeEvent>() {
-                        @Override
-                        public void onEvent(String tag, NetworkChangeEvent event) {
-                            hasNetWork(event.isAvailable);
-                        }
-                    });
+            RxBusHelper.subscribeWithTags(mFragment, new IRxBusCallback() {
+                @Override
+                public void callback(String eventTag, RxBusMessage rxBusMessage) {
+                    if (eventTag.equals(RxBusEventTag.NETWORK_CHANGE)) {
+                        final boolean isAvailable = (boolean) rxBusMessage.mObj;
+                        hasNetWork(isAvailable);
+                    }
+                }
+            }, RxBusEventTag.NETWORK_CHANGE);
         }
     }
 

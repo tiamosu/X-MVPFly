@@ -26,7 +26,7 @@ public abstract class AbstractBitmapCallback extends Callback<Bitmap> {
     public Bitmap parseNetworkResponse(ResponseBody responseBody) {
         final InputStream is = responseBody.byteStream();
         final Bitmap bitmap = BitmapFactory.decodeStream(is);
-        Platform.post(() -> onResponse(bitmap));
+        Platform.post(mHttpTag, o -> onResponse(bitmap));
         CloseUtils.closeIO(responseBody, is);
         return bitmap;
     }

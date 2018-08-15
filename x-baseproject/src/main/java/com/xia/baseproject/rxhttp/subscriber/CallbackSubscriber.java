@@ -1,7 +1,6 @@
 package com.xia.baseproject.rxhttp.subscriber;
 
 import android.app.Dialog;
-import android.arch.lifecycle.LifecycleOwner;
 import android.support.annotation.NonNull;
 
 import com.blankj.utilcode.util.NetworkUtils;
@@ -24,9 +23,11 @@ import okhttp3.ResponseBody;
 @SuppressWarnings("WeakerAccess")
 public class CallbackSubscriber implements Observer<ResponseBody> {
     private Callback mCallback;
+    private String mHttpTag;
 
     public CallbackSubscriber(@NonNull Callback callback) {
         mCallback = callback;
+        mHttpTag = callback.mHttpTag;
     }
 
     protected boolean isShowLoadingDialog() {
@@ -42,18 +43,12 @@ public class CallbackSubscriber implements Observer<ResponseBody> {
 
     @Override
     public void onSubscribe(Disposable d) {
-        if (mCallback != null) {
-            final LifecycleOwner owner = mCallback.mLifecycleOwner;
-            if (owner != null) {
-                final String tagName = owner.getClass().getName();
-                RxHttpDisposableManager.getInstance().add(tagName, d);
-            }
-        }
+        RxHttpDisposableManager.getInstance().add(mHttpTag, d);
         if (!NetworkUtils.isConnected()) {
             onError("无法连接网络");
             return;
         }
-        Platform.post(() -> {
+        Platform.post(mHttpTag, o -> {
             showDialog();
             if (mCallback != null) {
                 mCallback.onSubscribe(d);
@@ -82,7 +77,7 @@ public class CallbackSubscriber implements Observer<ResponseBody> {
 
     @Override
     public void onComplete() {
-        Platform.post(() -> {
+        Platform.post(mHttpTag, o -> {
             cancelDialog();
             if (mCallback != null) {
                 mCallback.onComplete();
@@ -92,7 +87,7 @@ public class CallbackSubscriber implements Observer<ResponseBody> {
     }
 
     private void onError(String error) {
-        Platform.post(() -> {
+        Platform.post(mHttpTag, o -> {
             cancelDialog();
             if (mCallback != null) {
                 mCallback.onError(error);

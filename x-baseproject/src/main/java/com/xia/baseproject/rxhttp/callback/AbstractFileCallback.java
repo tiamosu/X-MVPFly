@@ -81,17 +81,17 @@ public abstract class AbstractFileCallback extends Callback<File> {
             fos = new FileOutputStream(file);
             bos = new BufferedOutputStream(fos);
 
-            final long total = responseBody.contentLength();
+            final long fileSize = responseBody.contentLength();
             final byte[] data = new byte[1024 * 4];
-            int count;
-            long sum = 0;
+            int read;
+            long downloadSize = 0;
             int lastProgress = 0;
-            while ((count = bis.read(data)) != -1) {
-                bos.write(data, 0, count);
-                sum += count;
-                final int progress = Math.round(sum * 100f / total);
+            while ((read = bis.read(data)) != -1) {
+                bos.write(data, 0, read);
+                downloadSize += read;
+                final int progress = Math.round(downloadSize * 100f / fileSize);
                 if (lastProgress != progress) {
-                    Platform.post(() -> inProgress(progress, total));
+                    Platform.post(mHttpTag, o -> inProgress(progress, fileSize));
                 }
                 lastProgress = progress;
             }
