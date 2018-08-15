@@ -15,7 +15,6 @@ import com.blankj.utilcode.util.NetworkUtils;
 import com.xia.baseproject.R;
 import com.xia.baseproject.app.Rest;
 import com.xia.baseproject.app.RestConfigKeys;
-import com.xia.baseproject.handler.WeakHandler;
 import com.xia.baseproject.rxbus.event.NetworkChangeEvent;
 import com.xia.baseproject.rxhttp.RxHttpDisposableManager;
 import com.xia.baseproject.ui.fragments.SupportFragment;
@@ -48,7 +47,6 @@ public class SupportFragmentDelegate {
 
     //网络是否重新连接
     private boolean mNetReConnect;
-    private final WeakHandler mWeakHandler = new WeakHandler();
 
     public SupportFragmentDelegate(ISupportFragment support) {
         if (!(support instanceof Fragment)) {
@@ -90,7 +88,6 @@ public class SupportFragmentDelegate {
     }
 
     public void onDestroyView() {
-        mWeakHandler.removeCallbacksAndMessages(null);
         Rest.getHandler().removeCallbacksAndMessages(null);
         RxBusManager.unregister(mFragment);
         final String tagName = mFragment.getClass().getName();
@@ -115,7 +112,7 @@ public class SupportFragmentDelegate {
             mFragment.initView();
             mFragment.initEvent();
         }
-        mWeakHandler.postDelayed(() -> mFragment.onVisibleLazyLoad(), 200);
+        Rest.getHandler().postDelayed(() -> mFragment.onVisibleLazyLoad(), 200);
     }
 
     private void getBundle(Bundle bundle) {

@@ -50,7 +50,7 @@ object Deps {
     //util
     const val utilcode = "com.blankj:utilcode:1.19.0"
     //fragment
-    const val fragmentation_core = "me.yokeyword:fragmentation-core:1.3.5"
+    const val fragmentation_core = "me.yokeyword:fragmentation-core:1.3.6"
     //loadingView
     const val loading_indicator_view = "com.wang.avi:library:2.1.3"
 }
