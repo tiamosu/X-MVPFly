@@ -81,6 +81,13 @@ public abstract class SupportFragment<P extends BaseMvpPresenter> extends Abstra
     public void reConnect() {
     }
 
+    /**
+     * @param isAvailable 网络是否连接可用
+     */
+    @Override
+    public void networkState(boolean isAvailable) {
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

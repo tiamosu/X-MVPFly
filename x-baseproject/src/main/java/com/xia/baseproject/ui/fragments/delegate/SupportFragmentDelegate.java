@@ -148,18 +148,19 @@ public class SupportFragmentDelegate {
     private void hasNetWork(boolean isAvailable) {
         final int currentNetStatus = isAvailable ? NET_ON : NET_OFF;
         if (currentNetStatus != mLastNetStatus || mNetReConnect) {
-            if (isAvailable) {
-                //判断网络是否是重连接的
-                if (mLastNetStatus == NET_OFF) {
-                    mNetReConnect = true;
-                }
+            //判断网络是否是重连接的
+            if (isAvailable && mLastNetStatus == NET_OFF) {
+                mNetReConnect = true;
+            }
+            if (mFragment.isSupportVisible()) {
+                mFragment.networkState(isAvailable);
                 //当网络重新连接时并且只有当前页面才执行方法
-                if (mFragment.isSupportVisible() && mNetReConnect) {
+                if (isAvailable && mNetReConnect) {
                     mFragment.reConnect();
                     mNetReConnect = false;
                 }
+                mLastNetStatus = currentNetStatus;
             }
-            mLastNetStatus = currentNetStatus;
         }
     }
 }

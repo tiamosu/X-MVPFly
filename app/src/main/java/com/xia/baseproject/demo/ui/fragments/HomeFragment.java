@@ -48,7 +48,12 @@ public class HomeFragment extends HeadViewFragment<HomePresenter> implements Hom
 
     @Override
     public void reConnect() {
-        Log.e("weixi", "reConnect: ");
+        Log.e("xia", "reConnect: ");
+    }
+
+    @Override
+    public void networkState(boolean isAvailable) {
+        Log.e("xia", "networkState: " + isAvailable);
     }
 
     @Override

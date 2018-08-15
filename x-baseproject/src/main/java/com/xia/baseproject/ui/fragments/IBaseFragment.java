@@ -27,4 +27,6 @@ public interface IBaseFragment {
     void initEvent();
 
     void reConnect();
+
+    void networkState(boolean isAvailable);
 }
