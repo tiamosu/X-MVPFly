@@ -1,6 +1,8 @@
 package com.xia.baseproject.utils;
 
 import com.blankj.rxbus.RxBusMessage;
+import com.xia.baseproject.app.Rest;
+import com.xia.baseproject.app.RestConfigKeys;
 import com.xia.baseproject.rxbus.RxBusEventTag;
 import com.xia.baseproject.rxbus.RxBusHelper;
 
@@ -18,6 +20,11 @@ public final class NetworkHelper {
                 }
             }
         }, RxBusEventTag.NETWORK_CHANGE);
+    }
+
+    public static boolean isGlobalCheckNetwork(boolean isCheckCurrentPageNetwork) {
+        final boolean isCheckNetWork = Rest.getConfiguration(RestConfigKeys.NETWORK_CHECK);
+        return isCheckNetWork && isCheckCurrentPageNetwork;
     }
 
     public interface NetworkChangeCallback {

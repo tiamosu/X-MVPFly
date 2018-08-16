@@ -32,11 +32,10 @@ import butterknife.ButterKnife;
  */
 public class SupportActivityDelegate {
     private SupportActivity mActivity;
-    private int mLastNetStatus = NetworkState.NETWORK_DEFAULT;
 
-    /**
-     * 网络状态监听广播
-     */
+    //记录上一次网络连接状态
+    private int mLastNetStatus = NetworkState.NETWORK_DEFAULT;
+    //网络状态监听广播
     private NetworkChangeReceiver mNetworkChangeReceiver;
     //网络是否重新连接
     private boolean mNetReConnect;
@@ -64,7 +63,7 @@ public class SupportActivityDelegate {
     }
 
     public void onResume() {
-        if (isGlobalCheckNetWork()) {
+        if (NetworkHelper.isGlobalCheckNetwork(mActivity.isCheckNetWork())) {
             hasNetWork(NetworkUtils.isConnected());
         }
     }
@@ -80,20 +79,15 @@ public class SupportActivityDelegate {
     }
 
     private void initAll() {
-        registerNetCheckEvent();
+        initNetworkChangeEvent();
         mActivity.initData();
         mActivity.initView();
         mActivity.initEvent();
         mActivity.onVisibleLazyLoad();
     }
 
-    private boolean isGlobalCheckNetWork() {
-        final boolean isCheckNetWork = Rest.getConfiguration(RestConfigKeys.NETWORK_CHECK);
-        return isCheckNetWork && mActivity.isCheckNetWork();
-    }
-
-    private void registerNetCheckEvent() {
-        if (isGlobalCheckNetWork()) {
+    private void initNetworkChangeEvent() {
+        if (NetworkHelper.isGlobalCheckNetwork(mActivity.isCheckNetWork())) {
             NetworkHelper.networkChangeEvent(mActivity, rxBusMessage -> {
                 final boolean isAvailable = (boolean) rxBusMessage.mObj;
                 hasNetWork(isAvailable);
@@ -108,7 +102,7 @@ public class SupportActivityDelegate {
             if (isAvailable && mLastNetStatus == NetworkState.NETWORK_OFF) {
                 mNetReConnect = true;
             }
-            //APP位于前台并且当前页处于栈顶时执行
+            //APP位于前台并且当前页处于栈顶（可见）时执行
             if (AppUtils.isAppForeground()
                     && ActivityUtils.getTopActivity() == mActivity) {
                 mActivity.onNetworkState(isAvailable);
