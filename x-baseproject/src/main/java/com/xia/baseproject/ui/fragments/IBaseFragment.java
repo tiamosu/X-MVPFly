@@ -26,7 +26,7 @@ public interface IBaseFragment {
 
     void initEvent();
 
-    void reConnect();
+    void onNetReConnect();
 
-    void networkState(boolean isAvailable);
+    void onNetworkState(boolean isAvailable);
 }

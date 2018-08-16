@@ -78,14 +78,14 @@ public abstract class SupportFragment<P extends BaseMvpPresenter> extends Abstra
      * 用于网络连接恢复后加载
      */
     @Override
-    public void reConnect() {
+    public void onNetReConnect() {
     }
 
     /**
      * @param isAvailable 网络是否连接可用
      */
     @Override
-    public void networkState(boolean isAvailable) {
+    public void onNetworkState(boolean isAvailable) {
     }
 
     @Nullable

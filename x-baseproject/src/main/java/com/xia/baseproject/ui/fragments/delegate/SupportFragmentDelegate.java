@@ -113,7 +113,7 @@ public class SupportFragmentDelegate {
             mFragment.initView();
             mFragment.initEvent();
         }
-        Rest.getHandler().postDelayed(() -> mFragment.onVisibleLazyLoad(), 200);
+        mFragment.onVisibleLazyLoad();
     }
 
     private void getBundle(Bundle bundle) {
@@ -153,10 +153,9 @@ public class SupportFragmentDelegate {
                 mNetReConnect = true;
             }
             if (mFragment.isSupportVisible()) {
-                mFragment.networkState(isAvailable);
-                //当网络重新连接时并且只有当前页面才执行方法
+                mFragment.onNetworkState(isAvailable);
                 if (isAvailable && mNetReConnect) {
-                    mFragment.reConnect();
+                    mFragment.onNetReConnect();
                     mNetReConnect = false;
                 }
                 mLastNetStatus = currentNetStatus;
