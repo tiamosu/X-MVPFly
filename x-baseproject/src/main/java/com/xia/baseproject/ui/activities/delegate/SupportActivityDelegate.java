@@ -72,8 +72,7 @@ public class SupportActivityDelegate {
         if (mNetworkChangeReceiver != null) {
             mActivity.unregisterReceiver(mNetworkChangeReceiver);
         }
-        final String httpTag = mActivity.getClass().getSimpleName();
-        AutoDisposable.getInstance().remove(httpTag);
+        AutoDisposable.getInstance().remove(mActivity.mClsTag);
         Rest.getHandler().removeCallbacksAndMessages(null);
         RxBusHelper.unregister(mActivity);
     }

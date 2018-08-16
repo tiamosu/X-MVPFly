@@ -76,8 +76,7 @@ public class SupportFragmentDelegate {
     }
 
     public void onDestroyView() {
-        final String httpTag = mFragment.getClass().getSimpleName();
-        AutoDisposable.getInstance().remove(httpTag);
+        AutoDisposable.getInstance().remove(mFragment.mClsTag);
         Rest.getHandler().removeCallbacksAndMessages(null);
         RxBusHelper.unregister(mFragment);
     }
