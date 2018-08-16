@@ -11,8 +11,8 @@ import android.view.Window;
 import com.wang.avi.AVLoadingIndicatorView;
 import com.xia.baseproject.R;
 import com.xia.baseproject.R2;
-import com.xia.baseproject.ui.dialog.load.LoaderCreator;
-import com.xia.baseproject.ui.dialog.load.LoaderStyles;
+import com.xia.baseproject.ui.dialog.loader.LoaderCreator;
+import com.xia.baseproject.ui.dialog.loader.LoaderStyles;
 
 import butterknife.BindView;
 
