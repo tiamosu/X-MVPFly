@@ -1,15 +1,9 @@
 package com.xia.baseproject.demo.ui.fragments;
 
-import android.content.Intent;
 import android.util.Log;
 
-import com.blankj.utilcode.constant.PermissionConstants;
-import com.blankj.utilcode.util.PermissionUtils;
 import com.xia.baseproject.demo.R;
 import com.xia.baseproject.demo.base.HeadViewFragment;
-import com.xia.baseproject.demo.helper.DialogHelper;
-
-import java.util.List;
 
 import butterknife.OnClick;
 import me.yokeyword.fragmentation.ISupportFragment;
@@ -55,42 +49,6 @@ public class MainFragment extends HeadViewFragment {
     @Override
     public void onSupportVisible() {
         super.onSupportVisible();
-        if (mIsRequestPermission) {
-            permission();
-        }
-        mIsRequestPermission = false;
-        if (mIsToAppSetting) {
-            mIsRequestPermission = true;
-            mIsToAppSetting = false;
-        }
-    }
-
-    private boolean mIsRequestPermission = true;
-    private boolean mIsToAppSetting = false;
-
-    private void permission() {
-        PermissionUtils.permission(PermissionConstants.CAMERA, PermissionConstants.STORAGE)
-                .rationale(shouldRequest -> DialogHelper.showRationaleDialog(MainFragment.this, shouldRequest))
-                .callback(new PermissionUtils.FullCallback() {
-                    @Override
-                    public void onGranted(List<String> permissionsGranted) {
-                    }
-
-                    @Override
-                    public void onDenied(List<String> permissionsDeniedForever,
-                                         List<String> permissionsDenied) {
-                        DialogHelper.showOpenAppSettingDialog(MainFragment.this);
-                    }
-                })
-                .request();
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == DialogHelper.APP_SETTINGS_CODE) {
-            mIsToAppSetting = true;
-        }
     }
 
     @OnClick(R.id.main_btn)
