@@ -3,7 +3,6 @@ package com.xia.baseproject.demo.mvp.presenter;
 import android.app.Dialog;
 import android.arch.lifecycle.LifecycleOwner;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.xia.baseproject.demo.mvp.view.HomeView;
 import com.xia.baseproject.mvp.BaseMvpPresenter;
@@ -27,12 +26,12 @@ public class HomePresenter extends BaseMvpPresenter<HomeView> {
                 .request(new CallbackSubscriber(new AbstractFileCallback(mLifecycleOwner, "xry/apk", "test.apk") {
                     @Override
                     public void onResponse(File response) {
-                        Log.e("weixi", "onResponse: " + response.getName());
+//                        Log.e("weixi", "onResponse: " + response.getName());
                     }
 
                     @Override
                     public void inProgress(float progress, long total) {
-                        Log.e("weixi", "inProgress: " + progress);
+//                        Log.e("weixi", "inProgress: " + progress);
                     }
                 }));
     }
@@ -50,7 +49,7 @@ public class HomePresenter extends BaseMvpPresenter<HomeView> {
                 .request(new CallbackSubscriber(new AbstractStringCallback(mLifecycleOwner) {
                     @Override
                     public void onResponse(String response) {
-                        Log.e("weixi", "onResponse" + index + " :" + response);
+//                        Log.e("weixi", "onResponse" + index + " :" + response);
                     }
                 }) {
                     @Override

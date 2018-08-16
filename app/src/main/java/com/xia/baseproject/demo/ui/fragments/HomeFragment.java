@@ -1,7 +1,5 @@
 package com.xia.baseproject.demo.ui.fragments;
 
-import android.util.Log;
-
 import com.xia.baseproject.demo.R;
 import com.xia.baseproject.demo.base.HeadViewFragment;
 import com.xia.baseproject.demo.mvp.presenter.HomePresenter;
@@ -48,12 +46,12 @@ public class HomeFragment extends HeadViewFragment<HomePresenter> implements Hom
 
     @Override
     public void onNetReConnect() {
-        Log.e("xia", "reConnect: ");
+//        Log.e("xia", "reConnect: ");
     }
 
     @Override
     public void onNetworkState(boolean isAvailable) {
-        Log.e("xia", "networkState: " + isAvailable);
+//        Log.e("xia", "networkState: " + isAvailable);
     }
 
     @Override

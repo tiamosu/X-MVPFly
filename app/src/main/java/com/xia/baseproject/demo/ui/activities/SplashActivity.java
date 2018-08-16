@@ -1,6 +1,8 @@
 package com.xia.baseproject.demo.ui.activities;
 
 import android.content.Intent;
+import android.util.Log;
+import android.view.View;
 
 import com.blankj.utilcode.constant.PermissionConstants;
 import com.blankj.utilcode.util.ActivityUtils;
@@ -10,6 +12,8 @@ import com.xia.baseproject.demo.helper.DialogHelper;
 import com.xia.baseproject.ui.activities.SupportActivity;
 
 import java.util.List;
+
+import butterknife.OnClick;
 
 /**
  * @author xia
@@ -57,7 +61,6 @@ public class SplashActivity extends SupportActivity {
                     @Override
                     public void onGranted(List<String> permissionsGranted) {
                         ActivityUtils.startActivity(MainActivity.class);
-                        ActivityUtils.finishActivity(SplashActivity.class);
                     }
 
                     @Override
@@ -70,10 +73,25 @@ public class SplashActivity extends SupportActivity {
     }
 
     @Override
+    public void onNetworkState(boolean isAvailable) {
+        Log.e("weixi", "onNetworkState: " + isAvailable);
+    }
+
+    @Override
+    public void onNetReConnect() {
+        Log.e("weixi", "onNetReConnect: ");
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == DialogHelper.APP_SETTINGS_CODE) {
             mIsToAppSetting = true;
         }
+    }
+
+    @OnClick(R.id.splash_jump_btn)
+    public void onViewClicked(View view) {
+        ActivityUtils.startActivity(MainActivity.class);
     }
 }

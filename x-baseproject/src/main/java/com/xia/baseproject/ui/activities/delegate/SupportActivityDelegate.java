@@ -12,7 +12,9 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.AppUtils;
+import com.blankj.utilcode.util.NetworkUtils;
 import com.xia.baseproject.app.Rest;
 import com.xia.baseproject.app.RestConfigKeys;
 import com.xia.baseproject.constant.NetworkState;
@@ -61,6 +63,12 @@ public class SupportActivityDelegate {
         initAll();
     }
 
+    public void onResume() {
+        if (isGlobalCheckNetWork()) {
+            hasNetWork(NetworkUtils.isConnected());
+        }
+    }
+
     public void onDestroy() {
         if (mNetworkChangeReceiver != null) {
             mActivity.unregisterReceiver(mNetworkChangeReceiver);
@@ -100,12 +108,16 @@ public class SupportActivityDelegate {
             if (isAvailable && mLastNetStatus == NetworkState.NETWORK_OFF) {
                 mNetReConnect = true;
             }
-            mActivity.onNetworkState(isAvailable);
-            if (isAvailable && mNetReConnect) {
-                mActivity.onNetReConnect();
-                mNetReConnect = false;
+            //APP位于前台并且当前页处于栈顶时执行
+            if (AppUtils.isAppForeground()
+                    && ActivityUtils.getTopActivity() == mActivity) {
+                mActivity.onNetworkState(isAvailable);
+                if (isAvailable && mNetReConnect) {
+                    mActivity.onNetReConnect();
+                    mNetReConnect = false;
+                }
+                mLastNetStatus = currentNetStatus;
             }
-            mLastNetStatus = currentNetStatus;
         }
     }
 

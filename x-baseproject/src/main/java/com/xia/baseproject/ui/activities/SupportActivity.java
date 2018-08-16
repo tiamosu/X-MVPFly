@@ -92,6 +92,12 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        mDelegate.onResume();
+    }
+
+    @Override
     protected void onDestroy() {
         mDelegate.onDestroy();
         super.onDestroy();

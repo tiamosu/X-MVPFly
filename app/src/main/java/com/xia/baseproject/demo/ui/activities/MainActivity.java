@@ -37,4 +37,14 @@ public class MainActivity extends ProxyActivity {
     public FragmentAnimator onCreateFragmentAnimator() {
         return new DefaultVerticalAnimator();
     }
+
+//    @Override
+//    public void onNetworkState(boolean isAvailable) {
+//        Log.e("weixi", "onNetworkState: " + isAvailable);
+//    }
+//
+//    @Override
+//    public void onNetReConnect() {
+//        Log.e("weixi", "onNetReConnect: ");
+//    }
 }
