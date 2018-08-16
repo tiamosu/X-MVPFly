@@ -82,7 +82,7 @@ public class SupportFragmentDelegate {
     }
 
     public void onDestroy() {
-        if (mUnbinder != null) {
+        if (mUnbinder != null && mUnbinder != Unbinder.EMPTY) {
             mUnbinder.unbind();
         }
     }
