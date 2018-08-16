@@ -14,11 +14,11 @@ import com.blankj.utilcode.util.NetworkUtils;
 import com.xia.baseproject.R;
 import com.xia.baseproject.app.Rest;
 import com.xia.baseproject.app.RestConfigKeys;
-import com.xia.baseproject.rxbus.IRxBusCallback;
-import com.xia.baseproject.rxbus.RxBusEventTag;
+import com.xia.baseproject.constant.NetworkState;
 import com.xia.baseproject.rxbus.RxBusHelper;
 import com.xia.baseproject.rxhttp.AutoDisposable;
 import com.xia.baseproject.ui.fragments.SupportFragment;
+import com.xia.baseproject.utils.NetworkHelper;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -29,12 +29,6 @@ import me.yokeyword.fragmentation.ISupportFragment;
  * @date 2018/8/1.
  */
 public class SupportFragmentDelegate {
-
-    //网络连接状态表示
-    private static final int NET_OFF = 0;
-    private static final int NET_ON = 1;
-    private static final int NET_DEFAULT = -1;
-
     private SupportFragment mFragment;
     private Unbinder mUnbinder = null;
 
@@ -44,7 +38,7 @@ public class SupportFragmentDelegate {
 
     //防止多次初始化
     private boolean mIsInitAll = true;
-    private int mLastNetStatus = NET_DEFAULT;
+    private int mLastNetStatus = NetworkState.NETWORK_DEFAULT;
 
     //网络是否重新连接
     private boolean mNetReConnect;
@@ -133,23 +127,21 @@ public class SupportFragmentDelegate {
     @SuppressWarnings("Convert2Lambda")
     private void registerNetCheckEvent() {
         if (isGlobalCheckNetWork()) {
-            RxBusHelper.subscribeWithTags(mFragment, new IRxBusCallback() {
+            NetworkHelper.networkChangeEvent(mFragment, new NetworkHelper.NetworkChangeCallback() {
                 @Override
-                public void callback(String eventTag, RxBusMessage rxBusMessage) {
-                    if (eventTag.equals(RxBusEventTag.NETWORK_CHANGE)) {
-                        final boolean isAvailable = (boolean) rxBusMessage.mObj;
-                        hasNetWork(isAvailable);
-                    }
+                public void callback(RxBusMessage rxBusMessage) {
+                    final boolean isAvailable = (boolean) rxBusMessage.mObj;
+                    hasNetWork(isAvailable);
                 }
-            }, RxBusEventTag.NETWORK_CHANGE);
+            });
         }
     }
 
     private void hasNetWork(boolean isAvailable) {
-        final int currentNetStatus = isAvailable ? NET_ON : NET_OFF;
+        final int currentNetStatus = isAvailable ? NetworkState.NETWORK_ON : NetworkState.NETWORK_OFF;
         if (currentNetStatus != mLastNetStatus || mNetReConnect) {
             //判断网络是否是重连接的
-            if (isAvailable && mLastNetStatus == NET_OFF) {
+            if (isAvailable && mLastNetStatus == NetworkState.NETWORK_OFF) {
                 mNetReConnect = true;
             }
             if (mFragment.isSupportVisible()) {
