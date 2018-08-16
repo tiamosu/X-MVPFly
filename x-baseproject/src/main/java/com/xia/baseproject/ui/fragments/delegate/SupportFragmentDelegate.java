@@ -11,7 +11,6 @@ import android.widget.FrameLayout;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.xia.baseproject.R;
 import com.xia.baseproject.app.Rest;
-import com.xia.baseproject.app.RestConfigKeys;
 import com.xia.baseproject.constant.NetworkState;
 import com.xia.baseproject.rxbus.RxBusHelper;
 import com.xia.baseproject.rxhttp.AutoDisposable;
@@ -35,8 +34,8 @@ public class SupportFragmentDelegate {
 
     //防止多次初始化
     private boolean mIsInitAll = true;
+    //记录上一次网络连接状态
     private int mLastNetStatus = NetworkState.NETWORK_DEFAULT;
-
     //网络是否重新连接
     private boolean mNetReConnect;
 
@@ -90,12 +89,12 @@ public class SupportFragmentDelegate {
     }
 
     private void initAll() {
-        if (isGlobalCheckNetWork()) {
+        if (NetworkHelper.isGlobalCheckNetwork(mFragment.isCheckNetWork())) {
             hasNetWork(NetworkUtils.isConnected());
         }
         if (mIsInitAll) {
             mIsInitAll = false;
-            registerNetCheckEvent();
+            initNetworkChangeEvent();
             getBundle(mFragment.getArguments());
             mFragment.initData();
             mFragment.initView();
@@ -110,16 +109,11 @@ public class SupportFragmentDelegate {
         }
     }
 
-    private boolean isGlobalCheckNetWork() {
-        final boolean isCheckNetWork = Rest.getConfiguration(RestConfigKeys.NETWORK_CHECK);
-        return isCheckNetWork && mFragment.isCheckNetWork();
-    }
-
     /**
      * 这边Callback不能使用lambda语句，否则解析报错
      */
-    private void registerNetCheckEvent() {
-        if (isGlobalCheckNetWork()) {
+    private void initNetworkChangeEvent() {
+        if (NetworkHelper.isGlobalCheckNetwork(mFragment.isCheckNetWork())) {
             NetworkHelper.networkChangeEvent(mFragment, rxBusMessage -> {
                 final boolean isAvailable = (boolean) rxBusMessage.mObj;
                 hasNetWork(isAvailable);
