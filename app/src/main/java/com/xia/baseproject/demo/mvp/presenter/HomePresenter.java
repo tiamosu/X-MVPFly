@@ -3,6 +3,7 @@ package com.xia.baseproject.demo.mvp.presenter;
 import android.app.Dialog;
 import android.arch.lifecycle.LifecycleOwner;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.xia.baseproject.demo.mvp.view.HomeView;
 import com.xia.baseproject.mvp.BaseMvpPresenter;
@@ -49,7 +50,7 @@ public class HomePresenter extends BaseMvpPresenter<HomeView> {
                 .request(new CallbackSubscriber(new AbstractStringCallback(mLifecycleOwner) {
                     @Override
                     public void onResponse(String response) {
-//                        Log.e("weixi", "onResponse" + index + " :" + response);
+                        Log.e("weixi", "onResponse" + index + " :" + response);
                     }
                 }) {
                     @Override
