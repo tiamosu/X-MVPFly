@@ -13,7 +13,7 @@ import com.xia.baseproject.rxbus.RxBusHelper;
  * @author xia
  * @date 2018/7/31.
  */
-public class NetBroadcastReceiver extends BroadcastReceiver {
+public class NetworkChangeReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {

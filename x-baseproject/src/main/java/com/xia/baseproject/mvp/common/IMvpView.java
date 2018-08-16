@@ -1,6 +1,6 @@
 package com.xia.baseproject.mvp.common;
 
-import android.support.v4.app.FragmentActivity;
+import android.content.Context;
 
 /**
  * @author xia
@@ -10,5 +10,5 @@ public interface IMvpView<P> {
 
     P newP();
 
-    FragmentActivity getContext();
+    Context getContext();
 }

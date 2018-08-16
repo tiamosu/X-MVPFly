@@ -23,7 +23,7 @@ public class MainActivity extends ProxyActivity {
     }
 
     @Override
-    protected void systemConfiguration() {
+    protected void onCreateConfiguration() {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
