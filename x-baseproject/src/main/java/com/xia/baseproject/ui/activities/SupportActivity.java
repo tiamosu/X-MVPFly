@@ -17,7 +17,7 @@ import com.xia.baseproject.app.Rest;
 import com.xia.baseproject.app.RestConfigKeys;
 import com.xia.baseproject.mvp.BaseMvpPresenter;
 import com.xia.baseproject.receiver.NetworkChangeReceiver;
-import com.xia.baseproject.rxhttp.RxHttpDisposableManager;
+import com.xia.baseproject.rxhttp.AutoDisposable;
 
 import butterknife.ButterKnife;
 
@@ -73,7 +73,8 @@ public abstract class SupportActivity<P extends BaseMvpPresenter> extends Abstra
 
     @Override
     protected void onDestroy() {
-        RxHttpDisposableManager.getInstance().removeAll();
+        final String httpTag = getClass().getSimpleName();
+        AutoDisposable.getInstance().remove(httpTag);
         if (mNetworkChangeReceiver != null) {
             unregisterReceiver(mNetworkChangeReceiver);
         }

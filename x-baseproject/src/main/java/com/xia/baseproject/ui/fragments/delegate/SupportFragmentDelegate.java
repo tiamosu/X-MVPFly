@@ -17,7 +17,7 @@ import com.xia.baseproject.app.RestConfigKeys;
 import com.xia.baseproject.rxbus.IRxBusCallback;
 import com.xia.baseproject.rxbus.RxBusEventTag;
 import com.xia.baseproject.rxbus.RxBusHelper;
-import com.xia.baseproject.rxhttp.RxHttpDisposableManager;
+import com.xia.baseproject.rxhttp.AutoDisposable;
 import com.xia.baseproject.ui.fragments.SupportFragment;
 
 import butterknife.ButterKnife;
@@ -90,7 +90,7 @@ public class SupportFragmentDelegate {
 
     public void onDestroyView() {
         final String httpTag = mFragment.getClass().getSimpleName();
-        RxHttpDisposableManager.getInstance().remove(httpTag);
+        AutoDisposable.getInstance().remove(httpTag);
         Rest.getHandler().removeCallbacksAndMessages(null);
         RxBusHelper.unregister(mFragment);
     }

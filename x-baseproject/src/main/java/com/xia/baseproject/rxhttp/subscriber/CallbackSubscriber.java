@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.xia.baseproject.app.Rest;
-import com.xia.baseproject.rxhttp.RxHttpDisposableManager;
+import com.xia.baseproject.rxhttp.AutoDisposable;
 import com.xia.baseproject.rxhttp.callback.Callback;
 import com.xia.baseproject.rxhttp.exception.ApiException;
 import com.xia.baseproject.rxhttp.utils.Platform;
@@ -44,7 +44,7 @@ public class CallbackSubscriber implements Observer<ResponseBody> {
 
     @Override
     public void onSubscribe(Disposable d) {
-        RxHttpDisposableManager.getInstance().add(mHttpTag, d);
+        AutoDisposable.getInstance().add(mHttpTag, d);
         if (!NetworkUtils.isConnected()) {
             onError("无法连接网络");
             return;

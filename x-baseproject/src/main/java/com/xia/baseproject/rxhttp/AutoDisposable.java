@@ -13,7 +13,7 @@ import io.reactivex.disposables.Disposable;
  * @author xia
  * @date 2018/8/13.
  */
-public class RxHttpDisposableManager {
+public class AutoDisposable {
 
     /**
      * 网络请求订阅池，管理Subscribers订阅，防止内存泄漏
@@ -21,14 +21,14 @@ public class RxHttpDisposableManager {
     private ConcurrentHashMap<Object, CompositeDisposable> maps = new ConcurrentHashMap<>();
 
     private static class SingleTonHolder {
-        private static final RxHttpDisposableManager INSTANCE = new RxHttpDisposableManager();
+        private static final AutoDisposable INSTANCE = new AutoDisposable();
     }
 
-    public static RxHttpDisposableManager getInstance() {
+    public static AutoDisposable getInstance() {
         return SingleTonHolder.INSTANCE;
     }
 
-    private RxHttpDisposableManager() {
+    private AutoDisposable() {
     }
 
     /**
