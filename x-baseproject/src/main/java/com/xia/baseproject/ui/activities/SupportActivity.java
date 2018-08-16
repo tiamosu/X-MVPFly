@@ -8,7 +8,10 @@ import android.widget.EditText;
 import com.xia.baseproject.mvp.BaseMvpPresenter;
 import com.xia.baseproject.rxbus.IRxBusCallback;
 import com.xia.baseproject.rxbus.RxBusHelper;
+import com.xia.baseproject.rxhttp.utils.Platform;
 import com.xia.baseproject.ui.activities.delegate.SupportActivityDelegate;
+
+import io.reactivex.functions.Consumer;
 
 /**
  * @author xia
@@ -122,5 +125,9 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
 
     protected void subscribeStickyWithTags(final IRxBusCallback callback, final String... tags) {
         RxBusHelper.subscribeStickyWithTags(this, callback, tags);
+    }
+
+    protected void toMainThreadExecute(Consumer consumer) {
+        Platform.post(mClsTag, consumer);
     }
 }

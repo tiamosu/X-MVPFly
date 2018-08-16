@@ -12,8 +12,10 @@ import android.widget.FrameLayout;
 import com.xia.baseproject.mvp.BaseMvpPresenter;
 import com.xia.baseproject.rxbus.IRxBusCallback;
 import com.xia.baseproject.rxbus.RxBusHelper;
+import com.xia.baseproject.rxhttp.utils.Platform;
 import com.xia.baseproject.ui.fragments.delegate.SupportFragmentDelegate;
 
+import io.reactivex.functions.Consumer;
 import me.yokeyword.fragmentation.ISupportFragment;
 
 /**
@@ -146,5 +148,9 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
 
     protected void subscribeStickyWithTags(final IRxBusCallback callback, final String... tags) {
         RxBusHelper.subscribeStickyWithTags(this, callback, tags);
+    }
+
+    protected void toMainThreadExecute(Consumer consumer) {
+        Platform.post(mClsTag, consumer);
     }
 }
