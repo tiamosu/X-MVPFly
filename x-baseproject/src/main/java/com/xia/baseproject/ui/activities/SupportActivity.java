@@ -17,6 +17,8 @@ import com.xia.baseproject.app.Rest;
 import com.xia.baseproject.app.RestConfigKeys;
 import com.xia.baseproject.mvp.BaseMvpPresenter;
 import com.xia.baseproject.receiver.NetworkChangeReceiver;
+import com.xia.baseproject.rxbus.IRxBusCallback;
+import com.xia.baseproject.rxbus.RxBusHelper;
 import com.xia.baseproject.rxhttp.AutoDisposable;
 
 import butterknife.ButterKnife;
@@ -73,11 +75,13 @@ public abstract class SupportActivity<P extends BaseMvpPresenter> extends Abstra
 
     @Override
     protected void onDestroy() {
-        final String httpTag = getClass().getSimpleName();
-        AutoDisposable.getInstance().remove(httpTag);
         if (mNetworkChangeReceiver != null) {
             unregisterReceiver(mNetworkChangeReceiver);
         }
+        final String httpTag = getClass().getSimpleName();
+        AutoDisposable.getInstance().remove(httpTag);
+        Rest.getHandler().removeCallbacksAndMessages(null);
+        RxBusHelper.unregister(this);
         super.onDestroy();
         System.gc();
         System.runFinalization();
@@ -91,6 +95,14 @@ public abstract class SupportActivity<P extends BaseMvpPresenter> extends Abstra
         filter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
         filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
         registerReceiver(mNetworkChangeReceiver, filter);
+    }
+
+    protected void subscribeWithTags(final IRxBusCallback callback, final String... tags) {
+        RxBusHelper.subscribeWithTags(this, callback, tags);
+    }
+
+    protected void subscribeStickyWithTags(final IRxBusCallback callback, final String... tags) {
+        RxBusHelper.subscribeStickyWithTags(this, callback, tags);
     }
 
     /**
