@@ -23,13 +23,13 @@ public class MainActivity extends ProxyActivity {
     }
 
     @Override
-    protected void onCreateConfiguration() {
+    public void onBeforeCreateView() {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
     @Override
-    protected void dispatchTouchHideKeyboard(EditText editText, MotionEvent event) {
+    public void dispatchTouchHideKeyboard(EditText editText, MotionEvent event) {
         editText.setFocusable(false);
     }
 

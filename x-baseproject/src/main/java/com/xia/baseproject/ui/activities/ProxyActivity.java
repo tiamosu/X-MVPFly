@@ -40,4 +40,12 @@ public abstract class ProxyActivity extends SupportActivity {
             loadRootFragment(R.id.delegate_container, setRootFragment());
         }
     }
+
+    @Override
+    public void initData() {
+    }
+
+    @Override
+    public void initView() {
+    }
 }

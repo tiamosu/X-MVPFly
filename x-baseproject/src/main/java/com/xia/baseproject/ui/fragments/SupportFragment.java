@@ -20,7 +20,9 @@ import me.yokeyword.fragmentation.ISupportFragment;
  * @author xia
  * @date 2018/8/1.
  */
-public abstract class SupportFragment<P extends BaseMvpPresenter> extends AbstractMvpFragment<P> implements IBaseFragment {
+public abstract class SupportFragment<P extends BaseMvpPresenter>
+        extends AbstractMvpFragment<P> implements IBaseFragment {
+
     private final SupportFragmentDelegate mDelegate = new SupportFragmentDelegate(this);
 
     /**
@@ -37,7 +39,7 @@ public abstract class SupportFragment<P extends BaseMvpPresenter> extends Abstra
     }
 
     /**
-     * @return 是否检查网络状态，并进行提示
+     * @return 是否检查网络状态，默认为true
      */
     @Override
     public boolean isCheckNetWork() {
@@ -53,7 +55,11 @@ public abstract class SupportFragment<P extends BaseMvpPresenter> extends Abstra
 
     /**
      * 该方法确保已执行完{@link #onEnterAnimationEnd(Bundle)}
-     * 于Fragment可见时执行，保证转场动画的流畅性。
+     * 保证转场动画的流畅性。
+     * 并执行于{@link #initData()}
+     * {@link #initView()}
+     * {@link #initEvent()}
+     * 之后，可用于网路数据请求操作
      */
     @CallSuper
     @Override

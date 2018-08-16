@@ -3,13 +3,11 @@ package com.xia.baseproject.ui.fragments.delegate;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import com.blankj.rxbus.RxBusMessage;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.xia.baseproject.R;
 import com.xia.baseproject.app.Rest;
@@ -22,7 +20,6 @@ import com.xia.baseproject.utils.NetworkHelper;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import me.yokeyword.fragmentation.ISupportFragment;
 
 /**
  * @author xia
@@ -43,11 +40,8 @@ public class SupportFragmentDelegate {
     //网络是否重新连接
     private boolean mNetReConnect;
 
-    public SupportFragmentDelegate(ISupportFragment support) {
-        if (!(support instanceof Fragment)) {
-            throw new RuntimeException("Must extends Fragment");
-        }
-        this.mFragment = (SupportFragment) support;
+    public SupportFragmentDelegate(SupportFragment fragment) {
+        mFragment = fragment;
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
@@ -124,15 +118,11 @@ public class SupportFragmentDelegate {
     /**
      * 这边Callback不能使用lambda语句，否则解析报错
      */
-    @SuppressWarnings("Convert2Lambda")
     private void registerNetCheckEvent() {
         if (isGlobalCheckNetWork()) {
-            NetworkHelper.networkChangeEvent(mFragment, new NetworkHelper.NetworkChangeCallback() {
-                @Override
-                public void callback(RxBusMessage rxBusMessage) {
-                    final boolean isAvailable = (boolean) rxBusMessage.mObj;
-                    hasNetWork(isAvailable);
-                }
+            NetworkHelper.networkChangeEvent(mFragment, rxBusMessage -> {
+                final boolean isAvailable = (boolean) rxBusMessage.mObj;
+                hasNetWork(isAvailable);
             });
         }
     }
