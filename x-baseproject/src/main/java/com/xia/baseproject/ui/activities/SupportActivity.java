@@ -127,7 +127,7 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
         RxBusHelper.subscribeStickyWithTags(this, callback, tags);
     }
 
-    protected void toMainThreadExecute(Consumer consumer) {
+    protected void UIExecute(Consumer consumer) {
         Platform.post(mClsTag, consumer);
     }
 }
