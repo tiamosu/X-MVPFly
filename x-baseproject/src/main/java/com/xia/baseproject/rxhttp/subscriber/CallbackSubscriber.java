@@ -9,8 +9,8 @@ import com.xia.baseproject.rxhttp.AutoDisposable;
 import com.xia.baseproject.rxhttp.callback.Callback;
 import com.xia.baseproject.rxhttp.exception.ApiException;
 import com.xia.baseproject.rxhttp.utils.Platform;
-import com.xia.baseproject.ui.dialog.BaseDialog;
 import com.xia.baseproject.ui.dialog.LoadingDialog;
+import com.xia.baseproject.ui.dialog.loader.Loader;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
@@ -24,7 +24,6 @@ import okhttp3.ResponseBody;
 public class CallbackSubscriber implements Observer<ResponseBody> {
     private Callback mCallback;
     private String mHttpTag;
-    private Dialog mDialog;
 
     public CallbackSubscriber(@NonNull Callback callback) {
         mCallback = callback;
@@ -99,17 +98,14 @@ public class CallbackSubscriber implements Observer<ResponseBody> {
 
     private void showDialog() {
         if (isShowLoadingDialog()) {
-            if (mDialog == null || !mDialog.isShowing()) {
-                mDialog = getLoadingDialog();
-            }
-            Rest.getHandler().postDelayed(() -> BaseDialog.safeShowDialog(mDialog), 400);
+            Rest.getHandler().postDelayed(() -> Loader.showLoading(getLoadingDialog()), 400);
         }
     }
 
     private void cancelDialog() {
         if (isShowLoadingDialog()) {
             Rest.getHandler().removeCallbacksAndMessages(null);
-            BaseDialog.safeCloseDialog(mDialog);
+            Loader.stopLoading();
         }
     }
 }
