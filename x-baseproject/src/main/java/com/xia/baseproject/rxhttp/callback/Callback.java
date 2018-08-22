@@ -21,7 +21,7 @@ public abstract class Callback<T> {
     public String mHttpTag;
 
     public Context getContext() {
-        return mContext.get();
+        return mContext != null ? mContext.get() : null;
     }
 
     public Callback(@NonNull LifecycleOwner lifecycleOwner) {
