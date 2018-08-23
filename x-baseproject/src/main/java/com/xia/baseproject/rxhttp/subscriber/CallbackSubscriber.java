@@ -43,11 +43,12 @@ public class CallbackSubscriber implements Observer<ResponseBody> {
 
     @Override
     public void onSubscribe(Disposable d) {
-        AutoDisposable.getInstance().add(mHttpTag, d);
         if (!NetworkUtils.isConnected()) {
             onError("无法连接网络");
+            d.dispose();
             return;
         }
+        AutoDisposable.getInstance().add(mHttpTag, d);
         Platform.post(mHttpTag, o -> {
             showDialog();
             if (mCallback != null) {
