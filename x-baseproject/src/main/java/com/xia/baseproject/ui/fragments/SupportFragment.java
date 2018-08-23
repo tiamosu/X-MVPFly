@@ -106,7 +106,7 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mClsTag = this.getClass().getSimpleName();
+        mClsTag = getClass().getSimpleName();
     }
 
     /**

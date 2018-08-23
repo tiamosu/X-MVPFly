@@ -92,7 +92,7 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mClsTag = this.getClass().getSimpleName();
+        mClsTag = getClass().getSimpleName();
         mDelegate.onCreate(savedInstanceState);
     }
 
