@@ -18,7 +18,7 @@ public class AutoDisposable {
     /**
      * 网络请求订阅池，管理Subscribers订阅，防止内存泄漏
      */
-    private static final ConcurrentHashMap<Object, CompositeDisposable> DISPOSABLE_MAPS = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<Object, CompositeDisposable> mDisposableMap = new ConcurrentHashMap<>();
 
     private static class SingleTonHolder {
         private static final AutoDisposable INSTANCE = new AutoDisposable();
@@ -26,9 +26,6 @@ public class AutoDisposable {
 
     public static AutoDisposable getInstance() {
         return SingleTonHolder.INSTANCE;
-    }
-
-    private AutoDisposable() {
     }
 
     /**
@@ -39,10 +36,10 @@ public class AutoDisposable {
      */
     public void add(@NonNull Object tagName, @NonNull Disposable disposable) {
         /* 订阅管理 */
-        CompositeDisposable compositeDisposable = DISPOSABLE_MAPS.get(tagName);
+        CompositeDisposable compositeDisposable = mDisposableMap.get(tagName);
         if (compositeDisposable == null) {
             compositeDisposable = new CompositeDisposable();
-            DISPOSABLE_MAPS.put(tagName, compositeDisposable);
+            mDisposableMap.put(tagName, compositeDisposable);
         }
         compositeDisposable.add(disposable);
     }
@@ -53,10 +50,10 @@ public class AutoDisposable {
      * @param tagName 标志
      */
     public void remove(@NonNull Object tagName) {
-        final CompositeDisposable compositeDisposable = DISPOSABLE_MAPS.get(tagName);
+        final CompositeDisposable compositeDisposable = mDisposableMap.get(tagName);
         if (compositeDisposable != null) {
             compositeDisposable.dispose();
-            DISPOSABLE_MAPS.remove(tagName);
+            mDisposableMap.remove(tagName);
         }
     }
 
@@ -67,11 +64,11 @@ public class AutoDisposable {
      * @param disposable 订阅信息
      */
     public void remove(@NonNull Object tagName, Disposable disposable) {
-        CompositeDisposable compositeDisposable = DISPOSABLE_MAPS.get(tagName);
+        final CompositeDisposable compositeDisposable = mDisposableMap.get(tagName);
         if (compositeDisposable != null) {
             compositeDisposable.remove(disposable);
             if (compositeDisposable.size() == 0) {
-                DISPOSABLE_MAPS.remove(tagName);
+                mDisposableMap.remove(tagName);
             }
         }
     }
@@ -91,7 +88,7 @@ public class AutoDisposable {
      * 取消所有订阅
      */
     public void removeAll() {
-        final Iterator<Map.Entry<Object, CompositeDisposable>> it = DISPOSABLE_MAPS.entrySet().iterator();
+        final Iterator<Map.Entry<Object, CompositeDisposable>> it = mDisposableMap.entrySet().iterator();
         while (it.hasNext()) {
             final Map.Entry<Object, CompositeDisposable> entry = it.next();
             final CompositeDisposable compositeDisposable = entry.getValue();
@@ -100,6 +97,6 @@ public class AutoDisposable {
                 it.remove();
             }
         }
-        DISPOSABLE_MAPS.clear();
+        mDisposableMap.clear();
     }
 }

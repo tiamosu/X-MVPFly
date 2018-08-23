@@ -75,13 +75,10 @@ public class SupportFragmentDelegate {
         getBundle(args);
     }
 
-    public void onDestroyView() {
+    public void onDestroy() {
         AutoDisposable.getInstance().remove(mFragment.mClsTag);
         Rest.getHandler().removeCallbacksAndMessages(null);
         RxBusHelper.unregister(mFragment);
-    }
-
-    public void onDestroy() {
         if (mUnbinder != null && mUnbinder != Unbinder.EMPTY) {
             mUnbinder.unbind();
         }
