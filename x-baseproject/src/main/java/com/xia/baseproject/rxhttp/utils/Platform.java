@@ -42,7 +42,7 @@ public class Platform {
 
     @SuppressWarnings("unchecked")
     public static void post(String httpTag, Consumer consumer) {
-        final Disposable disposable = Observable.just("")
+        final Disposable disposable = Observable.just(consumer)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(consumer);
         AutoDisposable.getInstance().add(httpTag, disposable);
