@@ -12,8 +12,6 @@ import com.xia.baseproject.rxhttp.utils.Platform;
 import com.xia.baseproject.ui.dialog.LoadingDialog;
 import com.xia.baseproject.ui.dialog.loader.Loader;
 
-import java.lang.ref.WeakReference;
-
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import okhttp3.ResponseBody;
@@ -24,16 +22,12 @@ import okhttp3.ResponseBody;
  */
 @SuppressWarnings("WeakerAccess")
 public class CallbackSubscriber implements Observer<ResponseBody> {
-    private WeakReference<Callback> mCallback;
+    private Callback mCallback;
     private String mHttpTag;
 
     public CallbackSubscriber(@NonNull Callback callback) {
-        mCallback = new WeakReference<>(callback);
+        mCallback = callback;
         mHttpTag = callback.mHttpTag;
-    }
-
-    protected Callback getCallback() {
-        return mCallback != null ? mCallback.get() : null;
     }
 
     protected boolean isShowLoadingDialog() {
@@ -41,10 +35,10 @@ public class CallbackSubscriber implements Observer<ResponseBody> {
     }
 
     protected Dialog getLoadingDialog() {
-        if (getCallback() == null || getCallback().getContext() == null) {
+        if (mCallback == null || mCallback.getContext() == null) {
             return null;
         }
-        return new LoadingDialog(getCallback().getContext());
+        return new LoadingDialog(mCallback.getContext());
     }
 
     @Override
@@ -57,8 +51,8 @@ public class CallbackSubscriber implements Observer<ResponseBody> {
         AutoDisposable.getInstance().add(mHttpTag, d);
         Platform.post(() -> {
             showDialog();
-            if (getCallback() != null) {
-                getCallback().onSubscribe(d);
+            if (mCallback != null) {
+                mCallback.onSubscribe(d);
             }
         });
     }
@@ -67,8 +61,8 @@ public class CallbackSubscriber implements Observer<ResponseBody> {
     @Override
     public void onNext(ResponseBody responseBody) {
         try {
-            if (getCallback() != null) {
-                getCallback().parseNetworkResponse(responseBody);
+            if (mCallback != null) {
+                mCallback.parseNetworkResponse(responseBody);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -86,8 +80,9 @@ public class CallbackSubscriber implements Observer<ResponseBody> {
     public void onComplete() {
         Platform.post(() -> {
             cancelDialog();
-            if (getCallback() != null) {
-                getCallback().onComplete();
+            if (mCallback != null) {
+                mCallback.onComplete();
+                mCallback = null;
             }
         });
     }
@@ -95,8 +90,9 @@ public class CallbackSubscriber implements Observer<ResponseBody> {
     private void onError(String error) {
         Platform.post(() -> {
             cancelDialog();
-            if (getCallback() != null) {
-                getCallback().onError(error);
+            if (mCallback != null) {
+                mCallback.onError(error);
+                mCallback = null;
             }
         });
     }
