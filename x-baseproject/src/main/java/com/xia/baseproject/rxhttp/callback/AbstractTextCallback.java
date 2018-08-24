@@ -11,7 +11,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
-import io.reactivex.functions.Action;
 import okhttp3.ResponseBody;
 
 /**
@@ -35,7 +34,7 @@ public abstract class AbstractTextCallback extends Callback<String> {
             builder.append(line);
         }
         final String result = builder.toString();
-        Platform.post((Action) () -> onResponse(result));
+        Platform.post(() -> onResponse(result));
         CloseUtils.closeIO(responseBody, is, reader, bufferedReader);
         return result;
     }

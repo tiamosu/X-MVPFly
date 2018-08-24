@@ -16,7 +16,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import io.reactivex.functions.Action;
 import okhttp3.ResponseBody;
 
 /**
@@ -92,7 +91,7 @@ public abstract class AbstractFileCallback extends Callback<File> {
                 downloadSize += read;
                 final int progress = Math.round(downloadSize * 100f / fileSize);
                 if (lastProgress != progress) {
-                    Platform.post((Action) () -> inProgress(progress, fileSize));
+                    Platform.post(() -> inProgress(progress, fileSize));
                 }
                 lastProgress = progress;
             }

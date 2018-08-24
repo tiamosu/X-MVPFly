@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import com.blankj.utilcode.util.CloseUtils;
 import com.xia.baseproject.rxhttp.utils.Platform;
 
-import io.reactivex.functions.Action;
 import okhttp3.ResponseBody;
 
 /**
@@ -23,7 +22,7 @@ public abstract class AbstractStringCallback extends Callback<String> {
     @Override
     public String parseNetworkResponse(ResponseBody responseBody) throws Exception {
         final String result = responseBody.string();
-        Platform.post((Action) () -> onResponse(result));
+        Platform.post(() -> onResponse(result));
         CloseUtils.closeIO(responseBody);
         return result;
     }
