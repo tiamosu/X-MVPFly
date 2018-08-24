@@ -16,6 +16,7 @@ import java.lang.ref.WeakReference;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
 import okhttp3.ResponseBody;
 
 /**
@@ -55,7 +56,7 @@ public class CallbackSubscriber implements Observer<ResponseBody> {
             return;
         }
         AutoDisposable.getInstance().add(mHttpTag, d);
-        Platform.post(mHttpTag, o -> {
+        Platform.post((Action) () -> {
             showDialog();
             if (getCallback() != null) {
                 getCallback().onSubscribe(d);
@@ -84,7 +85,7 @@ public class CallbackSubscriber implements Observer<ResponseBody> {
 
     @Override
     public void onComplete() {
-        Platform.post(mHttpTag, o -> {
+        Platform.post((Action) () -> {
             cancelDialog();
             if (getCallback() != null) {
                 getCallback().onComplete();
@@ -93,7 +94,7 @@ public class CallbackSubscriber implements Observer<ResponseBody> {
     }
 
     private void onError(String error) {
-        Platform.post(mHttpTag, o -> {
+        Platform.post((Action) () -> {
             cancelDialog();
             if (getCallback() != null) {
                 getCallback().onError(error);

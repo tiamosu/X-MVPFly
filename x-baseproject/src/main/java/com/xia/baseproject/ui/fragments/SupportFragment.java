@@ -15,7 +15,7 @@ import com.xia.baseproject.rxbus.RxBusHelper;
 import com.xia.baseproject.rxhttp.utils.Platform;
 import com.xia.baseproject.ui.fragments.delegate.SupportFragmentDelegate;
 
-import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Action;
 import me.yokeyword.fragmentation.ISupportFragment;
 
 /**
@@ -144,7 +144,7 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
         RxBusHelper.subscribeStickyWithTags(this, callback, tags);
     }
 
-    protected void UIExecute(Consumer consumer) {
-        Platform.post(mClsTag, consumer);
+    protected void UIExecute(final Action action) {
+        Platform.post(action);
     }
 }

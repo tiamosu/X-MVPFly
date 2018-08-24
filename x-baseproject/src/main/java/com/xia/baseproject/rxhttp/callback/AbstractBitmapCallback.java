@@ -10,6 +10,7 @@ import com.xia.baseproject.rxhttp.utils.Platform;
 
 import java.io.InputStream;
 
+import io.reactivex.functions.Action;
 import okhttp3.ResponseBody;
 
 /**
@@ -26,7 +27,7 @@ public abstract class AbstractBitmapCallback extends Callback<Bitmap> {
     public Bitmap parseNetworkResponse(ResponseBody responseBody) {
         final InputStream is = responseBody.byteStream();
         final Bitmap bitmap = BitmapFactory.decodeStream(is);
-        Platform.post(mHttpTag, o -> onResponse(bitmap));
+        Platform.post((Action) () -> onResponse(bitmap));
         CloseUtils.closeIO(responseBody, is);
         return bitmap;
     }

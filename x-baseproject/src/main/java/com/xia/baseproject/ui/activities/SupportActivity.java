@@ -11,7 +11,7 @@ import com.xia.baseproject.rxbus.RxBusHelper;
 import com.xia.baseproject.rxhttp.utils.Platform;
 import com.xia.baseproject.ui.activities.delegate.SupportActivityDelegate;
 
-import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Action;
 
 /**
  * @author xia
@@ -127,7 +127,7 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
         RxBusHelper.subscribeStickyWithTags(this, callback, tags);
     }
 
-    protected void UIExecute(Consumer consumer) {
-        Platform.post(mClsTag, consumer);
+    protected void UIExecute(final Action action) {
+        Platform.post(action);
     }
 }
