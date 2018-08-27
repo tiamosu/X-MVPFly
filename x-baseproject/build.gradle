@@ -30,16 +30,8 @@ dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
     //support
     api Deps.multidex
-    api Deps.support_annotations
-    api(Deps.support_v4) {
-        exclude module: 'support-annotations'
-    }
-    api(Deps.appcompat_v7) {
-        exclude module: 'support-annotations'
-    }
-    api(Deps.recyclerview_v7) {
-        exclude module: 'support-annotations'
-    }
+    api Deps.appcompat_v7
+    api Deps.recyclerview_v7
     api Deps.constraint_layout
 
     //常用的util库
@@ -76,7 +68,10 @@ dependencies {
     //loadingView
     api Deps.loading_indicator_view
     //glide
-    compileOnly Deps.glide
+    api(Deps.glide) {
+        exclude module: 'support-annotations'
+        exclude module: 'support-fragment'
+    }
     annotationProcessor Deps.glide_compiler
 }
 

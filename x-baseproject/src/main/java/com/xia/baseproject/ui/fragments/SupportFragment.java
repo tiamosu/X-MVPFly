@@ -132,8 +132,8 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         mDelegate.onDestroy();
+        super.onDestroy();
     }
 
     protected void subscribeWithTags(final IRxBusCallback callback, final String... tags) {

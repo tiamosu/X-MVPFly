@@ -93,15 +93,17 @@ public class AutoDisposable {
      * 取消所有订阅
      */
     public void removeAll() {
-        final Iterator<Map.Entry<Object, CompositeDisposable>> it = mDisposableMap.entrySet().iterator();
-        while (it.hasNext()) {
-            final Map.Entry<Object, CompositeDisposable> entry = it.next();
-            final CompositeDisposable compositeDisposable = entry.getValue();
-            if (compositeDisposable != null) {
-                compositeDisposable.dispose(); //取消订阅
-                it.remove();
+        synchronized (mDisposableMap) {
+            final Iterator<Map.Entry<Object, CompositeDisposable>> it = mDisposableMap.entrySet().iterator();
+            while (it.hasNext()) {
+                final Map.Entry<Object, CompositeDisposable> entry = it.next();
+                final CompositeDisposable compositeDisposable = entry.getValue();
+                if (compositeDisposable != null) {
+                    compositeDisposable.dispose(); //取消订阅
+                    it.remove();
+                }
             }
+            mDisposableMap.clear();
         }
-        mDisposableMap.clear();
     }
 }

@@ -29,7 +29,6 @@ public final class RestCreator {
         private static final OkHttpClient.Builder BUILDER = new OkHttpClient.Builder();
         private static final ArrayList<Interceptor> INTERCEPTORS = Rest.getConfiguration(RestConfigKeys.INTERCEPTOR);
 
-        @SuppressWarnings("StatementWithEmptyBody")
         private static OkHttpClient.Builder addInterceptor() {
             if (INTERCEPTORS != null && !INTERCEPTORS.isEmpty()) {
                 for (Interceptor interceptor : INTERCEPTORS) {
