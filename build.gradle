@@ -23,8 +23,6 @@ allprojects {
             options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
         }
     }
-
-    tasks.getByPath(":x-baseproject:releaseAndroidJavadocs").enabled = false
 }
 
 task clean(type: Delete) {
