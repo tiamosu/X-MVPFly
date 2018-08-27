@@ -16,11 +16,15 @@ object Versions {
     const val okhttp3 = "3.11.0"
     const val autodispose = "1.0.0-RC1"
     const val leakcanary = "1.6.1"
+    const val glide = "4.7.1"
 }
 
 object Deps {
     //support
+    const val support_annotations = "com.android.support:support-annotations:${Versions.support}"
+    const val support_v4 = "com.android.support:support-v4:${Versions.support}"
     const val appcompat_v7 = "com.android.support:appcompat-v7:${Versions.support}"
+    const val recyclerview_v7 = "com.android.support:recyclerview-v7:${Versions.support}"
     const val multidex = "com.android.support:multidex:1.0.3"
     const val constraint_layout = "com.android.support.constraint:constraint-layout:1.1.2"
 
@@ -47,8 +51,12 @@ object Deps {
     const val okhttp3 = "com.squareup.okhttp3:okhttp:${Versions.okhttp3}"
     const val okhttp3_logging_interceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp3}"
 
+    //glide
+    const val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
+    const val glide_compiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
+
     //util
-    const val utilcode = "com.blankj:utilcode:1.19.2"
+    const val utilcode = "com.blankj:utilcode:1.19.3"
     //fragment
     const val fragmentation_core = "me.yokeyword:fragmentation-core:1.3.6"
     //loadingView

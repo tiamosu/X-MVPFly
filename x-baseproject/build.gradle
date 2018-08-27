@@ -29,26 +29,55 @@ android {
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
     //support
+    api Deps.support_annotations
     api Deps.multidex
-    compileOnly Deps.appcompat_v7
+    api(Deps.support_v4) {
+        exclude module: 'support-annotations'
+    }
+    api(Deps.appcompat_v7) {
+        exclude module: 'support-annotations'
+    }
+    api(Deps.recyclerview_v7) {
+        exclude module: 'support-annotations'
+    }
+    api Deps.constraint_layout
+
     //常用的util库
     api Deps.utilcode
     //fragment框架
     api Deps.fragmentation_core
     //butterknife
-    api Deps.butterknife
+    api(Deps.butterknife) {
+        exclude module: 'support-annotations'
+        exclude module: 'support-compat'
+    }
     annotationProcessor Deps.butterknife_apt
+
     //rx
     api Deps.rxjava2
-    api Deps.rxandroid2
-    api Deps.retrofit2
-    api Deps.retrofit2_adapter_rxjava2
-    api Deps.retrofit2_converter_gson
-    api Deps.x_rxbus
+    api(Deps.rxandroid2) {
+        exclude module: 'rxjava'
+    }
+    api(Deps.retrofit2) {
+        exclude module: 'okhttp'
+    }
+    api(Deps.retrofit2_adapter_rxjava2) {
+        exclude module: 'retrofit'
+        exclude module: 'rxjava'
+    }
+    api(Deps.retrofit2_converter_gson) {
+        exclude module: 'retrofit'
+    }
+    api(Deps.x_rxbus) {
+        exclude module: 'rxjava'
+    }
     //okhttp
     api Deps.okhttp3
     //loadingView
     api Deps.loading_indicator_view
+    //glide
+    compileOnly Deps.glide
+    annotationProcessor Deps.glide_compiler
 }
 
 tasks.withType(Javadoc) {

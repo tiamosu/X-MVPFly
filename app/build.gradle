@@ -43,8 +43,6 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':x-baseproject')
 
-    implementation Deps.appcompat_v7
-    implementation Deps.constraint_layout
     annotationProcessor Deps.butterknife_apt
 
     debugImplementation Deps.leakcanary_android
