@@ -9,7 +9,7 @@
     android:background="@drawable/bg_dialog_loading"
     android:gravity="center"
     android:orientation="horizontal"
-    android:padding="15dp"
+    android:padding="12dp"
     tools:ignore="all">
 
     <com.wang.avi.AVLoadingIndicatorView
