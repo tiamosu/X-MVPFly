@@ -8,23 +8,23 @@
     android:layout_gravity="center"
     android:background="@drawable/bg_dialog_loading"
     android:gravity="center"
-    android:orientation="vertical"
-    android:padding="10dp"
+    android:orientation="horizontal"
+    android:padding="15dp"
     tools:ignore="all">
 
     <com.wang.avi.AVLoadingIndicatorView
         android:id="@+id/dialog_loading_iv"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         app:indicatorName="LineSpinFadeLoaderIndicator"/>
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/dialog_loading_show_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
         android:textColor="#FFFFFF"
-        android:textSize="10sp"
+        android:textSize="14sp"
         android:visibility="gone"
         tools:text="加载中..."
         tools:visibility="visible"/>
