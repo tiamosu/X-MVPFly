@@ -35,6 +35,17 @@ public abstract class AbstractSupportFragment extends Fragment implements ISuppo
         return (T) getParentFragment();
     }
 
+    /**
+     * @param isOpenPageInParent 当前Fragment是ChildFragment时，判断是否从ParentFragment打开新页面，与ParentFragment同级;
+     *                           若当前Fragment没有ChildFragment时，打开的新页面与当前Fragment同级
+     */
+    @SuppressWarnings("unchecked")
+    public <T extends AbstractSupportFragment> T getOpenDelegate(boolean isOpenPageInParent) {
+        final AbstractSupportFragment fragment = (isOpenPageInParent
+                && getParentDelegate() != null) ? getParentDelegate() : this;
+        return (T) fragment;
+    }
+
     @Override
     public SupportFragmentDelegate getSupportDelegate() {
         return mDelegate;
@@ -338,11 +349,19 @@ public abstract class AbstractSupportFragment extends Fragment implements ISuppo
         mDelegate.start(toFragment);
     }
 
+    public void start(boolean isOpenPageInParent, ISupportFragment toFragment) {
+        getOpenDelegate(isOpenPageInParent).start(toFragment);
+    }
+
     /**
      * @param launchMode Similar to Activity's LaunchMode.
      */
     public void start(final ISupportFragment toFragment, @LaunchMode int launchMode) {
         mDelegate.start(toFragment, launchMode);
+    }
+
+    public void start(boolean isOpenPageInParent, final ISupportFragment toFragment, @LaunchMode int launchMode) {
+        getOpenDelegate(isOpenPageInParent).start(toFragment, launchMode);
     }
 
     /**
@@ -352,11 +371,19 @@ public abstract class AbstractSupportFragment extends Fragment implements ISuppo
         mDelegate.startForResult(toFragment, requestCode);
     }
 
+    public void startForResult(boolean isOpenPageInParent, ISupportFragment toFragment, int requestCode) {
+        getOpenDelegate(isOpenPageInParent).startForResult(toFragment, requestCode);
+    }
+
     /**
      * Start the target Fragment and pop itself
      */
     public void startWithPop(ISupportFragment toFragment) {
         mDelegate.startWithPop(toFragment);
+    }
+
+    public void startWithPop(boolean isOpenPageInParent, ISupportFragment toFragment) {
+        getOpenDelegate(isOpenPageInParent).startWithPop(toFragment);
     }
 
     /**
@@ -368,13 +395,24 @@ public abstract class AbstractSupportFragment extends Fragment implements ISuppo
         mDelegate.startWithPopTo(toFragment, targetFragmentClass, includeTargetFragment);
     }
 
+    public void startWithPopTo(boolean isOpenPageInParent, ISupportFragment toFragment, Class<?> targetFragmentClass, boolean includeTargetFragment) {
+        getOpenDelegate(isOpenPageInParent).startWithPopTo(toFragment, targetFragmentClass, includeTargetFragment);
+    }
 
     public void replaceFragment(ISupportFragment toFragment, boolean addToBackStack) {
         mDelegate.replaceFragment(toFragment, addToBackStack);
     }
 
+    public void replaceFragment(boolean isOpenPageInParent, ISupportFragment toFragment, boolean addToBackStack) {
+        getOpenDelegate(isOpenPageInParent).replaceFragment(toFragment, addToBackStack);
+    }
+
     public void pop() {
         mDelegate.pop();
+    }
+
+    public void pop(boolean isOpenPageInParent) {
+        getOpenDelegate(isOpenPageInParent).pop();
     }
 
     /**
@@ -382,6 +420,10 @@ public abstract class AbstractSupportFragment extends Fragment implements ISuppo
      */
     public void popChild() {
         mDelegate.popChild();
+    }
+
+    public void popChild(boolean isOpenPageInParent) {
+        getOpenDelegate(isOpenPageInParent).popChild();
     }
 
     /**
@@ -397,6 +439,10 @@ public abstract class AbstractSupportFragment extends Fragment implements ISuppo
         mDelegate.popTo(targetFragmentClass, includeTargetFragment);
     }
 
+    public void popTo(boolean isOpenPageInParent, Class<?> targetFragmentClass, boolean includeTargetFragment) {
+        getOpenDelegate(isOpenPageInParent).popTo(targetFragmentClass, includeTargetFragment);
+    }
+
     /**
      * If you want to begin another FragmentTransaction immediately after popTo(), use this method.
      * 如果你想在出栈后, 立刻进行FragmentTransaction操作，请使用该方法
@@ -405,20 +451,40 @@ public abstract class AbstractSupportFragment extends Fragment implements ISuppo
         mDelegate.popTo(targetFragmentClass, includeTargetFragment, afterPopTransactionRunnable);
     }
 
+    public void popTo(boolean isOpenPageInParent, Class<?> targetFragmentClass, boolean includeTargetFragment, Runnable afterPopTransactionRunnable) {
+        getOpenDelegate(isOpenPageInParent).popTo(targetFragmentClass, includeTargetFragment, afterPopTransactionRunnable);
+    }
+
     public void popTo(Class<?> targetFragmentClass, boolean includeTargetFragment, Runnable afterPopTransactionRunnable, int popAnim) {
         mDelegate.popTo(targetFragmentClass, includeTargetFragment, afterPopTransactionRunnable, popAnim);
+    }
+
+    public void popTo(boolean isOpenPageInParent, Class<?> targetFragmentClass, boolean includeTargetFragment, Runnable afterPopTransactionRunnable, int popAnim) {
+        getOpenDelegate(isOpenPageInParent).popTo(targetFragmentClass, includeTargetFragment, afterPopTransactionRunnable, popAnim);
     }
 
     public void popToChild(Class<?> targetFragmentClass, boolean includeTargetFragment) {
         mDelegate.popToChild(targetFragmentClass, includeTargetFragment);
     }
 
+    public void popToChild(boolean isOpenPageInParent, Class<?> targetFragmentClass, boolean includeTargetFragment) {
+        getOpenDelegate(isOpenPageInParent).popToChild(targetFragmentClass, includeTargetFragment);
+    }
+
     public void popToChild(Class<?> targetFragmentClass, boolean includeTargetFragment, Runnable afterPopTransactionRunnable) {
         mDelegate.popToChild(targetFragmentClass, includeTargetFragment, afterPopTransactionRunnable);
     }
 
+    public void popToChild(boolean isOpenPageInParent, Class<?> targetFragmentClass, boolean includeTargetFragment, Runnable afterPopTransactionRunnable) {
+        getOpenDelegate(isOpenPageInParent).popToChild(targetFragmentClass, includeTargetFragment, afterPopTransactionRunnable);
+    }
+
     public void popToChild(Class<?> targetFragmentClass, boolean includeTargetFragment, Runnable afterPopTransactionRunnable, int popAnim) {
         mDelegate.popToChild(targetFragmentClass, includeTargetFragment, afterPopTransactionRunnable, popAnim);
+    }
+
+    public void popToChild(boolean isOpenPageInParent, Class<?> targetFragmentClass, boolean includeTargetFragment, Runnable afterPopTransactionRunnable, int popAnim) {
+        getOpenDelegate(isOpenPageInParent).popToChild(targetFragmentClass, includeTargetFragment, afterPopTransactionRunnable, popAnim);
     }
 
     /**
