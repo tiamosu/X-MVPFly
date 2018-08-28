@@ -59,6 +59,8 @@ object Deps {
     const val utilcode = "com.blankj:utilcode:1.19.3"
     //fragment
     const val fragmentation_core = "me.yokeyword:fragmentation-core:1.3.6"
-    //loadingView
+    //loading各种动画样式
     const val loading_indicator_view = "com.wang.avi:library:2.1.3"
+    //autoSize屏幕适配
+    const val auto_size = "me.jessyan:autosize:0.8.0"
 }

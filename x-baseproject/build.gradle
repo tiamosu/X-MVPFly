@@ -27,23 +27,12 @@ android {
 }
 
 dependencies {
-    api fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     //support
     api Deps.multidex
     api Deps.appcompat_v7
     api Deps.recyclerview_v7
     api Deps.constraint_layout
-
-    //常用的util库
-    api Deps.utilcode
-    //fragment框架
-    api Deps.fragmentation_core
-    //butterknife
-    api(Deps.butterknife) {
-        exclude module: 'support-annotations'
-        exclude module: 'support-compat'
-    }
-    annotationProcessor Deps.butterknife_apt
 
     //rx
     api Deps.rxjava2
@@ -65,14 +54,29 @@ dependencies {
     }
     //okhttp
     api Deps.okhttp3
-    //loadingView
-    api Deps.loading_indicator_view
+
+    //butterknife
+    api(Deps.butterknife) {
+        exclude module: 'support-annotations'
+        exclude module: 'support-compat'
+    }
+    annotationProcessor Deps.butterknife_apt
+
     //glide
     api(Deps.glide) {
         exclude module: 'support-annotations'
         exclude module: 'support-fragment'
     }
     annotationProcessor Deps.glide_compiler
+
+    //常用的util库
+    api Deps.utilcode
+    //fragment框架
+    api Deps.fragmentation_core
+    //loading动画样式
+    api Deps.loading_indicator_view
+    //屏幕适配
+    api Deps.auto_size
 }
 
 tasks.withType(Javadoc) {
