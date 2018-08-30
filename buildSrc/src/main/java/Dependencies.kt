@@ -16,7 +16,7 @@ object Versions {
     const val okhttp3 = "3.11.0"
     const val autodispose = "1.0.0-RC1"
     const val leakcanary = "1.6.1"
-    const val glide = "4.7.1"
+    const val glide = "4.8.0"
 }
 
 object Deps {

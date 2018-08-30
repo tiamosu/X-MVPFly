@@ -12,8 +12,7 @@ import com.xia.baseproject.rxhttp.utils.Platform;
 import com.xia.baseproject.ui.dialog.LoadingDialog;
 import com.xia.baseproject.ui.dialog.loader.Loader;
 
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.observers.DisposableObserver;
 import okhttp3.ResponseBody;
 
 /**
@@ -21,7 +20,7 @@ import okhttp3.ResponseBody;
  * @date 2018/8/3.
  */
 @SuppressWarnings("WeakerAccess")
-public class CallbackSubscriber implements Observer<ResponseBody> {
+public class CallbackSubscriber extends DisposableObserver<ResponseBody> {
     private Callback mCallback;
     private String mHttpTag;
 
@@ -42,17 +41,17 @@ public class CallbackSubscriber implements Observer<ResponseBody> {
     }
 
     @Override
-    public void onSubscribe(Disposable d) {
+    protected void onStart() {
         if (!NetworkUtils.isConnected()) {
             onError("无法连接网络");
-            d.dispose();
+            dispose();
             return;
         }
-        AutoDisposable.getInstance().add(mHttpTag, d);
+        AutoDisposable.getInstance().add(mHttpTag, this);
         Platform.post(() -> {
             showDialog();
             if (mCallback != null) {
-                mCallback.onSubscribe(d);
+                mCallback.onSubscribe(this);
             }
         });
     }
@@ -61,30 +60,33 @@ public class CallbackSubscriber implements Observer<ResponseBody> {
     @Override
     public void onNext(ResponseBody responseBody) {
         try {
-            if (mCallback != null) {
+            if (mCallback != null && !isDisposed()) {
                 mCallback.parseNetworkResponse(responseBody);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
         }
     }
 
     @Override
     public void onError(Throwable e) {
-        final ApiException apiException = ApiException.handleException(e);
-        final String error = apiException.getMessage();
-        onError(error);
+        if (!isDisposed()) {
+            final ApiException apiException = ApiException.handleException(e);
+            final String error = apiException.getMessage();
+            onError(error);
+        }
     }
 
     @Override
     public void onComplete() {
-        Platform.post(() -> {
-            cancelDialog();
-            if (mCallback != null) {
-                mCallback.onComplete();
-                mCallback = null;
-            }
-        });
+        if (!isDisposed()) {
+            Platform.post(() -> {
+                cancelDialog();
+                if (mCallback != null) {
+                    mCallback.onComplete();
+                    mCallback = null;
+                }
+            });
+        }
     }
 
     private void onError(String error) {
