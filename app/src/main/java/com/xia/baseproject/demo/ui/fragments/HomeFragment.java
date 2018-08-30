@@ -7,6 +7,7 @@ import com.xia.baseproject.demo.R;
 import com.xia.baseproject.demo.base.HeadViewFragment;
 import com.xia.baseproject.demo.mvp.presenter.HomePresenter;
 import com.xia.baseproject.demo.mvp.view.HomeView;
+import com.xia.baseproject.rxhttp.utils.Platform;
 
 import butterknife.BindView;
 
@@ -36,6 +37,14 @@ public class HomeFragment extends HeadViewFragment<HomePresenter> implements Hom
     @Override
     public void initData() {
         Log.e("weixi", "initData: " + mAppCompatButton.getText().toString());
+        Platform.post(() -> {
+            try {
+                final String test = null;
+                Log.e("weixi", "initData: " + test.equals(""));
+            } catch (Exception e) {
+                Log.e("weixi", "initData: " + e.getMessage());
+            }
+        });
     }
 
     @Override
