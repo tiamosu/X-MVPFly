@@ -23,6 +23,9 @@ allprojects {
             options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
         }
     }
+
+    //忽略打包时警告
+    tasks.getByPath(":x-baseproject:releaseAndroidJavadocs").enabled = false
 }
 
 task clean(type: Delete) {
