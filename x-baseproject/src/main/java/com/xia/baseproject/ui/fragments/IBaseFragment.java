@@ -18,7 +18,7 @@ public interface IBaseFragment {
 
     void getBundleExtras(Bundle bundle);
 
-    void onCreateHeadView(FrameLayout container);
+    void onCreateHeadView(FrameLayout titleBarContainer);
 
     void initData();
 
