@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.xia.baseproject.app.Rest;
-import com.xia.baseproject.rxhttp.AutoDisposable;
 import com.xia.baseproject.rxhttp.callback.Callback;
 import com.xia.baseproject.rxhttp.exception.ApiException;
 import com.xia.baseproject.rxhttp.utils.Platform;
@@ -21,12 +20,10 @@ import okhttp3.ResponseBody;
  */
 @SuppressWarnings("WeakerAccess")
 public class CallbackSubscriber extends DisposableObserver<ResponseBody> {
-    private Callback mCallback;
-    private String mHttpTag;
+    public Callback mCallback;
 
     public CallbackSubscriber(@NonNull Callback callback) {
         mCallback = callback;
-        mHttpTag = callback.mHttpTag;
     }
 
     protected boolean isShowLoadingDialog() {
@@ -47,7 +44,6 @@ public class CallbackSubscriber extends DisposableObserver<ResponseBody> {
             dispose();
             return;
         }
-        AutoDisposable.getInstance().add(mHttpTag, this);
         Platform.post(() -> {
             showDialog();
             if (mCallback != null) {

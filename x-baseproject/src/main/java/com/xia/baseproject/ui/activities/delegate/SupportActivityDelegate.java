@@ -20,7 +20,6 @@ import com.xia.baseproject.app.RestConfigKeys;
 import com.xia.baseproject.constant.NetworkState;
 import com.xia.baseproject.receiver.NetworkChangeReceiver;
 import com.xia.baseproject.rxbus.RxBusHelper;
-import com.xia.baseproject.rxhttp.AutoDisposable;
 import com.xia.baseproject.ui.activities.SupportActivity;
 import com.xia.baseproject.utils.NetworkHelper;
 
@@ -72,7 +71,6 @@ public class SupportActivityDelegate {
         if (mNetworkChangeReceiver != null) {
             mActivity.unregisterReceiver(mNetworkChangeReceiver);
         }
-        AutoDisposable.getInstance().remove(mActivity.mClsTag);
         Rest.getHandler().removeCallbacksAndMessages(null);
         RxBusHelper.unregister(mActivity);
     }

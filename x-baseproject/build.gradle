@@ -52,6 +52,7 @@ dependencies {
     api(Deps.x_rxbus) {
         exclude module: 'rxjava'
     }
+    api Deps.autodispose_archcomponents
     //okhttp
     api Deps.okhttp3
 

@@ -14,7 +14,7 @@ object Versions {
     const val butterknife = "8.8.1"
     const val retrofit2 = "2.4.0"
     const val okhttp3 = "3.11.0"
-    const val autodispose = "1.0.0-RC1"
+    const val autodispose = "1.0.0-RC2"
     const val leakcanary = "1.6.1"
     const val glide = "4.8.0"
 }

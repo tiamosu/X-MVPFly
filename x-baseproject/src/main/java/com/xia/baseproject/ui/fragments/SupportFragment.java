@@ -26,7 +26,6 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
         extends AbstractMvpFragment<P> implements IBaseFragment {
 
     private final SupportFragmentDelegate mDelegate = new SupportFragmentDelegate(this);
-    public String mClsTag;
 
     /**
      * @return 加载布局（layout）
@@ -101,12 +100,6 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return mDelegate.onCreateView(inflater, container);
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mClsTag = getClass().getSimpleName();
     }
 
     /**

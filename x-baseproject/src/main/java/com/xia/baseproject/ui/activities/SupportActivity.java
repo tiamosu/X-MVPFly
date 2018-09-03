@@ -21,7 +21,6 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
         extends AbstractMvpActivity<P> implements IBaseActivity {
 
     private final SupportActivityDelegate mDelegate = new SupportActivityDelegate(this);
-    public String mClsTag;
 
     /**
      * @return 加载布局（layout）
@@ -92,7 +91,6 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mClsTag = getClass().getSimpleName();
         mDelegate.onCreate(savedInstanceState);
     }
 

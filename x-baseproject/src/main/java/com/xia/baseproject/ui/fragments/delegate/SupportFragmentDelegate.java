@@ -13,7 +13,6 @@ import com.xia.baseproject.R;
 import com.xia.baseproject.app.Rest;
 import com.xia.baseproject.constant.NetworkState;
 import com.xia.baseproject.rxbus.RxBusHelper;
-import com.xia.baseproject.rxhttp.AutoDisposable;
 import com.xia.baseproject.ui.fragments.SupportFragment;
 import com.xia.baseproject.utils.NetworkHelper;
 
@@ -76,7 +75,6 @@ public class SupportFragmentDelegate {
     }
 
     public void onDestroy() {
-        AutoDisposable.getInstance().remove(mFragment.mClsTag);
         Rest.getHandler().removeCallbacksAndMessages(null);
         RxBusHelper.unregister(mFragment);
         if (mUnbinder != null && mUnbinder != Unbinder.EMPTY) {
