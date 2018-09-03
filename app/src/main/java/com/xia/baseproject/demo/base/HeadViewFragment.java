@@ -14,7 +14,7 @@ import com.xia.baseproject.ui.fragments.SupportFragment;
 public abstract class HeadViewFragment<P extends BaseMvpPresenter> extends SupportFragment<P> {
 
     @Override
-    public void onCreateHeadView(FrameLayout container) {
+    public void onCreateTitleBar(FrameLayout container) {
         final View headView = View.inflate(getContext(), R.layout.layout_head_view, null);
         container.addView(headView);
     }

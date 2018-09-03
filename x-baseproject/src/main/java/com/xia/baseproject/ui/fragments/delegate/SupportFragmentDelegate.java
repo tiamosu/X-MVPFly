@@ -27,7 +27,6 @@ import butterknife.Unbinder;
 public class SupportFragmentDelegate {
     private SupportFragment mFragment;
     private Unbinder mUnbinder = null;
-    private FrameLayout mTitleBarContainer;
 
     //保证转场动画的流畅性
     private boolean mIsOnSupportVisible;
@@ -47,7 +46,8 @@ public class SupportFragmentDelegate {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
         final View rootView = inflater.inflate(R.layout.base_layout_root_view, container, false);
         if (mFragment.isLoadHeadView()) {
-            mTitleBarContainer = rootView.findViewById(R.id.layout_root_view_head_container);
+            final FrameLayout titleBarContainer = rootView.findViewById(R.id.layout_root_view_head_container);
+            mFragment.onCreateTitleBar(titleBarContainer);
         }
         if (mFragment.getLayoutId() > 0) {
             final FrameLayout contentContainer = rootView.findViewById(R.id.layout_root_view_content_container);
@@ -90,7 +90,6 @@ public class SupportFragmentDelegate {
         }
         if (mIsInitAll) {
             mIsInitAll = false;
-            initTitleBar();
             initNetworkChangeEvent();
             getBundle(mFragment.getArguments());
             mFragment.initData();
@@ -103,12 +102,6 @@ public class SupportFragmentDelegate {
     private void getBundle(Bundle bundle) {
         if (bundle != null && !bundle.isEmpty()) {
             mFragment.getBundleExtras(bundle);
-        }
-    }
-
-    private void initTitleBar() {
-        if (mTitleBarContainer != null) {
-            mFragment.onCreateHeadView(mTitleBarContainer);
         }
     }
 

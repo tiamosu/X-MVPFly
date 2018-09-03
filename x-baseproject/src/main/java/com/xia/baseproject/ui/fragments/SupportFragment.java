@@ -53,7 +53,7 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
      * @param titleBarContainer 头部标题栏容器，可用于自定义添加视图
      */
     @Override
-    public void onCreateHeadView(FrameLayout titleBarContainer) {
+    public void onCreateTitleBar(FrameLayout titleBarContainer) {
     }
 
     /**
