@@ -31,7 +31,9 @@ dependencies {
     //support
     api Deps.multidex
     api Deps.appcompat_v7
-    api Deps.recyclerview_v7
+    api(Deps.recyclerview_v7) {
+        exclude group: 'com.android.support'
+    }
     api Deps.constraint_layout
 
     //rx
@@ -52,7 +54,12 @@ dependencies {
     api(Deps.x_rxbus) {
         exclude module: 'rxjava'
     }
-    api Deps.autodispose_archcomponents
+    api(Deps.autodispose_archcomponents) {
+        exclude module: 'support-annotations'
+        exclude module: 'runtime'
+        exclude module: 'rxandroid'
+        exclude module: 'rxjava'
+    }
     //okhttp
     api Deps.okhttp3
 
