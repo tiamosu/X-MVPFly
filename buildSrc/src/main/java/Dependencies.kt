@@ -26,7 +26,7 @@ object Deps {
     const val appcompat_v7 = "com.android.support:appcompat-v7:${Versions.support}"
     const val recyclerview_v7 = "com.android.support:recyclerview-v7:${Versions.support}"
     const val multidex = "com.android.support:multidex:1.0.3"
-    const val constraint_layout = "com.android.support.constraint:constraint-layout:1.1.2"
+    const val constraint_layout = "com.android.support.constraint:constraint-layout:1.1.3"
 
     //butterknife
     const val butterknife = "com.jakewharton:butterknife:${Versions.butterknife}"
@@ -56,7 +56,7 @@ object Deps {
     const val glide_compiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
 
     //util
-    const val utilcode = "com.blankj:utilcode:1.19.4"
+    const val utilcode = "com.blankj:utilcode:1.20.0"
     //fragment
     const val fragmentation_core = "me.yokeyword:fragmentation-core:1.3.6"
     //loading各种动画样式
