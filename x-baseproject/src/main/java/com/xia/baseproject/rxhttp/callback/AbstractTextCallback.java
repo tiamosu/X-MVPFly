@@ -26,7 +26,7 @@ public abstract class AbstractTextCallback extends Callback<String> {
     @Override
     public String parseNetworkResponse(ResponseBody responseBody) throws Exception {
         final InputStream is = responseBody.byteStream();
-        final Reader reader = new InputStreamReader(is);
+        final Reader reader = new InputStreamReader(is, "utf-8");
         final BufferedReader bufferedReader = new BufferedReader(reader);
         String line;
         final StringBuilder builder = new StringBuilder();

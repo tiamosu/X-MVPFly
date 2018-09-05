@@ -104,8 +104,6 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
     protected void onDestroy() {
         mDelegate.onDestroy();
         super.onDestroy();
-        System.gc();
-        System.runFinalization();
     }
 
     /**

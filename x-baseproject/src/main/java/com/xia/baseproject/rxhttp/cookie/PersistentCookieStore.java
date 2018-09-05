@@ -22,6 +22,7 @@ import okhttp3.HttpUrl;
 
 /**
  * <p>描述：cookie存储器</p>
+ *
  * @author xia
  */
 @SuppressWarnings("WeakerAccess")
@@ -128,8 +129,9 @@ public class PersistentCookieStore {
 
     public List<Cookie> getCookies() {
         final ArrayList<Cookie> ret = new ArrayList<>();
-        for (String key : cookies.keySet()) {
-            ret.addAll(cookies.get(key).values());
+        for (Map.Entry<String, ConcurrentHashMap<String, Cookie>> entry : cookies.entrySet()) {
+            final ConcurrentHashMap<String, Cookie> cookieMap = entry.getValue();
+            ret.addAll(cookieMap.values());
         }
         return ret;
     }

@@ -9,6 +9,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.FileNameMap;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.util.Map;
 
 import io.reactivex.Observable;
 import okhttp3.Headers;
@@ -61,21 +62,20 @@ public class PostRequest extends BaseBodyRequest<PostRequest> {
 
     private RequestBody addParams(MultipartBody.Builder builder) {
         if (mParams != null && !mParams.isEmpty()) {
-            for (String key : mParams.keySet()) {
-                String value = mParams.get(key);
+            for (Map.Entry<String, String> entry : mParams.entrySet()) {
                 builder.addPart(Headers.of("Content-Disposition",
-                        "form-data; name=\"" + key + "\""),
-                        RequestBody.create(null, value));
+                        "form-data; name=\"" + entry.getKey() + "\""),
+                        RequestBody.create(null, entry.getValue()));
             }
         }
         if (mFileParams != null && !mFileParams.isEmpty()) {
-            for (String key : mFileParams.keySet()) {
-                final File file = mFileParams.get(key);
+            for (Map.Entry<String, File> entry : mFileParams.entrySet()) {
+                final File file = entry.getValue();
                 final RequestBody fileBody = RequestBody.create(
                         MediaType.parse(guessMimeType(file.getName())), file);
                 final UploadProgressRequestBody uploadProgressRequestBody
                         = new UploadProgressRequestBody(fileBody, mUpdateFileCallback);
-                builder.addFormDataPart(key, file.getName(), uploadProgressRequestBody);
+                builder.addFormDataPart(entry.getKey(), file.getName(), uploadProgressRequestBody);
             }
         }
         return builder.build();

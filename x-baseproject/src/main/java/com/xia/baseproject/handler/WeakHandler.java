@@ -132,9 +132,6 @@ public class WeakHandler {
 
     private WeakRunnable wrapRunnable(@NonNull Runnable r) {
         //noinspection ConstantConditions
-        if (r == null) {
-            throw new NullPointerException("Runnable can't be null");
-        }
         final ChainedRef hardRef = new ChainedRef(mLock, r);
         mChainedRef.insertAfter(hardRef);
         return hardRef.wrapper;

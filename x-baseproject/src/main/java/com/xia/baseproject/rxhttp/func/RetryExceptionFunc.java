@@ -3,6 +3,7 @@ package com.xia.baseproject.rxhttp.func;
 import android.util.Log;
 
 import com.xia.baseproject.rxhttp.exception.ApiException;
+import com.xia.baseproject.rxhttp.func.bean.Wrapper;
 
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
@@ -51,34 +52,24 @@ public class RetryExceptionFunc implements Function<Observable<? extends Throwab
         return observable.zipWith(Observable.range(1, count + 1),
                 (BiFunction<Throwable, Integer, Wrapper>) Wrapper::new)
                 .flatMap((Function<Wrapper, ObservableSource<?>>) wrapper -> {
-                    if (wrapper.index > 1) {
-                        Log.i("Retry", "重试次数：" + (wrapper.index));
+                    if (wrapper.getIndex() > 1) {
+                        Log.i("Retry", "重试次数：" + (wrapper.getIndex()));
                     }
                     int errCode = 0;
-                    if (wrapper.throwable instanceof ApiException) {
-                        final ApiException throwable = (ApiException) wrapper.throwable;
+                    if (wrapper.getThrowable() instanceof ApiException) {
+                        final ApiException throwable = (ApiException) wrapper.getThrowable();
                         errCode = throwable.getCode();
                     }
-                    if ((wrapper.throwable instanceof ConnectException
-                            || wrapper.throwable instanceof SocketTimeoutException
+                    if ((wrapper.getThrowable() instanceof ConnectException
+                            || wrapper.getThrowable() instanceof SocketTimeoutException
                             || errCode == ApiException.ERROR.NETWORD_ERROR
                             || errCode == ApiException.ERROR.TIMEOUT_ERROR
-                            || wrapper.throwable instanceof SocketTimeoutException
-                            || wrapper.throwable instanceof TimeoutException)
-                            && wrapper.index < count + 1) { //如果超出重试次数也抛出错误，否则默认是会进入onCompleted
-                        return Observable.timer(delay + (wrapper.index - 1) * increaseDelay, TimeUnit.MILLISECONDS);
+                            || wrapper.getThrowable() instanceof SocketTimeoutException
+                            || wrapper.getThrowable() instanceof TimeoutException)
+                            && wrapper.getIndex() < count + 1) { //如果超出重试次数也抛出错误，否则默认是会进入onCompleted
+                        return Observable.timer(delay + (wrapper.getIndex() - 1) * increaseDelay, TimeUnit.MILLISECONDS);
                     }
-                    return Observable.error(wrapper.throwable);
+                    return Observable.error(wrapper.getThrowable());
                 });
-    }
-
-    private class Wrapper {
-        private int index;
-        private Throwable throwable;
-
-        public Wrapper(Throwable throwable, int index) {
-            this.index = index;
-            this.throwable = throwable;
-        }
     }
 }
