@@ -1,5 +1,7 @@
 package com.xia.baseproject.rxhttp.body;
 
+import com.xia.baseproject.rxhttp.body.upload.ProgressResponseCallBack;
+
 import java.io.IOException;
 
 import okhttp3.MediaType;

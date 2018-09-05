@@ -8,7 +8,7 @@ import java.io.File;
  * @author xia
  * @date 2018/7/28.
  */
-@SuppressWarnings({"ResultOfMethodCallIgnored", "WeakerAccess"})
+@SuppressWarnings("WeakerAccess")
 public final class FileUtils {
 
     private static final String SDCARD_DIR =
@@ -18,13 +18,14 @@ public final class FileUtils {
         return new File(createDir(sdcardDirName), fileName);
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public static File createDir(String sdcardDirName) {
         //拼接成SD卡中完整的dir
         final String dir = SDCARD_DIR + "/" + sdcardDirName + "/";
         final File fileDir = new File(dir);
-        if (!fileDir.exists()) {
-            fileDir.mkdirs();
+        if (fileDir.exists() || fileDir.mkdirs()) {
+            return fileDir;
         }
-        return fileDir;
+        return null;
     }
 }

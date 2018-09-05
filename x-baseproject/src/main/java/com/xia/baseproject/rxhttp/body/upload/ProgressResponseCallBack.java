@@ -1,4 +1,4 @@
-package com.xia.baseproject.rxhttp.body;
+package com.xia.baseproject.rxhttp.body.upload;
 
 /**
  * @author xia

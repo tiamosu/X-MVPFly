@@ -2,7 +2,7 @@ package com.xia.baseproject.rxhttp.request;
 
 import android.support.annotation.NonNull;
 
-import com.xia.baseproject.rxhttp.body.ProgressResponseCallBack;
+import com.xia.baseproject.rxhttp.body.upload.ProgressResponseCallBack;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
