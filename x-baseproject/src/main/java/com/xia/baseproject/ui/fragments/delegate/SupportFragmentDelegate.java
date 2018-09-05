@@ -16,6 +16,8 @@ import com.xia.baseproject.rxbus.RxBusHelper;
 import com.xia.baseproject.ui.fragments.SupportFragment;
 import com.xia.baseproject.utils.NetworkHelper;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -32,7 +34,7 @@ public class SupportFragmentDelegate {
     private boolean mIsOnEnterAnimationEnd;
 
     //防止多次初始化
-    private boolean mIsInitAll = true;
+    private final AtomicBoolean mInitialized = new AtomicBoolean(false);
     //记录上一次网络连接状态
     private int mLastNetStatus = NetworkState.NETWORK_DEFAULT;
     //网络是否重新连接
@@ -86,8 +88,7 @@ public class SupportFragmentDelegate {
         if (NetworkHelper.isGlobalCheckNetwork(mFragment.isCheckNetWork())) {
             hasNetWork(NetworkUtils.isConnected());
         }
-        if (mIsInitAll) {
-            mIsInitAll = false;
+        if (mInitialized.compareAndSet(false, true)) {
             initNetworkChangeEvent();
             getBundle(mFragment.getArguments());
             mFragment.initData();
