@@ -111,7 +111,10 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
      */
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        mDelegate.dispatchTouchEvent(ev);
+        try {
+            mDelegate.dispatchTouchEvent(ev);
+        } catch (Throwable ignored) {
+        }
         return super.dispatchTouchEvent(ev);
     }
 
