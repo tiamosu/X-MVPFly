@@ -1,5 +1,6 @@
 package com.xia.baseproject.utils;
 
+import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleOwner;
 
 import com.uber.autodispose.AutoDispose;
@@ -18,7 +19,7 @@ public final class RxLifecycleUtils {
 
     public static <T> AutoDisposeConverter<T> bindLifecycle(LifecycleOwner lifecycleOwner) {
         return AutoDispose.autoDisposable(
-                AndroidLifecycleScopeProvider.from(lifecycleOwner)
+                AndroidLifecycleScopeProvider.from(lifecycleOwner, Lifecycle.Event.ON_DESTROY)
         );
     }
 }
