@@ -43,7 +43,7 @@ object Deps {
     const val retrofit2_converter_gson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit2}"
     const val autodispose = "com.uber.autodispose:autodispose-android:${Versions.autodispose}"
     const val autodispose_archcomponents = "com.uber.autodispose:autodispose-android-archcomponents:${Versions.autodispose}"
-    const val rxjava2 = "io.reactivex.rxjava2:rxjava:2.2.1"
+    const val rxjava2 = "io.reactivex.rxjava2:rxjava:2.2.2"
     const val rxandroid2 = "io.reactivex.rxjava2:rxandroid:2.1.0"
     const val x_rxbus = "com.xia:x-rxbus:1.0.2"
 
@@ -56,7 +56,7 @@ object Deps {
     const val glide_compiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
 
     //util
-    const val utilcode = "com.blankj:utilcode:1.20.0"
+    const val utilcode = "com.blankj:utilcode:1.20.1"
     //fragment
     const val fragmentation_core = "me.yokeyword:fragmentation-core:1.3.6"
     //loading各种动画样式
