@@ -4,9 +4,7 @@ import android.content.Context;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
-import android.os.Bundle;
 import android.os.IBinder;
-import android.support.annotation.Nullable;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -43,12 +41,7 @@ public class SupportActivityDelegate {
         mActivity = activity;
     }
 
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        //APP被杀死时进行重启
-        if (savedInstanceState != null) {
-            AppUtils.relaunchApp();
-            return;
-        }
+    public void onCreate() {
         mActivity.onBeforeCreateView();
         if (mActivity.getLayoutId() > 0) {
             mActivity.setContentView(mActivity.getLayoutId());

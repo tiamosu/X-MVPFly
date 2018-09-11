@@ -1,5 +1,6 @@
 package com.xia.baseproject.demo.ui.fragments;
 
+import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 
@@ -7,7 +8,7 @@ import com.xia.baseproject.demo.R;
 import com.xia.baseproject.demo.base.HeadViewFragment;
 import com.xia.baseproject.demo.mvp.presenter.HomePresenter;
 import com.xia.baseproject.demo.mvp.view.HomeView;
-import com.xia.baseproject.rxhttp.utils.Platform;
+import com.xia.baseproject.utils.FragmentUtils;
 
 import butterknife.BindView;
 
@@ -36,26 +37,24 @@ public class HomeFragment extends HeadViewFragment<HomePresenter> implements Hom
 
     @Override
     public void initData() {
-        Log.e("weixi", "initData: " + mAppCompatButton.getText().toString());
-        Platform.post(() -> {
-            try {
-                final String test = null;
-                Log.e("weixi", "initData: " + test.equals(""));
-            } catch (Exception e) {
-                Log.e("weixi", "initData: " + e.getMessage());
-            }
-        });
     }
 
     @Override
     public void initView() {
+        Log.e("weixi", "initView: ");
+        mAppCompatButton.setText("跳转下一页");
     }
 
     @Override
     public void initEvent() {
         if (getView() != null) {
-            getView().findViewById(R.id.home_jump_btn).setOnClickListener(v ->
-                    getParentDelegate().start(new SecondFragment()));
+            getView().findViewById(R.id.home_jump_btn)
+                    .setOnClickListener(v -> {
+                        final Bundle bundle = new Bundle();
+                        bundle.putString("Hello", "你好");
+                        start(true,
+                                FragmentUtils.newInstance(SecondFragment.class, bundle));
+                    });
         }
     }
 

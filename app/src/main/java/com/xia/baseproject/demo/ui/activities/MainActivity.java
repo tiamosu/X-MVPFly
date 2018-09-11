@@ -1,6 +1,7 @@
 package com.xia.baseproject.demo.ui.activities;
 
 import android.content.pm.ActivityInfo;
+import android.support.annotation.NonNull;
 import android.view.MotionEvent;
 import android.view.Window;
 import android.widget.EditText;
@@ -17,9 +18,10 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator;
  */
 public class MainActivity extends ProxyActivity {
 
+    @NonNull
     @Override
-    public SupportFragment setRootFragment() {
-        return new MainFragment();
+    public Class<? extends SupportFragment> setRootFragment() {
+        return MainFragment.class;
     }
 
     @Override

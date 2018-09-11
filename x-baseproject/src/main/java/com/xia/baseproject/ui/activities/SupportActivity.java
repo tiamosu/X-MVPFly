@@ -91,7 +91,7 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mDelegate.onCreate(savedInstanceState);
+        mDelegate.onCreate();
     }
 
     @Override
