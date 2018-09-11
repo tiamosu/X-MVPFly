@@ -47,6 +47,10 @@ public class MainFragment extends HeadViewFragment {
     }
 
     @Override
+    public void initEvent() {
+    }
+
+    @Override
     public void onSupportVisible() {
         super.onSupportVisible();
     }

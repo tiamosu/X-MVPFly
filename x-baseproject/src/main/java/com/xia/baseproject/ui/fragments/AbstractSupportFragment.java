@@ -411,19 +411,11 @@ public abstract class AbstractSupportFragment extends Fragment implements ISuppo
         mDelegate.pop();
     }
 
-    public void pop(boolean isOpenPageInParent) {
-        getOpenDelegate(isOpenPageInParent).pop();
-    }
-
     /**
      * Pop the child fragment.
      */
     public void popChild() {
         mDelegate.popChild();
-    }
-
-    public void popChild(boolean isOpenPageInParent) {
-        getOpenDelegate(isOpenPageInParent).popChild();
     }
 
     /**
