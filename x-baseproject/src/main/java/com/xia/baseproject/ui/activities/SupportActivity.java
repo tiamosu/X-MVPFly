@@ -32,6 +32,7 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
 
     private P mPresenter;
     private Unbinder mUnbinder;
+
     //网络状态监听广播
     private NetworkChangeReceiver mNetworkChangeReceiver;
     //记录上一次网络连接状态
