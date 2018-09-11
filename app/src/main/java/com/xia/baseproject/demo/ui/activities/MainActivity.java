@@ -1,9 +1,6 @@
 package com.xia.baseproject.demo.ui.activities;
 
-import android.content.pm.ActivityInfo;
 import android.support.annotation.NonNull;
-import android.view.MotionEvent;
-import android.view.Window;
 import android.widget.EditText;
 
 import com.xia.baseproject.demo.ui.fragments.MainFragment;
@@ -25,13 +22,7 @@ public class MainActivity extends ProxyActivity {
     }
 
     @Override
-    public void onBeforeCreateView() {
-        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-    }
-
-    @Override
-    public void dispatchTouchHideKeyboard(EditText editText, MotionEvent event) {
+    public void dispatchTouchHideKeyboard(EditText editText) {
         editText.setFocusable(false);
     }
 

@@ -41,6 +41,14 @@ public class SplashActivity extends SupportActivity {
     }
 
     @Override
+    public void initEvent() {
+    }
+
+    @Override
+    public void onLazyLoadData() {
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         if (mIsRequestPermission) {

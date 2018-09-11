@@ -51,4 +51,12 @@ public abstract class ProxyActivity extends SupportActivity {
     @Override
     public void initView() {
     }
+
+    @Override
+    public void initEvent() {
+    }
+
+    @Override
+    public void onLazyLoadData() {
+    }
 }

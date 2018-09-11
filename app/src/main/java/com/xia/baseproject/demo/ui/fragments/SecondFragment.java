@@ -46,7 +46,8 @@ public class SecondFragment extends HeadViewFragment<HomePresenter> implements H
     @Override
     public void initEvent() {
         if (getView() != null) {
-            getView().findViewById(R.id.btn_jump).setOnClickListener(v -> start(new SecondFragment()));
+            getView().findViewById(R.id.btn_jump)
+                    .setOnClickListener(v -> start(new SecondFragment()));
         }
     }
 
