@@ -15,6 +15,11 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator;
  */
 public class MainActivity extends ProxyActivity {
 
+    @Override
+    public boolean isDispatchTouchHideKeyboard() {
+        return false;
+    }
+
     @NonNull
     @Override
     public Class<? extends SupportFragment> setRootFragment() {

@@ -25,7 +25,7 @@ public final class RestCreator {
             = HttpsUtils.getSslSocketFactory(null, null, null);
 
     private static final class OkHttpHolder {
-        private static final long TIME_OUT = 10;
+        private static final long TIME_OUT = 60;
         private static final OkHttpClient.Builder BUILDER = new OkHttpClient.Builder();
         private static final ArrayList<Interceptor> INTERCEPTORS = Rest.getConfiguration(RestConfigKeys.INTERCEPTOR);
 

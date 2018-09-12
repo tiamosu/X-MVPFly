@@ -1,10 +1,14 @@
 package com.xia.baseproject.demo.ui.fragments;
 
-import android.util.Log;
+import android.support.v7.widget.AppCompatEditText;
+import android.view.View;
 
 import com.xia.baseproject.demo.R;
 import com.xia.baseproject.demo.base.HeadViewFragment;
+import com.xia.baseproject.demo.mvp.presenter.MainPresenter;
+import com.xia.baseproject.demo.mvp.view.MainView;
 
+import butterknife.BindView;
 import butterknife.OnClick;
 import me.yokeyword.fragmentation.ISupportFragment;
 
@@ -12,7 +16,11 @@ import me.yokeyword.fragmentation.ISupportFragment;
  * @author xia
  * @date 2018/7/3.
  */
-public class MainFragment extends HeadViewFragment {
+public class MainFragment extends HeadViewFragment<MainPresenter> implements MainView {
+    @BindView(R.id.main_user_id_edit)
+    AppCompatEditText mUserIdEditText;
+    @BindView(R.id.main_user_psd_edit)
+    AppCompatEditText mUserPsdEditText;
 
     private ISupportFragment[] mFragments = new ISupportFragment[1];
 
@@ -22,8 +30,8 @@ public class MainFragment extends HeadViewFragment {
     }
 
     @Override
-    public Object newP() {
-        return null;
+    public MainPresenter newP() {
+        return new MainPresenter();
     }
 
     @Override
@@ -55,8 +63,16 @@ public class MainFragment extends HeadViewFragment {
         super.onSupportVisible();
     }
 
-    @OnClick(R.id.main_btn)
-    public void onViewClicked() {
-        Log.e("weixi", "zzzzzzz");
+    @OnClick({R.id.main_login_btn, R.id.main_open_btn})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.main_login_btn:
+
+                break;
+            case R.id.main_open_btn:
+
+                break;
+            default:
+        }
     }
 }

@@ -4,33 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activities.MainActivity">
+    tools:context=".ui.activities.MainActivity"
+    tools:ignore="all">
 
     <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/main_btn"
-            android:layout_width="wrap_content"
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/main_user_id_edit"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hello World!"/>
+            android:hint="请输入账号"/>
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/main_user_psd_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入密码"/>
 
         <android.support.v7.widget.AppCompatButton
+            android:id="@+id/main_login_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello World!"/>
+            android:text="登录"/>
 
         <android.support.v7.widget.AppCompatButton
+            android:id="@+id/main_open_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello World!"/>
-
-        <android.support.v7.widget.AppCompatButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hello World!"/>
+            android:text="开通托管账户"/>
 
         <android.support.v7.widget.AppCompatButton
             android:layout_width="wrap_content"

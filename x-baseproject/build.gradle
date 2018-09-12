@@ -95,7 +95,7 @@ publish {
     userOrg = 'weixia'//bintray.com用户名
     groupId = 'com.xia'//jcenter上的路径
     artifactId = 'x-baseproject'//项目名称
-    publishVersion = '1.5.0'//版本号
+    publishVersion = '1.5.1'//版本号
     desc = 'Oh hi, this is a nice description for a project, right?'
     website = 'https://github.com/wexia/X-BaseProject'
 }
