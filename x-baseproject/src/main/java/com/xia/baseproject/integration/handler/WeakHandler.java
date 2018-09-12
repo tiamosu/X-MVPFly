@@ -1,4 +1,4 @@
-package com.xia.baseproject.handler;
+package com.xia.baseproject.integration.handler;
 
 import android.os.Handler;
 import android.os.Looper;

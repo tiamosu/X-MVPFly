@@ -10,8 +10,8 @@ import android.net.wifi.WifiManager;
 
 import com.blankj.rxbus.RxBusMessage;
 import com.blankj.utilcode.util.NetworkUtils;
-import com.xia.baseproject.rxbus.RxBusEventTag;
-import com.xia.baseproject.rxbus.RxBusHelper;
+import com.xia.baseproject.integration.rxbus.RxBusEventTag;
+import com.xia.baseproject.integration.rxbus.RxBusHelper;
 
 /**
  * @author xia

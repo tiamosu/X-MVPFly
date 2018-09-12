@@ -1,4 +1,4 @@
-package com.xia.baseproject;
+package com.xia.baseproject.app;
 
 import android.app.Application;
 import android.content.Context;

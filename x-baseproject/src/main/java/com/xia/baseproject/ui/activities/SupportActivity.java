@@ -15,8 +15,8 @@ import com.xia.baseproject.constant.NetworkState;
 import com.xia.baseproject.mvp.BaseMvpPresenter;
 import com.xia.baseproject.mvp.BaseMvpView;
 import com.xia.baseproject.receiver.NetworkChangeReceiver;
-import com.xia.baseproject.rxbus.IRxBusCallback;
-import com.xia.baseproject.rxbus.RxBusHelper;
+import com.xia.baseproject.integration.rxbus.IRxBusCallback;
+import com.xia.baseproject.integration.rxbus.RxBusHelper;
 import com.xia.baseproject.utils.KeyBoardHelper;
 import com.xia.baseproject.utils.NetworkHelper;
 

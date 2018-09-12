@@ -3,8 +3,8 @@ package com.xia.baseproject.utils;
 import com.blankj.rxbus.RxBusMessage;
 import com.xia.baseproject.app.Rest;
 import com.xia.baseproject.app.RestConfigKeys;
-import com.xia.baseproject.rxbus.RxBusEventTag;
-import com.xia.baseproject.rxbus.RxBusHelper;
+import com.xia.baseproject.integration.rxbus.RxBusEventTag;
+import com.xia.baseproject.integration.rxbus.RxBusHelper;
 
 /**
  * @author xia
