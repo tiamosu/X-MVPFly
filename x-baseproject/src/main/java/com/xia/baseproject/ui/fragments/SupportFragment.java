@@ -14,10 +14,10 @@ import com.blankj.utilcode.util.NetworkUtils;
 import com.xia.baseproject.R;
 import com.xia.baseproject.app.Rest;
 import com.xia.baseproject.constant.NetworkState;
-import com.xia.baseproject.mvp.BaseMvpPresenter;
-import com.xia.baseproject.mvp.BaseMvpView;
 import com.xia.baseproject.integration.rxbus.IRxBusCallback;
 import com.xia.baseproject.integration.rxbus.RxBusHelper;
+import com.xia.baseproject.mvp.BaseMvpPresenter;
+import com.xia.baseproject.mvp.BaseMvpView;
 import com.xia.baseproject.utils.NetworkHelper;
 
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -46,12 +46,6 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
     private int mLastNetStatus = NetworkState.NETWORK_DEFAULT;
     //网络是否重新连接
     private boolean mNetReConnect;
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        initMvp();
-    }
 
     @Nullable
     @Override
@@ -110,19 +104,9 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
         }
     }
 
-    @SuppressWarnings("unchecked")
-    private void initMvp() {
-        if (mPresenter == null) {
-            mPresenter = newP();
-            if (mPresenter != null) {
-                mPresenter.attachView(this);
-                getLifecycle().addObserver(mPresenter);
-            }
-        }
-    }
-
     private void initAll() {
         if (mInitialized.compareAndSet(false, true)) {
+            initMvp();
             getBundle(getArguments());
             initData();
             initView();
@@ -140,6 +124,17 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
             hasNetWork(NetworkUtils.isConnected());
         }
         onVisibleLazyLoad();
+    }
+
+    @SuppressWarnings("unchecked")
+    private void initMvp() {
+        if (mPresenter == null) {
+            mPresenter = newP();
+            if (mPresenter != null) {
+                mPresenter.attachView(this);
+                getLifecycle().addObserver(mPresenter);
+            }
+        }
     }
 
     private void getBundle(Bundle bundle) {

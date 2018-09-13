@@ -9,31 +9,10 @@ import android.widget.EditText;
 public interface IActivity {
 
     /**
-     * @return 用于布局加载, 如果{@link #getLayoutId()}返回0,
-     * 则不会调用{@link android.app.Activity#setContentView(int)}
-     */
-    int getLayoutId();
-
-    /**
-     * 用于初始化数据
-     */
-    void initData();
-
-    /**
-     * 用于初始化View
-     */
-    void initView();
-
-    /**
-     * 用于初始化事件
-     */
-    void initEvent();
-
-    /**
      * 该方法执行于
-     * {@link #initData()}
-     * {@link #initView()}
-     * {@link #initEvent()}
+     * {@link SupportActivity#initData()}
+     * {@link SupportActivity#initView()}
+     * {@link SupportActivity#initEvent()}
      * 之后，可用于加载网络数据等
      */
     void onLazyLoadData();

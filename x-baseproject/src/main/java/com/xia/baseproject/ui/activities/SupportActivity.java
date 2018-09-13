@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.EditText;
 
 import com.blankj.utilcode.util.ActivityUtils;
@@ -12,11 +13,11 @@ import com.blankj.utilcode.util.NetworkUtils;
 import com.xia.baseproject.app.Rest;
 import com.xia.baseproject.app.RestConfigKeys;
 import com.xia.baseproject.constant.NetworkState;
+import com.xia.baseproject.integration.rxbus.IRxBusCallback;
+import com.xia.baseproject.integration.rxbus.RxBusHelper;
 import com.xia.baseproject.mvp.BaseMvpPresenter;
 import com.xia.baseproject.mvp.BaseMvpView;
 import com.xia.baseproject.receiver.NetworkChangeReceiver;
-import com.xia.baseproject.integration.rxbus.IRxBusCallback;
-import com.xia.baseproject.integration.rxbus.RxBusHelper;
 import com.xia.baseproject.utils.KeyBoardHelper;
 import com.xia.baseproject.utils.NetworkHelper;
 
@@ -44,13 +45,10 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getLayoutId() != 0) {
-            setContentView(getLayoutId());
-            mUnbinder = ButterKnife.bind(this);
+            final View rootView = getLayoutInflater().inflate(getLayoutId(), null);
+            setContentView(rootView);
+            mUnbinder = ButterKnife.bind(this, rootView);
         }
-        if (Rest.getConfiguration(RestConfigKeys.NETWORK_CHECK)) {
-            mNetworkChangeReceiver = NetworkChangeReceiver.register(this);
-        }
-        initMvp();
         initAll();
     }
 
@@ -99,11 +97,15 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
     }
 
     private void initAll() {
+        initMvp();
         initData();
         initView();
         initEvent();
         onLazyLoadData();
 
+        if (Rest.getConfiguration(RestConfigKeys.NETWORK_CHECK)) {
+            mNetworkChangeReceiver = NetworkChangeReceiver.register(this);
+        }
         if (NetworkHelper.isGlobalCheckNetwork(isCheckNetWork())) {
             NetworkHelper.networkChangeEvent(this, rxBusMessage -> {
                 final boolean isAvailable = (boolean) rxBusMessage.mObj;
