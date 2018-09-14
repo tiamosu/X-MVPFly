@@ -18,6 +18,7 @@ import com.xia.baseproject.integration.rxbus.RxBusHelper;
 import com.xia.baseproject.mvp.BaseMvpPresenter;
 import com.xia.baseproject.mvp.BaseMvpView;
 import com.xia.baseproject.receiver.NetworkChangeReceiver;
+import com.xia.baseproject.utils.Platform;
 import com.xia.baseproject.utils.KeyBoardHelper;
 import com.xia.baseproject.utils.NetworkHelper;
 
@@ -63,7 +64,7 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Rest.getHandler().removeCallbacksAndMessages(null);
+        Platform.getHandler().removeCallbacksAndMessages(null);
         RxBusHelper.unregister(this);
         if (mPresenter != null) {
             mPresenter.detachView();

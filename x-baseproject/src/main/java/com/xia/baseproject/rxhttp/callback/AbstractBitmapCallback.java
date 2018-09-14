@@ -6,7 +6,7 @@ import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 
 import com.blankj.utilcode.util.CloseUtils;
-import com.xia.baseproject.rxhttp.utils.Platform;
+import com.xia.baseproject.utils.Platform;
 
 import java.io.InputStream;
 

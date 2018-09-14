@@ -1,4 +1,6 @@
-package com.xia.baseproject.rxhttp.utils;
+package com.xia.baseproject.utils;
+
+import android.os.Handler;
 
 import io.reactivex.Completable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -9,6 +11,12 @@ import io.reactivex.functions.Action;
  * @date 2018/4/24.
  */
 public class Platform {
+    private static final Handler HANDLER = new Handler();
+
+    public static Handler getHandler() {
+        return HANDLER;
+    }
+
     public static final boolean DEPENDENCY_GLIDE;
 
     static {

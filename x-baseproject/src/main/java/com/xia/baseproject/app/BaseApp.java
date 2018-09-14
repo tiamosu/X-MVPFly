@@ -6,7 +6,7 @@ import android.support.annotation.CallSuper;
 import android.support.multidex.MultiDex;
 
 import com.bumptech.glide.Glide;
-import com.xia.baseproject.rxhttp.utils.Platform;
+import com.xia.baseproject.utils.Platform;
 
 /**
  * @author xia

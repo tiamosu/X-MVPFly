@@ -1,7 +1,5 @@
 package com.xia.baseproject.app;
 
-import android.os.Handler;
-
 import com.xia.baseproject.app.RestConfigKeys.ConfigKey;
 
 /**
@@ -17,9 +15,5 @@ public final class Rest {
 
     public static <T> T getConfiguration(@ConfigKey String configKey) {
         return init().getConfiguration(configKey);
-    }
-
-    public static Handler getHandler() {
-        return getConfiguration(RestConfigKeys.HANDLER);
     }
 }

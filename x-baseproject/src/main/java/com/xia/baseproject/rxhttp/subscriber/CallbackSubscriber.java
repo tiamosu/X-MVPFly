@@ -4,10 +4,9 @@ import android.app.Dialog;
 import android.support.annotation.NonNull;
 
 import com.blankj.utilcode.util.NetworkUtils;
-import com.xia.baseproject.app.Rest;
 import com.xia.baseproject.rxhttp.callback.Callback;
 import com.xia.baseproject.rxhttp.exception.ApiException;
-import com.xia.baseproject.rxhttp.utils.Platform;
+import com.xia.baseproject.utils.Platform;
 import com.xia.baseproject.ui.dialog.LoadingDialog;
 import com.xia.baseproject.ui.dialog.loader.Loader;
 
@@ -97,13 +96,13 @@ public class CallbackSubscriber extends DisposableObserver<ResponseBody> {
 
     private void showDialog() {
         if (isShowLoadingDialog()) {
-            Rest.getHandler().postDelayed(() -> Loader.showLoading(getLoadingDialog()), 400);
+            Platform.getHandler().postDelayed(() -> Loader.showLoading(getLoadingDialog()), 400);
         }
     }
 
     private void cancelDialog() {
         if (isShowLoadingDialog()) {
-            Rest.getHandler().removeCallbacksAndMessages(null);
+            Platform.getHandler().removeCallbacksAndMessages(null);
             Loader.stopLoading();
         }
     }

@@ -1,4 +1,4 @@
-package com.xia.baseproject.rxhttp.utils;
+package com.xia.baseproject.utils;
 
 import android.support.annotation.NonNull;
 

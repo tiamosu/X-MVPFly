@@ -17,6 +17,7 @@ object Versions {
     const val autodispose = "1.0.0-RC2"
     const val leakcanary = "1.6.1"
     const val glide = "4.8.0"
+    const val dagger2 = "2.16"
 }
 
 object Deps {
@@ -31,6 +32,10 @@ object Deps {
     //butterknife
     const val butterknife = "com.jakewharton:butterknife:${Versions.butterknife}"
     const val butterknife_apt = "com.jakewharton:butterknife-compiler:${Versions.butterknife}"
+
+    //dagger2
+    const val dagger2 = "com.google.dagger:dagger:${Versions.dagger2}"
+    const val dagger2_apt = "com.google.dagger:dagger-compiler:${Versions.dagger2}"
 
     //leakcanary
     const val leakcanary_android = "com.squareup.leakcanary:leakcanary-android:${Versions.leakcanary}"

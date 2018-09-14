@@ -4,7 +4,7 @@ import android.arch.lifecycle.LifecycleOwner;
 import android.support.annotation.NonNull;
 
 import com.blankj.utilcode.util.CloseUtils;
-import com.xia.baseproject.rxhttp.utils.Platform;
+import com.xia.baseproject.utils.Platform;
 
 import okhttp3.ResponseBody;
 

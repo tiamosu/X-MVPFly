@@ -77,6 +77,10 @@ dependencies {
     }
     annotationProcessor Deps.glide_compiler
 
+    //dagger2
+    api Deps.dagger2
+    annotationProcessor Deps.dagger2_apt
+
     //常用的util库
     api Deps.utilcode
     //fragment框架

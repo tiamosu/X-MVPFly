@@ -12,12 +12,12 @@ import android.widget.FrameLayout;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.xia.baseproject.R;
-import com.xia.baseproject.app.Rest;
 import com.xia.baseproject.constant.NetworkState;
 import com.xia.baseproject.integration.rxbus.IRxBusCallback;
 import com.xia.baseproject.integration.rxbus.RxBusHelper;
 import com.xia.baseproject.mvp.BaseMvpPresenter;
 import com.xia.baseproject.mvp.BaseMvpView;
+import com.xia.baseproject.utils.Platform;
 import com.xia.baseproject.utils.NetworkHelper;
 
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -92,7 +92,7 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Rest.getHandler().removeCallbacksAndMessages(null);
+        Platform.getHandler().removeCallbacksAndMessages(null);
         RxBusHelper.unregister(this);
         if (mPresenter != null) {
             mPresenter.detachView();
