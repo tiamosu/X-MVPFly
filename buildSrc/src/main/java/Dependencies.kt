@@ -50,6 +50,8 @@ object Deps {
     const val autodispose_archcomponents = "com.uber.autodispose:autodispose-android-archcomponents:${Versions.autodispose}"
     const val rxjava2 = "io.reactivex.rxjava2:rxjava:2.2.2"
     const val rxandroid2 = "io.reactivex.rxjava2:rxandroid:2.1.0"
+    const val rxcache2 = "com.github.VictorAlbertos.RxCache:runtime:1.8.3-2.x"
+    const val rxcache_gson = "com.github.VictorAlbertos.Jolyglot:gson:0.0.4"
     const val x_rxbus = "com.xia:x-rxbus:1.0.2"
 
     //okhttp

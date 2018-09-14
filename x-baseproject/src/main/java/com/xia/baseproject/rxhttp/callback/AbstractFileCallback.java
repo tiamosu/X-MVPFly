@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 
 import com.blankj.utilcode.util.CloseUtils;
 import com.blankj.utilcode.util.ThreadUtils;
-import com.xia.baseproject.rxhttp.utils.FileUtils;
+import com.xia.baseproject.utils.FileUtils;
 import com.xia.baseproject.utils.Platform;
 
 import java.io.BufferedInputStream;

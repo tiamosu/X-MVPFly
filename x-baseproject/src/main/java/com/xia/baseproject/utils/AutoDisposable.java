@@ -13,7 +13,7 @@ import io.reactivex.disposables.Disposable;
  * @author xia
  * @date 2018/8/13.
  */
-public class AutoDisposable {
+public final class AutoDisposable {
 
     /**
      * 网络请求订阅池，管理Subscribers订阅，防止内存泄漏

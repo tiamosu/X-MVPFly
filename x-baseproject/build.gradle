@@ -41,6 +41,14 @@ dependencies {
     api(Deps.rxandroid2) {
         exclude module: 'rxjava'
     }
+    api(Deps.rxcache2) {
+        exclude module: 'dagger'
+        exclude module: 'rxjava'
+        exclude module: 'api'
+    }
+    implementation(Deps.rxcache_gson) {
+        exclude module: 'gson'
+    }
     api(Deps.retrofit2) {
         exclude module: 'okhttp'
     }

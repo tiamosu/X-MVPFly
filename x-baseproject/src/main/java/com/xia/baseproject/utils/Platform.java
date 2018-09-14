@@ -10,7 +10,7 @@ import io.reactivex.functions.Action;
  * @author xia
  * @date 2018/4/24.
  */
-public class Platform {
+public final class Platform {
     private static final Handler HANDLER = new Handler();
 
     public static Handler getHandler() {
