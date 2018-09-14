@@ -15,10 +15,9 @@ public final class RestConfigKeys {
     public static final String HANDLER = "HANDLER";
     public static final String INTERCEPTOR = "INTERCEPTOR";
     public static final String API_HOST = "API_HOST";
-    public static final String APPLICATION_CONTEXT = "APPLICATION_CONTEXT";
     public static final String NETWORK_CHECK = "NETWORK_CHECK";
 
-    @StringDef({CONFIG_READY, HANDLER, INTERCEPTOR, API_HOST, APPLICATION_CONTEXT, NETWORK_CHECK})
+    @StringDef({CONFIG_READY, HANDLER, INTERCEPTOR, API_HOST, NETWORK_CHECK})
     @Retention(RetentionPolicy.SOURCE)
     public @interface ConfigKey {
     }

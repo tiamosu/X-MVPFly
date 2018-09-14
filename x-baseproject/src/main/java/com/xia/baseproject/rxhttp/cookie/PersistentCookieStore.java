@@ -3,7 +3,7 @@ package com.xia.baseproject.rxhttp.cookie;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 
-import com.xia.baseproject.app.Rest;
+import com.blankj.utilcode.util.Utils;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -33,7 +33,7 @@ public class PersistentCookieStore {
     private final SharedPreferences cookiePrefs;
 
     public PersistentCookieStore() {
-        cookiePrefs = Rest.getApplicationContext().getSharedPreferences(COOKIE_PREFS, 0);
+        cookiePrefs = Utils.getApp().getSharedPreferences(COOKIE_PREFS, 0);
         cookies = new HashMap<>();
         final Map<String, ?> prefsMap = cookiePrefs.getAll();
         for (Map.Entry<String, ?> entry : prefsMap.entrySet()) {

@@ -1,7 +1,6 @@
 package com.xia.baseproject.demo.ui.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import com.xia.baseproject.demo.R;
 import com.xia.baseproject.demo.base.HeadViewFragment;
@@ -27,7 +26,7 @@ public class SecondFragment extends HeadViewFragment<HomePresenter> implements H
     @Override
     public void getBundleExtras(Bundle bundle) {
         final String s = bundle.getString("Hello");
-        Log.e("weixi", "getBundleExtras: " + s);
+//        Log.e("weixi", "getBundleExtras: " + s);
     }
 
     @Override

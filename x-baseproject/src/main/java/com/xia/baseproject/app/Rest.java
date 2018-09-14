@@ -1,6 +1,5 @@
 package com.xia.baseproject.app;
 
-import android.content.Context;
 import android.os.Handler;
 
 import com.xia.baseproject.app.RestConfigKeys.ConfigKey;
@@ -12,22 +11,12 @@ import com.xia.baseproject.app.RestConfigKeys.ConfigKey;
 @SuppressWarnings("WeakerAccess")
 public final class Rest {
 
-    public static RestConfigurator init(Context context) {
-        getConfigurator().getConfigs()
-                .put(RestConfigKeys.APPLICATION_CONTEXT, context.getApplicationContext());
-        return getConfigurator();
-    }
-
-    public static RestConfigurator getConfigurator() {
+    public static RestConfigurator init() {
         return RestConfigurator.getInstance();
     }
 
-    public static Context getApplicationContext() {
-        return getConfiguration(RestConfigKeys.APPLICATION_CONTEXT);
-    }
-
     public static <T> T getConfiguration(@ConfigKey String configKey) {
-        return getConfigurator().getConfiguration(configKey);
+        return init().getConfiguration(configKey);
     }
 
     public static Handler getHandler() {

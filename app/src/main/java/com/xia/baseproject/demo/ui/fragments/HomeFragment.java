@@ -41,7 +41,6 @@ public class HomeFragment extends HeadViewFragment<HomePresenter> implements Hom
 
     @Override
     public void initView() {
-        Log.e("weixi", "initView: ");
         mAppCompatButton.setText("跳转下一页");
     }
 

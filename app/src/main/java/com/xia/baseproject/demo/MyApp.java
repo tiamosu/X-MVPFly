@@ -33,7 +33,7 @@ public class MyApp extends BaseApp {
         final HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        Rest.init(this)
+        Rest.init()
                 .withApiHost("http://www.wanandroid.com")
                 .withNetWorkCheck(true)
                 .withInterceptor(loggingInterceptor)
