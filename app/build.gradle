@@ -41,8 +41,8 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation project(':x-fly')
-    implementation project(':x-fly-http')
+    implementation project(':fly')
+    implementation project(':fly-http')
 
     annotationProcessor Deps.butterknife_apt
 

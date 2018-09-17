@@ -6,8 +6,8 @@ import android.support.annotation.Nullable;
 
 import com.google.gson.Gson;
 import com.xia.fly.di.named.RxCacheDirectory;
-import com.xia.fly.http.GlobalHttpHandler;
-import com.xia.fly.http.log.RequestInterceptor;
+import com.xia.fly.rxhttp.GlobalHttpHandler;
+import com.xia.fly.rxhttp.log.RequestInterceptor;
 import com.xia.fly.utils.FileUtils;
 
 import java.io.File;

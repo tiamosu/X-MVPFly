@@ -1,4 +1,4 @@
-package com.xia.fly.http.log;
+package com.xia.fly.rxhttp.log;
 
 import android.text.TextUtils;
 
