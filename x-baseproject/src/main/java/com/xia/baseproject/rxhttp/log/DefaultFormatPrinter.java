@@ -45,9 +45,6 @@ public class DefaultFormatPrinter implements FormatPrinter {
 
     /**
      * 打印网络请求信息, 当网络请求时 {{@link okhttp3.RequestBody}} 可以解析的情况
-     *
-     * @param request
-     * @param bodyString
      */
     @Override
     public void printJsonRequest(Request request, String bodyString) {
@@ -63,8 +60,6 @@ public class DefaultFormatPrinter implements FormatPrinter {
 
     /**
      * 打印网络请求信息, 当网络请求时 {{@link okhttp3.RequestBody}} 为 {@code null} 或不可解析的情况
-     *
-     * @param request
      */
     @Override
     public void printFileRequest(Request request) {
@@ -134,17 +129,15 @@ public class DefaultFormatPrinter implements FormatPrinter {
     /**
      * 对 {@code lines} 中的信息进行逐行打印
      *
-     * @param tag
-     * @param lines
      * @param withLineSize 为 {@code true} 时, 每行的信息长度不会超过110, 超过则自动换行
      */
     private static void logLines(String tag, String[] lines, boolean withLineSize) {
         for (String line : lines) {
-            int lineLength = line.length();
-            int MAX_LONG_SIZE = withLineSize ? 110 : lineLength;
-            for (int i = 0; i <= lineLength / MAX_LONG_SIZE; i++) {
-                int start = i * MAX_LONG_SIZE;
-                int end = (i + 1) * MAX_LONG_SIZE;
+            final int lineLength = line.length();
+            final int maxLongSize = withLineSize ? 110 : lineLength;
+            for (int i = 0; i <= lineLength / maxLongSize; i++) {
+                final int start = i * maxLongSize;
+                int end = (i + 1) * maxLongSize;
                 end = end > line.length() ? line.length() : end;
                 LogUtils.dTag(resolveTag(tag), DEFAULT_LINE + line.substring(start, end));
             }
@@ -164,7 +157,7 @@ public class DefaultFormatPrinter implements FormatPrinter {
         if (last.get() >= 4) {
             last.set(0);
         }
-        String s = ARMS[last.get()];
+        final String s = ARMS[last.get()];
         last.set(last.get() + 1);
         return s;
     }
@@ -178,8 +171,6 @@ public class DefaultFormatPrinter implements FormatPrinter {
      * 现在暂时能想到的解决方案有两个: 1. 改变每行的 tag (每行 tag 都加一个可变化的 token) 2. 延迟每行日志打印的间隔时间
      * <p>
      * {@link #resolveTag(String)} 使用第一种解决方案
-     *
-     * @param tag
      */
     private static String resolveTag(String tag) {
         return computeKey() + tag;
@@ -187,7 +178,7 @@ public class DefaultFormatPrinter implements FormatPrinter {
 
     private static String[] getRequest(Request request) {
         String log;
-        String header = request.headers().toString();
+        final String header = request.headers().toString();
         log = METHOD_TAG + request.method() + DOUBLE_SEPARATOR +
                 (isEmpty(header) ? "" : HEADERS_TAG + LINE_SEPARATOR + dotHeaders(header));
         return log.split(LINE_SEPARATOR);
@@ -196,7 +187,7 @@ public class DefaultFormatPrinter implements FormatPrinter {
     private static String[] getResponse(String header, long tookMs, int code, boolean isSuccessful,
                                         List<String> segments, String message) {
         String log;
-        String segmentString = slashSegments(segments);
+        final String segmentString = slashSegments(segments);
         log = ((!TextUtils.isEmpty(segmentString) ? segmentString + " - " : "") + "is success : "
                 + isSuccessful + " - " + RECEIVED_TAG + tookMs + "ms" + DOUBLE_SEPARATOR + STATUS_CODE_TAG +
                 code + " / " + message + DOUBLE_SEPARATOR + (isEmpty(header) ? "" : HEADERS_TAG + LINE_SEPARATOR +
@@ -205,7 +196,7 @@ public class DefaultFormatPrinter implements FormatPrinter {
     }
 
     private static String slashSegments(List<String> segments) {
-        StringBuilder segmentString = new StringBuilder();
+        final StringBuilder segmentString = new StringBuilder();
         for (String segment : segments) {
             segmentString.append("/").append(segment);
         }
@@ -214,13 +205,10 @@ public class DefaultFormatPrinter implements FormatPrinter {
 
     /**
      * 对 {@code header} 按规定的格式进行处理
-     *
-     * @param header
-     * @return
      */
     private static String dotHeaders(String header) {
-        String[] headers = header.split(LINE_SEPARATOR);
-        StringBuilder builder = new StringBuilder();
+        final String[] headers = header.split(LINE_SEPARATOR);
+        final StringBuilder builder = new StringBuilder();
         String tag = "─ ";
         if (headers.length > 1) {
             for (int i = 0; i < headers.length; i++) {
@@ -242,10 +230,6 @@ public class DefaultFormatPrinter implements FormatPrinter {
     }
 
     private static String getTag(boolean isRequest) {
-        if (isRequest) {
-            return TAG + "-Request";
-        } else {
-            return TAG + "-Response";
-        }
+        return TAG + (isRequest ? "-Request" : "-Response");
     }
 }

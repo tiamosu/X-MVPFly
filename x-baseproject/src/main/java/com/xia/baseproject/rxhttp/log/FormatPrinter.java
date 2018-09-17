@@ -14,15 +14,12 @@ public interface FormatPrinter {
     /**
      * 打印网络请求信息, 当网络请求时 {{@link okhttp3.RequestBody}} 可以解析的情况
      *
-     * @param request
      * @param bodyString 发送给服务器的请求体中的数据(已解析)
      */
     void printJsonRequest(Request request, String bodyString);
 
     /**
      * 打印网络请求信息, 当网络请求时 {{@link okhttp3.RequestBody}} 为 {@code null} 或不可解析的情况
-     *
-     * @param request
      */
     void printFileRequest(Request request);
 

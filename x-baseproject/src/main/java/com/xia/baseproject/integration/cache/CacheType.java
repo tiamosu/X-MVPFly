@@ -5,12 +5,13 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 
+import java.util.Objects;
+
 /**
  * @author xia
  * @date 2018/9/14.
  */
 public interface CacheType {
-
     int RETROFIT_SERVICE_CACHE_TYPE_ID = 0;
     int CACHE_SERVICE_CACHE_TYPE_ID = 1;
     int EXTRAS_TYPE_ID = 2;
@@ -27,8 +28,8 @@ public interface CacheType {
 
         @Override
         public int calculateCacheSize(Context context) {
-            ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-            int targetMemoryCacheSize = (int) (activityManager.getMemoryClass() * MAX_SIZE_MULTIPLIER * 1024);
+            final ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+            int targetMemoryCacheSize = (int) (Objects.requireNonNull(activityManager).getMemoryClass() * MAX_SIZE_MULTIPLIER * 1024);
             if (targetMemoryCacheSize >= MAX_SIZE) {
                 return MAX_SIZE;
             }
@@ -47,8 +48,8 @@ public interface CacheType {
 
         @Override
         public int calculateCacheSize(Context context) {
-            ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-            int targetMemoryCacheSize = (int) (activityManager.getMemoryClass() * MAX_SIZE_MULTIPLIER * 1024);
+            final ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+            int targetMemoryCacheSize = (int) (Objects.requireNonNull(activityManager).getMemoryClass() * MAX_SIZE_MULTIPLIER * 1024);
             if (targetMemoryCacheSize >= MAX_SIZE) {
                 return MAX_SIZE;
             }
@@ -67,8 +68,8 @@ public interface CacheType {
 
         @Override
         public int calculateCacheSize(Context context) {
-            ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-            int targetMemoryCacheSize = (int) (activityManager.getMemoryClass() * MAX_SIZE_MULTIPLIER * 1024);
+            final ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+            int targetMemoryCacheSize = (int) (Objects.requireNonNull(activityManager).getMemoryClass() * MAX_SIZE_MULTIPLIER * 1024);
             if (targetMemoryCacheSize >= MAX_SIZE) {
                 return MAX_SIZE;
             }
@@ -90,8 +91,8 @@ public interface CacheType {
 
         @Override
         public int calculateCacheSize(Context context) {
-            ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-            int targetMemoryCacheSize = (int) (activityManager.getMemoryClass() * MAX_SIZE_MULTIPLIER * 1024);
+            final ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+            int targetMemoryCacheSize = (int) (Objects.requireNonNull(activityManager).getMemoryClass() * MAX_SIZE_MULTIPLIER * 1024);
             if (targetMemoryCacheSize >= MAX_SIZE) {
                 return MAX_SIZE;
             }
@@ -113,8 +114,8 @@ public interface CacheType {
 
         @Override
         public int calculateCacheSize(Context context) {
-            ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-            int targetMemoryCacheSize = (int) (activityManager.getMemoryClass() * MAX_SIZE_MULTIPLIER * 1024);
+            final ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+            int targetMemoryCacheSize = (int) (Objects.requireNonNull(activityManager).getMemoryClass() * MAX_SIZE_MULTIPLIER * 1024);
             if (targetMemoryCacheSize >= MAX_SIZE) {
                 return MAX_SIZE;
             }
@@ -124,15 +125,11 @@ public interface CacheType {
 
     /**
      * 返回框架内需要缓存的模块对应的 {@code id}
-     *
-     * @return
      */
     int getCacheTypeId();
 
     /**
      * 计算对应模块需要的缓存大小
-     *
-     * @return
      */
     int calculateCacheSize(Context context);
 }

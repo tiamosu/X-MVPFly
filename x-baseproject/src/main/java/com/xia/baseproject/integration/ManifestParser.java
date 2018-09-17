@@ -3,6 +3,7 @@ package com.xia.baseproject.integration;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,13 +22,14 @@ public final class ManifestParser {
     }
 
     public List<ConfigModule> parse() {
-        List<ConfigModule> modules = new ArrayList<>();
+        final List<ConfigModule> modules = new ArrayList<>();
         try {
-            ApplicationInfo appInfo = context.getPackageManager().getApplicationInfo(
+            final ApplicationInfo appInfo = context.getPackageManager().getApplicationInfo(
                     context.getPackageName(), PackageManager.GET_META_DATA);
-            if (appInfo.metaData != null) {
-                for (String key : appInfo.metaData.keySet()) {
-                    if (MODULE_VALUE.equals(appInfo.metaData.get(key))) {
+            final Bundle bundle = appInfo.metaData;
+            if (bundle != null) {
+                for (String key : bundle.keySet()) {
+                    if (MODULE_VALUE.equals(bundle.get(key))) {
                         modules.add(parseModule(key));
                     }
                 }
@@ -35,7 +37,6 @@ public final class ManifestParser {
         } catch (PackageManager.NameNotFoundException e) {
             throw new RuntimeException("Unable to find metadata to parse ConfigModule", e);
         }
-
         return modules;
     }
 

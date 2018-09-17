@@ -131,10 +131,9 @@ public class RequestInterceptor implements Interceptor {
      * @param response    {@link Response}
      * @param logResponse 是否打印响应结果
      * @return 解析后的响应结果
-     * @throws IOException
      */
     @Nullable
-    private String printResult(Request request, Response response, boolean logResponse) throws IOException {
+    private String printResult(Request request, Response response, boolean logResponse) {
         try {
             //读取服务器返回的结果
             final ResponseBody responseBody = response.newBuilder().build().body();
@@ -174,9 +173,9 @@ public class RequestInterceptor implements Interceptor {
         if (charset == null) {
             return "";
         }
-        if (encoding != null && encoding.equalsIgnoreCase("gzip")) {//content使用gzip压缩
+        if (encoding != null && "gzip".equalsIgnoreCase(encoding)) {//content使用gzip压缩
             return ZipHelper.decompressForGzip(clone.readByteArray(), convertCharset(charset));//解压
-        } else if (encoding != null && encoding.equalsIgnoreCase("zlib")) {//content使用zlib压缩
+        } else if (encoding != null && "zlib".equalsIgnoreCase(encoding)) {//content使用zlib压缩
             return ZipHelper.decompressToStringForZlib(clone.readByteArray(), convertCharset(charset));//解压
         } else {//content没有被压缩
             return clone.readString(charset);
@@ -196,15 +195,15 @@ public class RequestInterceptor implements Interceptor {
             if (body == null) {
                 return "";
             }
-            final Buffer requestbuffer = new Buffer();
-            body.writeTo(requestbuffer);
+            final Buffer requestBuffer = new Buffer();
+            body.writeTo(requestBuffer);
             Charset charset = Charset.forName("UTF-8");
             final MediaType contentType = body.contentType();
             if (contentType != null) {
                 charset = contentType.charset(charset);
             }
             if (charset != null) {
-                return CharacterHandler.jsonFormat(URLDecoder.decode(requestbuffer.readString(charset), convertCharset(charset)));
+                return CharacterHandler.jsonFormat(URLDecoder.decode(requestBuffer.readString(charset), convertCharset(charset)));
             }
             return null;
         } catch (IOException e) {
@@ -228,7 +227,7 @@ public class RequestInterceptor implements Interceptor {
     public static boolean isText(MediaType mediaType) {
         return mediaType != null
                 && mediaType.type() != null
-                && mediaType.type().equals("text");
+                && "text".equals(mediaType.type());
     }
 
     public static boolean isPlain(MediaType mediaType) {

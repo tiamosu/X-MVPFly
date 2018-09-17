@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.xia.baseproject.integration.cache.Cache;
 import com.xia.baseproject.integration.cache.CacheType;
+import com.xia.baseproject.utils.Preconditions;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -13,26 +14,28 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import dagger.Lazy;
-import dagger.internal.Preconditions;
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
+import io.rx_cache2.internal.RxCache;
 import retrofit2.Retrofit;
 
 /**
  * @author xia
  * @date 2018/9/14.
  */
+@SuppressWarnings("WeakerAccess")
 @Singleton
 public class RepositoryManager implements IRepositoryManager {
 
     @Inject
     Lazy<Retrofit> mRetrofit;
-    //    @Inject
-//    Lazy<RxCache> mRxCache;
+    @Inject
+    Lazy<RxCache> mRxCache;
     @Inject
     Application mApplication;
     @Inject
-    Cache.Factory mCachefactory;
+    Cache.Factory mCacheFactory;
+
     private Cache<String, Object> mRetrofitServiceCache;
     private Cache<String, Object> mCacheServiceCache;
 
@@ -90,7 +93,7 @@ public class RepositoryManager implements IRepositoryManager {
     @SuppressWarnings("unchecked")
     private <T> T getRetrofitService(Class<T> serviceClass) {
         if (mRetrofitServiceCache == null) {
-            mRetrofitServiceCache = mCachefactory.build(CacheType.RETROFIT_SERVICE_CACHE);
+            mRetrofitServiceCache = mCacheFactory.build(CacheType.RETROFIT_SERVICE_CACHE);
         }
         Preconditions.checkNotNull(mRetrofitServiceCache,
                 "Cannot return null from a Cache.Factory#build(int) method");
@@ -117,14 +120,14 @@ public class RepositoryManager implements IRepositoryManager {
     @Override
     public synchronized <T> T obtainCacheService(Class<T> cacheClass) {
         if (mCacheServiceCache == null) {
-            mCacheServiceCache = mCachefactory.build(CacheType.CACHE_SERVICE_CACHE);
+            mCacheServiceCache = mCacheFactory.build(CacheType.CACHE_SERVICE_CACHE);
         }
         Preconditions.checkNotNull(mCacheServiceCache,
                 "Cannot return null from a Cache.Factory#build(int) method");
         T cacheService = (T) mCacheServiceCache.get(cacheClass.getCanonicalName());
         if (cacheService == null) {
-//            cacheService = mRxCache.get().using(cacheClass);
-//            mCacheServiceCache.put(cacheClass.getCanonicalName(), cacheService);
+            cacheService = mRxCache.get().using(cacheClass);
+            mCacheServiceCache.put(cacheClass.getCanonicalName(), cacheService);
         }
         return cacheService;
     }
@@ -134,7 +137,7 @@ public class RepositoryManager implements IRepositoryManager {
      */
     @Override
     public void clearAllCache() {
-//        mRxCache.get().evictAll().subscribe();
+        mRxCache.get().evictAll().subscribe();
     }
 
     @Override

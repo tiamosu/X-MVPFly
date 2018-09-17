@@ -18,11 +18,10 @@ import com.xia.baseproject.di.module.GlobalConfigModule;
 import com.xia.baseproject.integration.ConfigModule;
 import com.xia.baseproject.integration.ManifestParser;
 import com.xia.baseproject.integration.cache.IntelligentCache;
+import com.xia.baseproject.utils.Preconditions;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import dagger.internal.Preconditions;
 
 /**
  * @author xia

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 
 import com.google.gson.Gson;
+import com.xia.baseproject.di.named.RxCacheDirectory;
 import com.xia.baseproject.rxhttp.GlobalHttpHandler;
 import com.xia.baseproject.rxhttp.log.RequestInterceptor;
 import com.xia.baseproject.utils.FileUtils;
@@ -13,7 +14,6 @@ import java.io.File;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Binds;
@@ -39,12 +39,6 @@ public abstract class ClientModule {
     /**
      * 提供 {@link Retrofit}
      *
-     * @param application
-     * @param configuration
-     * @param builder
-     * @param client
-     * @param httpUrl
-     * @param gson
      * @return {@link Retrofit}
      */
     @Singleton
@@ -91,7 +85,7 @@ public abstract class ClientModule {
         }
 
         if (configuration != null) {
-            configuration.configOkhttp(application, builder);
+            configuration.configOkHttp(application, builder);
         }
         return builder.build();
     }
@@ -114,8 +108,6 @@ public abstract class ClientModule {
     /**
      * 提供 {@link RxCache}
      *
-     * @param application
-     * @param configuration
      * @param cacheDirectory cacheDirectory RxCache缓存路径
      * @return {@link RxCache}
      */
@@ -123,7 +115,7 @@ public abstract class ClientModule {
     @Provides
     static RxCache provideRxCache(final Application application,
                                   @Nullable final RxCacheConfiguration configuration,
-                                  @Named("RxCacheDirectory") final File cacheDirectory,
+                                  @RxCacheDirectory final File cacheDirectory,
                                   final Gson gson) {
         final RxCache.Builder builder = new RxCache.Builder();
         RxCache rxCache = null;
@@ -139,40 +131,22 @@ public abstract class ClientModule {
     /**
      * 需要单独给 {@link RxCache} 提供缓存路径
      *
-     * @param cacheDir
      * @return {@link File}
      */
     @Singleton
     @Provides
-    @Named("RxCacheDirectory")
+    @RxCacheDirectory
     static File provideRxCacheDirectory(File cacheDir) {
         final File cacheDirectory = new File(cacheDir, "RxCache");
         return FileUtils.createOrExistsDir(cacheDirectory);
     }
-
-//    /**
-//     * 提供处理 RxJava 错误的管理器
-//     *
-//     * @param application
-//     * @param listener
-//     * @return {@link RxErrorHandler}
-//     */
-//    @Singleton
-//    @Provides
-//    static RxErrorHandler proRxErrorHandler(Application application, ResponseErrorListener listener) {
-//        return RxErrorHandler
-//                .builder()
-//                .with(application)
-//                .responseErrorListener(listener)
-//                .build();
-//    }
 
     public interface RetrofitConfiguration {
         void configRetrofit(Context context, Retrofit.Builder builder);
     }
 
     public interface OkHttpConfiguration {
-        void configOkhttp(Context context, OkHttpClient.Builder builder);
+        void configOkHttp(Context context, OkHttpClient.Builder builder);
     }
 
     public interface RxCacheConfiguration {
@@ -180,8 +154,6 @@ public abstract class ClientModule {
          * 若想自定义 RxCache 的缓存文件夹或者解析方式, 如改成 fastjson
          * 请 {@code return rxCacheBuilder.persistence(cacheDirectory, new FastJsonSpeaker());}, 否则请 {@code return null;}
          *
-         * @param context
-         * @param builder
          * @return {@link RxCache}
          */
         RxCache configRxCache(Context context, RxCache.Builder builder);

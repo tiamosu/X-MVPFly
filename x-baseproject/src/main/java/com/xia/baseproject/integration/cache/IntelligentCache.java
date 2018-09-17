@@ -3,16 +3,17 @@ package com.xia.baseproject.integration.cache;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.xia.baseproject.utils.Preconditions;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-
-import dagger.internal.Preconditions;
 
 /**
  * @author xia
  * @date 2018/9/14.
  */
+@SuppressWarnings("WeakerAccess")
 public class IntelligentCache<V> implements Cache<String, V> {
     private final Map<String, V> mMap;//可将数据永久存储至内存中的存储容器
     private final Cache<String, V> mCache;//当达到最大容量时可根据 LRU 算法抛弃不合规数据的存储容器

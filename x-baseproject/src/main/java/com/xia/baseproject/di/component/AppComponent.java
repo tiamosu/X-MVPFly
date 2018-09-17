@@ -8,8 +8,11 @@ import com.xia.baseproject.app.delegate.AppDelegate;
 import com.xia.baseproject.di.module.AppModule;
 import com.xia.baseproject.di.module.ClientModule;
 import com.xia.baseproject.di.module.GlobalConfigModule;
+import com.xia.baseproject.integration.ConfigModule;
 import com.xia.baseproject.integration.IRepositoryManager;
 import com.xia.baseproject.integration.cache.Cache;
+import com.xia.baseproject.ui.imageloader.BaseImageLoaderStrategy;
+import com.xia.baseproject.ui.imageloader.ImageLoader;
 import com.xia.baseproject.utils.FlyUtils;
 
 import java.io.File;
@@ -40,22 +43,12 @@ public interface AppComponent {
      */
     IRepositoryManager repositoryManager();
 
-//    /**
-//     * RxJava 错误处理管理类
-//     *
-//     * @return {@link RxErrorHandler}
-//     */
-//    RxErrorHandler rxErrorHandler();
-//
-//    /**
-//     * 图片加载管理器, 用于加载图片的管理类, 使用策略者模式, 可在运行时动态替换任何图片加载框架
-//     * arms-imageloader-glide 提供 Glide 的策略实现类, 也可以自行实现
-//     * 需要在 {@link ConfigModule#applyOptions(Context, GlobalConfigModule.Builder)} 中
-//     * 手动注册 {@link BaseImageLoaderStrategy}, {@link ImageLoader} 才能正常使用
-//     *
-//     * @return
-//     */
-//    ImageLoader imageLoader();
+    /**
+     * 图片加载管理器, 用于加载图片的管理类, 使用策略者模式, 可在运行时动态替换任何图片加载框架
+     * 需要在 {@link ConfigModule#applyOptions(Context, GlobalConfigModule.Builder)} 中
+     * 手动注册 {@link BaseImageLoaderStrategy}, {@link ImageLoader} 才能正常使用
+     */
+    ImageLoader imageLoader();
 
     /**
      * 网络请求框架
