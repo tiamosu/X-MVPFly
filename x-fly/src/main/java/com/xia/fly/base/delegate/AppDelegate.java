@@ -1,4 +1,4 @@
-package com.xia.fly.app.delegate;
+package com.xia.fly.base.delegate;
 
 import android.app.Activity;
 import android.app.Application;
@@ -10,8 +10,8 @@ import android.content.res.Configuration;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 
-import com.xia.fly.app.IApp;
-import com.xia.fly.app.IAppLifecycles;
+import com.xia.fly.base.IApp;
+import com.xia.fly.base.IAppLifecycles;
 import com.xia.fly.di.component.AppComponent;
 import com.xia.fly.di.component.DaggerAppComponent;
 import com.xia.fly.di.module.GlobalConfigModule;

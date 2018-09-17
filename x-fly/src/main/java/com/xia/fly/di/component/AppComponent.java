@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.google.gson.Gson;
-import com.xia.fly.app.delegate.AppDelegate;
+import com.xia.fly.base.delegate.AppDelegate;
 import com.xia.fly.di.module.AppModule;
 import com.xia.fly.di.module.ClientModule;
 import com.xia.fly.di.module.GlobalConfigModule;

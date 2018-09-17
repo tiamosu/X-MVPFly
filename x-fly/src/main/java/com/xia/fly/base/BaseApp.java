@@ -1,4 +1,4 @@
-package com.xia.fly.app;
+package com.xia.fly.base;
 
 import android.app.Application;
 import android.content.Context;

@@ -2,7 +2,7 @@ package com.xia.fly.utils;
 
 import android.content.Context;
 
-import com.xia.fly.app.IApp;
+import com.xia.fly.base.IApp;
 import com.xia.fly.di.component.AppComponent;
 
 /**

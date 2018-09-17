@@ -26,7 +26,7 @@ allprojects {
     }
 
     //忽略打包时警告
-    tasks.getByPath(":x-baseproject:releaseAndroidJavadocs").enabled = false
+    tasks.getByPath(":x-fly:releaseAndroidJavadocs").enabled = false
 }
 
 task clean(type: Delete) {
