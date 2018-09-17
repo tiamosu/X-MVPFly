@@ -1,1 +1,1 @@
-include ':app', ':x-fly'
+include ':app', ':x-fly', ':x-fly-http'
