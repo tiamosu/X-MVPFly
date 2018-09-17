@@ -79,7 +79,7 @@ dependencies {
     annotationProcessor Deps.butterknife_apt
 
     //glide
-    api(Deps.glide) {
+    compileOnly(Deps.glide) {
         exclude module: 'support-annotations'
         exclude module: 'support-fragment'
     }
@@ -106,7 +106,7 @@ tasks.withType(Javadoc) {
 publish {
     userOrg = 'weixia'//bintray.com用户名
     groupId = 'me.xia'//jcenter上的路径
-    artifactId = 'x-mvpfly'//项目名称
+    artifactId = 'fly'//项目名称
     publishVersion = '1.0.0'//版本号
     desc = 'Oh hi, this is a nice description for a project, right?'
     website = 'https://github.com/wexia/X-MVPFly'

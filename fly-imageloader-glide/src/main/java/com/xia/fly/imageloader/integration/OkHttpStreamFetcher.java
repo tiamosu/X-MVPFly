@@ -1,4 +1,4 @@
-package com.xia.fly.integration.glide;
+package com.xia.fly.imageloader.integration;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
