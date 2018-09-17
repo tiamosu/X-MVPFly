@@ -23,8 +23,8 @@ import retrofit2.Retrofit;
  * @author xia
  * @date 2018/9/14.
  */
-@SuppressWarnings("WeakerAccess")
 @Singleton
+@SuppressWarnings("WeakerAccess")
 public class RepositoryManager implements IRepositoryManager {
 
     @Inject
