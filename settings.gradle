@@ -1,1 +1,1 @@
-include ':app', ':x-baseproject'
+include ':app', ':x-baseproject', ':x-fly'

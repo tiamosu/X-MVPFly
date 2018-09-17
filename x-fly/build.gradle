@@ -1,0 +1,113 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'com.novoda.bintray-release'
+
+android {
+    compileSdkVersion Android.compileSdkVersion
+    defaultConfig {
+        minSdkVersion Android.minSdkVersion
+        targetSdkVersion Android.targetSdkVersion
+        versionCode Android.versionCode
+        versionName Android.versionName
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    lintOptions {
+        abortOnError false
+        ignoreWarnings true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //support
+    api Deps.multidex
+    api Deps.appcompat_v7
+    api(Deps.recyclerview_v7) {
+        exclude group: 'com.android.support'
+    }
+    api Deps.constraint_layout
+
+    //rx
+    api Deps.rxjava2
+    api(Deps.rxandroid2) {
+        exclude module: 'rxjava'
+    }
+    api(Deps.rxcache2) {
+        exclude module: 'dagger'
+        exclude module: 'rxjava'
+        exclude module: 'api'
+    }
+    implementation(Deps.rxcache_gson) {
+        exclude module: 'gson'
+    }
+    api(Deps.retrofit2) {
+        exclude module: 'okhttp'
+    }
+    api(Deps.retrofit2_adapter_rxjava2) {
+        exclude module: 'retrofit'
+        exclude module: 'rxjava'
+    }
+    api(Deps.retrofit2_converter_gson) {
+        exclude module: 'retrofit'
+    }
+    api(Deps.x_rxbus) {
+        exclude module: 'rxjava'
+    }
+    api(Deps.autodispose_archcomponents) {
+        exclude module: 'support-annotations'
+        exclude module: 'runtime'
+        exclude module: 'rxandroid'
+        exclude module: 'rxjava'
+    }
+    //okhttp
+    api Deps.okhttp3
+
+    //butterknife
+    api(Deps.butterknife) {
+        exclude module: 'support-annotations'
+        exclude module: 'support-compat'
+    }
+    annotationProcessor Deps.butterknife_apt
+
+    //glide
+    api(Deps.glide) {
+        exclude module: 'support-annotations'
+        exclude module: 'support-fragment'
+    }
+    annotationProcessor Deps.glide_compiler
+
+    //dagger2
+    api Deps.dagger2
+    annotationProcessor Deps.dagger2_apt
+
+    //常用的util库
+    api Deps.utilcode
+    //fragment框架
+    api Deps.fragmentation_core
+    //loading动画样式
+    api Deps.loading_indicator_view
+}
+
+tasks.withType(Javadoc) {
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
+}
+
+publish {
+    userOrg = 'weixia'//bintray.com用户名
+    groupId = 'me.xia'//jcenter上的路径
+    artifactId = 'x-mvpfly'//项目名称
+    publishVersion = '1.0.0'//版本号
+    desc = 'Oh hi, this is a nice description for a project, right?'
+    website = 'https://github.com/wexia/X-MVPFly'
+}
