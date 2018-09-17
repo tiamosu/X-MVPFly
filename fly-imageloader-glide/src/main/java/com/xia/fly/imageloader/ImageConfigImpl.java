@@ -22,7 +22,6 @@ public class ImageConfigImpl extends ImageConfig {
     /**
      * @see {@link Builder#transformation(BitmapTransformation)}
      */
-    @Deprecated
     private BitmapTransformation transformation;//glide用它来改变图形的形状
     private ImageView[] imageViews;
     private boolean isCrossFade;//是否使用淡入淡出过渡动画
@@ -121,7 +120,6 @@ public class ImageConfigImpl extends ImageConfig {
         /**
          * @see {@link Builder#transformation(BitmapTransformation)}
          */
-        @Deprecated
         private BitmapTransformation transformation;//glide用它来改变图形的形状
         private ImageView[] imageViews;
         private boolean isCrossFade;//是否使用淡入淡出过渡动画
@@ -186,10 +184,9 @@ public class ImageConfigImpl extends ImageConfig {
          * 此 API 会在后面的版本中被删除, 请使用其他 API 替代
          *
          * @param transformation {@link BitmapTransformation}
-         * @deprecated 请使用 {@link #isCircle()}, {@link #isCenterCrop()}, {@link #isImageRadius()} 替代
-         * 如果有其他自定义 BitmapTransformation 的需求, 请自行扩展 {@link BaseImageLoaderStrategy}
+         *                       请使用 {@link #isCircle()}, {@link #isCenterCrop()}, {@link #isImageRadius()} 替代
+         *                       如果有其他自定义 BitmapTransformation 的需求, 请自行扩展 {@link BaseImageLoaderStrategy}
          */
-        @Deprecated
         public Builder transformation(BitmapTransformation transformation) {
             this.transformation = transformation;
             return this;
