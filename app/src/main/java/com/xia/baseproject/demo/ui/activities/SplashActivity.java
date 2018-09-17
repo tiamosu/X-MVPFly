@@ -8,7 +8,7 @@ import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.PermissionUtils;
 import com.xia.baseproject.demo.R;
 import com.xia.baseproject.demo.helper.DialogHelper;
-import com.xia.baseproject.ui.activities.SupportActivity;
+import com.xia.fly.ui.activities.SupportActivity;
 
 import java.util.List;
 

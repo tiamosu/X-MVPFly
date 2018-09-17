@@ -1,7 +1,7 @@
 package com.xia.baseproject.demo.mvp.view;
 
 import com.xia.baseproject.demo.mvp.presenter.HomePresenter;
-import com.xia.baseproject.mvp.BaseMvpView;
+import com.xia.fly.mvp.BaseMvpView;
 
 /**
  * @author xia

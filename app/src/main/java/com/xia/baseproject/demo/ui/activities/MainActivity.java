@@ -4,8 +4,8 @@ import android.support.annotation.NonNull;
 import android.widget.EditText;
 
 import com.xia.baseproject.demo.ui.fragments.MainFragment;
-import com.xia.baseproject.ui.activities.ProxyActivity;
-import com.xia.baseproject.ui.fragments.SupportFragment;
+import com.xia.fly.ui.activities.ProxyActivity;
+import com.xia.fly.ui.fragments.SupportFragment;
 
 import me.yokeyword.fragmentation.anim.DefaultVerticalAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;

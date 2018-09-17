@@ -2,8 +2,8 @@ package com.xia.baseproject.demo;
 
 import com.blankj.utilcode.util.ThreadUtils;
 import com.squareup.leakcanary.LeakCanary;
-import com.xia.baseproject.app.BaseApp;
-import com.xia.baseproject.app.Rest;
+import com.xia.fly.app.BaseApp;
+import com.xia.fly.app.Rest;
 
 import okhttp3.logging.HttpLoggingInterceptor;
 

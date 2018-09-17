@@ -8,7 +8,7 @@ import com.xia.baseproject.demo.R;
 import com.xia.baseproject.demo.base.HeadViewFragment;
 import com.xia.baseproject.demo.mvp.presenter.HomePresenter;
 import com.xia.baseproject.demo.mvp.view.HomeView;
-import com.xia.baseproject.utils.FragmentUtils;
+import com.xia.fly.utils.FragmentUtils;
 
 import butterknife.BindView;
 

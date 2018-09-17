@@ -6,11 +6,11 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.xia.baseproject.demo.mvp.view.HomeView;
-import com.xia.baseproject.mvp.BaseMvpPresenter;
-import com.xia.baseproject.rxhttp.RxHttp;
-import com.xia.baseproject.rxhttp.callback.AbstractFileCallback;
-import com.xia.baseproject.rxhttp.callback.AbstractStringCallback;
-import com.xia.baseproject.rxhttp.subscriber.CallbackSubscriber;
+import com.xia.fly.mvp.BaseMvpPresenter;
+import com.xia.fly.rxhttp.RxHttp;
+import com.xia.fly.rxhttp.callback.AbstractFileCallback;
+import com.xia.fly.rxhttp.callback.AbstractStringCallback;
+import com.xia.fly.rxhttp.subscriber.CallbackSubscriber;
 
 import java.io.File;
 
