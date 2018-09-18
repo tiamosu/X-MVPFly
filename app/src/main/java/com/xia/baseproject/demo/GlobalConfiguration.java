@@ -6,7 +6,8 @@ import android.support.v4.app.FragmentManager;
 
 import com.xia.fly.base.IAppLifecycles;
 import com.xia.fly.di.module.GlobalConfigModule;
-import com.xia.fly.http.cookie.CookieManager;
+import com.xia.fly.http.cookie.CookieJarImpl;
+import com.xia.fly.http.cookie.store.PersistentCookieStore;
 import com.xia.fly.http.interceptors.RequestInterceptor;
 import com.xia.fly.http.utils.HttpsUtils;
 import com.xia.fly.imageloader.GlideImageLoaderStrategy;
@@ -39,7 +40,7 @@ public final class GlobalConfiguration implements ConfigModule {
                         //错误重连
                         .retryOnConnectionFailure(true)
                         //cookie认证
-                        .cookieJar(CookieManager.getInstance())
+                        .cookieJar(new CookieJarImpl(new PersistentCookieStore(context)))
                         .hostnameVerifier(new HttpsUtils.HOSTNAME_VERIFIER())
                         .sslSocketFactory(SSL_PARAMS.sSLSocketFactory, SSL_PARAMS.trustManager))
                 .retrofitConfiguration((context12, retrofitBuilder) -> {
