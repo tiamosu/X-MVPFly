@@ -13,7 +13,7 @@ import com.xia.fly.http.BaseUrl;
 import com.xia.fly.http.GlobalHttpHandler;
 import com.xia.fly.http.log.DefaultFormatPrinter;
 import com.xia.fly.http.log.FormatPrinter;
-import com.xia.fly.http.log.RequestInterceptor;
+import com.xia.fly.http.interceptors.RequestInterceptor;
 import com.xia.fly.ui.imageloader.BaseImageLoaderStrategy;
 import com.xia.fly.utils.FileUtils;
 import com.xia.fly.utils.Preconditions;

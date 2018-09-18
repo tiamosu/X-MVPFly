@@ -3,6 +3,7 @@ package com.xia.fly.http.log;
 import android.text.TextUtils;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.xia.fly.http.interceptors.RequestInterceptor;
 import com.xia.fly.utils.CharacterHandler;
 
 import java.util.List;

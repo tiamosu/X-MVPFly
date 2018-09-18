@@ -1,9 +1,10 @@
-package com.xia.fly.http.log;
+package com.xia.fly.http.interceptors;
 
 import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.xia.fly.http.GlobalHttpHandler;
+import com.xia.fly.http.log.FormatPrinter;
 import com.xia.fly.utils.CharacterHandler;
 import com.xia.fly.utils.ZipHelper;
 
@@ -17,7 +18,6 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -32,7 +32,7 @@ import okio.BufferedSource;
  */
 @Singleton
 @SuppressWarnings("WeakerAccess")
-public class RequestInterceptor implements Interceptor {
+public class RequestInterceptor extends BaseInterceptor {
     private static final String TAG = "RequestInterceptor";
 
     @Inject
@@ -84,9 +84,10 @@ public class RequestInterceptor implements Interceptor {
         final boolean logResponse = printLevel == Level.ALL || (printLevel != Level.NONE && printLevel == Level.RESPONSE);
         final long t1 = logResponse ? System.nanoTime() : 0;
         Response originalResponse;
+
         try {
             originalResponse = chain.proceed(request);
-        } catch (Exception e) {
+        } catch (IOException e) {
             Log.w(TAG, "Http Error: " + e);
             throw e;
         }
@@ -114,7 +115,6 @@ public class RequestInterceptor implements Interceptor {
                 mPrinter.printFileResponse(TimeUnit.NANOSECONDS.toMillis(t2 - t1),
                         isSuccessful, code, header, segmentList, message, url);
             }
-
         }
 
         //这里可以比客户端提前一步拿到服务器返回的结果,可以做一些操作,比如token超时,重新获取

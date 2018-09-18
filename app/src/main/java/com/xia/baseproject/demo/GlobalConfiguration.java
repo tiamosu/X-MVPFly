@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentManager;
 import com.xia.fly.base.IAppLifecycles;
 import com.xia.fly.di.module.GlobalConfigModule;
 import com.xia.fly.http.cookie.CookieManager;
-import com.xia.fly.http.log.RequestInterceptor;
+import com.xia.fly.http.interceptors.RequestInterceptor;
 import com.xia.fly.http.utils.HttpsUtils;
 import com.xia.fly.imageloader.GlideImageLoaderStrategy;
 import com.xia.fly.integration.ConfigModule;

@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
  * @author xia
  * @date 2018/9/14.
  */
-@SuppressWarnings({"WeakerAccess", "unused"})
+@SuppressWarnings("WeakerAccess")
 public final class Preconditions {
 
     private Preconditions() {
@@ -131,7 +131,7 @@ public final class Preconditions {
                 : badPositionIndex(start, size, "start index");
     }
 
-    static String format(String template, @Nullable Object... args) {
+    private static String format(String template, @Nullable Object... args) {
         if (args == null || args.length == 0) {
             return template;
         }
