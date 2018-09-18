@@ -2,8 +2,8 @@ package com.xia.fly.http.request;
 
 import android.support.annotation.NonNull;
 
-import com.xia.fly.http.RestCreator;
 import com.xia.fly.http.api.RestService;
+import com.xia.fly.utils.FlyUtils;
 
 import java.io.File;
 import java.util.LinkedHashMap;
@@ -50,7 +50,8 @@ public abstract class BaseRequest<R extends BaseRequest> {
         return (R) this;
     }
 
-    protected static final RestService mRestService = RestCreator.getRestService();
+    protected static final RestService mRestService =
+            FlyUtils.getAppComponent().repositoryManager().obtainRetrofitService(RestService.class);
 
     protected abstract Observable<ResponseBody> generateRequest();
 

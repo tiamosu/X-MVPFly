@@ -35,7 +35,7 @@ public class GlideConfiguration extends AppGlideModule {
 
     @Override
     public void applyOptions(@NonNull Context context, @NonNull GlideBuilder builder) {
-        final AppComponent appComponent = FlyUtils.obtainAppComponentFromContext(context);
+        final AppComponent appComponent = FlyUtils.getAppComponent();
         builder.setDiskCache(() -> {
             // Careful: the external cache directory doesn't enforce permissions
             return DiskLruCacheWrapper.create(
@@ -64,7 +64,7 @@ public class GlideConfiguration extends AppGlideModule {
     @Override
     public void registerComponents(@NonNull Context context, @NonNull Glide glide, @NonNull Registry registry) {
         //Glide 默认使用 HttpURLConnection 做网络请求,在这切换成 Okhttp 请求
-        final AppComponent appComponent = FlyUtils.obtainAppComponentFromContext(context);
+        final AppComponent appComponent = FlyUtils.getAppComponent();
         registry.replace(GlideUrl.class, InputStream.class, new OkHttpUrlLoader.Factory(appComponent.okHttpClient()));
     }
 

@@ -8,6 +8,7 @@ import com.xia.fly.base.IAppLifecycles;
 import com.xia.fly.di.module.GlobalConfigModule;
 import com.xia.fly.http.cookie.CookieManager;
 import com.xia.fly.http.log.RequestInterceptor;
+import com.xia.fly.http.utils.HttpsUtils;
 import com.xia.fly.imageloader.GlideImageLoaderStrategy;
 import com.xia.fly.integration.ConfigModule;
 
@@ -19,6 +20,9 @@ import java.util.concurrent.TimeUnit;
  * @date 2018/9/18.
  */
 public final class GlobalConfiguration implements ConfigModule {
+
+    private static final HttpsUtils.SSLParams SSL_PARAMS
+            = HttpsUtils.getSslSocketFactory(null, null, null);
 
     @Override
     public void applyOptions(Context context, GlobalConfigModule.Builder builder) {
@@ -35,7 +39,9 @@ public final class GlobalConfiguration implements ConfigModule {
                         //错误重连
                         .retryOnConnectionFailure(true)
                         //cookie认证
-                        .cookieJar(CookieManager.getInstance()))
+                        .cookieJar(CookieManager.getInstance())
+                        .hostnameVerifier(new HttpsUtils.HOSTNAME_VERIFIER())
+                        .sslSocketFactory(SSL_PARAMS.sSLSocketFactory, SSL_PARAMS.trustManager))
                 .retrofitConfiguration((context12, retrofitBuilder) -> {
                 });
     }

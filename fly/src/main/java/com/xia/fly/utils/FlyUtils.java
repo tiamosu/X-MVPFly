@@ -1,7 +1,6 @@
 package com.xia.fly.utils;
 
-import android.content.Context;
-
+import com.blankj.utilcode.util.Utils;
 import com.xia.fly.base.IApp;
 import com.xia.fly.di.component.AppComponent;
 
@@ -11,9 +10,9 @@ import com.xia.fly.di.component.AppComponent;
  */
 public final class FlyUtils {
 
-    public static AppComponent obtainAppComponentFromContext(Context context) {
-        Preconditions.checkNotNull(context, "%s cannot be null", Context.class.getName());
-        Preconditions.checkState(context.getApplicationContext() instanceof IApp, "Application does not implements App");
-        return ((IApp) context.getApplicationContext()).getAppComponent();
+    public static AppComponent getAppComponent() {
+        Preconditions.checkNotNull(Utils.getApp(), "%s cannot be null", Utils.getApp().getClass().getName());
+        Preconditions.checkState(Utils.getApp() instanceof IApp, "Application does not implements App");
+        return ((IApp) Utils.getApp()).getAppComponent();
     }
 }
