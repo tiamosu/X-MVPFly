@@ -1,0 +1,35 @@
+ext {
+    configAndroidDomain = this.&configAndroidDomain
+}
+
+def configAndroidDomain(Project pro) {
+    if (!pro.plugins.hasPlugin("com.android.application")) {
+        configLibAndroidDomain(pro)
+    }
+}
+
+def configLibAndroidDomain(Project pro) {
+    pro.android {
+        compileSdkVersion Android.compileSdkVersion
+        defaultConfig {
+            minSdkVersion Android.minSdkVersion
+            targetSdkVersion Android.targetSdkVersion
+            versionCode Android.versionCode
+            versionName Android.versionName
+        }
+        buildTypes {
+            release {
+                minifyEnabled false
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            }
+        }
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
+        lintOptions {
+            abortOnError false
+            ignoreWarnings true
+        }
+    }
+}
