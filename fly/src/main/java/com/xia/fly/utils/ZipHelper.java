@@ -1,8 +1,9 @@
 package com.xia.fly.utils;
 
+import com.blankj.utilcode.util.CloseUtils;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.Closeable;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -157,8 +158,8 @@ public final class ZipHelper {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            closeQuietly(gos);
-            closeQuietly(os);
+            CloseUtils.closeIOQuietly(gos);
+            CloseUtils.closeIOQuietly(os);
         }
         return null;
     }
@@ -198,20 +199,9 @@ public final class ZipHelper {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            closeQuietly(gis);
-            closeQuietly(is);
+            CloseUtils.closeIOQuietly(gis);
+            CloseUtils.closeIOQuietly(is);
         }
         return null;
-    }
-
-    public static void closeQuietly(Closeable closeable) {
-        if (closeable != null) {
-            try {
-                closeable.close();
-            } catch (RuntimeException rethrown) {
-                throw rethrown;
-            } catch (Exception ignored) {
-            }
-        }
     }
 }
