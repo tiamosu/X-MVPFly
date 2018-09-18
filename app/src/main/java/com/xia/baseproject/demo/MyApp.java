@@ -2,8 +2,8 @@ package com.xia.baseproject.demo;
 
 import com.blankj.utilcode.util.ThreadUtils;
 import com.squareup.leakcanary.LeakCanary;
-import com.xia.fly.base.BaseApp;
 import com.xia.fly.app.Rest;
+import com.xia.fly.base.BaseApp;
 
 import okhttp3.logging.HttpLoggingInterceptor;
 
@@ -35,7 +35,6 @@ public class MyApp extends BaseApp {
 
         Rest.init()
                 .withApiHost("http://www.wanandroid.com")
-                .withNetWorkCheck(true)
                 .withInterceptor(loggingInterceptor)
                 .configure();
     }

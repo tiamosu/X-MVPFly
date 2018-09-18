@@ -10,16 +10,14 @@ import android.widget.EditText;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.NetworkUtils;
-import com.xia.fly.app.Rest;
-import com.xia.fly.app.RestConfigKeys;
 import com.xia.fly.constant.NetworkState;
 import com.xia.fly.integration.rxbus.IRxBusCallback;
+import com.xia.fly.integration.rxbus.RxBusEventTag;
 import com.xia.fly.integration.rxbus.RxBusHelper;
 import com.xia.fly.mvp.BaseMvpPresenter;
 import com.xia.fly.mvp.BaseMvpView;
 import com.xia.fly.receiver.NetworkChangeReceiver;
 import com.xia.fly.utils.KeyBoardHelper;
-import com.xia.fly.utils.NetworkHelper;
 import com.xia.fly.utils.Platform;
 
 import butterknife.ButterKnife;
@@ -56,7 +54,7 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
     @Override
     protected void onResume() {
         super.onResume();
-        if (NetworkHelper.isGlobalCheckNetwork(isCheckNetWork())) {
+        if (isCheckNetWork()) {
             hasNetWork(NetworkUtils.isConnected());
         }
     }
@@ -104,14 +102,14 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
         initEvent();
         onLazyLoadData();
 
-        if (Rest.getConfiguration(RestConfigKeys.NETWORK_CHECK)) {
+        if (isCheckNetWork()) {
             mNetworkChangeReceiver = NetworkChangeReceiver.register(this);
-        }
-        if (NetworkHelper.isGlobalCheckNetwork(isCheckNetWork())) {
-            NetworkHelper.networkChangeEvent(this, rxBusMessage -> {
-                final boolean isAvailable = (boolean) rxBusMessage.mObj;
-                hasNetWork(isAvailable);
-            });
+            RxBusHelper.subscribeWithTags(this, (eventTag, rxBusMessage) -> {
+                if (eventTag.equals(RxBusEventTag.NETWORK_CHANGE)) {
+                    final boolean isAvailable = (boolean) rxBusMessage.mObj;
+                    hasNetWork(isAvailable);
+                }
+            }, RxBusEventTag.NETWORK_CHANGE);
         }
     }
 
@@ -147,7 +145,7 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
 
     @Override
     public boolean isCheckNetWork() {
-        return true;
+        return false;
     }
 
     @Override

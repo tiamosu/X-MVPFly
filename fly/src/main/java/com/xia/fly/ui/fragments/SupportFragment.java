@@ -14,10 +14,10 @@ import com.blankj.utilcode.util.NetworkUtils;
 import com.xia.fly.R;
 import com.xia.fly.constant.NetworkState;
 import com.xia.fly.integration.rxbus.IRxBusCallback;
+import com.xia.fly.integration.rxbus.RxBusEventTag;
 import com.xia.fly.integration.rxbus.RxBusHelper;
 import com.xia.fly.mvp.BaseMvpPresenter;
 import com.xia.fly.mvp.BaseMvpView;
-import com.xia.fly.utils.NetworkHelper;
 import com.xia.fly.utils.Platform;
 
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -112,15 +112,17 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
             initView();
             initEvent();
 
-            if (NetworkHelper.isGlobalCheckNetwork(isCheckNetWork())) {
-                NetworkHelper.networkChangeEvent(this, rxBusMessage -> {
-                    final boolean isAvailable = (boolean) rxBusMessage.mObj;
-                    hasNetWork(isAvailable);
-                });
+            if (isCheckNetWork()) {
+                RxBusHelper.subscribeWithTags(this, (eventTag, rxBusMessage) -> {
+                    if (eventTag.equals(RxBusEventTag.NETWORK_CHANGE)) {
+                        final boolean isAvailable = (boolean) rxBusMessage.mObj;
+                        hasNetWork(isAvailable);
+                    }
+                }, RxBusEventTag.NETWORK_CHANGE);
             }
         }
 
-        if (NetworkHelper.isGlobalCheckNetwork(isCheckNetWork())) {
+        if (isCheckNetWork()) {
             hasNetWork(NetworkUtils.isConnected());
         }
         onVisibleLazyLoad();
@@ -190,7 +192,7 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
 
     @Override
     public boolean isCheckNetWork() {
-        return true;
+        return false;
     }
 
     @Override

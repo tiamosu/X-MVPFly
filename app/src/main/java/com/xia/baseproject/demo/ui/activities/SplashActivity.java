@@ -1,6 +1,7 @@
 package com.xia.baseproject.demo.ui.activities;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 
 import com.blankj.utilcode.constant.PermissionConstants;
@@ -21,6 +22,11 @@ import butterknife.OnClick;
 public class SplashActivity extends SupportActivity {
     private boolean mIsRequestPermission = true;
     private boolean mIsToAppSetting = false;
+
+    @Override
+    public boolean isCheckNetWork() {
+        return true;
+    }
 
     @Override
     public int getLayoutId() {
@@ -79,15 +85,15 @@ public class SplashActivity extends SupportActivity {
                 .request();
     }
 
-//    @Override
-//    public void onNetworkState(boolean isAvailable) {
-//        Log.e("weixi", "onNetworkState: " + isAvailable);
-//    }
-//
-//    @Override
-//    public void onNetReConnect() {
-//        Log.e("weixi", "onNetReConnect: ");
-//    }
+    @Override
+    public void onNetworkState(boolean isAvailable) {
+        Log.e("xia", this + "    onNetworkState: " + isAvailable);
+    }
+
+    @Override
+    public void onNetReConnect() {
+        Log.e("xia", this + "    onNetReConnect: ");
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

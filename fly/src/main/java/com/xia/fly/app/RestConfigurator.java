@@ -26,7 +26,6 @@ public final class RestConfigurator {
     private RestConfigurator() {
         CONFIGS.put(RestConfigKeys.CONFIG_READY, false);
         CONFIGS.put(RestConfigKeys.INTERCEPTOR, INTERCEPTORS);
-        CONFIGS.put(RestConfigKeys.NETWORK_CHECK, false);
     }
 
     public final HashMap<Object, Object> getConfigs() {
@@ -47,11 +46,6 @@ public final class RestConfigurator {
     public final RestConfigurator withInterceptors(ArrayList<Interceptor> interceptors) {
         INTERCEPTORS.addAll(interceptors);
         CONFIGS.put(RestConfigKeys.INTERCEPTOR, INTERCEPTORS);
-        return this;
-    }
-
-    public final RestConfigurator withNetWorkCheck(boolean netCheck) {
-        CONFIGS.put(RestConfigKeys.NETWORK_CHECK, netCheck);
         return this;
     }
 

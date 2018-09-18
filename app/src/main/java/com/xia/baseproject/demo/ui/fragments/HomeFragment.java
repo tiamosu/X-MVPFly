@@ -21,6 +21,11 @@ public class HomeFragment extends HeadViewFragment<HomePresenter> implements Hom
     AppCompatButton mAppCompatButton;
 
     @Override
+    public boolean isCheckNetWork() {
+        return true;
+    }
+
+    @Override
     public boolean isLoadHeadView() {
         return false;
     }
@@ -66,12 +71,12 @@ public class HomeFragment extends HeadViewFragment<HomePresenter> implements Hom
 
     @Override
     public void onNetReConnect() {
-        Log.e("xia", "onNetReConnect: ");
+        Log.e("xia", this + "    onNetReConnect: ");
     }
 
     @Override
     public void onNetworkState(boolean isAvailable) {
-        Log.e("xia", "onNetworkState: " + isAvailable);
+        Log.e("xia", this + "    onNetworkState: " + isAvailable);
     }
 
     @Override
