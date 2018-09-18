@@ -72,7 +72,7 @@ public class BaseApp extends Application implements IApp {
      * {@link AppComponent} 接口中声明的方法所返回的实例, 在 {@link #getAppComponent()} 拿到对象后都可以直接使用
      *
      * @return AppComponent
-     * @see FlyUtils#obtainAppComponentFromContext(Context) 可直接获取 {@link AppComponent}
+     * @see FlyUtils#getAppComponent()) 可直接获取 {@link AppComponent}
      */
     @NonNull
     @Override
