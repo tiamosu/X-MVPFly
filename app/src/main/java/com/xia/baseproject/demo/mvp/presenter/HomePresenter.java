@@ -5,6 +5,8 @@ import android.arch.lifecycle.LifecycleOwner;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.blankj.utilcode.util.NetworkUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.xia.baseproject.demo.mvp.view.HomeView;
 import com.xia.fly.http.RxHttp;
 import com.xia.fly.http.callback.AbstractFileCallback;
@@ -13,6 +15,8 @@ import com.xia.fly.http.subscriber.CallbackSubscriber;
 import com.xia.fly.mvp.BaseMvpPresenter;
 
 import java.io.File;
+
+import io.reactivex.disposables.Disposable;
 
 /**
  * @author xia
@@ -61,6 +65,16 @@ public class HomePresenter extends BaseMvpPresenter<HomeView> {
                     @Override
                     protected Dialog getLoadingDialog() {
                         return super.getLoadingDialog();
+                    }
+
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        if (!NetworkUtils.isConnected()) {
+                            d.dispose();
+                            ToastUtils.showShort("无法连接网络");
+                            return;
+                        }
+                        super.onSubscribe(d);
                     }
                 });
     }

@@ -98,7 +98,7 @@ public abstract class AbstractFileCallback extends Callback<File> {
             bos.flush();
             fos.flush();
         } catch (IOException e) {
-            onError(e.getMessage());
+            onError(e);
         } finally {
             CloseUtils.closeIO(responseBody, bos, fos, bis, is);
         }

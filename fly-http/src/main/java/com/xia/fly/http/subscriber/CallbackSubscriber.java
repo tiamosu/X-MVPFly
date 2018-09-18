@@ -1,16 +1,15 @@
 package com.xia.fly.http.subscriber;
 
 import android.app.Dialog;
-import android.support.annotation.NonNull;
 
-import com.blankj.utilcode.util.NetworkUtils;
 import com.xia.fly.http.callback.Callback;
-import com.xia.fly.http.exception.ApiException;
 import com.xia.fly.ui.dialog.LoadingDialog;
 import com.xia.fly.ui.dialog.loader.Loader;
+import com.xia.fly.utils.FlyUtils;
 import com.xia.fly.utils.Platform;
 
-import io.reactivex.observers.DisposableObserver;
+import io.reactivex.disposables.Disposable;
+import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 import okhttp3.ResponseBody;
 
 /**
@@ -18,10 +17,12 @@ import okhttp3.ResponseBody;
  * @date 2018/8/3.
  */
 @SuppressWarnings("WeakerAccess")
-public class CallbackSubscriber extends DisposableObserver<ResponseBody> {
+public class CallbackSubscriber extends ErrorHandleSubscriber<ResponseBody> {
     public Callback mCallback;
+    private Disposable mDisposable;
 
-    public CallbackSubscriber(@NonNull Callback callback) {
+    public CallbackSubscriber(Callback callback) {
+        super(FlyUtils.getAppComponent().rxErrorHandler());
         mCallback = callback;
     }
 
@@ -37,16 +38,12 @@ public class CallbackSubscriber extends DisposableObserver<ResponseBody> {
     }
 
     @Override
-    protected void onStart() {
-        if (!NetworkUtils.isConnected()) {
-            onError("无法连接网络");
-            dispose();
-            return;
-        }
+    public void onSubscribe(Disposable d) {
+        mDisposable = d;
         Platform.post(() -> {
             showDialog();
             if (mCallback != null) {
-                mCallback.onSubscribe(this);
+                mCallback.onSubscribe(d);
             }
         });
     }
@@ -64,46 +61,42 @@ public class CallbackSubscriber extends DisposableObserver<ResponseBody> {
 
     @Override
     public void onError(Throwable e) {
-        if (!isDisposed()) {
-            final ApiException apiException = ApiException.handleException(e);
-            final String error = apiException.getMessage();
-            onError(error);
-        }
-    }
-
-    @Override
-    public void onComplete() {
-        if (!isDisposed()) {
-            Platform.post(() -> {
-                cancelDialog();
-                if (mCallback != null) {
-                    mCallback.onComplete();
-                    mCallback = null;
-                }
-            });
-        }
-    }
-
-    private void onError(String error) {
+        super.onError(e);
         Platform.post(() -> {
             cancelDialog();
             if (mCallback != null) {
-                mCallback.onError(error);
+                mCallback.onError(e);
                 mCallback = null;
             }
         });
     }
 
-    private void showDialog() {
+    @Override
+    public void onComplete() {
+        Platform.post(() -> {
+            cancelDialog();
+            if (mCallback != null) {
+                mCallback.onComplete();
+                mCallback = null;
+            }
+        });
+    }
+
+    protected void showDialog() {
         if (isShowLoadingDialog()) {
             Platform.getHandler().postDelayed(() -> Loader.showLoading(getLoadingDialog()), 400);
         }
     }
 
-    private void cancelDialog() {
+    protected void cancelDialog() {
         if (isShowLoadingDialog()) {
             Platform.getHandler().removeCallbacksAndMessages(null);
             Loader.stopLoading();
         }
+    }
+
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+    protected boolean isDisposed() {
+        return mDisposable != null && mDisposable.isDisposed();
     }
 }

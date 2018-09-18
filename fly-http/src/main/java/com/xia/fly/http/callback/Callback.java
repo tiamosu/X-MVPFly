@@ -36,7 +36,7 @@ public abstract class Callback<T> {
     public void onSubscribe(Disposable d) {
     }
 
-    public void onError(String error) {
+    public void onError(Throwable e) {
     }
 
     public void onComplete() {
