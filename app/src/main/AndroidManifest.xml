@@ -69,5 +69,9 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/NoTitleTheme"/>
+
+        <meta-data
+            android:name="com.xia.baseproject.demo.GlobalConfiguration"
+            android:value="ConfigModule"/>
     </application>
 </manifest>

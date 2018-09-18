@@ -181,6 +181,7 @@ public class GlobalConfigModule {
         } : mCacheFactory;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public static final class Builder {
         private HttpUrl mApiUrl;
         private BaseUrl mBaseUrl;

@@ -51,13 +51,13 @@ public abstract class ClientModule {
                 .baseUrl(httpUrl)//域名
                 .client(client);//设置okhttp
 
-        if (configuration != null) {
-            configuration.configRetrofit(application, builder);
-        }
-
         builder
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())//使用 Rxjava
                 .addConverterFactory(GsonConverterFactory.create(gson));//使用 Gson
+
+        if (configuration != null) {
+            configuration.configRetrofit(application, builder);
+        }
         return builder.build();
     }
 
@@ -142,11 +142,11 @@ public abstract class ClientModule {
     }
 
     public interface RetrofitConfiguration {
-        void configRetrofit(Context context, Retrofit.Builder builder);
+        void configRetrofit(Context context, Retrofit.Builder retrofitBuilder);
     }
 
     public interface OkHttpConfiguration {
-        void configOkHttp(Context context, OkHttpClient.Builder builder);
+        void configOkHttp(Context context, OkHttpClient.Builder okHttpBuilder);
     }
 
     public interface RxCacheConfiguration {
@@ -156,6 +156,6 @@ public abstract class ClientModule {
          *
          * @return {@link RxCache}
          */
-        RxCache configRxCache(Context context, RxCache.Builder builder);
+        RxCache configRxCache(Context context, RxCache.Builder rxCacheBuilder);
     }
 }

@@ -1,10 +1,13 @@
 package com.xia.fly.http;
 
+import com.blankj.utilcode.util.Utils;
 import com.xia.fly.app.Rest;
 import com.xia.fly.app.RestConfigKeys;
+import com.xia.fly.di.component.AppComponent;
 import com.xia.fly.http.api.RestService;
 import com.xia.fly.http.cookie.CookieManager;
 import com.xia.fly.http.utils.HttpsUtils;
+import com.xia.fly.utils.FlyUtils;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -63,8 +66,11 @@ public final class RestCreator {
     }
 
     private static final class RestServiceHolder {
-        private static final RestService REST_SERVICE =
-                RetrofitHolder.RETROFIT_CLIENT.create(RestService.class);
+        final static AppComponent mComponent = FlyUtils.obtainAppComponentFromContext(Utils.getApp());
+        private static final RestService REST_SERVICE = mComponent.repositoryManager()
+                .obtainRetrofitService(RestService.class);
+//        private static final RestService REST_SERVICE =
+//                RetrofitHolder.RETROFIT_CLIENT.create(RestService.class);
     }
 
     public static RestService getRestService() {
