@@ -21,6 +21,7 @@ import javax.inject.Singleton;
 
 import dagger.BindsInstance;
 import dagger.Component;
+import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import okhttp3.OkHttpClient;
 
 /**
@@ -42,6 +43,13 @@ public interface AppComponent {
      * @return {@link IRepositoryManager}
      */
     IRepositoryManager repositoryManager();
+
+    /**
+     * RxJava 错误处理管理类
+     *
+     * @return {@link RxErrorHandler}
+     */
+    RxErrorHandler rxErrorHandler();
 
     /**
      * 图片加载管理器, 用于加载图片的管理类, 使用策略者模式, 可在运行时动态替换任何图片加载框架

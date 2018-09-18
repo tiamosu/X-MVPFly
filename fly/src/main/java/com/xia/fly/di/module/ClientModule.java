@@ -21,6 +21,8 @@ import dagger.Module;
 import dagger.Provides;
 import io.rx_cache2.internal.RxCache;
 import io.victoralbertos.jolyglot.GsonSpeaker;
+import me.jessyan.rxerrorhandler.core.RxErrorHandler;
+import me.jessyan.rxerrorhandler.handler.listener.ResponseErrorListener;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -139,6 +141,23 @@ public abstract class ClientModule {
     static File provideRxCacheDirectory(File cacheDir) {
         final File cacheDirectory = new File(cacheDir, "RxCache");
         return FileUtils.createOrExistsDir(cacheDirectory);
+    }
+
+    /**
+     * 提供处理 RxJava 错误的管理器
+     *
+     * @param application
+     * @param listener
+     * @return {@link RxErrorHandler}
+     */
+    @Singleton
+    @Provides
+    static RxErrorHandler proRxErrorHandler(Application application, ResponseErrorListener listener) {
+        return RxErrorHandler
+                .builder()
+                .with(application)
+                .responseErrorListener(listener)
+                .build();
     }
 
     public interface RetrofitConfiguration {

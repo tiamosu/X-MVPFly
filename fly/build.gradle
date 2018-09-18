@@ -59,6 +59,7 @@ dependencies {
     api(Deps.retrofit2_converter_gson) {
         exclude module: 'retrofit'
     }
+    api Deps.rxerrorhandler
     api(Deps.x_rxbus) {
         exclude module: 'rxjava'
     }

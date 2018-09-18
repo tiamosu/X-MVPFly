@@ -27,7 +27,6 @@ public final class RxBusHelper {
         RxBusManager.postSticky(event, tag);
     }
 
-    @SuppressWarnings("Convert2Lambda")
     public static void subscribeWithTags(final Object subscriber,
                                          final IRxBusCallback callback,
                                          final String... tags) {
@@ -41,7 +40,6 @@ public final class RxBusHelper {
         }, tags);
     }
 
-    @SuppressWarnings("Convert2Lambda")
     public static void subscribeStickyWithTags(final Object subscriber,
                                                final IRxBusCallback callback,
                                                final String... tags) {

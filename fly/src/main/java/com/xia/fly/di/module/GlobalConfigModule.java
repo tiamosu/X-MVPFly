@@ -26,6 +26,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import me.jessyan.rxerrorhandler.handler.listener.ResponseErrorListener;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 
@@ -42,6 +43,7 @@ public class GlobalConfigModule {
     private BaseImageLoaderStrategy mLoaderStrategy;
     private GlobalHttpHandler mHandler;
     private List<Interceptor> mInterceptors;
+    private ResponseErrorListener mErrorListener;
     private File mCacheFile;
     private ClientModule.RetrofitConfiguration mRetrofitConfiguration;
     private ClientModule.OkHttpConfiguration mOkHttpConfiguration;
@@ -57,6 +59,7 @@ public class GlobalConfigModule {
         this.mLoaderStrategy = builder.mImageLoaderStrategy;
         this.mHandler = builder.mHttpHandler;
         this.mInterceptors = builder.mInterceptors;
+        this.mErrorListener = builder.mResponseErrorListener;
         this.mCacheFile = builder.mCacheFile;
         this.mRetrofitConfiguration = builder.mRetrofitConfiguration;
         this.mOkHttpConfiguration = builder.mOkHttpConfiguration;
@@ -120,6 +123,17 @@ public class GlobalConfigModule {
     @Provides
     File provideCacheFile() {
         return mCacheFile == null ? FileUtils.getCacheFile() : mCacheFile;
+    }
+
+    /**
+     * 提供处理 RxJava 错误的管理器的回调
+     *
+     * @return
+     */
+    @Singleton
+    @Provides
+    ResponseErrorListener provideResponseErrorListener() {
+        return mErrorListener == null ? ResponseErrorListener.EMPTY : mErrorListener;
     }
 
     @Singleton
@@ -188,6 +202,7 @@ public class GlobalConfigModule {
         private BaseImageLoaderStrategy mImageLoaderStrategy;
         private GlobalHttpHandler mHttpHandler;
         private List<Interceptor> mInterceptors;
+        private ResponseErrorListener mResponseErrorListener;
         private File mCacheFile;
         private ClientModule.RetrofitConfiguration mRetrofitConfiguration;
         private ClientModule.OkHttpConfiguration mOkHttpConfiguration;
@@ -228,6 +243,11 @@ public class GlobalConfigModule {
                 mInterceptors = new ArrayList<>();
             }
             this.mInterceptors.add(interceptor);
+            return this;
+        }
+
+        public Builder responseErrorListener(ResponseErrorListener listener) {//处理所有RxJava的onError逻辑
+            this.mResponseErrorListener = listener;
             return this;
         }
 

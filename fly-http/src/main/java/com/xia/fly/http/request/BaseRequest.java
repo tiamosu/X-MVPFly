@@ -51,7 +51,8 @@ public abstract class BaseRequest<R extends BaseRequest> {
     }
 
     protected static final RestService mRestService =
-            FlyUtils.getAppComponent().repositoryManager().obtainRetrofitService(RestService.class);
+            FlyUtils.getAppComponent().repositoryManager()
+                    .obtainRetrofitService(RestService.class);
 
     protected abstract Observable<ResponseBody> generateRequest();
 
