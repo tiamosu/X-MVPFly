@@ -32,4 +32,10 @@ def configLibAndroidDomain(Project pro) {
             ignoreWarnings true
         }
     }
+
+    pro.tasks.withType(Javadoc) {
+        options.addStringOption('Xdoclint:none', '-quiet')
+        options.addStringOption('encoding', 'UTF-8')
+        options.addStringOption('charSet', 'UTF-8')
+    }
 }

@@ -1,4 +1,8 @@
-apply plugin: 'com.android.library'
+plugins {
+    id "com.android.library"
+    id "com.jakewharton.butterknife"
+    id "com.novoda.bintray-release"
+}
 
 // in config.gradle
 configAndroidDomain project
@@ -6,4 +10,13 @@ configAndroidDomain project
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     compileOnly project(':fly')
+}
+
+publish {
+    userOrg = 'weixia'//bintray.com用户名
+    groupId = 'me.xia'//jcenter上的路径
+    artifactId = 'fly-http'//项目名称
+    publishVersion = '1.0.0'//版本号
+    desc = 'Oh hi, this is a nice description for a project, right?'
+    website = 'https://github.com/wexia/X-MVPFly'
 }
