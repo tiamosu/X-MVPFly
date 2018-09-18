@@ -1,4 +1,4 @@
-package com.xia.baseproject.demo;
+package com.xia.baseproject.demo.app;
 
 import com.blankj.utilcode.util.ThreadUtils;
 import com.squareup.leakcanary.LeakCanary;

@@ -61,8 +61,10 @@ public class AppDelegate implements IApp, IAppLifecycles {
     @Override
     public void attachBaseContext(@NonNull Context context) {
         //遍历 mAppLifecycles, 执行所有已注册的 AppLifecycles 的 attachBaseContext() 方法 (框架外部, 开发者扩展的逻辑)
-        for (IAppLifecycles lifecycle : mAppLifecycles) {
-            lifecycle.attachBaseContext(context);
+        if (mAppLifecycles != null && mAppLifecycles.size() > 0) {
+            for (IAppLifecycles lifecycle : mAppLifecycles) {
+                lifecycle.attachBaseContext(context);
+            }
         }
     }
 
@@ -103,8 +105,10 @@ public class AppDelegate implements IApp, IAppLifecycles {
         mApplication.registerComponentCallbacks(mComponentCallback);
 
         //执行框架外部, 开发者扩展的 App onCreate 逻辑
-        for (IAppLifecycles lifecycle : mAppLifecycles) {
-            lifecycle.onCreate(mApplication);
+        if (mAppLifecycles != null && mAppLifecycles.size() > 0) {
+            for (IAppLifecycles lifecycle : mAppLifecycles) {
+                lifecycle.onCreate(mApplication);
+            }
         }
     }
 
@@ -136,6 +140,33 @@ public class AppDelegate implements IApp, IAppLifecycles {
         this.mComponentCallback = null;
         this.mAppLifecycles = null;
         this.mApplication = null;
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        if (mAppLifecycles != null && mAppLifecycles.size() > 0) {
+            for (IAppLifecycles lifecycle : mAppLifecycles) {
+                lifecycle.onConfigurationChanged(newConfig);
+            }
+        }
+    }
+
+    @Override
+    public void onLowMemory() {
+        if (mAppLifecycles != null && mAppLifecycles.size() > 0) {
+            for (IAppLifecycles lifecycle : mAppLifecycles) {
+                lifecycle.onLowMemory();
+            }
+        }
+    }
+
+    @Override
+    public void onTrimMemory(int level) {
+        if (mAppLifecycles != null && mAppLifecycles.size() > 0) {
+            for (IAppLifecycles lifecycle : mAppLifecycles) {
+                lifecycle.onTrimMemory(level);
+            }
+        }
     }
 
     /**

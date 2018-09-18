@@ -1,4 +1,4 @@
-package com.xia.baseproject.demo;
+package com.xia.baseproject.demo.app;
 
 import android.app.Application;
 import android.content.Context;
@@ -49,6 +49,7 @@ public final class GlobalConfiguration implements ConfigModule {
 
     @Override
     public void injectAppLifecycle(Context context, List<IAppLifecycles> lifecycles) {
+        lifecycles.add(new AppLifecyclesImpl());
     }
 
     @Override

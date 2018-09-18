@@ -5,11 +5,9 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.multidex.MultiDex;
 
-import com.bumptech.glide.Glide;
 import com.xia.fly.base.delegate.AppDelegate;
 import com.xia.fly.di.component.AppComponent;
 import com.xia.fly.utils.FlyUtils;
-import com.xia.fly.utils.Platform;
 import com.xia.fly.utils.Preconditions;
 
 /**
@@ -45,25 +43,6 @@ public class BaseApp extends Application implements IApp {
         super.onTerminate();
         if (mAppDelegate != null) {
             this.mAppDelegate.onTerminate(this);
-        }
-    }
-
-    @Override
-    public void onTrimMemory(int level) {
-        super.onTrimMemory(level);
-        if (Platform.DEPENDENCY_GLIDE) {
-            if (level == TRIM_MEMORY_UI_HIDDEN) {
-                Glide.get(this).clearMemory();
-            }
-            Glide.get(this).trimMemory(level);
-        }
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        if (Platform.DEPENDENCY_GLIDE) {
-            Glide.get(this).clearMemory();
         }
     }
 

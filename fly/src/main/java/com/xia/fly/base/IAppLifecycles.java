@@ -2,6 +2,7 @@ package com.xia.fly.base;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.support.annotation.NonNull;
 
 /**
@@ -17,4 +18,10 @@ public interface IAppLifecycles {
     void onCreate(@NonNull Application application);
 
     void onTerminate(@NonNull Application application);
+
+    void onConfigurationChanged(Configuration newConfig);
+
+    void onLowMemory();
+
+    void onTrimMemory(int level);
 }
