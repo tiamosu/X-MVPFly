@@ -1,4 +1,4 @@
-package com.xia.fly.rxhttp;
+package com.xia.fly.http;
 
 import okhttp3.HttpUrl;
 

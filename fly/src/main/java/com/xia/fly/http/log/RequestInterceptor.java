@@ -1,9 +1,9 @@
-package com.xia.fly.rxhttp.log;
+package com.xia.fly.http.log;
 
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.xia.fly.rxhttp.GlobalHttpHandler;
+import com.xia.fly.http.GlobalHttpHandler;
 import com.xia.fly.utils.CharacterHandler;
 import com.xia.fly.utils.ZipHelper;
 

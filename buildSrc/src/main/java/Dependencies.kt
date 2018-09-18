@@ -52,7 +52,7 @@ object Deps {
     const val rxandroid2 = "io.reactivex.rxjava2:rxandroid:2.1.0"
     const val rxcache2 = "com.github.VictorAlbertos.RxCache:runtime:1.8.3-2.x"
     const val rxcache_gson = "com.github.VictorAlbertos.Jolyglot:gson:0.0.4"
-    const val x_rxbus = "com.xia:x-rxbus:1.0.2"
+    const val x_rxbus = "me.xia:x-rxbus:1.0.3"
 
     //okhttp
     const val okhttp3 = "com.squareup.okhttp3:okhttp:${Versions.okhttp3}"
