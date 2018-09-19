@@ -5,7 +5,10 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
+import com.blankj.utilcode.util.Utils;
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.GlideBuilder;
+import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
@@ -13,12 +16,16 @@ import com.xia.fly.imageloader.integration.GlideApp;
 import com.xia.fly.imageloader.integration.GlideRequest;
 import com.xia.fly.imageloader.integration.GlideRequests;
 import com.xia.fly.ui.imageloader.BaseImageLoaderStrategy;
+import com.xia.fly.ui.imageloader.ImageConfig;
 import com.xia.fly.utils.Platform;
 import com.xia.fly.utils.Preconditions;
 
 import io.reactivex.schedulers.Schedulers;
 
 /**
+ * 此类只是简单的实现了 Glide 加载的策略,方便快速使用,但大部分情况会需要应对复杂的场景
+ * 这时可自行实现 {@link BaseImageLoaderStrategy} 和 {@link ImageConfig} 替换现有策略
+ *
  * @author xia
  * @date 2018/9/17.
  */
@@ -27,12 +34,11 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy<ImageCo
     @SuppressWarnings("unchecked")
     @SuppressLint("CheckResult")
     @Override
-    public void loadImage(Context ctx, ImageConfigImpl config) {
-        Preconditions.checkNotNull(ctx, "Context is required");
+    public void loadImage(ImageConfigImpl config) {
         Preconditions.checkNotNull(config, "ImageConfigImpl is required");
         Preconditions.checkNotNull(config.getImageView(), "ImageView is required");
 
-        final GlideRequests requests = GlideApp.with(ctx);
+        final GlideRequests requests = GlideApp.with(Utils.getApp());
         final GlideRequest<Drawable> glideRequest = requests.load(config.getUrl());
         switch (config.getCacheStrategy()) {//缓存策略
             case 0:
@@ -108,26 +114,27 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy<ImageCo
     }
 
     @Override
-    public void clear(final Context ctx, ImageConfigImpl config) {
-        Preconditions.checkNotNull(ctx, "Context is required");
+    public void clear(ImageConfigImpl config) {
         Preconditions.checkNotNull(config, "ImageConfigImpl is required");
 
+        final Glide glide = GlideApp.get(Utils.getApp());
+        final RequestManager requestManager = glide.getRequestManagerRetriever().get(Utils.getApp());
         if (config.getImageView() != null) {
-            GlideApp.get(ctx).getRequestManagerRetriever().get(ctx).clear(config.getImageView());
+            requestManager.clear(config.getImageView());
         }
 
         if (config.getImageViews() != null && config.getImageViews().length > 0) {//取消在执行的任务并且释放资源
             for (ImageView imageView : config.getImageViews()) {
-                GlideApp.get(ctx).getRequestManagerRetriever().get(ctx).clear(imageView);
+                requestManager.clear(imageView);
             }
         }
 
         if (config.isClearDiskCache()) {//清除本地缓存
-            Platform.post(Schedulers.io(), () -> GlideApp.get(ctx).clearDiskCache());
+            Platform.post(Schedulers.io(), glide::clearDiskCache);
         }
 
         if (config.isClearMemory()) {//清除内存缓存
-            Platform.post(() -> GlideApp.get(ctx).clearMemory());
+            Platform.post(glide::clearMemory);
         }
     }
 

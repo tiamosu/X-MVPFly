@@ -1,6 +1,5 @@
 package com.xia.fly.ui.imageloader;
 
-import android.content.Context;
 import android.support.annotation.Nullable;
 
 import com.xia.fly.utils.Preconditions;
@@ -28,18 +27,18 @@ public final class ImageLoader {
      * 加载图片
      */
     @SuppressWarnings("unchecked")
-    public <T extends ImageConfig> void loadImage(Context context, T config) {
+    public <T extends ImageConfig> void loadImage(T config) {
         Preconditions.checkNotNull(mStrategy, "Please implement BaseImageLoaderStrategy and call GlobalConfigModule.Builder#imageLoaderStrategy(BaseImageLoaderStrategy) in the applyOptions method of ConfigModule");
-        this.mStrategy.loadImage(context, config);
+        this.mStrategy.loadImage(config);
     }
 
     /**
      * 停止加载或清理缓存
      */
     @SuppressWarnings("unchecked")
-    public <T extends ImageConfig> void clear(Context context, T config) {
+    public <T extends ImageConfig> void clear(T config) {
         Preconditions.checkNotNull(mStrategy, "Please implement BaseImageLoaderStrategy and call GlobalConfigModule.Builder#imageLoaderStrategy(BaseImageLoaderStrategy) in the applyOptions method of ConfigModule");
-        this.mStrategy.clear(context, config);
+        this.mStrategy.clear(config);
     }
 
     /**

@@ -9,6 +9,10 @@ import com.xia.fly.ui.imageloader.ImageConfig;
 import com.xia.fly.ui.imageloader.ImageLoader;
 
 /**
+ * 这里存放图片请求的配置信息,可以一直扩展字段,如果外部调用时想让图片加载框架
+ * 做一些操作,比如清除缓存或者切换缓存策略,则可以定义一个 int 类型的变量,内部根据 switch(int) 做不同的操作
+ * 其他操作同理
+ *
  * @author xia
  * @date 2018/9/17.
  */

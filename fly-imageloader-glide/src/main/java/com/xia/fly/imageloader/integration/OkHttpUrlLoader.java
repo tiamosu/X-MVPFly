@@ -14,6 +14,8 @@ import okhttp3.Call;
 import okhttp3.OkHttpClient;
 
 /**
+ * A simple model loader for fetching media over http/https using OkHttp.
+ *
  * @author xia
  * @date 2018/8/27.
  */

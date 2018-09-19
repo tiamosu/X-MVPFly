@@ -21,6 +21,8 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 
 /**
+ * Fetches an {@link InputStream} using the okhttp library.
+ *
  * @author xia
  * @date 2018/8/27.
  */
