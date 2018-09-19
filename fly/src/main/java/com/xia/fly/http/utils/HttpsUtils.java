@@ -60,7 +60,11 @@ public final class HttpsUtils {
         }
     }
 
-    public static final class HOSTNAME_VERIFIER implements HostnameVerifier {
+    public static HostnameVerifier DEFAULT_HOSTNAME_VERIFIER() {
+        return new HOSTNAME_VERIFIER();
+    }
+
+    private static final class HOSTNAME_VERIFIER implements HostnameVerifier {
         @SuppressLint("BadHostnameVerifier")
         @Override
         public boolean verify(String hostname, SSLSession session) {

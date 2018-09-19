@@ -18,23 +18,6 @@ public final class Platform {
         return HANDLER;
     }
 
-    public static final boolean DEPENDENCY_GLIDE;
-
-    static {
-        DEPENDENCY_GLIDE = findClassByClassName("com.bumptech.glide.Glide");
-    }
-
-    private static boolean findClassByClassName(final String className) {
-        boolean hasDependency;
-        try {
-            Class.forName(className);
-            hasDependency = true;
-        } catch (ClassNotFoundException e) {
-            hasDependency = false;
-        }
-        return hasDependency;
-    }
-
     public static void post(final Action action) {
         Completable.fromAction(action)
                 .subscribeOn(AndroidSchedulers.mainThread())

@@ -5,6 +5,8 @@ import android.app.Activity;
 import com.blankj.utilcode.util.ScreenUtils;
 
 /**
+ * 屏幕适配方案
+ *
  * @author xia
  * @date 2018/8/28.
  */

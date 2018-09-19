@@ -41,10 +41,11 @@ public final class GlobalConfiguration implements ConfigModule {
                         .retryOnConnectionFailure(true)
                         //cookie认证
                         .cookieJar(new CookieJarImpl(new PersistentCookieStore(context)))
-                        .hostnameVerifier(new HttpsUtils.HOSTNAME_VERIFIER())
+                        .hostnameVerifier(HttpsUtils.DEFAULT_HOSTNAME_VERIFIER())
                         .sslSocketFactory(SSL_PARAMS.sSLSocketFactory, SSL_PARAMS.trustManager))
                 .retrofitConfiguration((context12, retrofitBuilder) -> {
-                });
+                })
+                .responseErrorListener(new ResponseErrorListenerImpl());
     }
 
     @Override
