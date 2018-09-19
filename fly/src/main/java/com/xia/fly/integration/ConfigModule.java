@@ -10,8 +10,11 @@ import com.xia.fly.di.module.GlobalConfigModule;
 import java.util.List;
 
 /**
+ * {@link ConfigModule} 可以给框架配置一些参数,需要实现 {@link ConfigModule} 后,在 AndroidManifest 中声明该实现类
+ *
  * @author xia
  * @date 2018/9/14.
+ * @see <a href="https://github.com/JessYanCoding/MVPArms/wiki#2.1">ConfigModule wiki 官方文档</a>
  */
 public interface ConfigModule {
 

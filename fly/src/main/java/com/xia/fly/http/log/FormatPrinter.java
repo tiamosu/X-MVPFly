@@ -1,13 +1,19 @@
 package com.xia.fly.http.log;
 
+import com.xia.fly.di.module.GlobalConfigModule;
+
 import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.Request;
 
 /**
+ * 对 OkHttp 的请求和响应信息进行更规范和清晰的打印, 开发者可更根据自己的需求自行扩展打印格式
+ *
  * @author xia
  * @date 2018/9/14.
+ * @see DefaultFormatPrinter
+ * @see GlobalConfigModule.Builder#formatPrinter(FormatPrinter)
  */
 public interface FormatPrinter {
 

@@ -10,6 +10,16 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * {@link IntelligentCache} 含有可将数据永久存储至内存中的存储容器 {@link #mMap}, 和当达到最大容量时可根据 LRU
+ * 算法抛弃不合规数据的存储容器 {@link #mCache}
+ * <p>
+ * {@link IntelligentCache} 可根据您传入的 {@code key} 智能的判断您需要将数据存储至哪个存储容器, 从而针对数据
+ * 的不同特性进行不同的存储优化
+ * <p>
+ * 调用 {@link IntelligentCache#put(Object, Object)} 方法, 使用 {@link #KEY_KEEP} + {@code key} 作为 key 传入的
+ * {@code value} 可存储至 {@link #mMap} (数据永久存储至内存中, 适合比较重要的数据) 中, 否则储存至 {@link #mCache}
+ * <p>
+ *
  * @author xia
  * @date 2018/9/14.
  */

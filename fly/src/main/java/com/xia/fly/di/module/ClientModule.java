@@ -31,6 +31,8 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
+ * 提供一些三方库客户端实例的 {@link Module}
+ *
  * @author xia
  * @date 2018/9/14.
  */

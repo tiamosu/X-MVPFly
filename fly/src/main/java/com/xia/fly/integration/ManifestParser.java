@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 用于解析 AndroidManifest 中的 Meta 属性
+ * 配合 {@link ConfigModule} 使用
+ *
  * @author xia
  * @date 2018/9/14.
  */

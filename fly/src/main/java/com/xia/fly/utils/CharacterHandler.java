@@ -22,6 +22,8 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 /**
+ * 处理字符串的工具类
+ *
  * @author xia
  * @date 2018/9/14.
  */

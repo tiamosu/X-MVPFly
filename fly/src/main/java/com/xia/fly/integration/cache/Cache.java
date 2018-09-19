@@ -1,13 +1,21 @@
 package com.xia.fly.integration.cache;
 
+import android.app.Application;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+
+import com.xia.fly.di.module.GlobalConfigModule;
 
 import java.util.Set;
 
 /**
+ * 用于缓存框架中所必需的组件,开发者可通过 {@link GlobalConfigModule.Builder#cacheFactory(Factory)} 为框架提供缓存策略
+ * 开发者也可以用于自己日常中的使用
+ *
  * @author xia
  * @date 2018/9/14.
+ * @see GlobalConfigModule#provideCacheFactory(Application)
+ * @see LruCache
  */
 public interface Cache<K, V> {
 

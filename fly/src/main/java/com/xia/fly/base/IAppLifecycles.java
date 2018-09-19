@@ -6,10 +6,10 @@ import android.content.res.Configuration;
 import android.support.annotation.NonNull;
 
 /**
+ * 用于代理 {@link Application} 的生命周期
+ *
  * @author xia
  * @date 2018/9/14.
- * <p>
- * 用于代理 {@link Application} 的生命周期
  */
 public interface IAppLifecycles {
 

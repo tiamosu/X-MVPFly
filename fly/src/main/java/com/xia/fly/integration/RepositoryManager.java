@@ -20,8 +20,11 @@ import io.rx_cache2.internal.RxCache;
 import retrofit2.Retrofit;
 
 /**
+ * 用来管理网络请求层,以及数据缓存层,以后可能添加数据库请求层
+ *
  * @author xia
  * @date 2018/9/14.
+ * @see <a href="https://github.com/JessYanCoding/MVPArms/wiki#2.3">RepositoryManager wiki 官方文档</a>
  */
 @SuppressWarnings("WeakerAccess")
 @Singleton

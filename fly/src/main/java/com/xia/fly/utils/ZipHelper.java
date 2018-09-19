@@ -15,6 +15,8 @@ import java.util.zip.GZIPOutputStream;
 import java.util.zip.Inflater;
 
 /**
+ * 处理压缩和解压的工具类
+ *
  * @author xia
  * @date 2018/9/14.
  */

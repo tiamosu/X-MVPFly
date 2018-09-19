@@ -1,12 +1,18 @@
 package com.xia.fly.http;
 
+import com.xia.fly.di.module.GlobalConfigModule;
+
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
 /**
+ * 处理 Http 请求和响应结果的处理类
+ * 使用 {@link GlobalConfigModule.Builder#globalHttpHandler(GlobalHttpHandler)} 方法配置
+ *
  * @author xia
  * @date 2018/9/14.
+ * @see <a href="https://github.com/JessYanCoding/MVPArms/wiki#3.2">GlobalHttpHandler Wiki 官方文档</a>
  */
 public interface GlobalHttpHandler {
 

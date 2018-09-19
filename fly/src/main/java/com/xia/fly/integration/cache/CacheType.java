@@ -8,8 +8,12 @@ import android.support.v4.app.Fragment;
 import java.util.Objects;
 
 /**
+ * 构建 {@link Cache} 时,使用 {@link CacheType} 中声明的类型,来区分不同的模块
+ * 从而为不同的模块构建不同的缓存策略
+ *
  * @author xia
  * @date 2018/9/14.
+ * @see Cache.Factory#build(CacheType)
  */
 public interface CacheType {
     int RETROFIT_SERVICE_CACHE_TYPE_ID = 0;

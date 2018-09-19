@@ -18,6 +18,8 @@ import dagger.Module;
 import dagger.Provides;
 
 /**
+ * 提供一些框架必须的实例的 {@link Module}
+ *
  * @author xia
  * @date 2018/9/14.
  */

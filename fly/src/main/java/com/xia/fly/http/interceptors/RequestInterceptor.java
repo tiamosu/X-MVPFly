@@ -3,6 +3,7 @@ package com.xia.fly.http.interceptors;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.xia.fly.di.module.GlobalConfigModule;
 import com.xia.fly.http.GlobalHttpHandler;
 import com.xia.fly.http.log.FormatPrinter;
 import com.xia.fly.utils.CharacterHandler;
@@ -27,6 +28,9 @@ import okio.Buffer;
 import okio.BufferedSource;
 
 /**
+ * 解析框架中的网络请求和响应结果,并以日志形式输出,调试神器
+ * 可使用 {@link GlobalConfigModule.Builder#printHttpLogLevel(Level)} 控制或关闭日志
+ *
  * @author xia
  * @date 2018/9/14.
  */

@@ -3,6 +3,7 @@ package com.xia.fly.http.log;
 import android.text.TextUtils;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.xia.fly.di.module.GlobalConfigModule;
 import com.xia.fly.http.interceptors.RequestInterceptor;
 import com.xia.fly.utils.CharacterHandler;
 
@@ -12,8 +13,12 @@ import okhttp3.MediaType;
 import okhttp3.Request;
 
 /**
+ * 对 OkHttp 的请求和响应信息进行更规范和清晰的打印, 此类为框架默认实现, 以默认格式打印信息, 若觉得默认打印格式
+ * 并不能满足自己的需求, 可自行扩展自己理想的打印格式
+ *
  * @author xia
  * @date 2018/9/14.
+ * @see GlobalConfigModule.Builder#formatPrinter(FormatPrinter)
  */
 public class DefaultFormatPrinter implements FormatPrinter {
     private static final String TAG = "ArmsHttpLog";
