@@ -1,12 +1,21 @@
 package com.xia.fly.imageloader;
 
+import android.net.Uri;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
+import android.support.annotation.RawRes;
 import android.widget.ImageView;
 
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
+import com.xia.fly.imageloader.CacheStrategy.StrategyType;
 import com.xia.fly.ui.imageloader.BaseImageLoaderStrategy;
 import com.xia.fly.ui.imageloader.ImageConfig;
 import com.xia.fly.ui.imageloader.ImageLoader;
+
+import java.io.File;
 
 /**
  * 这里存放图片请求的配置信息,可以一直扩展字段,如果外部调用时想让图片加载框架
@@ -18,165 +27,226 @@ import com.xia.fly.ui.imageloader.ImageLoader;
  */
 @SuppressWarnings("WeakerAccess")
 public class ImageConfigImpl extends ImageConfig {
-    private int cacheStrategy;//0对应DiskCacheStrategy.all,1对应DiskCacheStrategy.NONE,2对应DiskCacheStrategy.SOURCE,3对应DiskCacheStrategy.RESULT
-    private int fallback; //请求 url 为空,则使用此图片作为占位符
-    private int imageRadius;//图片每个圆角的大小
-    private int blurValue;//高斯模糊值, 值越大模糊效果越大
-
-    /**
-     * @see {@link Builder#transformation(BitmapTransformation)}
-     */
-    private BitmapTransformation transformation;//glide用它来改变图形的形状
-    private ImageView[] imageViews;
-    private boolean isCrossFade;//是否使用淡入淡出过渡动画
-    private boolean isCenterCrop;//是否将图片剪切为 CenterCrop
-    private boolean isCircle;//是否将图片剪切为圆形
-    private boolean isClearMemory;//清理内存缓存
-    private boolean isClearDiskCache;//清理本地缓存
+    private int mCacheStrategy;//0对应DiskCacheStrategy.all,1对应DiskCacheStrategy.NONE,2对应DiskCacheStrategy.SOURCE,3对应DiskCacheStrategy.RESULT
+    private int mFallback; //请求 url 为空,则使用此图片作为占位符
+    private int mImageRadius;//图片每个圆角的大小
+    private int mBlurValue;//高斯模糊值, 值越大模糊效果越大
+    private BitmapTransformation mTransformation;//glide用它来改变图形的形状
+    private ImageView[] mImageViews;
+    private boolean mIsCrossFade;//是否使用淡入淡出过渡动画
+    private boolean mIsCenterCrop;//是否将图片剪切为 CenterCrop
+    private boolean mIsCenterInside;//是否将图片剪切为 CenterInside
+    private boolean mIsCircleCrop;//是否将图片剪切为圆形
+    private boolean mIsClearMemory;//清理内存缓存
+    private boolean mIsClearDiskCache;//清理本地缓存
+    private int mTargetWidth, mTargetHeight;//重新设定图片大小
+    private RequestOptions mRequestOptions;
+    private RequestListener mRequestListener;
+    private boolean mIsDontAnimate;
 
     private ImageConfigImpl(Builder builder) {
-        this.mUrl = builder.url;
-        this.mImageView = builder.imageView;
+        this.mUrl = builder.mUrl;
+        this.mResId = builder.mResId;
+        this.mFile = builder.mFile;
+        this.mUri = builder.mUri;
+        this.mObject = builder.mObject;
+        this.mImageView = builder.mImageView;
         this.mTarget = builder.mTarget;
-        this.mPlaceholder = builder.placeholder;
-        this.mErrorPic = builder.errorPic;
-        this.fallback = builder.fallback;
-        this.cacheStrategy = builder.cacheStrategy;
-        this.imageRadius = builder.imageRadius;
-        this.blurValue = builder.blurValue;
-        this.transformation = builder.transformation;
-        this.imageViews = builder.imageViews;
-        this.isCrossFade = builder.isCrossFade;
-        this.isCenterCrop = builder.isCenterCrop;
-        this.isCircle = builder.isCircle;
-        this.isClearMemory = builder.isClearMemory;
-        this.isClearDiskCache = builder.isClearDiskCache;
+        this.mPlaceholder = builder.mPlaceholder;
+        this.mErrorPic = builder.mErrorPic;
+        this.mFallback = builder.mFallback;
+        this.mCacheStrategy = builder.mCacheStrategy;
+        this.mImageRadius = builder.mImageRadius;
+        this.mBlurValue = builder.mBlurValue;
+        this.mTransformation = builder.mTransformation1;
+        this.mImageViews = builder.mImageViews;
+        this.mIsCrossFade = builder.mIsCrossFade;
+        this.mIsCenterCrop = builder.mIsCenterCrop;
+        this.mIsCenterInside = builder.mIsCenterInside;
+        this.mIsCircleCrop = builder.mIsCircleCrop;
+        this.mIsClearMemory = builder.mIsClearMemory;
+        this.mIsClearDiskCache = builder.mIsClearDiskCache;
+        this.mTargetWidth = builder.mTargetWidth;
+        this.mTargetHeight = builder.mTargetHeight;
+        this.mRequestOptions = builder.mRequestOptions;
+        this.mRequestListener = builder.mRequestListener;
+        this.mIsDontAnimate = builder.mIsDontAnimate;
     }
 
     public int getCacheStrategy() {
-        return cacheStrategy;
+        return mCacheStrategy;
     }
 
     public BitmapTransformation getTransformation() {
-        return transformation;
+        return mTransformation;
     }
 
     public ImageView[] getImageViews() {
-        return imageViews;
+        return mImageViews;
     }
 
     public boolean isClearMemory() {
-        return isClearMemory;
+        return mIsClearMemory;
     }
 
     public boolean isClearDiskCache() {
-        return isClearDiskCache;
+        return mIsClearDiskCache;
     }
 
     public int getFallback() {
-        return fallback;
+        return mFallback;
     }
 
     public int getBlurValue() {
-        return blurValue;
+        return mBlurValue;
     }
 
     public boolean isBlurImage() {
-        return blurValue > 0;
+        return mBlurValue > 0;
     }
 
     public int getImageRadius() {
-        return imageRadius;
+        return mImageRadius;
     }
 
     public boolean isImageRadius() {
-        return imageRadius > 0;
+        return mImageRadius > 0;
     }
 
     public boolean isCrossFade() {
-        return isCrossFade;
+        return mIsCrossFade;
     }
 
     public boolean isCenterCrop() {
-        return isCenterCrop;
+        return mIsCenterCrop;
     }
 
-    public boolean isCircle() {
-        return isCircle;
+    public boolean isCenterInside() {
+        return mIsCenterInside;
+    }
+
+    public boolean isCircleCrop() {
+        return mIsCircleCrop;
+    }
+
+    public int getTargetWidth() {
+        return mTargetWidth;
+    }
+
+    public int getTargetHeight() {
+        return mTargetHeight;
+    }
+
+    public RequestOptions getRequestOptions() {
+        return mRequestOptions;
+    }
+
+    public RequestListener getRequestListener() {
+        return mRequestListener;
+    }
+
+    public boolean isDontAnimate() {
+        return mIsDontAnimate;
     }
 
     public static Builder builder() {
         return new Builder();
     }
 
-
     public static final class Builder {
-        private String url;
-        private ImageView imageView;
+        private String mUrl;
+        private Integer mResId;
+        private File mFile;
+        private Uri mUri;
+        private Object mObject;
+        private ImageView mImageView;
         private Target mTarget;
-        private int placeholder;
-        private int errorPic;
-        private int fallback; //请求 url 为空,则使用此图片作为占位符
-        private int cacheStrategy;//0对应DiskCacheStrategy.all,1对应DiskCacheStrategy.NONE,2对应DiskCacheStrategy.SOURCE,3对应DiskCacheStrategy.RESULT
-        private int imageRadius;//图片每个圆角的大小
-        private int blurValue;//高斯模糊值, 值越大模糊效果越大
+        private int mPlaceholder;
+        private int mErrorPic;
+        private int mFallback; //请求 url 为空,则使用此图片作为占位符
+        private int mCacheStrategy;//0对应DiskCacheStrategy.all,1对应DiskCacheStrategy.NONE,2对应DiskCacheStrategy.SOURCE,3对应DiskCacheStrategy.RESULT
+        private int mImageRadius;//图片每个圆角的大小
+        private int mBlurValue;//高斯模糊值, 值越大模糊效果越大
+        private BitmapTransformation mTransformation1;//glide用它来改变图形的形状
+        private ImageView[] mImageViews;
+        private boolean mIsCrossFade;//是否使用淡入淡出过渡动画
+        private boolean mIsCenterCrop;//是否将图片剪切为 CenterCrop
+        private boolean mIsCenterInside;
+        private boolean mIsCircleCrop;//是否将图片剪切为圆形
+        private boolean mIsClearMemory;//清理内存缓存
+        private boolean mIsClearDiskCache;//清理本地缓存
+        private int mTargetWidth, mTargetHeight;
+        private RequestOptions mRequestOptions;
+        private RequestListener mRequestListener;
+        private boolean mIsDontAnimate;
 
-        /**
-         * @see {@link Builder#transformation(BitmapTransformation)}
-         */
-        private BitmapTransformation transformation;//glide用它来改变图形的形状
-        private ImageView[] imageViews;
-        private boolean isCrossFade;//是否使用淡入淡出过渡动画
-        private boolean isCenterCrop;//是否将图片剪切为 CenterCrop
-        private boolean isCircle;//是否将图片剪切为圆形
-        private boolean isClearMemory;//清理内存缓存
-        private boolean isClearDiskCache;//清理本地缓存
-
-        private Builder() {
-        }
-
-        public Builder url(String url) {
-            this.url = url;
+        public Builder load(String url) {
+            this.mUrl = url;
             return this;
         }
 
-        public Builder placeholder(int placeholder) {
-            this.placeholder = placeholder;
+        public Builder load(@RawRes @DrawableRes Integer resId) {
+            this.mResId = resId;
             return this;
         }
 
-        public Builder errorPic(int errorPic) {
-            this.errorPic = errorPic;
+        public Builder load(File file) {
+            this.mFile = file;
             return this;
         }
 
-        public Builder fallback(int fallback) {
-            this.fallback = fallback;
+        public Builder load(Uri uri) {
+            this.mUri = uri;
             return this;
         }
 
-        public Builder imageView(ImageView imageView) {
-            this.imageView = imageView;
+        public Builder load(Object o) {
+            this.mObject = o;
             return this;
         }
 
-        public Builder target(Target target) {
+        public Builder into(ImageView imageView) {
+            this.mImageView = imageView;
+            return this;
+        }
+
+        public Builder into(Target target) {
             this.mTarget = target;
             return this;
         }
 
-        public Builder cacheStrategy(int cacheStrategy) {
-            this.cacheStrategy = cacheStrategy;
+        public Builder into(ImageView... imageViews) {
+            this.mImageViews = imageViews;
+            return this;
+        }
+
+        public Builder placeholder(int placeholder) {
+            this.mPlaceholder = placeholder;
+            return this;
+        }
+
+        public Builder error(int errorPic) {
+            this.mErrorPic = errorPic;
+            return this;
+        }
+
+        public Builder fallback(int fallback) {
+            this.mFallback = fallback;
+            return this;
+        }
+
+        public Builder cacheStrategy(@StrategyType int cacheStrategy) {
+            this.mCacheStrategy = cacheStrategy;
             return this;
         }
 
         public Builder imageRadius(int imageRadius) {
-            this.imageRadius = imageRadius;
+            this.mImageRadius = imageRadius;
             return this;
         }
 
         public Builder blurValue(int blurValue) { //blurValue 建议设置为 15
-            this.blurValue = blurValue;
+            this.mBlurValue = blurValue;
             return this;
         }
 
@@ -188,41 +258,62 @@ public class ImageConfigImpl extends ImageConfig {
          * 此 API 会在后面的版本中被删除, 请使用其他 API 替代
          *
          * @param transformation {@link BitmapTransformation}
-         *                       请使用 {@link #isCircle()}, {@link #isCenterCrop()}, {@link #isImageRadius()} 替代
+         *                       请使用 {@link #isCircleCrop()}, {@link #isCenterCrop()}, {@link #isImageRadius()} 替代
          *                       如果有其他自定义 BitmapTransformation 的需求, 请自行扩展 {@link BaseImageLoaderStrategy}
          */
-        public Builder transformation(BitmapTransformation transformation) {
-            this.transformation = transformation;
+        public Builder transform(BitmapTransformation transformation) {
+            this.mTransformation1 = transformation;
             return this;
         }
 
-        public Builder imageViews(ImageView... imageViews) {
-            this.imageViews = imageViews;
+        public Builder crossFade(boolean isCrossFade) {
+            this.mIsCrossFade = isCrossFade;
             return this;
         }
 
-        public Builder isCrossFade(boolean isCrossFade) {
-            this.isCrossFade = isCrossFade;
+        public Builder centerCrop(boolean isCenterCrop) {
+            this.mIsCenterCrop = isCenterCrop;
             return this;
         }
 
-        public Builder isCenterCrop(boolean isCenterCrop) {
-            this.isCenterCrop = isCenterCrop;
+        public Builder centerInside(boolean isCenterInside) {
+            this.mIsCenterInside = isCenterInside;
             return this;
         }
 
-        public Builder isCircle(boolean isCircle) {
-            this.isCircle = isCircle;
+        public Builder circleCrop(boolean isCircleCrop) {
+            this.mIsCircleCrop = isCircleCrop;
             return this;
         }
 
-        public Builder isClearMemory(boolean isClearMemory) {
-            this.isClearMemory = isClearMemory;
+        public Builder override(int targetWidth, int targetHeight) {
+            this.mTargetWidth = targetWidth;
+            this.mTargetHeight = targetHeight;
             return this;
         }
 
-        public Builder isClearDiskCache(boolean isClearDiskCache) {
-            this.isClearDiskCache = isClearDiskCache;
+        public Builder clearMemory(boolean isClearMemory) {
+            this.mIsClearMemory = isClearMemory;
+            return this;
+        }
+
+        public Builder clearDiskCache(boolean isClearDiskCache) {
+            this.mIsClearDiskCache = isClearDiskCache;
+            return this;
+        }
+
+        public Builder apply(@NonNull RequestOptions requestOptions) {
+            this.mRequestOptions = requestOptions;
+            return this;
+        }
+
+        public Builder addListener(RequestListener requestListener) {
+            this.mRequestListener = requestListener;
+            return this;
+        }
+
+        public Builder dontAnimate(boolean isDontAnimate) {
+            this.mIsDontAnimate = isDontAnimate;
             return this;
         }
 

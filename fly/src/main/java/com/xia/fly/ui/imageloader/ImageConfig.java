@@ -1,8 +1,11 @@
 package com.xia.fly.ui.imageloader;
 
+import android.net.Uri;
 import android.widget.ImageView;
 
 import com.bumptech.glide.request.target.Target;
+
+import java.io.File;
 
 /**
  * 这里是图片加载配置信息的基类,定义一些所有图片加载框架都可以用的通用参数
@@ -13,13 +16,33 @@ import com.bumptech.glide.request.target.Target;
  */
 public class ImageConfig {
     protected String mUrl;
+    protected Integer mResId;
+    protected File mFile;
+    protected Uri mUri;
+    protected Object mObject;
     protected ImageView mImageView;
+    protected Target mTarget;
     protected int mPlaceholder;//占位符
     protected int mErrorPic;//错误占位符
-    protected Target mTarget;
 
     public String getUrl() {
         return mUrl;
+    }
+
+    public Integer getResId() {
+        return mResId;
+    }
+
+    public File getFile() {
+        return mFile;
+    }
+
+    public Uri getUri() {
+        return mUri;
+    }
+
+    public Object getObject() {
+        return mObject;
     }
 
     public ImageView getImageView() {

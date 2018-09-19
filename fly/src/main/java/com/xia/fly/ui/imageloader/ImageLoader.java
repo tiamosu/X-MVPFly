@@ -1,7 +1,10 @@
 package com.xia.fly.ui.imageloader;
 
+import android.content.Context;
 import android.support.annotation.Nullable;
 
+import com.blankj.utilcode.util.Utils;
+import com.xia.fly.utils.FlyUtils;
 import com.xia.fly.utils.Preconditions;
 
 import javax.inject.Inject;
@@ -23,22 +26,34 @@ public final class ImageLoader {
     public ImageLoader() {
     }
 
+    public static <T extends ImageConfig> void load(T config) {
+        FlyUtils.getAppComponent().imageLoader()
+                .loadImage(Utils.getApp(), config);
+    }
+
+    public static <T extends ImageConfig> void clear(T config) {
+        FlyUtils.getAppComponent().imageLoader()
+                .clear(Utils.getApp(), config);
+    }
+
     /**
      * 加载图片
      */
     @SuppressWarnings("unchecked")
-    public <T extends ImageConfig> void loadImage(T config) {
-        Preconditions.checkNotNull(mStrategy, "Please implement BaseImageLoaderStrategy and call GlobalConfigModule.Builder#imageLoaderStrategy(BaseImageLoaderStrategy) in the applyOptions method of ConfigModule");
-        this.mStrategy.loadImage(config);
+    public <T extends ImageConfig> void loadImage(Context context, T config) {
+        Preconditions.checkNotNull(mStrategy, "Please implement BaseImageLoaderStrategy " +
+                "and call GlobalConfigModule.Builder#imageLoaderStrategy(BaseImageLoaderStrategy) in the applyOptions method of ConfigModule");
+        this.mStrategy.loadImage(context, config);
     }
 
     /**
      * 停止加载或清理缓存
      */
     @SuppressWarnings("unchecked")
-    public <T extends ImageConfig> void clear(T config) {
-        Preconditions.checkNotNull(mStrategy, "Please implement BaseImageLoaderStrategy and call GlobalConfigModule.Builder#imageLoaderStrategy(BaseImageLoaderStrategy) in the applyOptions method of ConfigModule");
-        this.mStrategy.clear(config);
+    public <T extends ImageConfig> void clear(Context context, T config) {
+        Preconditions.checkNotNull(mStrategy, "Please implement BaseImageLoaderStrategy " +
+                "and call GlobalConfigModule.Builder#imageLoaderStrategy(BaseImageLoaderStrategy) in the applyOptions method of ConfigModule");
+        this.mStrategy.clear(context, config);
     }
 
     /**

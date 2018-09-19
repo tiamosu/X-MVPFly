@@ -2,12 +2,15 @@ package com.xia.baseproject.demo.ui.fragments;
 
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.Log;
 
 import com.xia.baseproject.demo.R;
 import com.xia.baseproject.demo.base.HeadViewFragment;
 import com.xia.baseproject.demo.mvp.presenter.HomePresenter;
 import com.xia.baseproject.demo.mvp.view.HomeView;
+import com.xia.fly.imageloader.ImageConfigImpl;
+import com.xia.fly.ui.imageloader.ImageLoader;
 import com.xia.fly.utils.FragmentUtils;
 
 import butterknife.BindView;
@@ -19,6 +22,8 @@ import butterknife.BindView;
 public class HomeFragment extends HeadViewFragment<HomePresenter> implements HomeView {
     @BindView(R.id.home_jump_btn)
     AppCompatButton mAppCompatButton;
+    @BindView(R.id.home_photo_iv)
+    AppCompatImageView mPhotoView;
 
     @Override
     public boolean isCheckNetWork() {
@@ -67,6 +72,11 @@ public class HomeFragment extends HeadViewFragment<HomePresenter> implements Hom
         super.onVisibleLazyLoad();
 //        getP().downloadFile();
 //        new Handler().postDelayed(() -> getP().load(), 3000);
+
+        ImageLoader.load(
+                ImageConfigImpl.builder()
+                        .load(R.mipmap.ic_launcher_round)
+                        .build());
     }
 
     @Override

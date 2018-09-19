@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
-import com.blankj.utilcode.util.Utils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.GlideBuilder;
 import com.bumptech.glide.RequestManager;
@@ -34,26 +33,36 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy<ImageCo
     @SuppressWarnings("unchecked")
     @SuppressLint("CheckResult")
     @Override
-    public void loadImage(ImageConfigImpl config) {
+    public void loadImage(Context context, ImageConfigImpl config) {
+        Preconditions.checkNotNull(context, "Context is required");
         Preconditions.checkNotNull(config, "ImageConfigImpl is required");
-        Preconditions.checkNotNull(config.getImageView(), "ImageView is required");
 
-        final GlideRequests requests = GlideApp.with(Utils.getApp());
-        final GlideRequest<Drawable> glideRequest = requests.load(config.getUrl());
+        final GlideRequests requests = GlideApp.with(context);
+        GlideRequest<Drawable> glideRequest = requests.load(config.getObject());
+        if (config.getUrl() != null) {
+            glideRequest = requests.load(config.getUrl());
+        } else if (config.getResId() != 0) {
+            glideRequest = requests.load(config.getResId());
+        } else if (config.getFile() != null) {
+            glideRequest = requests.load(config.getFile());
+        } else if (config.getUri() != null) {
+            glideRequest = requests.load(config.getUri());
+        }
+
         switch (config.getCacheStrategy()) {//缓存策略
-            case 0:
+            case CacheStrategy.ALL:
                 glideRequest.diskCacheStrategy(DiskCacheStrategy.ALL);
                 break;
-            case 1:
+            case CacheStrategy.NONE:
                 glideRequest.diskCacheStrategy(DiskCacheStrategy.NONE);
                 break;
-            case 2:
+            case CacheStrategy.RESOURCE:
                 glideRequest.diskCacheStrategy(DiskCacheStrategy.RESOURCE);
                 break;
-            case 3:
+            case CacheStrategy.DATA:
                 glideRequest.diskCacheStrategy(DiskCacheStrategy.DATA);
                 break;
-            case 4:
+            case CacheStrategy.AUTOMATIC:
                 glideRequest.diskCacheStrategy(DiskCacheStrategy.AUTOMATIC);
                 break;
             default:
@@ -69,10 +78,12 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy<ImageCo
         //是否将图片剪切为 CenterCrop
         if (config.isCenterCrop()) {
             glideRequest.centerCrop();
+        } else if (config.isCenterInside()) {
+            glideRequest.centerInside();
         }
 
         //是否将图片剪切为圆形
-        if (config.isCircle()) {
+        if (config.isCircleCrop()) {
             glideRequest.circleCrop();
         }
 
@@ -106,6 +117,26 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy<ImageCo
             glideRequest.fallback(config.getFallback());
         }
 
+        //设定大小
+        if (config.getTargetWidth() > 0 && config.getTargetHeight() > 0) {
+            glideRequest.override(config.getTargetWidth(), config.getTargetHeight());
+        }
+
+        //添加请求配置
+        if (config.getRequestOptions() != null) {
+            glideRequest.apply(config.getRequestOptions());
+        }
+
+        //添加图片加载监听
+        if (config.getRequestListener() != null) {
+            glideRequest.addListener(config.getRequestListener());
+        }
+
+        //不加载动画
+        if (config.isDontAnimate()) {
+            glideRequest.dontAnimate();
+        }
+
         if (config.getImageView() != null) {
             glideRequest.into(config.getImageView());
         } else if (config.getTarget() != null) {
@@ -114,11 +145,12 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy<ImageCo
     }
 
     @Override
-    public void clear(ImageConfigImpl config) {
+    public void clear(Context context, ImageConfigImpl config) {
+        Preconditions.checkNotNull(context, "Context is required");
         Preconditions.checkNotNull(config, "ImageConfigImpl is required");
 
-        final Glide glide = GlideApp.get(Utils.getApp());
-        final RequestManager requestManager = glide.getRequestManagerRetriever().get(Utils.getApp());
+        final Glide glide = GlideApp.get(context);
+        final RequestManager requestManager = glide.getRequestManagerRetriever().get(context);
         if (config.getImageView() != null) {
             requestManager.clear(config.getImageView());
         }
