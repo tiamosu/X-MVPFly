@@ -36,7 +36,7 @@ public final class KeyBoardHelper {
     private static boolean isShouldHideKeyboard(SupportActivity activity, View v, MotionEvent event) {
         if (v != null && (v instanceof EditText)) {
             final EditText editText = (EditText) v;
-            activity.dispatchTouchHideKeyboard(editText);
+            activity.onDispatchTouchHideKeyboard(editText);
             final int[] l = {0, 0};
             v.getLocationInWindow(l);
             final int left = l[0];

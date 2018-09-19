@@ -33,7 +33,7 @@ public class MainActivity extends ProxyActivity {
     }
 
     @Override
-    public void dispatchTouchHideKeyboard(EditText editText) {
+    public void onDispatchTouchHideKeyboard(EditText editText) {
         editText.setFocusable(false);
     }
 

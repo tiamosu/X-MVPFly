@@ -40,5 +40,5 @@ public interface IActivity {
     /**
      * 点击空白区域，隐藏软键盘时，EditText进行相关设置
      */
-    void dispatchTouchHideKeyboard(EditText editText);
+    void onDispatchTouchHideKeyboard(EditText editText);
 }

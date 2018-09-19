@@ -162,7 +162,7 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
     }
 
     @Override
-    public void dispatchTouchHideKeyboard(EditText editText) {
+    public void onDispatchTouchHideKeyboard(EditText editText) {
     }
 
     protected void subscribeWithTags(final IRxBusCallback callback, final String... tags) {
