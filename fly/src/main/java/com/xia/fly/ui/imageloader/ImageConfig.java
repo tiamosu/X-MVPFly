@@ -15,49 +15,13 @@ import java.io.File;
  * @date 2018/9/17.
  */
 public class ImageConfig {
-    protected String mUrl;
-    protected Integer mResId;
-    protected File mFile;
-    protected Uri mUri;
-    protected Object mObject;
-    protected ImageView mImageView;
-    protected Target mTarget;
-    protected int mPlaceholder;//占位符
-    protected int mErrorPic;//错误占位符
-
-    public String getUrl() {
-        return mUrl;
-    }
-
-    public Integer getResId() {
-        return mResId;
-    }
-
-    public File getFile() {
-        return mFile;
-    }
-
-    public Uri getUri() {
-        return mUri;
-    }
-
-    public Object getObject() {
-        return mObject;
-    }
-
-    public ImageView getImageView() {
-        return mImageView;
-    }
-
-    public int getPlaceholder() {
-        return mPlaceholder;
-    }
-
-    public int getErrorPic() {
-        return mErrorPic;
-    }
-
-    public Target getTarget() {
-        return mTarget;
-    }
+    public String mUrl;
+    public Integer mResId;
+    public File mFile;
+    public Uri mUri;
+    public Object mObject;
+    public ImageView mImageView;
+    public Target mTarget;
+    public int mPlaceholder;//占位符
+    public int mErrorPic;//错误占位符
 }

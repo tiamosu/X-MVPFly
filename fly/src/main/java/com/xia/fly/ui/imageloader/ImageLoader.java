@@ -26,7 +26,7 @@ public final class ImageLoader {
     public ImageLoader() {
     }
 
-    public static <T extends ImageConfig> void load(T config) {
+    public static <T extends ImageConfig> void loadImage(T config) {
         FlyUtils.getAppComponent().imageLoader()
                 .loadImage(Utils.getApp(), config);
     }

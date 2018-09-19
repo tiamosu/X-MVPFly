@@ -1,10 +1,15 @@
 package com.xia.baseproject.demo.ui.fragments;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.Log;
 
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.xia.baseproject.demo.R;
 import com.xia.baseproject.demo.base.HeadViewFragment;
 import com.xia.baseproject.demo.mvp.presenter.HomePresenter;
@@ -73,10 +78,22 @@ public class HomeFragment extends HeadViewFragment<HomePresenter> implements Hom
 //        getP().downloadFile();
 //        new Handler().postDelayed(() -> getP().load(), 3000);
 
-        ImageLoader.load(
-                ImageConfigImpl.builder()
+        ImageLoader.loadImage(
+                ImageConfigImpl
                         .load(R.mipmap.ic_launcher_round)
-                        .build());
+                        .into(mPhotoView)
+                        .addListener(new RequestListener() {
+                            @Override
+                            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target target, boolean isFirstResource) {
+                                return false;
+                            }
+
+                            @Override
+                            public boolean onResourceReady(Object resource, Object model, Target target, DataSource dataSource, boolean isFirstResource) {
+                                Log.e("weixi", "onResourceReady: ");
+                                return false;
+                            }
+                        }));
     }
 
     @Override
