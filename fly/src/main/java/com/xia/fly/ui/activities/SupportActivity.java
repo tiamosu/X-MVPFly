@@ -17,7 +17,7 @@ import com.xia.fly.integration.rxbus.RxBusHelper;
 import com.xia.fly.mvp.BaseMvpPresenter;
 import com.xia.fly.mvp.BaseMvpView;
 import com.xia.fly.receiver.NetworkChangeReceiver;
-import com.xia.fly.utils.KeyBoardHelper;
+import com.xia.fly.utils.DispatchTouchEventHelper;
 import com.xia.fly.utils.Platform;
 
 import butterknife.ButterKnife;
@@ -80,7 +80,7 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        KeyBoardHelper.dispatchTouchEvent(this, ev);
+        DispatchTouchEventHelper.dispatchTouchEvent(this, ev);
         return super.dispatchTouchEvent(ev);
     }
 

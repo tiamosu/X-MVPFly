@@ -13,7 +13,7 @@ import com.xia.fly.ui.activities.SupportActivity;
  * @author xia
  * @date 2018/9/11.
  */
-public final class KeyBoardHelper {
+public final class DispatchTouchEventHelper {
 
     /**
      * 处理控制 点击屏幕空白区域隐藏软键盘
