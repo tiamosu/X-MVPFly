@@ -16,6 +16,8 @@ import com.xia.fly.integration.ConfigModule;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.logging.HttpLoggingInterceptor;
+
 /**
  * @author xia
  * @date 2018/9/18.
@@ -33,6 +35,7 @@ public final class GlobalConfiguration implements ConfigModule {
         builder.baseurl("http://www.wanandroid.com")
                 .imageLoaderStrategy(new GlideImageLoaderStrategy())
                 .okhttpConfiguration((context1, okHttpBuilder) -> okHttpBuilder
+                        .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                         //设置超时
                         .connectTimeout(10, TimeUnit.SECONDS)
                         .readTimeout(10, TimeUnit.SECONDS)

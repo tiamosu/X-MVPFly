@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 
 import com.blankj.utilcode.util.Utils;
 import com.bumptech.glide.Glide;
+import com.squareup.leakcanary.LeakCanary;
 import com.xia.fly.base.IAppLifecycles;
 
 import static android.content.ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN;
@@ -23,6 +24,9 @@ public class AppLifecyclesImpl implements IAppLifecycles {
 
     @Override
     public void onCreate(@NonNull Application application) {
+        if (!LeakCanary.isInAnalyzerProcess(application)) {
+            LeakCanary.install(application);
+        }
     }
 
     @Override
