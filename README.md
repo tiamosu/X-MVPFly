@@ -34,7 +34,7 @@ compile 'me.xia:fly-imageloader-glide:2.0.0'
 9. [Gson](https://github.com/google/gson)
 10. [RxCache](https://github.com/VictorAlbertos/RxCache)
 11. [RxErroHandler](https://github.com/JessYanCoding/RxErrorHandler)
-12. [RxBus](https://github.com/Blankj/RxBus)
+12. [RxBus](https://github.com/wexia/X-RxBus)
 13. [AndroidUtilCode](https://github.com/Blankj/AndroidUtilCode)
 14. [Butterknife](https://github.com/JakeWharton/butterknife)
 15. [Dagger2](https://github.com/google/dagger)
