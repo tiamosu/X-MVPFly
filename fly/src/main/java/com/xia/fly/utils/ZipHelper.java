@@ -185,14 +185,14 @@ public final class ZipHelper {
      * @return
      */
     public static String decompressForGzip(byte[] compressed, String charsetName) {
-        final int BUFFER_SIZE = compressed.length;
+        final int bufferSize = compressed.length;
         GZIPInputStream gis = null;
         ByteArrayInputStream is = null;
         try {
             is = new ByteArrayInputStream(compressed);
-            gis = new GZIPInputStream(is, BUFFER_SIZE);
+            gis = new GZIPInputStream(is, bufferSize);
             StringBuilder string = new StringBuilder();
-            byte[] data = new byte[BUFFER_SIZE];
+            byte[] data = new byte[bufferSize];
             int bytesRead;
             while ((bytesRead = gis.read(data)) != -1) {
                 string.append(new String(data, 0, bytesRead, charsetName));

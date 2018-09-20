@@ -1,6 +1,7 @@
 package com.xia.fly.ui.fragments;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
@@ -23,11 +24,11 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator;
  */
 public abstract class AbstractSupportFragment extends Fragment implements ISupportFragment {
     private final SupportFragmentDelegate mDelegate = new SupportFragmentDelegate(this);
-    protected FragmentActivity _mActivity;
+    protected FragmentActivity mFragmentActivity;
 
     @Override
     public FragmentActivity getContext() {
-        return _mActivity;
+        return mFragmentActivity;
     }
 
     @SuppressWarnings("unchecked")
@@ -60,12 +61,13 @@ public abstract class AbstractSupportFragment extends Fragment implements ISuppo
         return mDelegate.extraTransaction();
     }
 
-    @SuppressWarnings("deprecation")
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        mDelegate.onAttach(activity);
-        _mActivity = mDelegate.getActivity();
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (getActivity() != null) {
+            mDelegate.onAttach(getActivity());
+            mFragmentActivity = mDelegate.getActivity();
+        }
     }
 
     @Override

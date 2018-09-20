@@ -7,7 +7,6 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
 
-import org.apache.http.conn.ConnectTimeoutException;
 import org.json.JSONException;
 
 import java.io.NotSerializableException;
@@ -52,8 +51,6 @@ public class ResponseErrorListenerImpl implements ResponseErrorListener {
             msg = "类型转换错误";
         } else if (t instanceof ConnectException) {
             msg = "无法连接网络";
-        } else if (t instanceof ConnectTimeoutException) {
-            msg = "网络连接超时";
         } else if (t instanceof SocketTimeoutException) {
             msg = "请求网络超时";
         } else if (t instanceof SSLHandshakeException) {

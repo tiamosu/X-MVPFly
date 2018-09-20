@@ -60,7 +60,7 @@ public final class HttpsUtils {
         }
     }
 
-    public static HostnameVerifier DEFAULT_HOSTNAME_VERIFIER() {
+    public static HostnameVerifier defaultHostnameVerifier() {
         return new HOSTNAME_VERIFIER();
     }
 

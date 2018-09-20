@@ -27,7 +27,7 @@ public class LoadingDialog extends BaseDialog {
     @BindView(R2.id.dialog_loading_show_tv)
     AppCompatTextView mLoadingTv;
 
-    private static final String DEFAULT_LOADER = LoaderStyles.LineSpinFadeLoaderIndicator;
+    private static final String DEFAULT_LOADER = LoaderStyles.LINE_SPIN_FADE_LOADER_INDICATOR;
 
     private String mMessage;
 

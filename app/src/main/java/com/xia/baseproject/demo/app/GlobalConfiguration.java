@@ -44,7 +44,7 @@ public final class GlobalConfiguration implements ConfigModule {
                         .retryOnConnectionFailure(true)
                         //cookie认证
                         .cookieJar(new CookieJarImpl(new PersistentCookieStore(context)))
-                        .hostnameVerifier(HttpsUtils.DEFAULT_HOSTNAME_VERIFIER())
+                        .hostnameVerifier(HttpsUtils.defaultHostnameVerifier())
                         .sslSocketFactory(SSL_PARAMS.sSLSocketFactory, SSL_PARAMS.trustManager))
                 .retrofitConfiguration((context12, retrofitBuilder) -> {
                 })
