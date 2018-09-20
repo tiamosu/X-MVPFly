@@ -15,6 +15,7 @@ import com.xia.fly.base.IApp;
 import com.xia.fly.di.component.AppComponent;
 import com.xia.fly.di.component.DaggerAppComponent;
 import com.xia.fly.di.module.GlobalConfigModule;
+import com.xia.fly.di.named.ActivityLifecycleNamed;
 import com.xia.fly.integration.ConfigModule;
 import com.xia.fly.integration.ManifestParser;
 import com.xia.fly.integration.cache.IntelligentCache;
@@ -23,6 +24,8 @@ import com.xia.fly.utils.Preconditions;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 /**
  * AppDelegate 可以代理 Application 的生命周期,在对应的生命周期,执行对应的逻辑,因为 Java 只能单继承
@@ -40,12 +43,9 @@ public class AppDelegate implements IApp, IAppLifecycles {
     private Application mApplication;
     private AppComponent mAppComponent;
 
-//    @Inject
-//    @ActivityLifecycle
-//    protected Application.ActivityLifecycleCallbacks mActivityLifecycle;
-//    @Inject
-//    @ActivityLifecycleForRxLifecycle
-//    protected Application.ActivityLifecycleCallbacks mActivityLifecycleForRxLifecycle;
+    @Inject
+    @ActivityLifecycleNamed
+    protected Application.ActivityLifecycleCallbacks mActivityLifecycle;
 
     private List<ConfigModule> mModules;
     private List<IAppLifecycles> mAppLifecycles = new ArrayList<>();
@@ -95,10 +95,7 @@ public class AppDelegate implements IApp, IAppLifecycles {
         this.mModules = null;
 
         //注册框架内部已实现的 Activity 生命周期逻辑
-//        mApplication.registerActivityLifecycleCallbacks(mActivityLifecycle);
-
-        //注册框架内部已实现的 RxLifecycle 逻辑
-//        mApplication.registerActivityLifecycleCallbacks(mActivityLifecycleForRxLifecycle);
+        mApplication.registerActivityLifecycleCallbacks(mActivityLifecycle);
 
         //注册框架外部, 开发者扩展的 Activity 生命周期逻辑
         //每个 ConfigModule 的实现类可以声明多个 Activity 的生命周期回调
@@ -122,12 +119,9 @@ public class AppDelegate implements IApp, IAppLifecycles {
 
     @Override
     public void onTerminate(@NonNull Application application) {
-//        if (mActivityLifecycle != null) {
-//            mApplication.unregisterActivityLifecycleCallbacks(mActivityLifecycle);
-//        }
-//        if (mActivityLifecycleForRxLifecycle != null) {
-//            mApplication.unregisterActivityLifecycleCallbacks(mActivityLifecycleForRxLifecycle);
-//        }
+        if (mActivityLifecycle != null) {
+            mApplication.unregisterActivityLifecycleCallbacks(mActivityLifecycle);
+        }
         if (mComponentCallback != null) {
             mApplication.unregisterComponentCallbacks(mComponentCallback);
         }
@@ -142,8 +136,7 @@ public class AppDelegate implements IApp, IAppLifecycles {
             }
         }
         this.mAppComponent = null;
-//        this.mActivityLifecycle = null;
-//        this.mActivityLifecycleForRxLifecycle = null;
+        this.mActivityLifecycle = null;
         this.mActivityLifecycles = null;
         this.mComponentCallback = null;
         this.mAppLifecycles = null;

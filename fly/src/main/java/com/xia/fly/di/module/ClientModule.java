@@ -5,7 +5,7 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 
 import com.google.gson.Gson;
-import com.xia.fly.di.named.RxCacheDirectory;
+import com.xia.fly.di.named.RxCacheDirectoryNamed;
 import com.xia.fly.http.GlobalHttpHandler;
 import com.xia.fly.http.interceptors.RequestInterceptor;
 import com.xia.fly.utils.FileUtils;
@@ -119,7 +119,7 @@ public abstract class ClientModule {
     @Provides
     static RxCache provideRxCache(final Application application,
                                   @Nullable final RxCacheConfiguration configuration,
-                                  @RxCacheDirectory final File cacheDirectory,
+                                  @RxCacheDirectoryNamed final File cacheDirectory,
                                   final Gson gson) {
         final RxCache.Builder builder = new RxCache.Builder();
         RxCache rxCache = null;
@@ -139,7 +139,7 @@ public abstract class ClientModule {
      */
     @Singleton
     @Provides
-    @RxCacheDirectory
+    @RxCacheDirectoryNamed
     static File provideRxCacheDirectory(File cacheDir) {
         final File cacheDirectory = new File(cacheDir, "RxCache");
         return FileUtils.createOrExistsDir(cacheDirectory);

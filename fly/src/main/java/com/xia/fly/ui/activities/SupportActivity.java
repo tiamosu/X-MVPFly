@@ -1,6 +1,7 @@
 package com.xia.fly.ui.activities;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
@@ -11,6 +12,8 @@ import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.xia.fly.constant.NetworkState;
+import com.xia.fly.integration.cache.Cache;
+import com.xia.fly.integration.cache.CacheType;
 import com.xia.fly.integration.rxbus.IRxBusCallback;
 import com.xia.fly.integration.rxbus.RxBusEventTag;
 import com.xia.fly.integration.rxbus.RxBusHelper;
@@ -18,6 +21,7 @@ import com.xia.fly.mvp.BaseMvpPresenter;
 import com.xia.fly.mvp.BaseMvpView;
 import com.xia.fly.receiver.NetworkChangeReceiver;
 import com.xia.fly.utils.DispatchTouchEventHelper;
+import com.xia.fly.utils.FlyUtils;
 import com.xia.fly.utils.Platform;
 
 import butterknife.ButterKnife;
@@ -32,6 +36,7 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
 
     private P mPresenter;
     private Unbinder mUnbinder;
+    private Cache<String, Object> mCache;
 
     //网络状态监听广播
     private NetworkChangeReceiver mNetworkChangeReceiver;
@@ -39,6 +44,16 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
     private int mLastNetStatus = NetworkState.NETWORK_DEFAULT;
     //网络是否重新连接
     private boolean mNetReConnect;
+
+    @SuppressWarnings("unchecked")
+    @NonNull
+    @Override
+    public synchronized Cache<String, Object> provideCache() {
+        if (mCache == null) {
+            mCache = FlyUtils.getAppComponent().cacheFactory().build(CacheType.ACTIVITY_CACHE);
+        }
+        return mCache;
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

@@ -8,10 +8,10 @@ import javax.inject.Qualifier;
 
 /**
  * @author xia
- * @date 2018/9/14.
+ * @date 2018/9/20.
  */
 @Qualifier
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ActivityLifecycle {
+public @interface ActivityLifecycleNamed {
 }
