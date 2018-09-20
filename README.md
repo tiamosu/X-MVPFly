@@ -20,4 +20,4 @@ compile 'me.xia:fly-http:2.0.0'
 ```
 compile 'me.xia:fly-imageloader-glide:2.0.0'
 ```
----
+------
