@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.multidex.MultiDex;
 
 import com.xia.fly.base.delegate.AppDelegate;
+import com.xia.fly.base.delegate.IAppLifecycles;
 import com.xia.fly.di.component.AppComponent;
 import com.xia.fly.utils.FlyUtils;
 import com.xia.fly.utils.Preconditions;

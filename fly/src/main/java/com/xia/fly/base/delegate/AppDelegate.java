@@ -12,7 +12,6 @@ import android.support.v4.app.Fragment;
 
 import com.xia.fly.base.BaseApplication;
 import com.xia.fly.base.IApp;
-import com.xia.fly.base.IAppLifecycles;
 import com.xia.fly.di.component.AppComponent;
 import com.xia.fly.di.component.DaggerAppComponent;
 import com.xia.fly.di.module.GlobalConfigModule;
