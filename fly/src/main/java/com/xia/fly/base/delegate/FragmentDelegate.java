@@ -15,7 +15,7 @@ import android.view.View;
  * @see FragmentDelegateImpl
  * @see <a href="https://github.com/JessYanCoding/MVPArms/wiki#3.13">FragmentDelegate wiki 官方文档</a>
  */
-public interface IFragmentDelegate {
+public interface FragmentDelegate {
 
     String FRAGMENT_DELEGATE = "FRAGMENT_DELEGATE";
 

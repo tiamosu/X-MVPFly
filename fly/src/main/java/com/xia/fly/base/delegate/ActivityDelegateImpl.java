@@ -20,13 +20,13 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * {@link IActivityDelegate} 默认实现类
+ * {@link ActivityDelegate} 默认实现类
  *
  * @author xia
  * @date 2018/9/20.
  */
 @SuppressWarnings("WeakerAccess")
-public class ActivityDelegateImpl implements IActivityDelegate {
+public class ActivityDelegateImpl implements ActivityDelegate {
     private Activity mActivity;
     private IActivity mIActivity;
     private Unbinder mUnbinder;

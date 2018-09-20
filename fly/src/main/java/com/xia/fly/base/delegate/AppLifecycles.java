@@ -11,7 +11,7 @@ import android.support.annotation.NonNull;
  * @author xia
  * @date 2018/9/14.
  */
-public interface IAppLifecycles {
+public interface AppLifecycles {
 
     void attachBaseContext(@NonNull Context base);
 

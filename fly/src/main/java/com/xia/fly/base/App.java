@@ -10,7 +10,7 @@ import com.xia.fly.di.component.AppComponent;
  * @author xia
  * @date 2018/9/14.
  */
-public interface IApp {
+public interface App {
 
     @NonNull
     AppComponent getAppComponent();

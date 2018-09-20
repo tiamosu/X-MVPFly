@@ -7,7 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.multidex.MultiDex;
 
 import com.xia.fly.base.delegate.AppDelegate;
-import com.xia.fly.base.delegate.IAppLifecycles;
+import com.xia.fly.base.delegate.AppLifecycles;
 import com.xia.fly.di.component.AppComponent;
 import com.xia.fly.utils.FlyUtils;
 import com.xia.fly.utils.Preconditions;
@@ -16,8 +16,8 @@ import com.xia.fly.utils.Preconditions;
  * @author xia
  * @date 2018/7/2.
  */
-public class BaseApplication extends Application implements IApp {
-    private IAppLifecycles mAppDelegate;
+public class BaseApplication extends Application implements App {
+    private AppLifecycles mAppDelegate;
 
     @Override
     protected void attachBaseContext(Context base) {
@@ -83,7 +83,7 @@ public class BaseApplication extends Application implements IApp {
     @Override
     public AppComponent getAppComponent() {
         Preconditions.checkNotNull(mAppDelegate, "%s cannot be null", mAppDelegate.getClass().getName());
-        Preconditions.checkState(mAppDelegate instanceof IApp, "%s must be implements %s", mAppDelegate.getClass().getName(), IApp.class.getName());
-        return ((IApp) mAppDelegate).getAppComponent();
+        Preconditions.checkState(mAppDelegate instanceof App, "%s must be implements %s", mAppDelegate.getClass().getName(), App.class.getName());
+        return ((App) mAppDelegate).getAppComponent();
     }
 }

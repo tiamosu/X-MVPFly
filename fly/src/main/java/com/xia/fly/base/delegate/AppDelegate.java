@@ -11,7 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 
 import com.xia.fly.base.BaseApplication;
-import com.xia.fly.base.IApp;
+import com.xia.fly.base.App;
 import com.xia.fly.di.component.AppComponent;
 import com.xia.fly.di.component.DaggerAppComponent;
 import com.xia.fly.di.module.GlobalConfigModule;
@@ -39,7 +39,7 @@ import javax.inject.Inject;
  * @see <a href="https://github.com/JessYanCoding/MVPArms/wiki#3.12">AppDelegate wiki 官方文档</a>
  */
 @SuppressWarnings("WeakerAccess")
-public class AppDelegate implements IApp, IAppLifecycles {
+public class AppDelegate implements App, AppLifecycles {
     private Application mApplication;
     private AppComponent mAppComponent;
 
@@ -48,7 +48,7 @@ public class AppDelegate implements IApp, IAppLifecycles {
     protected Application.ActivityLifecycleCallbacks mActivityLifecycle;
 
     private List<ConfigModule> mModules;
-    private List<IAppLifecycles> mAppLifecycles = new ArrayList<>();
+    private List<AppLifecycles> mAppLifecycles = new ArrayList<>();
     private List<Application.ActivityLifecycleCallbacks> mActivityLifecycles = new ArrayList<>();
     private ComponentCallbacks2 mComponentCallback;
 
@@ -70,7 +70,7 @@ public class AppDelegate implements IApp, IAppLifecycles {
     public void attachBaseContext(@NonNull Context context) {
         //遍历 mAppLifecycles, 执行所有已注册的 AppLifecycles 的 attachBaseContext() 方法 (框架外部, 开发者扩展的逻辑)
         if (mAppLifecycles != null && mAppLifecycles.size() > 0) {
-            for (IAppLifecycles lifecycle : mAppLifecycles) {
+            for (AppLifecycles lifecycle : mAppLifecycles) {
                 lifecycle.attachBaseContext(context);
             }
         }
@@ -111,7 +111,7 @@ public class AppDelegate implements IApp, IAppLifecycles {
 
         //执行框架外部, 开发者扩展的 App onCreate 逻辑
         if (mAppLifecycles != null && mAppLifecycles.size() > 0) {
-            for (IAppLifecycles lifecycle : mAppLifecycles) {
+            for (AppLifecycles lifecycle : mAppLifecycles) {
                 lifecycle.onCreate(mApplication);
             }
         }
@@ -131,7 +131,7 @@ public class AppDelegate implements IApp, IAppLifecycles {
             }
         }
         if (mAppLifecycles != null && mAppLifecycles.size() > 0) {
-            for (IAppLifecycles lifecycle : mAppLifecycles) {
+            for (AppLifecycles lifecycle : mAppLifecycles) {
                 lifecycle.onTerminate(mApplication);
             }
         }
@@ -146,7 +146,7 @@ public class AppDelegate implements IApp, IAppLifecycles {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         if (mAppLifecycles != null && mAppLifecycles.size() > 0) {
-            for (IAppLifecycles lifecycle : mAppLifecycles) {
+            for (AppLifecycles lifecycle : mAppLifecycles) {
                 lifecycle.onConfigurationChanged(newConfig);
             }
         }
@@ -155,7 +155,7 @@ public class AppDelegate implements IApp, IAppLifecycles {
     @Override
     public void onLowMemory() {
         if (mAppLifecycles != null && mAppLifecycles.size() > 0) {
-            for (IAppLifecycles lifecycle : mAppLifecycles) {
+            for (AppLifecycles lifecycle : mAppLifecycles) {
                 lifecycle.onLowMemory();
             }
         }
@@ -164,7 +164,7 @@ public class AppDelegate implements IApp, IAppLifecycles {
     @Override
     public void onTrimMemory(int level) {
         if (mAppLifecycles != null && mAppLifecycles.size() > 0) {
-            for (IAppLifecycles lifecycle : mAppLifecycles) {
+            for (AppLifecycles lifecycle : mAppLifecycles) {
                 lifecycle.onTrimMemory(level);
             }
         }

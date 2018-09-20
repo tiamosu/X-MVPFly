@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
 
-import com.xia.fly.base.delegate.IAppLifecycles;
+import com.xia.fly.base.delegate.AppLifecycles;
 import com.xia.fly.di.module.GlobalConfigModule;
 
 import java.util.List;
@@ -24,9 +24,9 @@ public interface ConfigModule {
     void applyOptions(Context context, GlobalConfigModule.Builder builder);
 
     /**
-     * 使用{@link IAppLifecycles}在Application的生命周期中注入一些操作
+     * 使用{@link AppLifecycles}在Application的生命周期中注入一些操作
      */
-    void injectAppLifecycle(Context context, List<IAppLifecycles> lifecycles);
+    void injectAppLifecycle(Context context, List<AppLifecycles> lifecycles);
 
     /**
      * 使用{@link Application.ActivityLifecycleCallbacks}在Activity的生命周期中注入一些操作

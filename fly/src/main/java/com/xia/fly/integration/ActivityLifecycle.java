@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 
 import com.xia.fly.base.delegate.ActivityDelegateImpl;
-import com.xia.fly.base.delegate.IActivityDelegate;
+import com.xia.fly.base.delegate.ActivityDelegate;
 import com.xia.fly.integration.cache.Cache;
 import com.xia.fly.integration.cache.IntelligentCache;
 import com.xia.fly.ui.activities.IActivity;
@@ -23,7 +23,7 @@ import dagger.Lazy;
 
 /**
  * {@link Application.ActivityLifecycleCallbacks} 默认实现类
- * 通过 {@link IActivityDelegate} 管理 {@link Activity}
+ * 通过 {@link ActivityDelegate} 管理 {@link Activity}
  *
  * @author xia
  * @date 2018/9/20.
@@ -49,13 +49,13 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
         //配置ActivityDelegate
         if (activity instanceof IActivity) {
-            IActivityDelegate activityDelegate = fetchActivityDelegate(activity);
+            ActivityDelegate activityDelegate = fetchActivityDelegate(activity);
             if (activityDelegate == null) {
                 final Cache<String, Object> cache = getCacheFromActivity((IActivity) activity);
                 activityDelegate = new ActivityDelegateImpl(activity);
                 //使用 IntelligentCache.KEY_KEEP 作为 key 的前缀, 可以使储存的数据永久存储在内存中
                 //否则存储在 LRU 算法的存储空间中, 前提是 Activity 使用的是 IntelligentCache (框架默认使用)
-                cache.put(IntelligentCache.getKeyOfKeep(IActivityDelegate.ACTIVITY_DELEGATE), activityDelegate);
+                cache.put(IntelligentCache.getKeyOfKeep(ActivityDelegate.ACTIVITY_DELEGATE), activityDelegate);
             }
             activityDelegate.onCreate(savedInstanceState);
         }
@@ -65,7 +65,7 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
 
     @Override
     public void onActivityStarted(Activity activity) {
-        final IActivityDelegate activityDelegate = fetchActivityDelegate(activity);
+        final ActivityDelegate activityDelegate = fetchActivityDelegate(activity);
         if (activityDelegate != null) {
             activityDelegate.onStart();
         }
@@ -73,7 +73,7 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
 
     @Override
     public void onActivityResumed(Activity activity) {
-        final IActivityDelegate activityDelegate = fetchActivityDelegate(activity);
+        final ActivityDelegate activityDelegate = fetchActivityDelegate(activity);
         if (activityDelegate != null) {
             activityDelegate.onResume();
         }
@@ -81,7 +81,7 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
 
     @Override
     public void onActivityPaused(Activity activity) {
-        final IActivityDelegate activityDelegate = fetchActivityDelegate(activity);
+        final ActivityDelegate activityDelegate = fetchActivityDelegate(activity);
         if (activityDelegate != null) {
             activityDelegate.onPause();
         }
@@ -89,7 +89,7 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
 
     @Override
     public void onActivityStopped(Activity activity) {
-        final IActivityDelegate activityDelegate = fetchActivityDelegate(activity);
+        final ActivityDelegate activityDelegate = fetchActivityDelegate(activity);
         if (activityDelegate != null) {
             activityDelegate.onStop();
         }
@@ -97,7 +97,7 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
 
     @Override
     public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
-        final IActivityDelegate activityDelegate = fetchActivityDelegate(activity);
+        final ActivityDelegate activityDelegate = fetchActivityDelegate(activity);
         if (activityDelegate != null) {
             activityDelegate.onSaveInstanceState(outState);
         }
@@ -105,7 +105,7 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
 
     @Override
     public void onActivityDestroyed(Activity activity) {
-        final IActivityDelegate activityDelegate = fetchActivityDelegate(activity);
+        final ActivityDelegate activityDelegate = fetchActivityDelegate(activity);
         if (activityDelegate != null) {
             activityDelegate.onDestroy();
             getCacheFromActivity((IActivity) activity).clear();
@@ -145,11 +145,11 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
         }
     }
 
-    private IActivityDelegate fetchActivityDelegate(Activity activity) {
-        IActivityDelegate activityDelegate = null;
+    private ActivityDelegate fetchActivityDelegate(Activity activity) {
+        ActivityDelegate activityDelegate = null;
         if (activity instanceof IActivity) {
             final Cache<String, Object> cache = getCacheFromActivity((IActivity) activity);
-            activityDelegate = (IActivityDelegate) cache.get(IntelligentCache.getKeyOfKeep(IActivityDelegate.ACTIVITY_DELEGATE));
+            activityDelegate = (ActivityDelegate) cache.get(IntelligentCache.getKeyOfKeep(ActivityDelegate.ACTIVITY_DELEGATE));
         }
         return activityDelegate;
     }

@@ -13,7 +13,7 @@ import android.support.annotation.Nullable;
  * @see ActivityDelegateImpl
  * @see <a href="https://github.com/JessYanCoding/MVPArms/wiki#3.13">ActivityDelegate wiki 官方文档</a>
  */
-public interface IActivityDelegate {
+public interface ActivityDelegate {
     String ACTIVITY_DELEGATE = "ACTIVITY_DELEGATE";
 
     void onCreate(@Nullable Bundle savedInstanceState);
