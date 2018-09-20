@@ -28,6 +28,8 @@ allprojects {
 
     //忽略打包时警告
     tasks.getByPath(":fly:releaseAndroidJavadocs").enabled = false
+    tasks.getByPath(":fly-http:releaseAndroidJavadocs").enabled = false
+    tasks.getByPath(":fly-imageloader-glide:releaseAndroidJavadocs").enabled = false
 }
 
 task clean(type: Delete) {

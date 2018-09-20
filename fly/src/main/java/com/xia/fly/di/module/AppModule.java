@@ -46,10 +46,10 @@ public abstract class AppModule {
     @Binds
     abstract IRepositoryManager bindRepositoryManager(RepositoryManager repositoryManager);
 
+    @SuppressWarnings("unchecked")
     @Singleton
     @Provides
     static Cache<String, Object> provideExtras(Cache.Factory cacheFactory) {
-        //noinspection unchecked
         return cacheFactory.build(CacheType.EXTRAS);
     }
 
