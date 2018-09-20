@@ -24,6 +24,32 @@ public interface IActivity {
     Cache<String, Object> provideCache();
 
     /**
+     * @return 用于布局加载
+     * 如果{@link #getLayoutId()}返回0，则不会生产视图
+     */
+    int getLayoutId();
+
+    /**
+     * 用于初始化MVP
+     */
+    void initMvp();
+
+    /**
+     * 用于初始化数据
+     */
+    void initData();
+
+    /**
+     * 用于初始化View
+     */
+    void initView();
+
+    /**
+     * 用于初始化事件
+     */
+    void initEvent();
+
+    /**
      * 该方法执行于
      * {@link SupportActivity#initData()}
      * {@link SupportActivity#initView()}
@@ -31,6 +57,16 @@ public interface IActivity {
      * 之后，可用于加载网络数据等
      */
     void onLazyLoadData();
+
+    /**
+     * 可见时执行
+     * 并执行于
+     * {@link SupportActivity#initData()}
+     * {@link SupportActivity#initView()}
+     * {@link SupportActivity#initEvent()}
+     * 之后
+     */
+    void onVisibleLazyLoad();
 
     /**
      * @return 是否检查网络状态，默认为true

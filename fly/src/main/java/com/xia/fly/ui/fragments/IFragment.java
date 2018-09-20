@@ -26,6 +26,53 @@ public interface IFragment {
     Cache<String, Object> provideCache();
 
     /**
+     * @return 用于布局加载
+     * 如果{@link #getLayoutId()}返回0，则不会生产视图
+     */
+    int getLayoutId();
+
+    /**
+     * 用于初始化MVP
+     */
+    void initMvp();
+
+    /**
+     * 用于初始化数据
+     */
+    void initData();
+
+    /**
+     * 用于初始化View
+     */
+    void initView();
+
+    /**
+     * 用于初始化事件
+     */
+    void initEvent();
+
+    /**
+     * 该方法执行于
+     * {@link SupportFragment#initData()}
+     * {@link SupportFragment#initView()}
+     * {@link SupportFragment#initEvent()}
+     * 之后，可用于加载网络数据等
+     */
+    void onLazyLoadData();
+
+    /**
+     * 该方法确保已执行完{@link SupportFragment#onEnterAnimationEnd(Bundle)}
+     * 保证转场动画的流畅性。
+     * 可见时执行
+     * 并执行于
+     * {@link SupportFragment#initData()}
+     * {@link SupportFragment#initView()}
+     * {@link SupportFragment#initEvent()}
+     * 之后
+     */
+    void onVisibleLazyLoad();
+
+    /**
      * @return 是否加载头部标题栏，默认为true
      */
     boolean isLoadHeadView();
@@ -39,17 +86,6 @@ public interface IFragment {
      * @param bundle 用于获取页面跳转传参数据
      */
     void getBundleExtras(Bundle bundle);
-
-    /**
-     * 该方法确保已执行完{@link SupportFragment#onEnterAnimationEnd(Bundle)}
-     * 保证转场动画的流畅性。
-     * 并执行于
-     * {@link SupportFragment#initData()}
-     * {@link SupportFragment#initView()}
-     * {@link SupportFragment#initEvent()}
-     * 之后，可用于网路数据请求等
-     */
-    void onVisibleLazyLoad();
 
     /**
      * @return 是否检查网络状态，默认为true

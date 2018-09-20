@@ -8,8 +8,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 
+import com.xia.fly.integration.rxbus.RxBusHelper;
 import com.xia.fly.ui.fragments.IFragment;
+import com.xia.fly.utils.Platform;
 
+import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
@@ -32,62 +35,72 @@ public class FragmentDelegateImpl implements IFragmentDelegate {
 
     @Override
     public void onAttach(@NonNull Context context) {
-
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-
     }
 
     @Override
     public void onCreateView(@Nullable View view, @Nullable Bundle savedInstanceState) {
-
+        if (view != null) {
+            mUnbinder = ButterKnife.bind(mFragment, view);
+        }
     }
 
     @Override
     public void onActivityCreate(@Nullable Bundle savedInstanceState) {
-
+        mIFragment.initMvp();
+        mIFragment.getBundleExtras(mFragment.getArguments());
+        mIFragment.initData();
+        mIFragment.initView();
+        mIFragment.initEvent();
+        mIFragment.onLazyLoadData();
     }
 
     @Override
     public void onStart() {
-
     }
 
     @Override
     public void onResume() {
-
     }
 
     @Override
     public void onPause() {
-
     }
 
     @Override
     public void onStop() {
-
     }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
-
     }
 
     @Override
     public void onDestroyView() {
-
     }
 
     @Override
     public void onDestroy() {
-
+        Platform.getHandler().removeCallbacksAndMessages(null);
+        RxBusHelper.unregister(mFragment);
+        if (mUnbinder != null && mUnbinder != Unbinder.EMPTY) {
+            try {
+                //fix Bindings already cleared
+                mUnbinder.unbind();
+            } catch (IllegalStateException ignored) {
+            }
+            mUnbinder = null;
+        }
+        this.mFragmentManager = null;
+        this.mFragment = null;
+        this.mIFragment = null;
     }
 
     @Override
     public void onDetach() {
-
     }
 
     @Override

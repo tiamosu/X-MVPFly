@@ -21,12 +21,9 @@ import com.xia.fly.integration.rxbus.RxBusHelper;
 import com.xia.fly.mvp.BaseMvpPresenter;
 import com.xia.fly.mvp.BaseMvpView;
 import com.xia.fly.utils.FlyUtils;
-import com.xia.fly.utils.Platform;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import me.yokeyword.fragmentation.ISupportFragment;
 
 /**
@@ -37,7 +34,6 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
         extends AbstractSupportFragment implements IFragment, BaseMvpView<P> {
 
     private P mPresenter;
-    private Unbinder mUnbinder;
     private Cache<String, Object> mCache;
 
     //保证转场动画的流畅性
@@ -73,8 +69,19 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
             final FrameLayout contentContainer = rootView.findViewById(R.id.layout_root_view_content_container);
             View.inflate(getContext(), getLayoutId(), contentContainer);
         }
-        mUnbinder = ButterKnife.bind(this, rootView);
         return rootView;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public void initMvp() {
+        if (mPresenter == null) {
+            mPresenter = newP();
+            if (mPresenter != null) {
+                mPresenter.attachView(this);
+                getLifecycle().addObserver(mPresenter);
+            }
+        }
     }
 
     /**
@@ -85,7 +92,7 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
     public void onEnterAnimationEnd(Bundle savedInstanceState) {
         mIsOnEnterAnimationEnd = true;
         if (mIsOnSupportVisible) {
-            initAll();
+            onVisibleInit();
         }
     }
 
@@ -94,7 +101,7 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
         super.onSupportVisible();
         mIsOnSupportVisible = true;
         if (mIsOnEnterAnimationEnd) {
-            initAll();
+            onVisibleInit();
         }
     }
 
@@ -106,60 +113,36 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Platform.getHandler().removeCallbacksAndMessages(null);
-        RxBusHelper.unregister(this);
         if (mPresenter != null) {
             mPresenter.detachView();
             mPresenter = null;
         }
-        if (mUnbinder != null && mUnbinder != Unbinder.EMPTY) {
-            try {
-                mUnbinder.unbind();
-            } catch (IllegalStateException ignored) {
-                //fix Bindings already cleared
-            }
-            mUnbinder = null;
-        }
     }
 
-    private void initAll() {
+    private void onVisibleInit() {
         if (mInitialized.compareAndSet(false, true)) {
-            initMvp();
-            getBundle(getArguments());
-            initData();
-            initView();
-            initEvent();
-
-            if (isCheckNetWork()) {
-                RxBusHelper.subscribeWithTags(this, (eventTag, rxBusMessage) -> {
-                    if (eventTag.equals(RxBusEventTag.NETWORK_CHANGE)) {
-                        final boolean isAvailable = (boolean) rxBusMessage.mObj;
-                        hasNetWork(isAvailable);
-                    }
-                }, RxBusEventTag.NETWORK_CHANGE);
-            }
+            checkNetEvent();
         }
-
         if (isCheckNetWork()) {
             hasNetWork(NetworkUtils.isConnected());
         }
         onVisibleLazyLoad();
     }
 
-    @SuppressWarnings("unchecked")
-    private void initMvp() {
-        if (mPresenter == null) {
-            mPresenter = newP();
-            if (mPresenter != null) {
-                mPresenter.attachView(this);
-                getLifecycle().addObserver(mPresenter);
-            }
-        }
-    }
-
     private void getBundle(Bundle bundle) {
         if (bundle != null && !bundle.isEmpty()) {
             getBundleExtras(bundle);
+        }
+    }
+
+    private void checkNetEvent() {
+        if (isCheckNetWork()) {
+            RxBusHelper.subscribeWithTags(this, (eventTag, rxBusMessage) -> {
+                if (eventTag.equals(RxBusEventTag.NETWORK_CHANGE)) {
+                    final boolean isAvailable = (boolean) rxBusMessage.mObj;
+                    hasNetWork(isAvailable);
+                }
+            }, RxBusEventTag.NETWORK_CHANGE);
         }
     }
 
@@ -188,6 +171,10 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
     @Override
     public FragmentActivity getContext() {
         return super.getContext();
+    }
+
+    @Override
+    public void onLazyLoadData() {
     }
 
     @Override
