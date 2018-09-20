@@ -99,7 +99,11 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
             mPresenter = null;
         }
         if (mUnbinder != null && mUnbinder != Unbinder.EMPTY) {
-            mUnbinder.unbind();
+            try {
+                mUnbinder.unbind();
+            } catch (IllegalStateException ignored) {
+                //fix Bindings already cleared
+            }
             mUnbinder = null;
         }
     }
