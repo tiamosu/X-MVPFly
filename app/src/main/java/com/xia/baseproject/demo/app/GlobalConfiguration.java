@@ -24,8 +24,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
  */
 public final class GlobalConfiguration implements ConfigModule {
 
-    private static final HttpsUtils.SSLParams SSL_PARAMS
-            = HttpsUtils.getSslSocketFactory(null, null, null);
+    private static final HttpsUtils.SSLParams SSL_PARAMS = HttpsUtils.getSslSocketFactory();
 
     @Override
     public void applyOptions(Context context, GlobalConfigModule.Builder builder) {
@@ -44,7 +43,7 @@ public final class GlobalConfiguration implements ConfigModule {
                         .retryOnConnectionFailure(true)
                         //cookie认证
                         .cookieJar(new CookieJarImpl(new PersistentCookieStore(context)))
-                        .hostnameVerifier(HttpsUtils.defaultHostnameVerifier())
+                        .hostnameVerifier(new HttpsUtils.SAFE_HOSTNAME_VERIFIER())
                         .sslSocketFactory(SSL_PARAMS.sSLSocketFactory, SSL_PARAMS.trustManager))
                 .retrofitConfiguration((context12, retrofitBuilder) -> {
                 })

@@ -27,12 +27,16 @@ import javax.net.ssl.X509TrustManager;
  * @author xia
  * @date 2018/4/2.
  */
+@SuppressWarnings("WeakerAccess")
 public final class HttpsUtils {
 
-    @SuppressWarnings("WeakerAccess")
     public static class SSLParams {
         public SSLSocketFactory sSLSocketFactory;
         public X509TrustManager trustManager;
+    }
+
+    public static SSLParams getSslSocketFactory() {
+        return getSslSocketFactory(null, null, null);
     }
 
     public static SSLParams getSslSocketFactory(InputStream[] certificates, InputStream bksFile, String password) {
@@ -60,11 +64,7 @@ public final class HttpsUtils {
         }
     }
 
-    public static HostnameVerifier defaultHostnameVerifier() {
-        return new HOSTNAME_VERIFIER();
-    }
-
-    private static final class HOSTNAME_VERIFIER implements HostnameVerifier {
+    public static final class SAFE_HOSTNAME_VERIFIER implements HostnameVerifier {
         @SuppressLint("BadHostnameVerifier")
         @Override
         public boolean verify(String hostname, SSLSession session) {
