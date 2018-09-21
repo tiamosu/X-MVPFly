@@ -92,7 +92,7 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
     public void onEnterAnimationEnd(Bundle savedInstanceState) {
         mIsOnEnterAnimationEnd = true;
         if (mIsOnSupportVisible) {
-            onVisibleInit();
+            onVisibleLazyInit();
         }
     }
 
@@ -101,7 +101,7 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
         super.onSupportVisible();
         mIsOnSupportVisible = true;
         if (mIsOnEnterAnimationEnd) {
-            onVisibleInit();
+            onVisibleLazyInit();
         }
     }
 
@@ -119,7 +119,7 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
         }
     }
 
-    private void onVisibleInit() {
+    private void onVisibleLazyInit() {
         if (mInitialized.compareAndSet(false, true)) {
             checkNetEvent();
         }

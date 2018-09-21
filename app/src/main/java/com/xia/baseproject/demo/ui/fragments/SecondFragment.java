@@ -31,11 +31,6 @@ public class SecondFragment extends HeadViewFragment<HomePresenter> implements H
 
     @Override
     public void initData() {
-        getP().load(1);
-        getP().load(2);
-        getP().load(3);
-        getP().load(4);
-        getP().load(5);
     }
 
     @Override
@@ -48,6 +43,15 @@ public class SecondFragment extends HeadViewFragment<HomePresenter> implements H
             getView().findViewById(R.id.btn_jump)
                     .setOnClickListener(v -> start(new SecondFragment()));
         }
+    }
+
+    @Override
+    public void onLazyLoadData() {
+        getP().load(1);
+        getP().load(2);
+        getP().load(3);
+        getP().load(4);
+        getP().load(5);
     }
 
     @Override
