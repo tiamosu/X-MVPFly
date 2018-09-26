@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -183,6 +184,7 @@ public abstract class AbstractSupportFragment extends Fragment implements ISuppo
      * <p>
      * Is the combination of  [onHiddenChanged() + onResume()/onPause() + setUserVisibleHint()]
      */
+    @CallSuper
     @Override
     public void onSupportVisible() {
         mDelegate.onSupportVisible();
@@ -193,6 +195,7 @@ public abstract class AbstractSupportFragment extends Fragment implements ISuppo
      * <p>
      * Is the combination of  [onHiddenChanged() + onResume()/onPause() + setUserVisibleHint()]
      */
+    @CallSuper
     @Override
     public void onSupportInvisible() {
         mDelegate.onSupportInvisible();
