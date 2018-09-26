@@ -50,12 +50,6 @@ public class FragmentDelegateImpl implements FragmentDelegate {
 
     @Override
     public void onActivityCreate(@Nullable Bundle savedInstanceState) {
-        mIFragment.initMvp();
-        mIFragment.getBundleExtras(mFragment.getArguments());
-        mIFragment.initData();
-        mIFragment.initView();
-        mIFragment.initEvent();
-        mIFragment.onLazyLoadData();
     }
 
     @Override

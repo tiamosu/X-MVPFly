@@ -121,6 +121,12 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
 
     private void onVisibleLazyInit() {
         if (mInitialized.compareAndSet(false, true)) {
+            initMvp();
+            getBundle(getArguments());
+            initData();
+            initView();
+            initEvent();
+            onLazyLoadData();
             checkNetEvent();
         }
         if (isCheckNetWork()) {

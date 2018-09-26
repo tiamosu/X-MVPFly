@@ -41,9 +41,6 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-//    implementation 'me.xia:fly:2.0.2'
-//    implementation 'me.xia:fly-http:2.0.2'
-//    implementation 'me.xia:fly-imageloader-glide:2.0.2'
     implementation project(':fly')
     implementation project(':fly-http')
     implementation project(':fly-imageloader-glide')
