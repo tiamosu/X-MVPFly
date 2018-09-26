@@ -34,7 +34,7 @@ public final class DispatchTouchEventHelper {
     }
 
     private static boolean isShouldHideKeyboard(SupportActivity activity, View v, MotionEvent event) {
-        if (v != null && (v instanceof EditText)) {
+        if (v instanceof EditText) {
             final EditText editText = (EditText) v;
             activity.onDispatchTouchHideKeyboard(editText);
             final int[] l = {0, 0};

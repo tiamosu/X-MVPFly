@@ -18,7 +18,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class WeakHandler {
     private final Handler.Callback mCallback; // hard reference to Callback. We need to keep callback in memory
     private final ExecHandler mExec;
-    private Lock mLock = new ReentrantLock();
+    private final Lock mLock = new ReentrantLock();
 
     @SuppressWarnings("ConstantConditions")
     @VisibleForTesting
@@ -204,7 +204,7 @@ public class WeakHandler {
         final WeakRunnable wrapper;
 
         @NonNull
-        Lock lock;
+        final Lock lock;
 
         @SuppressWarnings("NullableProblems")
         private ChainedRef(@NonNull Lock lock, @NonNull Runnable r) {

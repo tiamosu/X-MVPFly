@@ -177,9 +177,9 @@ public class RequestInterceptor extends BaseInterceptor {
         if (charset == null) {
             return "";
         }
-        if (encoding != null && "gzip".equalsIgnoreCase(encoding)) {//content使用gzip压缩
+        if ("gzip".equalsIgnoreCase(encoding)) {//content使用gzip压缩
             return ZipHelper.decompressForGzip(clone.readByteArray(), convertCharset(charset));//解压
-        } else if (encoding != null && "zlib".equalsIgnoreCase(encoding)) {//content使用zlib压缩
+        } else if ("zlib".equalsIgnoreCase(encoding)) {//content使用zlib压缩
             return ZipHelper.decompressToStringForZlib(clone.readByteArray(), convertCharset(charset));//解压
         } else {//content没有被压缩
             return clone.readString(charset);

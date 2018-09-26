@@ -38,20 +38,20 @@ import okhttp3.Interceptor;
  */
 @Module
 public class GlobalConfigModule {
-    private HttpUrl mApiUrl;
-    private BaseUrl mBaseUrl;
-    private BaseImageLoaderStrategy mLoaderStrategy;
-    private GlobalHttpHandler mHandler;
-    private List<Interceptor> mInterceptors;
-    private ResponseErrorListener mErrorListener;
-    private File mCacheFile;
-    private ClientModule.RetrofitConfiguration mRetrofitConfiguration;
-    private ClientModule.OkHttpConfiguration mOkHttpConfiguration;
-    private ClientModule.RxCacheConfiguration mRxCacheConfiguration;
-    private AppModule.GsonConfiguration mGsonConfiguration;
-    private RequestInterceptor.Level mPrintHttpLogLevel;
-    private FormatPrinter mFormatPrinter;
-    private Cache.Factory mCacheFactory;
+    private final HttpUrl mApiUrl;
+    private final BaseUrl mBaseUrl;
+    private final BaseImageLoaderStrategy mLoaderStrategy;
+    private final GlobalHttpHandler mHandler;
+    private final List<Interceptor> mInterceptors;
+    private final ResponseErrorListener mErrorListener;
+    private final File mCacheFile;
+    private final ClientModule.RetrofitConfiguration mRetrofitConfiguration;
+    private final ClientModule.OkHttpConfiguration mOkHttpConfiguration;
+    private final ClientModule.RxCacheConfiguration mRxCacheConfiguration;
+    private final AppModule.GsonConfiguration mGsonConfiguration;
+    private final RequestInterceptor.Level mPrintHttpLogLevel;
+    private final FormatPrinter mFormatPrinter;
+    private final Cache.Factory mCacheFactory;
 
     private GlobalConfigModule(Builder builder) {
         this.mApiUrl = builder.mApiUrl;

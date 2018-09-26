@@ -22,7 +22,7 @@ import okio.Sink;
 @SuppressWarnings("WeakerAccess")
 public class UploadProgressRequestBody extends RequestBody {
     protected RequestBody delegate;
-    protected ProgressResponseCallBack progressCallBack;
+    protected final ProgressResponseCallBack progressCallBack;
     protected CountingSink countingSink;
 
     public UploadProgressRequestBody(ProgressResponseCallBack listener) {

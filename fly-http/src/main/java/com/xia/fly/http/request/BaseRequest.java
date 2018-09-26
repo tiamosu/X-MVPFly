@@ -18,9 +18,9 @@ import okhttp3.ResponseBody;
  */
 @SuppressWarnings({"unchecked", "WeakerAccess"})
 public abstract class BaseRequest<R extends BaseRequest> {
-    protected String mUrl;
-    protected LinkedHashMap<String, String> mParams = new LinkedHashMap<>();
-    protected LinkedHashMap<String, File> mFileParams = new LinkedHashMap<>();
+    protected final String mUrl;
+    protected final LinkedHashMap<String, String> mParams = new LinkedHashMap<>();
+    protected final LinkedHashMap<String, File> mFileParams = new LinkedHashMap<>();
 
     public BaseRequest(@NonNull String url) {
         mUrl = url;

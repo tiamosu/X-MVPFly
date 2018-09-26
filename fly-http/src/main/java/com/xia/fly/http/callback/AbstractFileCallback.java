@@ -27,11 +27,11 @@ public abstract class AbstractFileCallback extends Callback<File> {
     /**
      * 目标文件存储的文件夹路径
      */
-    private String destFileDir;
+    private final String destFileDir;
     /**
      * 目标文件存储的文件名
      */
-    private String destFileName;
+    private final String destFileName;
     private DownloadTask mDownloadTask;
 
     public AbstractFileCallback(@NonNull LifecycleOwner lifecycleOwner, String destFileDir, String destFileName) {
@@ -42,16 +42,15 @@ public abstract class AbstractFileCallback extends Callback<File> {
 
     @SuppressWarnings("unchecked")
     @Override
-    public File parseNetworkResponse(final ResponseBody responseBody) {
+    public void parseNetworkResponse(final ResponseBody responseBody) {
         if (mDownloadTask == null) {
             mDownloadTask = new DownloadTask(responseBody);
             ThreadUtils.executeByIo(mDownloadTask);
         }
-        return null;
     }
 
     private class DownloadTask extends ThreadUtils.SimpleTask<File> {
-        private ResponseBody mResponseBody;
+        private final ResponseBody mResponseBody;
 
         DownloadTask(ResponseBody responseBody) {
             mResponseBody = responseBody;

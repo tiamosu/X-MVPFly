@@ -19,7 +19,7 @@ import okhttp3.ResponseBody;
 @SuppressWarnings("WeakerAccess")
 public class RequestCall {
 
-    private Observable<ResponseBody> mObservable;
+    private final Observable<ResponseBody> mObservable;
 
     public RequestCall(Observable<ResponseBody> observable) {
         mObservable = observable;

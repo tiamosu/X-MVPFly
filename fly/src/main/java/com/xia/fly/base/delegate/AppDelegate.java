@@ -209,8 +209,8 @@ public class AppDelegate implements App, AppLifecycles {
      */
     @SuppressWarnings("WeakerAccess")
     private static class AppComponentCallbacks implements ComponentCallbacks2 {
-        private Application mApplication;
-        private AppComponent mAppComponent;
+        private final Application mApplication;
+        private final AppComponent mAppComponent;
 
         public AppComponentCallbacks(Application application, AppComponent appComponent) {
             this.mApplication = application;

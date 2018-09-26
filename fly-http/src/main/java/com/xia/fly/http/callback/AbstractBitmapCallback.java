@@ -23,11 +23,10 @@ public abstract class AbstractBitmapCallback extends Callback<Bitmap> {
     }
 
     @Override
-    public Bitmap parseNetworkResponse(ResponseBody responseBody) {
+    public void parseNetworkResponse(ResponseBody responseBody) {
         final InputStream is = responseBody.byteStream();
         final Bitmap bitmap = BitmapFactory.decodeStream(is);
         Platform.post(() -> onResponse(bitmap));
         CloseUtils.closeIO(responseBody, is);
-        return bitmap;
     }
 }

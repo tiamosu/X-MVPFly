@@ -15,7 +15,7 @@ import okhttp3.HttpUrl;
  * Created by zhy on 16/3/10.
  */
 public class CookieJarImpl implements CookieJar {
-    private CookieStore cookieStore;
+    private final CookieStore cookieStore;
 
     public CookieJarImpl(@NonNull CookieStore cookieStore) {
         Preconditions.checkNotNull(cookieStore, "cookieStore can not be null");

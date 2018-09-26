@@ -29,7 +29,7 @@ public class LoadingDialog extends BaseDialog {
 
     private static final String DEFAULT_LOADER = LoaderStyles.LINE_SPIN_FADE_LOADER_INDICATOR;
 
-    private String mMessage;
+    private final String mMessage;
 
     public LoadingDialog(@NonNull Context context) {
         this(context, "");

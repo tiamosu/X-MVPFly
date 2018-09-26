@@ -22,7 +22,7 @@ public class MainFragment extends HeadViewFragment<MainPresenter> implements Mai
     @BindView(R.id.main_user_psd_edit)
     AppCompatEditText mUserPsdEditText;
 
-    private ISupportFragment[] mFragments = new ISupportFragment[1];
+    private final ISupportFragment[] mFragments = new ISupportFragment[1];
 
     @Override
     public boolean isCheckNetWork() {

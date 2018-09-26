@@ -18,7 +18,7 @@ import okhttp3.ResponseBody;
 @SuppressWarnings("WeakerAccess")
 public abstract class Callback<T> {
     private WeakReference<Context> mContext;
-    public LifecycleOwner mLifecycleOwner;
+    public final LifecycleOwner mLifecycleOwner;
 
     public Context getContext() {
         return mContext != null ? mContext.get() : null;
@@ -45,7 +45,7 @@ public abstract class Callback<T> {
     public void inProgress(float progress, long total) {
     }
 
-    public abstract T parseNetworkResponse(ResponseBody responseBody) throws Exception;
+    public abstract void parseNetworkResponse(ResponseBody responseBody) throws Exception;
 
     public abstract void onResponse(T response);
 }

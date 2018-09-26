@@ -20,10 +20,9 @@ public abstract class AbstractStringCallback extends Callback<String> {
     }
 
     @Override
-    public String parseNetworkResponse(ResponseBody responseBody) throws Exception {
+    public void parseNetworkResponse(ResponseBody responseBody) throws Exception {
         final String result = responseBody.string();
         Platform.post(() -> onResponse(result));
         CloseUtils.closeIO(responseBody);
-        return result;
     }
 }
