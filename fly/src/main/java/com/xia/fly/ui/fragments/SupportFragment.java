@@ -98,7 +98,6 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
 
     @Override
     public void onSupportVisible() {
-        super.onSupportVisible();
         mIsOnSupportVisible = true;
         if (mIsOnEnterAnimationEnd) {
             onVisibleLazyInit();

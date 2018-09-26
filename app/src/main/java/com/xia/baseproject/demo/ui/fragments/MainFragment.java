@@ -60,7 +60,6 @@ public class MainFragment extends HeadViewFragment<MainPresenter> implements Mai
 
     @Override
     public void onSupportVisible() {
-        super.onSupportVisible();
     }
 
     @OnClick({R.id.main_login_btn, R.id.main_open_btn})

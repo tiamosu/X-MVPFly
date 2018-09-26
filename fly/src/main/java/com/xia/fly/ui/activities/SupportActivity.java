@@ -1,5 +1,6 @@
 package com.xia.fly.ui.activities;
 
+import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
@@ -71,6 +72,7 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
         return this;
     }
 
+    @CallSuper
     @Override
     public void onVisibleLazyLoad() {
     }
