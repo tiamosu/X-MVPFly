@@ -50,7 +50,7 @@ public class PostRequest extends BaseBodyRequest<PostRequest> {
             return mRestService.postBody(mUrl, body);
         }
 
-        if (mFileParams == null || mFileParams.isEmpty()) {
+        if (mFileParams.isEmpty()) {
             return mRestService.post(mUrl, mParams);
         } else {
             final MultipartBody.Builder builder = new MultipartBody.Builder()
@@ -61,14 +61,14 @@ public class PostRequest extends BaseBodyRequest<PostRequest> {
     }
 
     private RequestBody addParams(MultipartBody.Builder builder) {
-        if (mParams != null && !mParams.isEmpty()) {
+        if (!mParams.isEmpty()) {
             for (Map.Entry<String, String> entry : mParams.entrySet()) {
                 builder.addPart(Headers.of("Content-Disposition",
                         "form-data; name=\"" + entry.getKey() + "\""),
                         RequestBody.create(null, entry.getValue()));
             }
         }
-        if (mFileParams != null && !mFileParams.isEmpty()) {
+        if (!mFileParams.isEmpty()) {
             for (Map.Entry<String, File> entry : mFileParams.entrySet()) {
                 final File file = entry.getValue();
                 final RequestBody fileBody = RequestBody.create(

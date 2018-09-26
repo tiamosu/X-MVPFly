@@ -20,7 +20,7 @@ public abstract class ProxyActivity extends SupportActivity {
      * @return 设置根Fragment
      */
     @NonNull
-    public abstract Class<? extends SupportFragment> setRootFragment();
+    protected abstract Class<? extends SupportFragment> setRootFragment();
 
     @Override
     public Object newP() {

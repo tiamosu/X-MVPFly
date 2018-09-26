@@ -23,6 +23,7 @@ import retrofit2.HttpException;
  * @author xia
  * @date 2018/9/19.
  */
+@SuppressWarnings("WeakerAccess")
 public class ResponseErrorListenerImpl implements ResponseErrorListener {
     private static final int UNAUTHORIZED = 401;
     private static final int FORBIDDEN = 403;

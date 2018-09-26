@@ -15,6 +15,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author xia
  * @date 2018/8/3.
  */
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class WeakHandler {
     private final Handler.Callback mCallback; // hard reference to Callback. We need to keep callback in memory
     private final ExecHandler mExec;

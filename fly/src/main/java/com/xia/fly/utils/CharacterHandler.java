@@ -58,7 +58,7 @@ public final class CharacterHandler {
      */
     public static String str2HexStr(String str) {
         final char[] chars = "0123456789ABCDEF".toCharArray();
-        final StringBuilder sb = new StringBuilder("");
+        final StringBuilder sb = new StringBuilder();
         final byte[] bs = str.getBytes();
         int bit;
 

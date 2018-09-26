@@ -14,6 +14,7 @@ import com.blankj.utilcode.util.Utils;
  * <p>
  * 剪贴板相关工具类
  */
+@SuppressWarnings("unused")
 public final class ClipboardUtils {
 
     private ClipboardUtils() {

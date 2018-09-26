@@ -9,6 +9,7 @@ import static java.lang.reflect.Proxy.newProxyInstance;
  * @author xia
  * @date 2018/7/19.
  */
+@SuppressWarnings("WeakerAccess")
 public final class NoOp {
 
     private static final InvocationHandler DEFAULT_VALUE = new DefaultValueInvocationHandler();

@@ -21,6 +21,7 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator;
  * @author xia
  * @date 2018/7/3.
  */
+@SuppressWarnings("unused")
 public abstract class AbstractSupportFragment extends Fragment implements ISupportFragment {
     private final SupportFragmentDelegate mDelegate = new SupportFragmentDelegate(this);
     protected FragmentActivity mFragmentActivity;

@@ -26,6 +26,7 @@ import okhttp3.ResponseBody;
  * @author xia
  * @date 2018/8/27.
  */
+@SuppressWarnings("WeakerAccess")
 public class OkHttpStreamFetcher implements DataFetcher<InputStream>, okhttp3.Callback {
     private static final String TAG = "OkHttpStreamFetcher";
     private final Call.Factory client;

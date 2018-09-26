@@ -19,10 +19,10 @@ import okhttp3.OkHttpClient;
  * @author xia
  * @date 2018/8/27.
  */
+@SuppressWarnings("WeakerAccess")
 public class OkHttpUrlLoader implements ModelLoader<GlideUrl, InputStream> {
     private final Call.Factory client;
 
-    @SuppressWarnings("WeakerAccess")
     public OkHttpUrlLoader(@NonNull Call.Factory client) {
         this.client = client;
     }
@@ -41,7 +41,7 @@ public class OkHttpUrlLoader implements ModelLoader<GlideUrl, InputStream> {
     /**
      * The default factory for {@link OkHttpUrlLoader}s.
      */
-    @SuppressWarnings("WeakerAccess")
+    @SuppressWarnings({"WeakerAccess", "unused"})
     public static class Factory implements ModelLoaderFactory<GlideUrl, InputStream> {
         private static volatile Call.Factory internalClient;
         private final Call.Factory client;

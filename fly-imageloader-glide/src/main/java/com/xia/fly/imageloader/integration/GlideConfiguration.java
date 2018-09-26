@@ -29,6 +29,7 @@ import java.io.InputStream;
  * @author xia
  * @date 2018/8/27.
  */
+@SuppressWarnings("WeakerAccess")
 @GlideModule
 public class GlideConfiguration extends AppGlideModule {
     private static final int IMAGE_DISK_CACHE_MAX_SIZE = 100 * 1024 * 1024;//图片缓存文件最大值为100Mb

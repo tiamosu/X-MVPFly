@@ -26,9 +26,9 @@ import butterknife.BindView;
  */
 public class HomeFragment extends HeadViewFragment<HomePresenter> implements HomeView {
     @BindView(R.id.home_jump_btn)
-    AppCompatButton mAppCompatButton;
+    private AppCompatButton mAppCompatButton;
     @BindView(R.id.home_photo_iv)
-    AppCompatImageView mPhotoView;
+    private AppCompatImageView mPhotoView;
 
     @Override
     public boolean isCheckNetWork() {

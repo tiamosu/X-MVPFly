@@ -19,7 +19,7 @@ public abstract class MvpNullObjectBasePresenter<V extends IMvpView> implements 
     private final V mNullView;
 
     @SuppressWarnings("unchecked")
-    public MvpNullObjectBasePresenter() {
+    protected MvpNullObjectBasePresenter() {
         try {
             // Scan the inheritance hierarchy until we reached MvpNullObjectBasePresenter
             Class<V> viewClass = null;

@@ -9,6 +9,7 @@ import static java.util.Collections.unmodifiableMap;
  * @author xia
  * @date 2018/7/19.
  */
+@SuppressWarnings("WeakerAccess")
 public final class Defaults {
 
     private static final Map<Class<?>, Object> DEFAULTS =

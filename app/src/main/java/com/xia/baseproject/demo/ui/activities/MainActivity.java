@@ -28,7 +28,7 @@ public class MainActivity extends ProxyActivity {
 
     @NonNull
     @Override
-    public Class<? extends SupportFragment> setRootFragment() {
+    protected Class<? extends SupportFragment> setRootFragment() {
         return MainFragment.class;
     }
 
