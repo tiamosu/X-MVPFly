@@ -5,10 +5,11 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.0'
+        //noinspection GradleDependency
+        classpath 'com.android.tools.build:gradle:3.1.4'
         //noinspection GradleDependency
         classpath 'com.jakewharton:butterknife-gradle-plugin:8.4.0'
-        classpath "guru.stefma.bintrayrelease:bintrayrelease:1.0.0"
+        classpath 'com.novoda:bintray-release:0.8.1'
     }
 }
 
@@ -27,9 +28,9 @@ allprojects {
     }
 
     //忽略打包时警告
-//    tasks.getByPath(":fly:releaseAndroidJavadocsJar").enabled = false
-//    tasks.getByPath(":fly-http:releaseAndroidJavadocs").enabled = false
-//    tasks.getByPath(":fly-imageloader-glide:releaseAndroidJavadocs").enabled = false
+    tasks.getByPath(":fly:releaseAndroidJavadocsJar").enabled = false
+    tasks.getByPath(":fly-http:releaseAndroidJavadocs").enabled = false
+    tasks.getByPath(":fly-imageloader-glide:releaseAndroidJavadocs").enabled = false
 }
 
 task clean(type: Delete) {

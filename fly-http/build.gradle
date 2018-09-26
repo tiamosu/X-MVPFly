@@ -1,7 +1,7 @@
 plugins {
     id "com.android.library"
     id "com.jakewharton.butterknife"
-    id "guru.stefma.bintrayrelease"
+    id "com.novoda.bintray-release"
 }
 
 // in config.gradle
@@ -12,11 +12,11 @@ dependencies {
     compileOnly project(':fly')
 }
 
-version = Publish.publishVersion
-group = Publish.groupId
 publish {
     userOrg = Publish.userOrg
+    groupId = Publish.groupId
     artifactId = 'fly-http'
+    publishVersion = Publish.publishVersion
     desc = Publish.desc
     website = Publish.website
 }
