@@ -1,9 +1,10 @@
 package com.xia.fly.http.cookie.store;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.util.Log;
+
+import com.blankj.utilcode.util.Utils;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -51,11 +52,9 @@ public class PersistentCookieStore implements CookieStore {
 
     /**
      * Construct a persistent cookie store.
-     *
-     * @param context Context to attach cookie store to
      */
-    public PersistentCookieStore(Context context) {
-        cookiePrefs = context.getSharedPreferences(COOKIE_PREFS, 0);
+    public PersistentCookieStore() {
+        cookiePrefs = Utils.getApp().getSharedPreferences(COOKIE_PREFS, 0);
         cookies = new HashMap<>();
 
         // Load any previously stored cookies into the store
@@ -95,7 +94,7 @@ public class PersistentCookieStore implements CookieStore {
         }
 
         // Save cookie into persistent store
-        SharedPreferences.Editor prefsWriter = cookiePrefs.edit();
+        final SharedPreferences.Editor prefsWriter = cookiePrefs.edit();
         prefsWriter.putString(uri.host(), TextUtils.join(",", cookies.get(uri.host()).keySet()));
         prefsWriter.putString(COOKIE_NAME_PREFIX + name, encodeCookie(new SerializableHttpCookie(cookie)));
         prefsWriter.apply();
