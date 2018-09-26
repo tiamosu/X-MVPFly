@@ -1,7 +1,7 @@
 plugins {
     id "com.android.library"
     id "com.jakewharton.butterknife"
-    id "com.novoda.bintray-release"
+    id "guru.stefma.bintrayrelease"
 }
 
 // in config.gradle
@@ -78,11 +78,11 @@ dependencies {
     api Deps.loading_indicator_view
 }
 
+version = Publish.publishVersion
+group = Publish.groupId
 publish {
     userOrg = Publish.userOrg
-    groupId = Publish.groupId
     artifactId = 'fly'
-    publishVersion = Publish.publishVersion
     desc = Publish.desc
     website = Publish.website
 }

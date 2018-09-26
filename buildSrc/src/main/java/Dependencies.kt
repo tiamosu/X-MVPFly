@@ -2,7 +2,7 @@
 
 object Android {
     const val compileSdkVersion = 28
-    const val buildToolsVersion = "27.0.3"
+    const val buildToolsVersion = "28.0.3"
     const val minSdkVersion = 15
     const val targetSdkVersion = 25
 
@@ -11,7 +11,7 @@ object Android {
 }
 
 object Versions {
-    const val support = "27.1.1"
+    const val support = "28.0.0"
     const val butterknife = "8.8.1"
     const val retrofit2 = "2.4.0"
     const val okhttp3 = "3.11.0"

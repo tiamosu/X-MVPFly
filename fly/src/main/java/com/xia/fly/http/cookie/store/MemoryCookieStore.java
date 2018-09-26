@@ -22,7 +22,7 @@ public class MemoryCookieStore implements CookieStore {
                 final String va = itNew.next().name();
                 while (va != null && itOld.hasNext()) {
                     final String v = itOld.next().name();
-                    if (v != null && va.equals(v)) {
+                    if (va.equals(v)) {
                         itOld.remove();
                     }
                 }
