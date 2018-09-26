@@ -79,10 +79,10 @@ dependencies {
 }
 
 publish {
-    userOrg = 'weixia'//bintray.com用户名
-    groupId = 'me.xia'//jcenter上的路径
-    artifactId = 'fly'//项目名称
-    publishVersion = '2.0.0'//版本号
-    desc = 'Oh hi, this is a nice description for a project, right?'
-    website = 'https://github.com/wexia/X-MVPFly'
+    userOrg = Publish.userOrg
+    groupId = Publish.groupId
+    artifactId = 'fly'
+    publishVersion = Publish.publishVersion
+    desc = Publish.desc
+    website = Publish.website
 }

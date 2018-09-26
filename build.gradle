@@ -26,6 +26,13 @@ allprojects {
         }
     }
 
+    //防止编码问题
+    tasks.withType(Javadoc) {
+        options.addStringOption('Xdoclint:none', '-quiet')
+        options.addStringOption('encoding', 'UTF-8')
+        options.addStringOption('charSet', 'UTF-8')
+    }
+
     //忽略打包时警告
     tasks.getByPath(":fly:releaseAndroidJavadocs").enabled = false
     tasks.getByPath(":fly-http:releaseAndroidJavadocs").enabled = false

@@ -2,6 +2,7 @@
 
 object Android {
     const val compileSdkVersion = 28
+    const val buildToolsVersion = "27.0.3"
     const val minSdkVersion = 15
     const val targetSdkVersion = 25
 
@@ -18,6 +19,14 @@ object Versions {
     const val leakcanary = "1.6.1"
     const val glide = "4.8.0"
     const val dagger2 = "2.17"
+}
+
+object Publish {
+    const val userOrg = "weixia" //bintray.com用户名
+    const val groupId = "me.xia" //jcenter上的路径
+    const val publishVersion = "2.0.1" //版本号
+    const val desc = "Oh hi, this is a nice description for a project, right?"
+    const val website = "https://github.com/wexia/X-MVPFly"
 }
 
 object Deps {
