@@ -30,7 +30,6 @@ import me.yokeyword.fragmentation.ISupportFragment;
  * @author xia
  * @date 2018/8/1.
  */
-@SuppressWarnings("unchecked")
 public abstract class SupportFragment<P extends BaseMvpPresenter>
         extends AbstractSupportFragment implements IFragment, BaseMvpView<P> {
 
@@ -48,7 +47,7 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
     //网络是否重新连接
     private boolean mNetReConnect;
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("all")
     @NonNull
     @Override
     public synchronized Cache<String, Object> provideCache() {
