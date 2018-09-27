@@ -14,6 +14,7 @@ import com.xia.fly.imageloader.GlideImageLoaderStrategy;
 import com.xia.fly.integration.ConfigModule;
 
 import java.net.Proxy;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -48,7 +49,8 @@ public final class GlobalConfiguration implements ConfigModule {
                         //cookie认证
                         .cookieJar(new CookieJarImpl(new MemoryCookieStore()))
                         .hostnameVerifier(new HttpsUtils.SAFE_HOSTNAME_VERIFIER())
-                        .sslSocketFactory(SSL_PARAMS.sSLSocketFactory, SSL_PARAMS.trustManager))
+                        .sslSocketFactory(SSL_PARAMS.sSLSocketFactory, SSL_PARAMS.trustManager)
+                        .connectionSpecs(Collections.singletonList(HttpsUtils.getConnectionSpec())))
                 .retrofitConfiguration((context12, retrofitBuilder) -> {
                 })
                 .responseErrorListener(new ResponseErrorListenerImpl());
