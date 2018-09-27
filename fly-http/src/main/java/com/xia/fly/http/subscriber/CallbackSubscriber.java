@@ -64,28 +64,24 @@ public class CallbackSubscriber extends ErrorHandleSubscriber<ResponseBody> {
     @Override
     public void onError(Throwable e) {
         super.onError(e);
-        if (!isDisposed()) {
-            Platform.post(() -> {
-                cancelDialog();
-                if (mCallback != null) {
-                    mCallback.onError(e);
-                    mCallback = null;
-                }
-            });
-        }
+        Platform.post(() -> {
+            cancelDialog();
+            if (mCallback != null) {
+                mCallback.onError(e);
+                mCallback = null;
+            }
+        });
     }
 
     @Override
     public void onComplete() {
-        if (!isDisposed()) {
-            Platform.post(() -> {
-                cancelDialog();
-                if (mCallback != null) {
-                    mCallback.onComplete();
-                    mCallback = null;
-                }
-            });
-        }
+        Platform.post(() -> {
+            cancelDialog();
+            if (mCallback != null) {
+                mCallback.onComplete();
+                mCallback = null;
+            }
+        });
     }
 
     protected void showDialog() {
@@ -99,10 +95,19 @@ public class CallbackSubscriber extends ErrorHandleSubscriber<ResponseBody> {
             Platform.getHandler().removeCallbacksAndMessages(null);
             Loader.stopLoading();
         }
+        if (!isDisposed()) {
+            dispose();
+        }
     }
 
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     protected boolean isDisposed() {
         return mDisposable != null && mDisposable.isDisposed();
+    }
+
+    protected void dispose() {
+        if (mDisposable != null) {
+            mDisposable.dispose();
+        }
     }
 }
