@@ -40,12 +40,14 @@ public class CallbackSubscriber extends ErrorHandleSubscriber<ResponseBody> {
     @Override
     public void onSubscribe(Disposable d) {
         mDisposable = d;
-        Platform.post(() -> {
-            showDialog();
-            if (mCallback != null) {
-                mCallback.onSubscribe(d);
-            }
-        });
+        if (!isDisposed()) {
+            Platform.post(() -> {
+                showDialog();
+                if (mCallback != null) {
+                    mCallback.onSubscribe(d);
+                }
+            });
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -62,24 +64,28 @@ public class CallbackSubscriber extends ErrorHandleSubscriber<ResponseBody> {
     @Override
     public void onError(Throwable e) {
         super.onError(e);
-        Platform.post(() -> {
-            cancelDialog();
-            if (mCallback != null) {
-                mCallback.onError(e);
-                mCallback = null;
-            }
-        });
+        if (!isDisposed()) {
+            Platform.post(() -> {
+                cancelDialog();
+                if (mCallback != null) {
+                    mCallback.onError(e);
+                    mCallback = null;
+                }
+            });
+        }
     }
 
     @Override
     public void onComplete() {
-        Platform.post(() -> {
-            cancelDialog();
-            if (mCallback != null) {
-                mCallback.onComplete();
-                mCallback = null;
-            }
-        });
+        if (!isDisposed()) {
+            Platform.post(() -> {
+                cancelDialog();
+                if (mCallback != null) {
+                    mCallback.onComplete();
+                    mCallback = null;
+                }
+            });
+        }
     }
 
     protected void showDialog() {
