@@ -1,9 +1,9 @@
-package com.xia.baseproject.demo.base;
+package com.xia.fly.demo.base;
 
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.xia.baseproject.demo.R;
+import com.xia.fly.demo.R;
 import com.xia.fly.mvp.BaseMvpPresenter;
 import com.xia.fly.ui.fragments.SupportFragment;
 

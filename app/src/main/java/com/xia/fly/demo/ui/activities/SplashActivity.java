@@ -1,4 +1,4 @@
-package com.xia.baseproject.demo.ui.activities;
+package com.xia.fly.demo.ui.activities;
 
 import android.content.Intent;
 import android.util.Log;
@@ -7,8 +7,8 @@ import android.view.View;
 import com.blankj.utilcode.constant.PermissionConstants;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.PermissionUtils;
-import com.xia.baseproject.demo.R;
-import com.xia.baseproject.demo.helper.DialogHelper;
+import com.xia.fly.demo.R;
+import com.xia.fly.demo.helper.DialogHelper;
 import com.xia.fly.ui.activities.SupportActivity;
 
 import java.util.List;

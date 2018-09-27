@@ -1,4 +1,4 @@
-package com.xia.baseproject.demo.app;
+package com.xia.fly.demo.app;
 
 import android.app.Application;
 import android.content.Context;

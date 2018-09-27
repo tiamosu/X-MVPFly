@@ -1,4 +1,4 @@
-package com.xia.baseproject.demo.mvp.presenter;
+package com.xia.fly.demo.mvp.presenter;
 
 import android.app.Dialog;
 import android.arch.lifecycle.LifecycleOwner;
@@ -7,7 +7,7 @@ import android.util.Log;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.xia.baseproject.demo.mvp.view.HomeView;
+import com.xia.fly.demo.mvp.view.HomeView;
 import com.xia.fly.http.RxHttp;
 import com.xia.fly.http.callback.AbstractFileCallback;
 import com.xia.fly.http.callback.AbstractStringCallback;

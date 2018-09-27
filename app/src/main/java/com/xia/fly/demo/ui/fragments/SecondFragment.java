@@ -1,11 +1,11 @@
-package com.xia.baseproject.demo.ui.fragments;
+package com.xia.fly.demo.ui.fragments;
 
 import android.os.Bundle;
 
-import com.xia.baseproject.demo.R;
-import com.xia.baseproject.demo.base.HeadViewFragment;
-import com.xia.baseproject.demo.mvp.presenter.HomePresenter;
-import com.xia.baseproject.demo.mvp.view.HomeView;
+import com.xia.fly.demo.R;
+import com.xia.fly.demo.base.HeadViewFragment;
+import com.xia.fly.demo.mvp.presenter.HomePresenter;
+import com.xia.fly.demo.mvp.view.HomeView;
 
 /**
  * @author xia

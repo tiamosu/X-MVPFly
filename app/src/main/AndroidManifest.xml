@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
-          package="com.xia.baseproject.demo">
+          package="com.xia.fly.demo">
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
@@ -72,7 +72,7 @@
             android:theme="@style/NoTitleTheme"/>
 
         <meta-data
-            android:name="com.xia.baseproject.demo.app.GlobalConfiguration"
+            android:name="com.xia.fly.demo.app.GlobalConfiguration"
             android:value="ConfigModule"/>
     </application>
 </manifest>

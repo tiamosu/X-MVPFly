@@ -1,4 +1,4 @@
-package com.xia.baseproject.demo.ui.fragments;
+package com.xia.fly.demo.ui.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,10 +10,10 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.xia.baseproject.demo.R;
-import com.xia.baseproject.demo.base.HeadViewFragment;
-import com.xia.baseproject.demo.mvp.presenter.HomePresenter;
-import com.xia.baseproject.demo.mvp.view.HomeView;
+import com.xia.fly.demo.R;
+import com.xia.fly.demo.base.HeadViewFragment;
+import com.xia.fly.demo.mvp.presenter.HomePresenter;
+import com.xia.fly.demo.mvp.view.HomeView;
 import com.xia.fly.imageloader.ImageConfigImpl;
 import com.xia.fly.ui.imageloader.ImageLoader;
 import com.xia.fly.utils.FragmentUtils;

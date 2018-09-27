@@ -1,12 +1,12 @@
-package com.xia.baseproject.demo.ui.fragments;
+package com.xia.fly.demo.ui.fragments;
 
 import android.support.v7.widget.AppCompatEditText;
 import android.view.View;
 
-import com.xia.baseproject.demo.R;
-import com.xia.baseproject.demo.base.HeadViewFragment;
-import com.xia.baseproject.demo.mvp.presenter.MainPresenter;
-import com.xia.baseproject.demo.mvp.view.MainView;
+import com.xia.fly.demo.R;
+import com.xia.fly.demo.base.HeadViewFragment;
+import com.xia.fly.demo.mvp.presenter.MainPresenter;
+import com.xia.fly.demo.mvp.view.MainView;
 
 import butterknife.BindView;
 import butterknife.OnClick;

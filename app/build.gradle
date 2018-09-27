@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion Android.compileSdkVersion
     defaultConfig {
-        applicationId "com.xia.baseproject.demo"
+        applicationId "com.xia.fly.demo"
         minSdkVersion Android.minSdkVersion
         targetSdkVersion Android.targetSdkVersion
         versionCode Android.versionCode

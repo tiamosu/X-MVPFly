@@ -1,6 +1,6 @@
-package com.xia.baseproject.demo.mvp.view;
+package com.xia.fly.demo.mvp.view;
 
-import com.xia.baseproject.demo.mvp.presenter.MainPresenter;
+import com.xia.fly.demo.mvp.presenter.MainPresenter;
 import com.xia.fly.mvp.BaseMvpView;
 
 /**
