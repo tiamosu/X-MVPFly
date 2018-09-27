@@ -223,6 +223,9 @@ public class RequestInterceptor extends BaseInterceptor {
      * @return {@code true} 为可以解析
      */
     public static boolean isParseable(MediaType mediaType) {
+        if (mediaType == null || mediaType.type() == null) {
+            return false;
+        }
         return isText(mediaType) || isPlain(mediaType)
                 || isJson(mediaType) || isForm(mediaType)
                 || isHtml(mediaType) || isXml(mediaType);
