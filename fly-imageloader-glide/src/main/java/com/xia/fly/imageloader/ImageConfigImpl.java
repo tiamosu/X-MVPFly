@@ -140,23 +140,23 @@ public class ImageConfigImpl extends ImageConfig {
         return this;
     }
 
-    public ImageConfigImpl crossFade(boolean isCrossFade) {
-        this.mIsCrossFade = isCrossFade;
+    public ImageConfigImpl crossFade() {
+        this.mIsCrossFade = true;
         return this;
     }
 
-    public ImageConfigImpl centerCrop(boolean isCenterCrop) {
-        this.mIsCenterCrop = isCenterCrop;
+    public ImageConfigImpl centerCrop() {
+        this.mIsCenterCrop = true;
         return this;
     }
 
-    public ImageConfigImpl centerInside(boolean isCenterInside) {
-        this.mIsCenterInside = isCenterInside;
+    public ImageConfigImpl centerInside() {
+        this.mIsCenterInside = true;
         return this;
     }
 
-    public ImageConfigImpl circleCrop(boolean isCircleCrop) {
-        this.mIsCircleCrop = isCircleCrop;
+    public ImageConfigImpl circleCrop() {
+        this.mIsCircleCrop = true;
         return this;
     }
 
@@ -166,13 +166,13 @@ public class ImageConfigImpl extends ImageConfig {
         return this;
     }
 
-    public ImageConfigImpl clearMemory(boolean isClearMemory) {
-        this.mIsClearMemory = isClearMemory;
+    public ImageConfigImpl clearMemory() {
+        this.mIsClearMemory = true;
         return this;
     }
 
-    public ImageConfigImpl clearDiskCache(boolean isClearDiskCache) {
-        this.mIsClearDiskCache = isClearDiskCache;
+    public ImageConfigImpl clearDiskCache() {
+        this.mIsClearDiskCache = true;
         return this;
     }
 
@@ -186,8 +186,8 @@ public class ImageConfigImpl extends ImageConfig {
         return this;
     }
 
-    public ImageConfigImpl dontAnimate(boolean isDontAnimate) {
-        this.mIsDontAnimate = isDontAnimate;
+    public ImageConfigImpl dontAnimate() {
+        this.mIsDontAnimate = true;
         return this;
     }
 }
