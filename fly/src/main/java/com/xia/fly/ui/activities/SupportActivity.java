@@ -19,6 +19,7 @@ import com.xia.fly.utils.FlyUtils;
  * @author xia
  * @date 2018/8/16.
  */
+@SuppressWarnings("unchecked")
 public abstract class SupportActivity<P extends BaseMvpPresenter>
         extends AbstractSupportActivity implements IActivity, BaseMvpView<P> {
 

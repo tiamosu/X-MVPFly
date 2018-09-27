@@ -5,15 +5,15 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.bumptech.glide.Glide;
+import com.xia.fly.http.BaseUrl;
+import com.xia.fly.http.GlobalHttpHandler;
+import com.xia.fly.http.interceptors.RequestInterceptor;
+import com.xia.fly.http.log.DefaultFormatPrinter;
+import com.xia.fly.http.log.FormatPrinter;
 import com.xia.fly.integration.cache.Cache;
 import com.xia.fly.integration.cache.CacheType;
 import com.xia.fly.integration.cache.IntelligentCache;
 import com.xia.fly.integration.cache.LruCache;
-import com.xia.fly.http.BaseUrl;
-import com.xia.fly.http.GlobalHttpHandler;
-import com.xia.fly.http.log.DefaultFormatPrinter;
-import com.xia.fly.http.log.FormatPrinter;
-import com.xia.fly.http.interceptors.RequestInterceptor;
 import com.xia.fly.ui.imageloader.BaseImageLoaderStrategy;
 import com.xia.fly.utils.FileUtils;
 import com.xia.fly.utils.Preconditions;
@@ -167,7 +167,7 @@ public class GlobalConfigModule {
     @Singleton
     @Provides
     RequestInterceptor.Level providePrintHttpLogLevel() {
-        return mPrintHttpLogLevel == null ? RequestInterceptor.Level.ALL : mPrintHttpLogLevel;
+        return mPrintHttpLogLevel == null ? RequestInterceptor.Level.NONE : mPrintHttpLogLevel;
     }
 
     @Singleton

@@ -30,6 +30,7 @@ import me.yokeyword.fragmentation.ISupportFragment;
  * @author xia
  * @date 2018/8/1.
  */
+@SuppressWarnings("unchecked")
 public abstract class SupportFragment<P extends BaseMvpPresenter>
         extends AbstractSupportFragment implements IFragment, BaseMvpView<P> {
 
