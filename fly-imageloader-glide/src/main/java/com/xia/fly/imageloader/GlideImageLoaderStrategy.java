@@ -38,7 +38,7 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy<ImageCo
         Preconditions.checkNotNull(context, "Context is required");
         Preconditions.checkNotNull(config, "ImageConfigImpl is required");
 
-        final GlideRequest<?> glideRequest = getGlideRequest(context, config);
+        final GlideRequest glideRequest = getGlideRequest(context, config);
 
         //缓存策略
         switch (config.mCacheStrategy) {
@@ -62,17 +62,6 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy<ImageCo
                 break;
         }
 
-        //是否使用淡入淡出过渡动画
-        if (config.mIsCrossFade) {
-            if (config.mTranscodeType == TranscodeType.AS_BITMAP) {
-                final GlideRequest<Bitmap> bitmapGlideRequest = (GlideRequest<Bitmap>) glideRequest;
-                bitmapGlideRequest.transition(BitmapTransitionOptions.withCrossFade());
-            } else if (config.mTranscodeType == TranscodeType.AS_DRAWABLE) {
-                final GlideRequest<Drawable> drawableGlideRequest = (GlideRequest<Drawable>) glideRequest;
-                drawableGlideRequest.transition(DrawableTransitionOptions.withCrossFade());
-            }
-        }
-
         //是否将图片剪切为 CenterCrop
         if (config.mIsCenterCrop) {
             glideRequest.centerCrop();
@@ -86,8 +75,8 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy<ImageCo
         }
 
         //设置圆角大小
-        if (config.mImageRadius != 0) {
-            glideRequest.transform(new RoundedCorners(config.mImageRadius));
+        if (config.mRoundingRadius != 0) {
+            glideRequest.transform(new RoundedCorners(config.mRoundingRadius));
         }
 
         //高斯模糊值, 值越大模糊效果越大(blurValue 建议设置为 15)
@@ -135,18 +124,32 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy<ImageCo
             glideRequest.dontAnimate();
         }
 
+        GlideRequest finalRequest = glideRequest;
+        if (config.mTranscodeType == TranscodeType.AS_DRAWABLE) {
+            final GlideRequest<Drawable> drawableGlideRequest = (GlideRequest<Drawable>) glideRequest;
+            //是否使用淡入淡出过渡动画
+            if (config.mIsCrossFade) {
+                drawableGlideRequest.transition(DrawableTransitionOptions.withCrossFade());
+            }
+            finalRequest = drawableGlideRequest;
+        } else if (config.mTranscodeType == TranscodeType.AS_BITMAP) {
+            final GlideRequest<Bitmap> bitmapGlideRequest = (GlideRequest<Bitmap>) glideRequest;
+            if (config.mIsCrossFade) {
+                bitmapGlideRequest.transition(BitmapTransitionOptions.withCrossFade());
+            }
+            finalRequest = bitmapGlideRequest;
+        }
         if (config.mImageView != null) {
-            glideRequest.into(config.mImageView);
+            finalRequest.into(config.mImageView);
         } else if (config.mTarget != null) {
-            glideRequest.into(config.mTarget);
+            finalRequest.into(config.mTarget);
         }
     }
 
     @SuppressWarnings("unchecked")
-    private static <T> GlideRequest<T> getGlideRequest(final Context context,
-                                                       final ImageConfigImpl config) {
+    private static GlideRequest getGlideRequest(final Context context, final ImageConfigImpl config) {
         final GlideRequests request = GlideApp.with(context);
-        GlideRequest<?> glideRequest;
+        GlideRequest glideRequest;
         switch (config.mTranscodeType) {
             case TranscodeType.AS_BITMAP:
                 glideRequest = request.asBitmap();
@@ -164,15 +167,15 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy<ImageCo
 
         final Object o = config.mObject;
         if (o instanceof Bitmap) {
-            return (GlideRequest<T>) glideRequest.load((Bitmap) o);
+            return glideRequest.load((Bitmap) o);
         } else if (o instanceof Drawable) {
-            return (GlideRequest<T>) glideRequest.load((Drawable) o);
+            return glideRequest.load((Drawable) o);
         } else if (o instanceof Integer) {
-            return (GlideRequest<T>) glideRequest.load((Integer) o);
+            return glideRequest.load((Integer) o);
         } else if (o instanceof byte[]) {
-            return (GlideRequest<T>) glideRequest.load((byte[]) o);
+            return glideRequest.load((byte[]) o);
         }
-        return (GlideRequest<T>) glideRequest.load(o);
+        return glideRequest.load(o);
     }
 
     @Override

@@ -39,7 +39,7 @@ public class ImageConfigImpl extends ImageConfig {
     public int mCacheStrategy;//缓存策略
     public int mTranscodeType;
     public int mFallback; //请求 url 为空,则使用此图片作为占位符
-    public int mImageRadius;//图片每个圆角的大小
+    public int mRoundingRadius;//图片每个圆角的大小
     public int mBlurValue;//高斯模糊值, 值越大模糊效果越大
     public int mTargetWidth, mTargetHeight;//重新设定图片大小
     public boolean mIsCrossFade;//是否使用淡入淡出过渡动画
@@ -63,7 +63,7 @@ public class ImageConfigImpl extends ImageConfig {
         this.mCacheStrategy = builder.mCacheStrategy;
         this.mTranscodeType = builder.mTranscodeType;
         this.mFallback = builder.mFallback;
-        this.mImageRadius = builder.mImageRadius;
+        this.mRoundingRadius = builder.mRoundingRadius;
         this.mBlurValue = builder.mBlurValue;
         this.mTargetWidth = builder.mTargetWidth;
         this.mTargetHeight = builder.mTargetHeight;
@@ -125,7 +125,7 @@ public class ImageConfigImpl extends ImageConfig {
         private int mCacheStrategy;//缓存策略
         private int mTranscodeType;
         private int mFallback; //请求 url 为空,则使用此图片作为占位符
-        private int mImageRadius;//图片每个圆角的大小
+        private int mRoundingRadius;//图片每个圆角的大小
         private int mBlurValue;//高斯模糊值, 值越大模糊效果越大
         private int mTargetWidth, mTargetHeight;//重新设定图片大小
         private boolean mIsCrossFade;//是否使用淡入淡出过渡动画
@@ -180,8 +180,8 @@ public class ImageConfigImpl extends ImageConfig {
             return this;
         }
 
-        public Builder imageRadius(int imageRadius) {
-            this.mImageRadius = imageRadius;
+        public Builder imageRadius(int mRoundingRadius) {
+            this.mRoundingRadius = mRoundingRadius;
             return this;
         }
 
@@ -198,7 +198,7 @@ public class ImageConfigImpl extends ImageConfig {
          * 此 API 会在后面的版本中被删除, 请使用其他 API 替代
          *
          * @param transformation {@link BitmapTransformation}
-         *                       请使用 {@link #mIsCircleCrop}, {@link #mIsCenterCrop}, {@link #mImageRadius} 替代
+         *                       请使用 {@link #mIsCircleCrop}, {@link #mIsCenterCrop}, {@link #mRoundingRadius} 替代
          *                       如果有其他自定义 BitmapTransformation 的需求, 请自行扩展 {@link BaseImageLoaderStrategy}
          */
         public Builder transform(BitmapTransformation transformation) {
