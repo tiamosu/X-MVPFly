@@ -10,7 +10,7 @@ import java.lang.annotation.RetentionPolicy;
  * @date 2018/9/19.
  */
 @SuppressWarnings("WeakerAccess")
-public final class CacheStrategy {
+public final class DiskCacheStrategy {
     public static final int ALL = 0;
     public static final int NONE = 1;
     public static final int RESOURCE = 2;

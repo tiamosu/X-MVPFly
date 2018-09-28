@@ -15,6 +15,7 @@ import com.xia.fly.demo.base.HeadViewFragment;
 import com.xia.fly.demo.mvp.presenter.HomePresenter;
 import com.xia.fly.demo.mvp.view.HomeView;
 import com.xia.fly.imageloader.ImageConfigImpl;
+import com.xia.fly.imageloader.TranscodeType;
 import com.xia.fly.ui.imageloader.ImageLoader;
 import com.xia.fly.utils.FragmentUtils;
 
@@ -80,7 +81,11 @@ public class HomeFragment extends HeadViewFragment<HomePresenter> implements Hom
 
         ImageLoader.loadImage(
                 ImageConfigImpl
-                        .load(R.mipmap.ic_launcher_round)
+                        .load(R.mipmap.ic_launcher)
+                        .as(TranscodeType.AS_DRAWABLE)
+                        .crossFade()
+                        .centerCrop()
+                        .circleCrop()
                         .into(mPhotoView)
                         .addListener(new RequestListener() {
                             @Override
@@ -93,7 +98,9 @@ public class HomeFragment extends HeadViewFragment<HomePresenter> implements Hom
                                 Log.e("weixi", "onResourceReady: ");
                                 return false;
                             }
-                        }));
+                        })
+                        .build()
+        );
     }
 
     @Override

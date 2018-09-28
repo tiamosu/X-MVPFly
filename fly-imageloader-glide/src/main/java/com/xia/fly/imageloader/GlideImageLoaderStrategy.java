@@ -2,13 +2,14 @@ package com.xia.fly.imageloader;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.GlideBuilder;
 import com.bumptech.glide.RequestManager;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.xia.fly.imageloader.integration.GlideApp;
@@ -37,42 +38,39 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy<ImageCo
         Preconditions.checkNotNull(context, "Context is required");
         Preconditions.checkNotNull(config, "ImageConfigImpl is required");
 
-        final GlideRequests requests = GlideApp.with(context);
-        GlideRequest<Drawable> glideRequest = requests.load(config.mObject);
-        if (config.mUrl != null) {
-            glideRequest = requests.load(config.mUrl);
-        } else if (config.mResId != 0) {
-            glideRequest = requests.load(config.mResId);
-        } else if (config.mFile != null) {
-            glideRequest = requests.load(config.mFile);
-        } else if (config.mUri != null) {
-            glideRequest = requests.load(config.mUri);
-        }
+        final GlideRequest<?> glideRequest = getGlideRequest(context, config);
 
-        switch (config.mCacheStrategy) {//缓存策略
-            case CacheStrategy.ALL:
-                glideRequest.diskCacheStrategy(DiskCacheStrategy.ALL);
+        //缓存策略
+        switch (config.mCacheStrategy) {
+            case DiskCacheStrategy.ALL:
+                glideRequest.diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL);
                 break;
-            case CacheStrategy.NONE:
-                glideRequest.diskCacheStrategy(DiskCacheStrategy.NONE);
+            case DiskCacheStrategy.NONE:
+                glideRequest.diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.NONE);
                 break;
-            case CacheStrategy.RESOURCE:
-                glideRequest.diskCacheStrategy(DiskCacheStrategy.RESOURCE);
+            case DiskCacheStrategy.RESOURCE:
+                glideRequest.diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.RESOURCE);
                 break;
-            case CacheStrategy.DATA:
-                glideRequest.diskCacheStrategy(DiskCacheStrategy.DATA);
+            case DiskCacheStrategy.DATA:
+                glideRequest.diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.DATA);
                 break;
-            case CacheStrategy.AUTOMATIC:
-                glideRequest.diskCacheStrategy(DiskCacheStrategy.AUTOMATIC);
+            case DiskCacheStrategy.AUTOMATIC:
+                glideRequest.diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.AUTOMATIC);
                 break;
             default:
-                glideRequest.diskCacheStrategy(DiskCacheStrategy.ALL);
+                glideRequest.diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL);
                 break;
         }
 
         //是否使用淡入淡出过渡动画
         if (config.mIsCrossFade) {
-            glideRequest.transition(DrawableTransitionOptions.withCrossFade());
+            if (config.mTranscodeType == TranscodeType.AS_BITMAP) {
+                final GlideRequest<Bitmap> bitmapGlideRequest = (GlideRequest<Bitmap>) glideRequest;
+                bitmapGlideRequest.transition(BitmapTransitionOptions.withCrossFade());
+            } else if (config.mTranscodeType == TranscodeType.AS_DRAWABLE) {
+                final GlideRequest<Drawable> drawableGlideRequest = (GlideRequest<Drawable>) glideRequest;
+                drawableGlideRequest.transition(DrawableTransitionOptions.withCrossFade());
+            }
         }
 
         //是否将图片剪切为 CenterCrop
@@ -142,6 +140,39 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy<ImageCo
         } else if (config.mTarget != null) {
             glideRequest.into(config.mTarget);
         }
+    }
+
+    @SuppressWarnings("unchecked")
+    private static <T> GlideRequest<T> getGlideRequest(final Context context,
+                                                       final ImageConfigImpl config) {
+        final GlideRequests request = GlideApp.with(context);
+        GlideRequest<?> glideRequest;
+        switch (config.mTranscodeType) {
+            case TranscodeType.AS_BITMAP:
+                glideRequest = request.asBitmap();
+                break;
+            case TranscodeType.AS_FILE:
+                glideRequest = request.asFile();
+                break;
+            case TranscodeType.AS_GIF:
+                glideRequest = request.asGif();
+                break;
+            default:
+                glideRequest = request.asDrawable();
+                break;
+        }
+
+        final Object o = config.mObject;
+        if (o instanceof Bitmap) {
+            return (GlideRequest<T>) glideRequest.load((Bitmap) o);
+        } else if (o instanceof Drawable) {
+            return (GlideRequest<T>) glideRequest.load((Drawable) o);
+        } else if (o instanceof Integer) {
+            return (GlideRequest<T>) glideRequest.load((Integer) o);
+        } else if (o instanceof byte[]) {
+            return (GlideRequest<T>) glideRequest.load((byte[]) o);
+        }
+        return (GlideRequest<T>) glideRequest.load(o);
     }
 
     @Override
