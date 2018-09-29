@@ -12,6 +12,7 @@ import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
 import com.xia.fly.imageloader.integration.GlideApp;
 import com.xia.fly.imageloader.integration.GlideRequest;
 import com.xia.fly.imageloader.integration.GlideRequests;
@@ -129,13 +130,17 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy<ImageCo
             final GlideRequest<Drawable> drawableGlideRequest = (GlideRequest<Drawable>) glideRequest;
             //是否使用淡入淡出过渡动画
             if (config.mIsCrossFade) {
-                drawableGlideRequest.transition(DrawableTransitionOptions.withCrossFade());
+                final DrawableTransitionOptions drawableTransitionOptions = new DrawableTransitionOptions()
+                        .crossFade(new DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build());
+                drawableGlideRequest.transition(drawableTransitionOptions);
             }
             finalRequest = drawableGlideRequest;
         } else if (config.mTranscodeType == TranscodeType.AS_BITMAP) {
             final GlideRequest<Bitmap> bitmapGlideRequest = (GlideRequest<Bitmap>) glideRequest;
             if (config.mIsCrossFade) {
-                bitmapGlideRequest.transition(BitmapTransitionOptions.withCrossFade());
+                final BitmapTransitionOptions bitmapTransitionOptions = new BitmapTransitionOptions()
+                        .crossFade(new DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build());
+                bitmapGlideRequest.transition(bitmapTransitionOptions);
             }
             finalRequest = bitmapGlideRequest;
         }
