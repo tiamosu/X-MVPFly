@@ -47,7 +47,7 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
     //网络是否重新连接
     private boolean mNetReConnect;
 
-    @SuppressWarnings("all")
+    @SuppressWarnings("unchecked")
     @NonNull
     @Override
     public synchronized Cache<String, Object> provideCache() {

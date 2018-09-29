@@ -21,6 +21,7 @@ public interface CacheType {
     int EXTRAS_TYPE_ID = 2;
     int ACTIVITY_CACHE_TYPE_ID = 3;
     int FRAGMENT_CACHE_TYPE_ID = 4;
+
     CacheType RETROFIT_SERVICE_CACHE = new CacheType() {
         private static final int MAX_SIZE = 150;
         private static final float MAX_SIZE_MULTIPLIER = 0.002f;

@@ -25,7 +25,7 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
     private P mPresenter;
     private Cache<String, Object> mCache;
 
-    @SuppressWarnings("all")
+    @SuppressWarnings("unchecked")
     @NonNull
     @Override
     public synchronized Cache<String, Object> provideCache() {

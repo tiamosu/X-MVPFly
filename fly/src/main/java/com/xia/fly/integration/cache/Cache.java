@@ -19,7 +19,7 @@ import java.util.Set;
  */
 public interface Cache<K, V> {
 
-    interface Factory {
+    interface Factory<K, V> {
         /**
          * Returns a new cache
          *
@@ -27,7 +27,7 @@ public interface Cache<K, V> {
          * @return {@link Cache}
          */
         @NonNull
-        Cache build(CacheType type);
+        Cache<K, V> build(CacheType type);
     }
 
     /**
