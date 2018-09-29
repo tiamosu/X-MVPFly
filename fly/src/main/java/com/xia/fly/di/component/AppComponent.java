@@ -92,7 +92,7 @@ public interface AppComponent {
      *
      * @return {@link Cache.Factory}
      */
-    Cache.Factory cacheFactory();
+    Cache.Factory<String, Object> cacheFactory();
 
     void inject(AppDelegate delegate);
 

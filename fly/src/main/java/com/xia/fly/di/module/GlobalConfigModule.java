@@ -51,7 +51,7 @@ public class GlobalConfigModule {
     private final AppModule.GsonConfiguration mGsonConfiguration;
     private final RequestInterceptor.Level mPrintHttpLogLevel;
     private final FormatPrinter mFormatPrinter;
-    private final Cache.Factory mCacheFactory;
+    private final Cache.Factory<String, Object> mCacheFactory;
 
     private GlobalConfigModule(Builder builder) {
         this.mApiUrl = builder.mApiUrl;
@@ -178,7 +178,7 @@ public class GlobalConfigModule {
 
     @Singleton
     @Provides
-    Cache.Factory provideCacheFactory(Application application) {
+    Cache.Factory<String, Object> provideCacheFactory(Application application) {
         return mCacheFactory == null ? type -> {
             //若想自定义 LruCache 的 size, 或者不想使用 LruCache, 想使用自己自定义的策略
             //使用 GlobalConfigModule.Builder#cacheFactory() 即可扩展
@@ -187,10 +187,10 @@ public class GlobalConfigModule {
                 case CacheType.EXTRAS_TYPE_ID:
                 case CacheType.ACTIVITY_CACHE_TYPE_ID:
                 case CacheType.FRAGMENT_CACHE_TYPE_ID:
-                    return new IntelligentCache(type.calculateCacheSize(application));
+                    return new IntelligentCache<>(type.calculateCacheSize(application));
                 //其余使用 LruCache (当达到最大容量时可根据 LRU 算法抛弃不合规数据)
                 default:
-                    return new LruCache(type.calculateCacheSize(application));
+                    return new LruCache<>(type.calculateCacheSize(application));
             }
         } : mCacheFactory;
     }
@@ -210,7 +210,7 @@ public class GlobalConfigModule {
         private AppModule.GsonConfiguration mGsonConfiguration;
         private RequestInterceptor.Level mPrintHttpLogLevel;
         private FormatPrinter mFormatPrinter;
-        private Cache.Factory mCacheFactory;
+        private Cache.Factory<String, Object> mCacheFactory;
 
         private Builder() {
         }
@@ -286,7 +286,7 @@ public class GlobalConfigModule {
             return this;
         }
 
-        public Builder cacheFactory(Cache.Factory cacheFactory) {
+        public Builder cacheFactory(Cache.Factory<String, Object> cacheFactory) {
             this.mCacheFactory = cacheFactory;
             return this;
         }
