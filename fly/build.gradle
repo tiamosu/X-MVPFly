@@ -1,7 +1,6 @@
 plugins {
     id "com.android.library"
     id "com.jakewharton.butterknife"
-    id "com.novoda.bintray-release"
 }
 
 // in config.gradle
@@ -78,11 +77,4 @@ dependencies {
     api Deps.loading_indicator_view
 }
 
-publish {
-    userOrg = Publish.userOrg
-    groupId = Publish.groupId
-    artifactId = 'fly'
-    publishVersion = Publish.publishVersion
-    desc = Publish.desc
-    website = Publish.website
-}
+apply from: 'bintray.gradle'
