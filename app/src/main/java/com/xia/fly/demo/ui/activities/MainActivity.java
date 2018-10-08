@@ -26,6 +26,11 @@ public class MainActivity extends ProxyActivity {
         return false;
     }
 
+    @Override
+    protected boolean isRestartSaved() {
+        return false;
+    }
+
     @NonNull
     @Override
     protected Class<? extends SupportFragment> setRootFragment() {

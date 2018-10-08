@@ -22,6 +22,13 @@ public abstract class ProxyActivity extends SupportActivity {
     @NonNull
     protected abstract Class<? extends SupportFragment> setRootFragment();
 
+    /**
+     * @return APP被杀死重启时，是否还原到被杀死前保存的状态
+     */
+    protected boolean isRestartSaved() {
+        return true;
+    }
+
     @Override
     public Object newP() {
         return null;
@@ -39,7 +46,7 @@ public abstract class ProxyActivity extends SupportActivity {
         final ContentFrameLayout container = new ContentFrameLayout(this);
         container.setId(R.id.delegate_container);
         setContentView(container);
-        if (findFragment(setRootFragment()) == null) {
+        if (findFragment(setRootFragment()) == null || !isRestartSaved()) {
             loadRootFragment(R.id.delegate_container, FragmentUtils.newInstance(setRootFragment()));
         }
     }
