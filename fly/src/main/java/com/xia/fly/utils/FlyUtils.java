@@ -10,6 +10,10 @@ import com.xia.fly.di.component.AppComponent;
  */
 public final class FlyUtils {
 
+    private FlyUtils() {
+        throw new IllegalStateException("u can't instantiate me!");
+    }
+
     public static AppComponent getAppComponent() {
         Preconditions.checkNotNull(Utils.getApp(), "%s cannot be null", Utils.getApp().getClass().getName());
         Preconditions.checkState(Utils.getApp() instanceof App, "Application does not implements App");

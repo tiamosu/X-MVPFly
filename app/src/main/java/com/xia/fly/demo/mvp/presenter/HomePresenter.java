@@ -9,12 +9,9 @@ import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.xia.fly.demo.mvp.view.HomeView;
 import com.xia.fly.http.RxHttp;
-import com.xia.fly.http.callback.AbstractFileCallback;
 import com.xia.fly.http.callback.AbstractStringCallback;
 import com.xia.fly.http.subscriber.CallbackSubscriber;
 import com.xia.fly.mvp.BaseMvpPresenter;
-
-import java.io.File;
 
 import io.reactivex.disposables.Disposable;
 
@@ -23,23 +20,6 @@ import io.reactivex.disposables.Disposable;
  * @date 2018/7/20.
  */
 public class HomePresenter extends BaseMvpPresenter<HomeView> {
-
-    public void downloadFile() {
-        RxHttp.get("https://www.leverking.cn/apk/xry_test.apk")
-                .upDownload()
-                .build()
-                .request(new CallbackSubscriber(new AbstractFileCallback(mLifecycleOwner, "xry/apk", "test.apk") {
-                    @Override
-                    public void onResponse(File response) {
-//                        Log.e("weixi", "onResponse: " + response.getName());
-                    }
-
-                    @Override
-                    public void inProgress(float progress, long total) {
-//                        Log.e("weixi", "inProgress: " + progress);
-                    }
-                }));
-    }
 
     public void load(int index) {
 //        Log.e("weixi", "load");

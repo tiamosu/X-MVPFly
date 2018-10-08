@@ -12,6 +12,11 @@ import io.reactivex.functions.Action;
  * @date 2018/4/24.
  */
 public final class Platform {
+
+    private Platform() {
+        throw new IllegalStateException("u can't instantiate me!");
+    }
+
     private static final Handler HANDLER = new Handler();
 
     public static Handler getHandler() {

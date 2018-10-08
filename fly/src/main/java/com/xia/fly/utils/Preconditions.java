@@ -10,7 +10,7 @@ import android.support.annotation.Nullable;
 public final class Preconditions {
 
     private Preconditions() {
-        throw new IllegalStateException("you can't instantiate me!");
+        throw new IllegalStateException("u can't instantiate me!");
     }
 
     public static void checkArgument(boolean expression) {

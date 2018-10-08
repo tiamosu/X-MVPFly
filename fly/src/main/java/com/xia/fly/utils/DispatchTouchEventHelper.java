@@ -15,6 +15,10 @@ import com.xia.fly.ui.activities.SupportActivity;
  */
 public final class DispatchTouchEventHelper {
 
+    private DispatchTouchEventHelper() {
+        throw new IllegalStateException("u can't instantiate me!");
+    }
+
     /**
      * 处理控制 点击屏幕空白区域隐藏软键盘
      */

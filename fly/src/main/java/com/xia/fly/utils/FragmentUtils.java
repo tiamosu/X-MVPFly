@@ -12,6 +12,10 @@ import me.yokeyword.fragmentation.ISupportFragment;
 @SuppressWarnings("WeakerAccess")
 public final class FragmentUtils {
 
+    private FragmentUtils() {
+        throw new IllegalStateException("u can't instantiate me!");
+    }
+
     public static <T extends ISupportFragment> T newInstance(final Class cls) {
         return newInstance(cls, null);
     }

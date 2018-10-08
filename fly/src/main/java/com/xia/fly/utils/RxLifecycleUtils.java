@@ -14,7 +14,7 @@ import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
 public final class RxLifecycleUtils {
 
     private RxLifecycleUtils() {
-        throw new IllegalStateException("Can't instance the RxLifecycleUtils");
+        throw new IllegalStateException("u can't instantiate me!");
     }
 
     public static <T> AutoDisposeConverter<T> bindLifecycle(LifecycleOwner lifecycleOwner) {

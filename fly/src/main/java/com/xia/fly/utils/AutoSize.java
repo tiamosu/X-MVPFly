@@ -13,6 +13,10 @@ import com.blankj.utilcode.util.ScreenUtils;
 @SuppressWarnings({"SuspiciousNameCombination", "WeakerAccess"})
 public final class AutoSize {
 
+    private AutoSize() {
+        throw new IllegalStateException("u can't instantiate me!");
+    }
+
     public static void adaptScreen(final Activity activity,
                                    final int designWidthInPx) {
         adaptScreen(activity, designWidthInPx, designWidthInPx);

@@ -14,6 +14,10 @@ import java.io.File;
 @SuppressWarnings("WeakerAccess")
 public final class FileUtils {
 
+    private FileUtils() {
+        throw new IllegalStateException("u can't instantiate me!");
+    }
+
     private static final String SDCARD_DIR =
             Environment.getExternalStorageDirectory().getAbsolutePath();
 

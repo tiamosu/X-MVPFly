@@ -30,7 +30,7 @@ import javax.xml.transform.stream.StreamSource;
 public final class CharacterHandler {
 
     private CharacterHandler() {
-        throw new IllegalStateException("you can't instantiate me!");
+        throw new IllegalStateException("u can't instantiate me!");
     }
 
     /**

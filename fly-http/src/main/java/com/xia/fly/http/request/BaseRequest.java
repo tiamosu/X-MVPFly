@@ -3,6 +3,7 @@ package com.xia.fly.http.request;
 import android.support.annotation.NonNull;
 
 import com.xia.fly.http.api.RestService;
+import com.xia.fly.http.utils.ParamsUtils;
 import com.xia.fly.utils.FlyUtils;
 
 import java.io.File;
@@ -27,6 +28,7 @@ public abstract class BaseRequest<R extends BaseRequest> {
     }
 
     public R addParam(String key, String value) {
+        value = value == null ? "" : value;
         mParams.put(key, value);
         return (R) this;
     }
@@ -34,6 +36,7 @@ public abstract class BaseRequest<R extends BaseRequest> {
     public R params(Map<String, String> params) {
         if (params != null) {
             mParams.putAll(params);
+            ParamsUtils.escapeParams(mParams);
         }
         return (R) this;
     }
