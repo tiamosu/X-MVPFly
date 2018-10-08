@@ -6,7 +6,7 @@ import java.util.Map;
  * @author xia
  * @date 2018/10/8.
  * <p>
- * 处理空参数
+ * 用于处理空参数
  */
 @SuppressWarnings("UnusedReturnValue")
 public final class ParamsUtils {
