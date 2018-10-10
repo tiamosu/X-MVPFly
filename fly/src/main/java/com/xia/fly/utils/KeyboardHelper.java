@@ -13,9 +13,9 @@ import com.xia.fly.ui.activities.SupportActivity;
  * @author xia
  * @date 2018/9/11.
  */
-public final class DispatchTouchEventHelper {
+public final class KeyboardHelper {
 
-    private DispatchTouchEventHelper() {
+    private KeyboardHelper() {
         throw new IllegalStateException("u can't instantiate me!");
     }
 

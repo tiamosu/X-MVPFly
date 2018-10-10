@@ -12,7 +12,7 @@ import com.xia.fly.integration.rxbus.IRxBusCallback;
 import com.xia.fly.integration.rxbus.RxBusHelper;
 import com.xia.fly.mvp.BaseMvpPresenter;
 import com.xia.fly.mvp.BaseMvpView;
-import com.xia.fly.utils.DispatchTouchEventHelper;
+import com.xia.fly.utils.KeyboardHelper;
 import com.xia.fly.utils.FlyUtils;
 
 /**
@@ -57,7 +57,7 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        DispatchTouchEventHelper.dispatchTouchEvent(this, ev);
+        KeyboardHelper.dispatchTouchEvent(this, ev);
         return super.dispatchTouchEvent(ev);
     }
 
