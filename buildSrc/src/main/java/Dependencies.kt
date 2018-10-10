@@ -15,7 +15,7 @@ object Versions {
     const val butterknife = "8.8.1"
     const val retrofit2 = "2.4.0"
     const val okhttp3 = "3.11.0"
-    const val autodispose = "1.0.0-RC2"
+    const val autodispose = "1.0.0"
     const val leakcanary = "1.6.1"
     const val glide = "4.8.0"
     const val dagger2 = "2.17"
@@ -64,7 +64,7 @@ object Deps {
     const val rxcache2 = "com.github.VictorAlbertos.RxCache:runtime:1.8.3-2.x"
     const val rxcache_gson = "com.github.VictorAlbertos.Jolyglot:gson:0.0.4"
     const val rxerrorhandler = "me.jessyan:rxerrorhandler:2.1.1"
-    const val x_rxbus = "me.xia:x-rxbus:1.0.4"
+    const val x_rxbus = "me.xia:x-rxbus:1.0.6"
 
     //okhttp
     const val okhttp3 = "com.squareup.okhttp3:okhttp:${Versions.okhttp3}"
