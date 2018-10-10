@@ -2,15 +2,9 @@ apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
 
 Properties properties = new Properties()
-boolean isHasFile = false
-try {
-    def localFile = project.rootProject.file("local.properties")
-    if (localFile != null && localFile.exists()) {
-        isHasFile = true
-        properties.load(localFile.newDataInputStream())
-    }
-} catch (Exception ignored) {
-    print("local.properties not found")
+def localFile = project.rootProject.file("local.properties")
+if (localFile != null && localFile.exists()) {
+    properties.load(localFile.newDataInputStream())
 }
 
 def projectGitUrl = Publish.gitUrl
@@ -58,8 +52,8 @@ install {
 }
 
 bintray {
-    user = isHasFile ? properties.getProperty("bintray.user") : System.getenv("bintray_user")
-    key = isHasFile ? properties.getProperty("bintray.apikey") : System.getenv("bintray_apikey")
+    user = properties.getProperty("bintray.user")
+    key =  properties.getProperty("bintray.apikey")
     configurations = ['archives']
     pkg {
         repo = 'maven'
