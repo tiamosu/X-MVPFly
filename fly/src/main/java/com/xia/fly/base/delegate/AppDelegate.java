@@ -196,7 +196,10 @@ public class AppDelegate implements App, AppLifecycles {
     @NonNull
     @Override
     public AppComponent getAppComponent() {
-        Preconditions.checkNotNull(mAppComponent, mApplication.getClass().getName());
+        Preconditions.checkNotNull(mAppComponent,
+                "%s == null, first call %s#onCreate(Application) in %s#onCreate()",
+                AppComponent.class.getName(), getClass().getName(), mApplication == null
+                        ? Application.class.getName() : mApplication.getClass().getName());
         return mAppComponent;
     }
 

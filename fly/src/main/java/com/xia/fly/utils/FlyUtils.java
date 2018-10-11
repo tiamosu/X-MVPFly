@@ -15,8 +15,9 @@ public final class FlyUtils {
     }
 
     public static AppComponent getAppComponent() {
-        Preconditions.checkNotNull(Utils.getApp(), "%s cannot be null", Utils.getApp().getClass().getName());
-        Preconditions.checkState(Utils.getApp() instanceof App, "Application does not implements App");
+        Preconditions.checkNotNull(Utils.getApp(), "%s == null", Utils.getApp().getClass().getName());
+        Preconditions.checkState(Utils.getApp() instanceof App, "%s must be implements %s",
+                Utils.getApp().getClass().getName(), App.class.getName());
         return ((App) Utils.getApp()).getAppComponent();
     }
 }
