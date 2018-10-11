@@ -23,7 +23,7 @@ compile 'me.xia:fly-imageloader-glide:2.1.4'
 ------
 
 ## Libraries
-1. [MVP](https://github.com/sockeqwe/mosby/)
+1. [Mosby](https://github.com/sockeqwe/mosby/)
 2. [MVPArms](https://github.com/JessYanCoding/MVPArms)
 3. [Fragmentation](https://github.com/YoKeyword/Fragmentation)
 4. [RxJava](https://github.com/ReactiveX/RxJava)
