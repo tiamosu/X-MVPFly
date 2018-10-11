@@ -12,7 +12,7 @@ object Android {
 
 object Versions {
     const val support = "28.0.0"
-    const val butterknife = "8.8.1"
+    const val butterknife = "9.0.0-rc1"
     const val retrofit2 = "2.4.0"
     const val okhttp3 = "3.11.0"
     const val autodispose = "1.0.0-RC2"

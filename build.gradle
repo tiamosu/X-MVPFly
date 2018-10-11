@@ -6,11 +6,8 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.0'
-        //noinspection GradleDependency
-        classpath 'com.jakewharton:butterknife-gradle-plugin:8.4.0'
-        //Gradle Android Maven plugin
+        classpath 'com.jakewharton:butterknife-gradle-plugin:9.0.0-rc1'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
-        //Gradle Bintray Plugin
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
     }
 }
@@ -28,18 +25,8 @@ allprojects {
             options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
         }
     }
-
-    //忽略打包时警告
-//    tasks.getByPath(":fly:releaseAndroidJavadocs").enabled = false
-//    tasks.getByPath(":fly-http:releaseAndroidJavadocs").enabled = false
-//    tasks.getByPath(":fly-imageloader-glide:releaseAndroidJavadocs").enabled = false
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
-}
-
-ext {
-    version_code = 1
-    version_name = '1.0'
 }

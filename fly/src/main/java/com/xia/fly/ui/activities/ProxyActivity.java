@@ -43,10 +43,14 @@ public abstract class ProxyActivity extends SupportActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (!isRestartSaved() && savedInstanceState != null) {
+            finish();
+            return;
+        }
         final ContentFrameLayout container = new ContentFrameLayout(this);
         container.setId(R.id.delegate_container);
         setContentView(container);
-        if (findFragment(setRootFragment()) == null || !isRestartSaved()) {
+        if (findFragment(setRootFragment()) == null) {
             loadRootFragment(R.id.delegate_container, FragmentUtils.newInstance(setRootFragment()));
         }
     }
