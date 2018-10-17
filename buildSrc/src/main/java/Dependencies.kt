@@ -16,7 +16,7 @@ object Versions {
     const val retrofit2 = "2.4.0"
     const val okhttp3 = "3.11.0"
     const val autodispose = "1.0.0-RC2"
-    const val leakcanary = "1.6.1"
+    const val leakcanary = "1.6.2"
     const val glide = "4.8.0"
     const val dagger2 = "2.17"
 }
@@ -75,7 +75,7 @@ object Deps {
     const val glide_compiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
 
     //util
-    const val utilcode = "com.blankj:utilcode:1.20.4"
+    const val utilcode = "com.blankj:utilcode:1.21.0"
     //fragment
     const val fragmentation_core = "me.yokeyword:fragmentation-core:1.3.6"
     //loading各种动画样式
