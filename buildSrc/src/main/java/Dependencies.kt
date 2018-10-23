@@ -18,7 +18,7 @@ object Versions {
     const val autodispose = "1.0.0-RC2"
     const val leakcanary = "1.6.2"
     const val glide = "4.8.0"
-    const val dagger2 = "2.17"
+    const val dagger2 = "2.18"
 }
 
 object Publish {
