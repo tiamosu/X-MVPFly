@@ -67,8 +67,7 @@ public class HomeFragment extends HeadViewFragment<HomePresenter> implements Hom
                     .setOnClickListener(v -> {
                         final Bundle bundle = new Bundle();
                         bundle.putString("Hello", "你好");
-                        start(true,
-                                FragmentUtils.newInstance(SecondFragment.class, bundle));
+                        getParentDelegate().start(FragmentUtils.newInstance(SecondFragment.class, bundle));
                     });
         }
     }
