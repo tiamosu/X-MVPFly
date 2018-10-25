@@ -45,11 +45,12 @@ dependencies {
     implementation project(':fly-http')
     implementation project(':fly-imageloader-glide')
 
+    implementation Deps.okhttp3_logging_interceptor
+
+    implementation Deps.butterknife
     annotationProcessor Deps.butterknife_apt
 
     debugImplementation Deps.leakcanary_android
     releaseImplementation Deps.leakcanary_android_no_op
     debugImplementation Deps.leakcanary_support_fragment
-
-    implementation Deps.okhttp3_logging_interceptor
 }

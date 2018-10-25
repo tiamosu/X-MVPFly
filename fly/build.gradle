@@ -32,7 +32,7 @@ dependencies {
     api(Deps.retrofit2) {
         exclude module: 'okhttp'
     }
-    api(Deps.retrofit2_adapter_rxjava2) {
+    implementation(Deps.retrofit2_adapter_rxjava2) {
         exclude module: 'retrofit'
         exclude module: 'rxjava'
     }
@@ -53,7 +53,7 @@ dependencies {
     api Deps.okhttp3
 
     //butterknife
-    api(Deps.butterknife) {
+    implementation(Deps.butterknife) {
         exclude module: 'support-annotations'
         exclude module: 'support-compat'
     }
@@ -66,7 +66,7 @@ dependencies {
     }
 
     //dagger2
-    api Deps.dagger2
+    implementation Deps.dagger2
     annotationProcessor Deps.dagger2_apt
 
     //常用的util库
@@ -74,7 +74,7 @@ dependencies {
     //fragment框架
     api Deps.fragmentation_core
     //loading动画样式
-    api Deps.loading_indicator_view
+    implementation Deps.loading_indicator_view
 }
 
 apply from: 'bintray.gradle'
