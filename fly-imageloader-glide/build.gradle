@@ -20,25 +20,24 @@ dependencies {
 
 //apply from: 'bintray-imageloader-glide.gradle'
 
-//生成文档注释
-task androidJavadocs(type: Javadoc) {
+task androidJavadocs(type: Javadoc) {//生成文档注释
     failOnError = false
     source = android.sourceSets.main.java.srcDirs
     ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
     classpath += files(ext.androidJar)
 }
-//将文档打包成jar
-task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+
+task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {//将文档打包成jar
     classifier = 'javadoc'
     from androidJavadocs.destinationDir
 }
-//将源码打包
-task androidSourcesJar(type: Jar) {
+
+task androidSourcesJar(type: Jar) {//将源码打包
     classifier = 'sources'
     from android.sourceSets.main.java.srcDirs
 }
-//包含文档和源码的aar
-artifacts {
+
+artifacts {//包含文档和源码的aar
     archives androidSourcesJar
     archives androidJavadocsJar
 }
