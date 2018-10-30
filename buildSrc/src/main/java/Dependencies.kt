@@ -15,10 +15,10 @@ object Versions {
     const val butterknife = "9.0.0-rc1"
     const val retrofit2 = "2.4.0"
     const val okhttp3 = "3.11.0"
-    const val autodispose = "1.0.0-RC2"
+    const val autodispose = "1.0.0-RC3"
     const val leakcanary = "1.6.2"
     const val glide = "4.8.0"
-    const val dagger2 = "2.18"
+    const val dagger2 = "2.19"
 }
 
 object Publish {
