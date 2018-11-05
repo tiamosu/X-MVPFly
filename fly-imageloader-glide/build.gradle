@@ -18,52 +18,52 @@ dependencies {
     annotationProcessor Deps.glide_compiler
 }
 
-//apply from: 'bintray-imageloader-glide.gradle'
-
-task androidJavadocs(type: Javadoc) {//生成文档注释
-    failOnError = false
-    source = android.sourceSets.main.java.srcDirs
-    ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
-    classpath += files(ext.androidJar)
-}
-
-task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {//将文档打包成jar
-    classifier = 'javadoc'
-    from androidJavadocs.destinationDir
-}
-
-task androidSourcesJar(type: Jar) {//将源码打包
-    classifier = 'sources'
-    from android.sourceSets.main.java.srcDirs
-}
-
-artifacts {//包含文档和源码的aar
-    archives androidSourcesJar
-    archives androidJavadocsJar
-}
-
-Properties properties = new Properties()
-def localFile = project.rootProject.file("local.properties")
-if (localFile != null && localFile.exists()) {
-    properties.load(localFile.newDataInputStream())
-}
-uploadArchives {
-    def userName = properties.getProperty("maven.user")
-    def password = properties.getProperty("maven.pwd")
-    def url = properties.getProperty("maven.repository")
-    configuration = configurations.archives
-    repositories {
-        mavenDeployer {
-            repository(url: url) {
-                authentication(userName: userName, password: password)
-            }
-            pom.project {
-                version Publish.publishVersion
-                artifactId 'fly-imageloader-glide'
-                groupId Publish.groupId
-                packaging 'aar'
-                description Publish.desc
-            }
-        }
-    }
-}
+apply from: 'bintray-imageloader-glide.gradle'
+//
+//task androidJavadocs(type: Javadoc) {//生成文档注释
+//    failOnError = false
+//    source = android.sourceSets.main.java.srcDirs
+//    ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
+//    classpath += files(ext.androidJar)
+//}
+//
+//task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {//将文档打包成jar
+//    classifier = 'javadoc'
+//    from androidJavadocs.destinationDir
+//}
+//
+//task androidSourcesJar(type: Jar) {//将源码打包
+//    classifier = 'sources'
+//    from android.sourceSets.main.java.srcDirs
+//}
+//
+//artifacts {//包含文档和源码的aar
+//    archives androidSourcesJar
+//    archives androidJavadocsJar
+//}
+//
+//Properties properties = new Properties()
+//def localFile = project.rootProject.file("local.properties")
+//if (localFile != null && localFile.exists()) {
+//    properties.load(localFile.newDataInputStream())
+//}
+//uploadArchives {
+//    def userName = properties.getProperty("maven.user")
+//    def password = properties.getProperty("maven.pwd")
+//    def url = properties.getProperty("maven.repository")
+//    configuration = configurations.archives
+//    repositories {
+//        mavenDeployer {
+//            repository(url: url) {
+//                authentication(userName: userName, password: password)
+//            }
+//            pom.project {
+//                version Publish.publishVersion
+//                artifactId 'fly-imageloader-glide'
+//                groupId Publish.groupId
+//                packaging 'aar'
+//                description Publish.desc
+//            }
+//        }
+//    }
+//}
