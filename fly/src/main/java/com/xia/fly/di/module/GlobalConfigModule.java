@@ -21,6 +21,11 @@ import com.xia.fly.utils.Preconditions;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
 
@@ -29,6 +34,7 @@ import dagger.Provides;
 import me.jessyan.rxerrorhandler.handler.listener.ResponseErrorListener;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
+import okhttp3.internal.Util;
 
 /**
  * 框架独创的建造者模式 {@link Module},可向框架中注入外部配置的自定义参数
@@ -52,6 +58,7 @@ public class GlobalConfigModule {
     private final RequestInterceptor.Level mPrintHttpLogLevel;
     private final FormatPrinter mFormatPrinter;
     private final Cache.Factory<String, Object> mCacheFactory;
+    private ExecutorService mExecutorService;
 
     private GlobalConfigModule(Builder builder) {
         this.mApiUrl = builder.mApiUrl;
@@ -68,6 +75,7 @@ public class GlobalConfigModule {
         this.mPrintHttpLogLevel = builder.mPrintHttpLogLevel;
         this.mFormatPrinter = builder.mFormatPrinter;
         this.mCacheFactory = builder.mCacheFactory;
+        this.mExecutorService = builder.mExecutorService;
     }
 
     public static Builder builder() {
@@ -127,8 +135,6 @@ public class GlobalConfigModule {
 
     /**
      * 提供处理 RxJava 错误的管理器的回调
-     *
-     * @return
      */
     @Singleton
     @Provides
@@ -195,6 +201,21 @@ public class GlobalConfigModule {
         } : mCacheFactory;
     }
 
+    /**
+     * 返回一个全局公用的线程池,适用于大多数异步需求。
+     * 避免多个线程池创建带来的资源消耗。
+     *
+     * @return {@link Executor}
+     */
+    @Singleton
+    @Provides
+    ExecutorService provideExecutorService() {
+        return mExecutorService == null ? new ThreadPoolExecutor(
+                0, Integer.MAX_VALUE, 60, TimeUnit.SECONDS,
+                new SynchronousQueue<>(), Util.threadFactory("Fly Executor", false))
+                : mExecutorService;
+    }
+
     @SuppressWarnings("UnusedReturnValue")
     public static final class Builder {
         private HttpUrl mApiUrl;
@@ -211,6 +232,7 @@ public class GlobalConfigModule {
         private RequestInterceptor.Level mPrintHttpLogLevel;
         private FormatPrinter mFormatPrinter;
         private Cache.Factory<String, Object> mCacheFactory;
+        private ExecutorService mExecutorService;
 
         private Builder() {
         }
@@ -288,6 +310,11 @@ public class GlobalConfigModule {
 
         public Builder cacheFactory(Cache.Factory<String, Object> cacheFactory) {
             this.mCacheFactory = cacheFactory;
+            return this;
+        }
+
+        public Builder executorService(ExecutorService executorService) {
+            this.mExecutorService = executorService;
             return this;
         }
 

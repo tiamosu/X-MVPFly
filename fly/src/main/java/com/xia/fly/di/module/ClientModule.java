@@ -12,6 +12,7 @@ import com.xia.fly.utils.FileUtils;
 
 import java.io.File;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
@@ -23,6 +24,7 @@ import io.rx_cache2.internal.RxCache;
 import io.victoralbertos.jolyglot.GsonSpeaker;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.listener.ResponseErrorListener;
+import okhttp3.Dispatcher;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -72,7 +74,8 @@ public abstract class ClientModule {
                                       final OkHttpClient.Builder builder,
                                       final Interceptor intercept,
                                       @Nullable final List<Interceptor> interceptors,
-                                      @Nullable final GlobalHttpHandler handler) {
+                                      @Nullable final GlobalHttpHandler handler,
+                                      final ExecutorService executorService) {
         builder
                 .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .readTimeout(TIME_OUT, TimeUnit.SECONDS)
@@ -88,6 +91,9 @@ public abstract class ClientModule {
                 builder.addInterceptor(interceptor);
             }
         }
+
+        // 为 OkHttp 设置默认的线程池。
+        builder.dispatcher(new Dispatcher(executorService));
 
         if (configuration != null) {
             configuration.configOkHttp(application, builder);
@@ -149,8 +155,6 @@ public abstract class ClientModule {
     /**
      * 提供处理 RxJava 错误的管理器
      *
-     * @param application
-     * @param listener
      * @return {@link RxErrorHandler}
      */
     @Singleton

@@ -16,6 +16,7 @@ import com.xia.fly.ui.imageloader.ImageLoader;
 import com.xia.fly.utils.FlyUtils;
 
 import java.io.File;
+import java.util.concurrent.ExecutorService;
 
 import javax.inject.Singleton;
 
@@ -93,6 +94,14 @@ public interface AppComponent {
      * @return {@link Cache.Factory}
      */
     Cache.Factory<String, Object> cacheFactory();
+
+    /**
+     * 返回一个全局公用的线程池,适用于大多数异步需求。
+     * 避免多个线程池创建带来的资源消耗。
+     *
+     * @return {@link ExecutorService}
+     */
+    ExecutorService executorService();
 
     void inject(AppDelegate delegate);
 
