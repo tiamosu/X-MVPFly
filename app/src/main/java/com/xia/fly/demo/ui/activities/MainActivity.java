@@ -23,7 +23,7 @@ public class MainActivity extends ProxyActivity {
 
     @Override
     public boolean isDispatchTouchHideKeyboard() {
-        return false;
+        return true;
     }
 
     @Override
