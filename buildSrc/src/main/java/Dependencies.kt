@@ -12,7 +12,7 @@ object Android {
 
 object Versions {
     const val support = "28.0.0"
-    const val butterknife = "9.0.0-rc1"
+    const val butterknife = "9.0.0-rc2"
     const val retrofit2 = "2.5.0"
     const val okhttp3 = "3.12.0"
     const val autodispose = "1.0.0-RC3"
@@ -24,7 +24,7 @@ object Versions {
 object Publish {
     const val userOrg = "weixia" //bintray.com用户名
     const val groupId = "me.xia" //jcenter上的路径
-    const val publishVersion = "2.2.4" //版本号
+    const val publishVersion = "2.2.5" //版本号
     const val desc = "Oh hi, this is a nice description for a project, right?"
     const val website = "https://github.com/wexia/X-MVPFly"
     const val gitUrl = "https://github.com/wexia/X-MVPFly.git"
