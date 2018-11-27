@@ -71,16 +71,12 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
         return rootView;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    public void initMvp() {
-        if (mPresenter == null) {
-            mPresenter = newP();
-            if (mPresenter != null) {
-                mPresenter.attachView(this);
-                getLifecycle().addObserver(mPresenter);
-            }
-        }
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        initMvp();
+        getBundle(getArguments());
+        initData();
     }
 
     /**
@@ -120,9 +116,6 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
 
     private void onVisibleLazyInit() {
         if (mInitialized.compareAndSet(false, true)) {
-            initMvp();
-            getBundle(getArguments());
-            initData();
             initView();
             initEvent();
             onLazyLoadData();
@@ -132,6 +125,18 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
             hasNetWork(NetworkUtils.isConnected());
         }
         onVisibleLazyLoad();
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public void initMvp() {
+        if (mPresenter == null) {
+            mPresenter = newP();
+            if (mPresenter != null) {
+                mPresenter.attachView(this);
+                getLifecycle().addObserver(mPresenter);
+            }
+        }
     }
 
     private void getBundle(Bundle bundle) {

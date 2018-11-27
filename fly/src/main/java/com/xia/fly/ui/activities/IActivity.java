@@ -59,16 +59,6 @@ public interface IActivity {
     void onLazyLoadData();
 
     /**
-     * 可见时执行
-     * 并执行于
-     * {@link SupportActivity#initData()}
-     * {@link SupportActivity#initView()}
-     * {@link SupportActivity#initEvent()}
-     * 之后
-     */
-    void onVisibleLazyLoad();
-
-    /**
      * @return 是否检查网络状态，默认为true
      */
     boolean isCheckNetWork();

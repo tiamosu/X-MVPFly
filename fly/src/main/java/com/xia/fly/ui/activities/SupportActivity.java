@@ -1,6 +1,5 @@
 package com.xia.fly.ui.activities;
 
-import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
@@ -12,8 +11,8 @@ import com.xia.fly.integration.rxbus.IRxBusCallback;
 import com.xia.fly.integration.rxbus.RxBusHelper;
 import com.xia.fly.mvp.BaseMvpPresenter;
 import com.xia.fly.mvp.BaseMvpView;
-import com.xia.fly.utils.KeyboardHelper;
 import com.xia.fly.utils.FlyUtils;
+import com.xia.fly.utils.KeyboardHelper;
 
 /**
  * @author xia
@@ -69,11 +68,6 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
     @Override
     public AppCompatActivity getContext() {
         return this;
-    }
-
-    @CallSuper
-    @Override
-    public void onVisibleLazyLoad() {
     }
 
     @Override

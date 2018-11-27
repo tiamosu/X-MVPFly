@@ -101,7 +101,6 @@ public class ActivityDelegateImpl implements ActivityDelegate {
 
     @Override
     public void onResume() {
-        mIActivity.onVisibleLazyLoad();
         if (mIActivity.isCheckNetWork()) {
             hasNetWork(NetworkUtils.isConnected());
         }
