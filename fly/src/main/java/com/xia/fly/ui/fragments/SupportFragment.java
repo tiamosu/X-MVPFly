@@ -71,14 +71,6 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
         return rootView;
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        initMvp();
-        getBundle(getArguments());
-        initData();
-    }
-
     /**
      * 在{@link #loadMultipleRootFragment(int, int, ISupportFragment...)}的情况下，
      * 该方法将会先于{{@link #onSupportVisible()}先执行
@@ -116,6 +108,9 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
 
     private void onVisibleLazyInit() {
         if (mInitialized.compareAndSet(false, true)) {
+            initMvp();
+            getBundle(getArguments());
+            initData();
             initView();
             initEvent();
             onLazyLoadData();
