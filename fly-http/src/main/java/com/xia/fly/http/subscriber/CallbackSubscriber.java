@@ -87,14 +87,14 @@ public class CallbackSubscriber extends ErrorHandleSubscriber<ResponseBody> {
 
     protected void showDialog() {
         if (isShowLoadingDialog()) {
-            Platform.getHandler().postDelayed(() ->
+            Platform.getLoadingHandler().postDelayed(() ->
                     Loader.showLoading(getLoadingDialog()), 300);
         }
     }
 
     protected void cancelDialog() {
         if (isShowLoadingDialog()) {
-            Platform.getHandler().removeCallbacksAndMessages(null);
+            Platform.getLoadingHandler().removeCallbacksAndMessages(null);
             Loader.stopLoading();
         }
         if (!isDisposed()) {

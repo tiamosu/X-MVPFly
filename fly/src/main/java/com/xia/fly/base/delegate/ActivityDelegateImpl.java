@@ -14,6 +14,7 @@ import com.xia.fly.integration.rxbus.RxBusEventTag;
 import com.xia.fly.integration.rxbus.RxBusHelper;
 import com.xia.fly.receiver.NetworkChangeReceiver;
 import com.xia.fly.ui.activities.IActivity;
+import com.xia.fly.ui.dialog.loader.Loader;
 import com.xia.fly.utils.Platform;
 
 import butterknife.ButterKnife;
@@ -108,6 +109,8 @@ public class ActivityDelegateImpl implements ActivityDelegate {
 
     @Override
     public void onPause() {
+        Platform.getLoadingHandler().removeCallbacksAndMessages(null);
+        Loader.stopLoading();
     }
 
     @Override

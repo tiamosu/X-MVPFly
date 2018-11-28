@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.view.View;
 
 import com.xia.fly.integration.rxbus.RxBusHelper;
+import com.xia.fly.ui.dialog.loader.Loader;
 import com.xia.fly.ui.fragments.IFragment;
 import com.xia.fly.utils.Platform;
 
@@ -62,6 +63,8 @@ public class FragmentDelegateImpl implements FragmentDelegate {
 
     @Override
     public void onPause() {
+        Platform.getLoadingHandler().removeCallbacksAndMessages(null);
+        Loader.stopLoading();
     }
 
     @Override
