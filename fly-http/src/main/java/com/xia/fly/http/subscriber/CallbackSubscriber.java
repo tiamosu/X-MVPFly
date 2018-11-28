@@ -1,6 +1,7 @@
 package com.xia.fly.http.subscriber;
 
 import android.app.Dialog;
+import android.support.annotation.NonNull;
 
 import com.xia.fly.http.callback.Callback;
 import com.xia.fly.ui.dialog.LoadingDialog;

@@ -1,6 +1,5 @@
 package com.xia.fly.http.request;
 
-import android.arch.lifecycle.LifecycleOwner;
 import android.support.annotation.NonNull;
 
 import com.xia.fly.http.callback.Callback;
@@ -26,20 +25,14 @@ public class RequestCall {
     }
 
     public final void request(@NonNull CallbackSubscriber subscriber) {
-        if (mObservable != null) {
-            final Callback callback = subscriber.mCallback;
-            LifecycleOwner lifecycleOwner = null;
-            if (callback != null) {
-                lifecycleOwner = callback.mLifecycleOwner;
-            }
-            if (lifecycleOwner != null) {
-                mObservable.subscribeOn(Schedulers.io())
-                        .unsubscribeOn(Schedulers.io())
-                        //遇到错误时重试,第一个参数为重试几次,第二个参数为重试的间隔时间（单位：秒）
-                        .retryWhen(new RetryWithDelay(3, 2))
-                        .as(RxLifecycleUtils.bindLifecycle(lifecycleOwner))
-                        .subscribe(subscriber);
-            }
+        Callback callback;
+        if (mObservable != null && (callback = subscriber.mCallback) != null) {
+            mObservable.subscribeOn(Schedulers.io())
+                    .unsubscribeOn(Schedulers.io())
+                    //遇到错误时重试,第一个参数为重试几次,第二个参数为重试的间隔时间（单位：秒）
+                    .retryWhen(new RetryWithDelay(3, 2))
+                    .as(RxLifecycleUtils.bindLifecycle(callback.mLifecycleOwner))
+                    .subscribe(subscriber);
         }
     }
 }
