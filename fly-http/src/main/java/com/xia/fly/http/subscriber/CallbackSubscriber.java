@@ -21,7 +21,7 @@ public class CallbackSubscriber extends ErrorHandleSubscriber<ResponseBody> {
     public Callback mCallback;
     private Disposable mDisposable;
 
-    public CallbackSubscriber(Callback callback) {
+    public CallbackSubscriber(@NonNull Callback callback) {
         super(FlyUtils.getAppComponent().rxErrorHandler());
         mCallback = callback;
     }
@@ -86,7 +86,8 @@ public class CallbackSubscriber extends ErrorHandleSubscriber<ResponseBody> {
 
     protected void showDialog() {
         if (isShowLoadingDialog()) {
-            Platform.getHandler().postDelayed(() -> Loader.showLoading(getLoadingDialog()), 400);
+            Platform.getHandler().postDelayed(() ->
+                    Loader.showLoading(getLoadingDialog()), 300);
         }
     }
 
