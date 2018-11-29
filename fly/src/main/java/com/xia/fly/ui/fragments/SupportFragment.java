@@ -1,5 +1,6 @@
 package com.xia.fly.ui.fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
@@ -106,6 +107,7 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
         }
     }
 
+    @SuppressLint("MissingPermission")
     private void onVisibleLazyInit() {
         if (mInitialized.compareAndSet(false, true)) {
             initMvp();

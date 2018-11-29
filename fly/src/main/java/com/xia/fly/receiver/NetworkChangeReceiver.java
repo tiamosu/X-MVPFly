@@ -1,5 +1,6 @@
 package com.xia.fly.receiver;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -19,6 +20,7 @@ import com.xia.fly.integration.rxbus.RxBusHelper;
  */
 public class NetworkChangeReceiver extends BroadcastReceiver {
 
+    @SuppressLint("MissingPermission")
     @Override
     public void onReceive(Context context, Intent intent) {
         //**判断当前的网络连接状态是否可用*/
