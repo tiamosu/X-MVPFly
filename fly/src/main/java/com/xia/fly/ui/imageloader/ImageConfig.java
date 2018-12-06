@@ -16,5 +16,5 @@ public class ImageConfig {
     public ImageView mImageView;
     public Target mTarget;
     public int mPlaceholder;//占位符
-    public int mErrorPic;//错误占位符
+    public int mError;//错误占位符
 }

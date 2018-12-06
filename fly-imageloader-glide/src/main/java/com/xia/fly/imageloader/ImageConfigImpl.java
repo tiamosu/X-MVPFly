@@ -49,20 +49,26 @@ public class ImageConfigImpl extends ImageConfig {
     public boolean mIsClearMemory;//清理内存缓存
     public boolean mIsClearDiskCache;//清理本地缓存
     public boolean mIsDontAnimate;//不显示动画
+    public Drawable mPlaceholderDrawable;
+    public Drawable mErrorDrawable;
+    public Drawable mFallbackDrawable;
 
     private ImageConfigImpl(Builder builder) {
         this.mObject = builder.mObject;
         this.mImageView = builder.mImageView;
         this.mTarget = builder.mTarget;
         this.mPlaceholder = builder.mPlaceholder;
-        this.mErrorPic = builder.mErrorPic;
+        this.mError = builder.mError;
+        this.mFallback = builder.mFallback;
+        this.mPlaceholderDrawable = builder.mPlaceholderDrawable;
+        this.mErrorDrawable = builder.mErrorDrawable;
+        this.mFallbackDrawable = builder.mFallbackDrawable;
         this.mRequestOptions = builder.mRequestOptions;
         this.mRequestListener = builder.mRequestListener;
         this.mTransformation = builder.mTransformation;
         this.mImageViews = builder.mImageViews;
         this.mCacheStrategy = builder.mCacheStrategy;
         this.mTranscodeType = builder.mTranscodeType;
-        this.mFallback = builder.mFallback;
         this.mRoundingRadius = builder.mRoundingRadius;
         this.mBlurValue = builder.mBlurValue;
         this.mTargetWidth = builder.mTargetWidth;
@@ -117,14 +123,17 @@ public class ImageConfigImpl extends ImageConfig {
         private ImageView mImageView;
         private Target mTarget;
         private int mPlaceholder;//占位符
-        private int mErrorPic;//错误占位符
+        private int mError;//错误占位符
+        private int mFallback; //请求 url 为空,则使用此图片作为占位符
+        private Drawable mPlaceholderDrawable;
+        private Drawable mErrorDrawable;
+        private Drawable mFallbackDrawable;
         private RequestOptions mRequestOptions;//加载配置
         private RequestListener mRequestListener;//加载监听
         private BitmapTransformation mTransformation;//glide用它来改变图形的形状
         private ImageView[] mImageViews;//视图控件数组
         private int mCacheStrategy;//缓存策略
         private int mTranscodeType;
-        private int mFallback; //请求 url 为空,则使用此图片作为占位符
         private int mRoundingRadius;//图片每个圆角的大小
         private int mBlurValue;//高斯模糊值, 值越大模糊效果越大
         private int mTargetWidth, mTargetHeight;//重新设定图片大小
@@ -165,13 +174,28 @@ public class ImageConfigImpl extends ImageConfig {
             return this;
         }
 
-        public Builder error(int errorPic) {
-            this.mErrorPic = errorPic;
+        public Builder placeholder(Drawable placeholder) {
+            this.mPlaceholderDrawable = placeholder;
+            return this;
+        }
+
+        public Builder error(int error) {
+            this.mError = error;
+            return this;
+        }
+
+        public Builder error(Drawable error) {
+            this.mErrorDrawable = error;
             return this;
         }
 
         public Builder fallback(int fallback) {
             this.mFallback = fallback;
+            return this;
+        }
+
+        public Builder fallback(Drawable fallback) {
+            this.mFallbackDrawable = fallback;
             return this;
         }
 

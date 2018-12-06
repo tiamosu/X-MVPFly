@@ -93,16 +93,22 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy<ImageCo
         //设置占位符
         if (config.mPlaceholder != 0) {
             glideRequest.placeholder(config.mPlaceholder);
+        } else if (config.mPlaceholderDrawable != null) {
+            glideRequest.placeholder(config.mPlaceholderDrawable);
         }
 
         //设置错误的图片
-        if (config.mErrorPic != 0) {
-            glideRequest.error(config.mErrorPic);
+        if (config.mError != 0) {
+            glideRequest.error(config.mError);
+        } else if (config.mErrorDrawable != null) {
+            glideRequest.error(config.mErrorDrawable);
         }
 
         //设置请求 url 为空图片
         if (config.mFallback != 0) {
             glideRequest.fallback(config.mFallback);
+        } else if (config.mFallbackDrawable != null) {
+            glideRequest.fallback(config.mFallbackDrawable);
         }
 
         //设定大小
