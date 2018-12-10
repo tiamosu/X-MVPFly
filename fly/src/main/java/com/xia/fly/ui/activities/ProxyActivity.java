@@ -47,11 +47,13 @@ public abstract class ProxyActivity extends SupportActivity {
             finish();
             return;
         }
-        final ContentFrameLayout container = new ContentFrameLayout(this);
-        container.setId(R.id.delegate_container);
-        setContentView(container);
-        if (findFragment(setRootFragment()) == null) {
-            loadRootFragment(R.id.delegate_container, FragmentUtils.newInstance(setRootFragment()));
+        if (getLayoutId() == 0) {
+            final ContentFrameLayout container = new ContentFrameLayout(this);
+            container.setId(R.id.delegate_container);
+            setContentView(container);
+            if (findFragment(setRootFragment()) == null) {
+                loadRootFragment(R.id.delegate_container, FragmentUtils.newInstance(setRootFragment()));
+            }
         }
     }
 
