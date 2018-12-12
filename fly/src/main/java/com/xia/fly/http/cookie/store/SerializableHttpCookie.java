@@ -53,7 +53,6 @@ public class SerializableHttpCookie implements Serializable {
         final boolean secure = in.readBoolean();
         final boolean httpOnly = in.readBoolean();
         final boolean hostOnly = in.readBoolean();
-        final boolean persistent = in.readBoolean();
         Cookie.Builder builder = new Cookie.Builder();
         builder = builder.name(name);
         builder = builder.value(value);

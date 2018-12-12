@@ -1,5 +1,6 @@
 package com.xia.fly.http.interceptors;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
@@ -70,8 +71,9 @@ public class RequestInterceptor extends BaseInterceptor {
     public RequestInterceptor() {
     }
 
+    @NonNull
     @Override
-    public Response intercept(Chain chain) throws IOException {
+    public Response intercept(@NonNull Chain chain) throws IOException {
         final Request request = chain.request();
         final boolean logRequest = printLevel == Level.ALL || (printLevel != Level.NONE && printLevel == Level.REQUEST);
 
@@ -79,7 +81,10 @@ public class RequestInterceptor extends BaseInterceptor {
             //打印请求信息
             final RequestBody requestBody = request.body();
             if (requestBody != null && isParseable(requestBody.contentType())) {
-                mPrinter.printJsonRequest(request, parseParams(request));
+                final String parseString = parseParams(request);
+                if (parseString != null) {
+                    mPrinter.printJsonRequest(request, parseString);
+                }
             } else {
                 mPrinter.printFileRequest(request);
             }
@@ -223,7 +228,7 @@ public class RequestInterceptor extends BaseInterceptor {
      * @return {@code true} 为可以解析
      */
     public static boolean isParseable(MediaType mediaType) {
-        if (mediaType == null || mediaType.type() == null) {
+        if (mediaType == null) {
             return false;
         }
         return isText(mediaType) || isPlain(mediaType)
@@ -232,39 +237,27 @@ public class RequestInterceptor extends BaseInterceptor {
     }
 
     public static boolean isText(MediaType mediaType) {
-        return mediaType != null
-                && mediaType.type() != null
-                && "text".equals(mediaType.type());
+        return mediaType != null && "text".equals(mediaType.type());
     }
 
     public static boolean isPlain(MediaType mediaType) {
-        return mediaType != null
-                && mediaType.subtype() != null
-                && mediaType.subtype().toLowerCase().contains("plain");
+        return mediaType != null && mediaType.subtype().toLowerCase().contains("plain");
     }
 
     public static boolean isJson(MediaType mediaType) {
-        return mediaType != null
-                && mediaType.subtype() != null
-                && mediaType.subtype().toLowerCase().contains("json");
+        return mediaType != null && mediaType.subtype().toLowerCase().contains("json");
     }
 
     public static boolean isXml(MediaType mediaType) {
-        return mediaType != null
-                && mediaType.subtype() != null
-                && mediaType.subtype().toLowerCase().contains("xml");
+        return mediaType != null && mediaType.subtype().toLowerCase().contains("xml");
     }
 
     public static boolean isHtml(MediaType mediaType) {
-        return mediaType != null
-                && mediaType.subtype() != null
-                && mediaType.subtype().toLowerCase().contains("html");
+        return mediaType != null && mediaType.subtype().toLowerCase().contains("html");
     }
 
     public static boolean isForm(MediaType mediaType) {
-        return mediaType != null
-                && mediaType.subtype() != null
-                && mediaType.subtype().toLowerCase().contains("x-www-form-urlencoded");
+        return mediaType != null && mediaType.subtype().toLowerCase().contains("x-www-form-urlencoded");
     }
 
     public static String convertCharset(Charset charset) {

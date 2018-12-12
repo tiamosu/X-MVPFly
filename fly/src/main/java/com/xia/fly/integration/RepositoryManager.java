@@ -2,6 +2,7 @@ package com.xia.fly.integration;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.xia.fly.integration.cache.Cache;
 import com.xia.fly.integration.cache.CacheType;
@@ -53,8 +54,9 @@ public class RepositoryManager implements IRepositoryManager {
      * @param <T>          ApiService class
      * @return ApiService
      */
+    @NonNull
     @Override
-    public synchronized <T> T obtainRetrofitService(Class<T> serviceClass) {
+    public synchronized <T> T obtainRetrofitService(@NonNull Class<T> serviceClass) {
         return createWrapperService(serviceClass);
     }
 
@@ -67,6 +69,8 @@ public class RepositoryManager implements IRepositoryManager {
      */
     @SuppressWarnings("unchecked")
     private <T> T createWrapperService(Class<T> serviceClass) {
+        Preconditions.checkNotNull(serviceClass, "serviceClass == null");
+
         // 通过二次代理，对 Retrofit 代理方法的调用包进新的 Observable 里在 io 线程执行。
         return (T) Proxy.newProxyInstance(serviceClass.getClassLoader(),
                 new Class<?>[]{serviceClass}, (proxy, method, args) -> {
@@ -120,8 +124,11 @@ public class RepositoryManager implements IRepositoryManager {
      * @return Cache
      */
     @SuppressWarnings("unchecked")
+    @NonNull
     @Override
-    public synchronized <T> T obtainCacheService(Class<T> cacheClass) {
+    public synchronized <T> T obtainCacheService(@NonNull Class<T> cacheClass) {
+        Preconditions.checkNotNull(cacheClass, "cacheClass == null");
+
         if (mCacheServiceCache == null) {
             mCacheServiceCache = mCacheFactory.build(CacheType.CACHE_SERVICE_CACHE);
         }
@@ -143,6 +150,7 @@ public class RepositoryManager implements IRepositoryManager {
         mRxCache.get().evictAll().subscribe();
     }
 
+    @NonNull
     @Override
     public Context getContext() {
         return mApplication;

@@ -1,6 +1,7 @@
 package com.xia.fly.imageloader;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.GlideBuilder;
@@ -22,5 +23,5 @@ public interface GlideAppliesOptions {
      * @param context
      * @param builder {@link GlideBuilder} 此类被用来创建 Glide
      */
-    void applyGlideOptions(Context context, GlideBuilder builder);
+    void applyGlideOptions(@NonNull Context context, @NonNull GlideBuilder builder);
 }

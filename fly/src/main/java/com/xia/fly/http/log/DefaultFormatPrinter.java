@@ -1,5 +1,7 @@
 package com.xia.fly.http.log;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.blankj.utilcode.util.LogUtils;
@@ -53,7 +55,7 @@ public class DefaultFormatPrinter implements FormatPrinter {
      * 打印网络请求信息, 当网络请求时 {{@link okhttp3.RequestBody}} 可以解析的情况
      */
     @Override
-    public void printJsonRequest(Request request, String bodyString) {
+    public void printJsonRequest(@NonNull Request request, @NonNull String bodyString) {
         final String requestBody = LINE_SEPARATOR + BODY_TAG + LINE_SEPARATOR + bodyString;
         final String tag = getTag(true);
 
@@ -68,7 +70,7 @@ public class DefaultFormatPrinter implements FormatPrinter {
      * 打印网络请求信息, 当网络请求时 {{@link okhttp3.RequestBody}} 为 {@code null} 或不可解析的情况
      */
     @Override
-    public void printFileRequest(Request request) {
+    public void printFileRequest(@NonNull Request request) {
         final String tag = getTag(true);
 
         LogUtils.dTag(tag, REQUEST_UP_LINE);
@@ -92,8 +94,10 @@ public class DefaultFormatPrinter implements FormatPrinter {
      * @param responseUrl  请求地址
      */
     @Override
-    public void printJsonResponse(long chainMs, boolean isSuccessful, int code, String headers, MediaType contentType,
-                                  String bodyString, List<String> segments, String message, final String responseUrl) {
+    public void printJsonResponse(long chainMs, boolean isSuccessful, int code, @NonNull String headers,
+                                  @Nullable MediaType contentType, @Nullable String bodyString,
+                                  @NonNull List<String> segments, @NonNull String message,
+                                  @NonNull final String responseUrl) {
         bodyString = RequestInterceptor.isJson(contentType) ? CharacterHandler.jsonFormat(bodyString)
                 : RequestInterceptor.isXml(contentType) ? CharacterHandler.xmlFormat(bodyString) : bodyString;
 
@@ -120,8 +124,8 @@ public class DefaultFormatPrinter implements FormatPrinter {
      * @param responseUrl  请求地址
      */
     @Override
-    public void printFileResponse(long chainMs, boolean isSuccessful, int code, String headers,
-                                  List<String> segments, String message, final String responseUrl) {
+    public void printFileResponse(long chainMs, boolean isSuccessful, int code, @NonNull String headers,
+                                  @NonNull List<String> segments, @NonNull String message, @NonNull final String responseUrl) {
         final String tag = getTag(false);
         final String[] urlLine = {URL_TAG + responseUrl, N};
 

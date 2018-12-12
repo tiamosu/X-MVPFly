@@ -2,6 +2,7 @@ package com.xia.fly.demo.app;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 
 import com.xia.fly.base.delegate.AppLifecycles;
@@ -28,7 +29,7 @@ public final class GlobalConfiguration implements ConfigModule {
     private static final HttpsUtils.SSLParams SSL_PARAMS = HttpsUtils.getSslSocketFactory();
 
     @Override
-    public void applyOptions(Context context, GlobalConfigModule.Builder builder) {
+    public void applyOptions(@NonNull Context context, @NonNull GlobalConfigModule.Builder builder) {
 //        if (!BuildConfig.DEBUG) { //Release 时,让框架不再打印 Http 请求和响应的信息
         builder.printHttpLogLevel(RequestInterceptor.Level.NONE);
 //        }
@@ -56,15 +57,15 @@ public final class GlobalConfiguration implements ConfigModule {
     }
 
     @Override
-    public void injectAppLifecycle(Context context, List<AppLifecycles> lifecycles) {
+    public void injectAppLifecycle(@NonNull Context context, @NonNull List<AppLifecycles> lifecycles) {
         lifecycles.add(new AppLifecyclesImpl());
     }
 
     @Override
-    public void injectActivityLifecycle(Context context, List<Application.ActivityLifecycleCallbacks> lifecycles) {
+    public void injectActivityLifecycle(@NonNull Context context, @NonNull List<Application.ActivityLifecycleCallbacks> lifecycles) {
     }
 
     @Override
-    public void injectFragmentLifecycle(Context context, List<FragmentManager.FragmentLifecycleCallbacks> lifecycles) {
+    public void injectFragmentLifecycle(@NonNull Context context, @NonNull List<FragmentManager.FragmentLifecycleCallbacks> lifecycles) {
     }
 }

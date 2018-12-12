@@ -96,10 +96,7 @@ public class GlobalConfigModule {
     @Provides
     HttpUrl provideBaseUrl() {
         if (mBaseUrl != null) {
-            HttpUrl httpUrl = mBaseUrl.url();
-            if (httpUrl != null) {
-                return httpUrl;
-            }
+            return mBaseUrl.url();
         }
         return mApiUrl == null ? HttpUrl.parse("https://api.github.com/") : mApiUrl;
     }

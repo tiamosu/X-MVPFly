@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -35,7 +37,7 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy<ImageCo
     @SuppressWarnings("unchecked")
     @SuppressLint("CheckResult")
     @Override
-    public void loadImage(Context context, ImageConfigImpl config) {
+    public void loadImage(@Nullable Context context, @Nullable ImageConfigImpl config) {
         Preconditions.checkNotNull(context, "Context is required");
         Preconditions.checkNotNull(config, "ImageConfigImpl is required");
 
@@ -190,7 +192,7 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy<ImageCo
     }
 
     @Override
-    public void clear(Context context, ImageConfigImpl config) {
+    public void clear(@Nullable Context context, @Nullable ImageConfigImpl config) {
         Preconditions.checkNotNull(context, "Context is required");
         Preconditions.checkNotNull(config, "ImageConfigImpl is required");
 
@@ -216,7 +218,7 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy<ImageCo
     }
 
     @Override
-    public void applyGlideOptions(Context context, GlideBuilder builder) {
+    public void applyGlideOptions(@NonNull Context context, @NonNull GlideBuilder builder) {
     }
 }
 

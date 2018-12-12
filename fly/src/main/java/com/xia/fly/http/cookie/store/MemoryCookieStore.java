@@ -20,7 +20,7 @@ public class MemoryCookieStore implements CookieStore {
             final Iterator<Cookie> itOld = oldCookies.iterator();
             while (itNew.hasNext()) {
                 final String va = itNew.next().name();
-                while (va != null && itOld.hasNext()) {
+                while (itOld.hasNext()) {
                     final String v = itOld.next().name();
                     if (va.equals(v)) {
                         itOld.remove();
@@ -54,7 +54,10 @@ public class MemoryCookieStore implements CookieStore {
         final List<Cookie> cookies = new ArrayList<>();
         final Set<String> httpUrls = allCookies.keySet();
         for (String url : httpUrls) {
-            cookies.addAll(allCookies.get(url));
+            final List<Cookie> list = allCookies.get(url);
+            if (list != null) {
+                cookies.addAll(list);
+            }
         }
         return cookies;
     }
@@ -62,6 +65,6 @@ public class MemoryCookieStore implements CookieStore {
     @Override
     public boolean remove(HttpUrl uri, Cookie cookie) {
         final List<Cookie> cookies = allCookies.get(uri.host());
-        return cookie != null && cookies.remove(cookie);
+        return cookie != null && (cookies != null && cookies.remove(cookie));
     }
 }
