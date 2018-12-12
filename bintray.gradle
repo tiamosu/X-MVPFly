@@ -14,8 +14,9 @@ def projectGroupId = Publish.groupId
 def projectUserOrg = Publish.userOrg
 def projectEmail = Publish.email
 def projectDesc = Publish.desc
-def projectName = "fly-imageloader-glide"
+def projectName = POM_NAME
 
+version = projectVersion
 group = projectGroupId
 install {
     repositories.mavenInstaller {
@@ -23,9 +24,6 @@ install {
             project {
                 packaging "aar"
                 name projectName
-                groupId projectGroupId
-                artifactId projectName
-                version projectVersion
                 url projectSiteUrl
                 description projectDesc
                 licenses {
@@ -62,6 +60,14 @@ bintray {
         vcsUrl = projectGitUrl
         licenses = ["Apache-2.0"]
         publish = true // 是否是公开项目。
+
+        version {
+            name = projectName
+            desc = projectDesc
+            released = new Date()
+            vcsTag = 'v' + projectName
+            attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
+        }
     }
 }
 
