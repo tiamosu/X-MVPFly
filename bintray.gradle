@@ -62,10 +62,10 @@ bintray {
         publish = true // 是否是公开项目。
 
         version {
-            name = projectName
+            name = projectVersion
             desc = projectDesc
             released = new Date()
-            vcsTag = 'v' + projectName
+            vcsTag = 'v' + projectVersion
             attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
         }
     }
