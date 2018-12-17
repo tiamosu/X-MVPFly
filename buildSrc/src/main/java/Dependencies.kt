@@ -24,7 +24,7 @@ object Versions {
 object Publish {
     const val userOrg = "weixia" //bintray.com用户名
     const val groupId = "me.xia" //jcenter上的路径
-    const val publishVersion = "2.3.3" //版本号
+    const val publishVersion = "2.3.4" //版本号
     const val desc = "Oh hi, this is a nice description for a project, right?"
     const val website = "https://github.com/wexia/X-MVPFly"
     const val gitUrl = "https://github.com/wexia/X-MVPFly.git"
@@ -75,7 +75,7 @@ object Deps {
     const val glide_compiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
 
     //util
-    const val utilcode = "com.blankj:utilcode:1.22.2"
+    const val utilcode = "com.blankj:utilcode:1.22.3"
     //fragment
     const val fragmentation_core = "me.yokeyword:fragmentation-core:1.3.6"
     //loading各种动画样式

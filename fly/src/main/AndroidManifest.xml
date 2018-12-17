@@ -5,5 +5,11 @@
     <application
         android:name=".base.BaseApplication"
         android:networkSecurityConfig="@xml/network_security_config"
-        tools:targetApi="n"/>
+        tools:targetApi="n">
+
+        <!--9.0-->
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false"/>
+    </application>
 </manifest>
