@@ -75,7 +75,7 @@ object Deps {
     const val glide_compiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
 
     //util
-    const val utilcode = "com.blankj:utilcode:1.22.1"
+    const val utilcode = "com.blankj:utilcode:1.22.2"
     //fragment
     const val fragmentation_core = "me.yokeyword:fragmentation-core:1.3.6"
     //loading各种动画样式
