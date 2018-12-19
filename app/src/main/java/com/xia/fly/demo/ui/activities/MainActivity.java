@@ -28,7 +28,7 @@ public class MainActivity extends ProxyActivity {
     }
 
     @Override
-    protected boolean isRestartRestore() {
+    public boolean isRestartRestore() {
         return false;
     }
 
@@ -37,16 +37,8 @@ public class MainActivity extends ProxyActivity {
         return R.layout.activity_main;
     }
 
-//    @Override
-//    protected void onCreate(@Nullable Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        if (findFragment(setRootFragment()) == null) {
-//            loadRootFragment(R.id.main_container_fl, FragmentUtils.newInstance(setRootFragment()));
-//        }
-//    }
-
     @Override
-    protected void loadProxyRootFragment(int containerId) {
+    protected void loadProxyRootFragment(int proxyContainerId) {
         super.loadProxyRootFragment(R.id.main_container_fl);
     }
 

@@ -26,7 +26,8 @@ public abstract class ProxyActivity extends SupportActivity {
     /**
      * @return APP被杀死重启时，是否还原到被杀死前保存的状态
      */
-    protected boolean isRestartRestore() {
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+    public boolean isRestartRestore() {
         return true;
     }
 
@@ -59,7 +60,8 @@ public abstract class ProxyActivity extends SupportActivity {
     }
 
     @CallSuper
-    protected void loadProxyRootFragment(int containerId) {
+    protected void loadProxyRootFragment(int proxyContainerId) {
+        final int containerId = getLayoutId() == 0 ? R.id.delegate_container : proxyContainerId;
         loadRootFragment(containerId, FragmentUtils.newInstance(setRootFragment()));
     }
 
