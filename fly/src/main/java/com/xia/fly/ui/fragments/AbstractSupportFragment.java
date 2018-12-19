@@ -268,6 +268,7 @@ public abstract class AbstractSupportFragment extends Fragment implements ISuppo
      * @param args putNewBundle(Bundle newBundle)
      * @see #start(ISupportFragment, int)
      */
+    @CallSuper
     @Override
     public void onNewBundle(Bundle args) {
         mDelegate.onNewBundle(args);

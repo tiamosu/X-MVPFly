@@ -34,17 +34,17 @@ public class ActivityDelegateImpl implements ActivityDelegate {
     private IActivity mIActivity;
     private Unbinder mUnbinder;
 
+    public ActivityDelegateImpl(@NonNull Activity activity) {
+        this.mActivity = activity;
+        this.mIActivity = (IActivity) activity;
+    }
+
     //网络状态监听广播
     private NetworkChangeReceiver mNetworkChangeReceiver;
     //记录上一次网络连接状态
     private int mLastNetStatus = NetworkState.NETWORK_DEFAULT;
     //网络是否重新连接
     private boolean mNetReConnect;
-
-    public ActivityDelegateImpl(@NonNull Activity activity) {
-        this.mActivity = activity;
-        this.mIActivity = (IActivity) activity;
-    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

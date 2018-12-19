@@ -1,6 +1,5 @@
 package com.xia.fly.ui.fragments;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
@@ -11,19 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import com.blankj.utilcode.util.NetworkUtils;
 import com.xia.fly.R;
-import com.xia.fly.constant.NetworkState;
 import com.xia.fly.integration.cache.Cache;
 import com.xia.fly.integration.cache.CacheType;
 import com.xia.fly.integration.rxbus.IRxBusCallback;
-import com.xia.fly.integration.rxbus.RxBusEventTag;
 import com.xia.fly.integration.rxbus.RxBusHelper;
 import com.xia.fly.mvp.BaseMvpPresenter;
 import com.xia.fly.mvp.BaseMvpView;
 import com.xia.fly.utils.FlyUtils;
-
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import me.yokeyword.fragmentation.ISupportFragment;
 
@@ -40,13 +34,6 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
     //保证转场动画的流畅性
     private boolean mIsOnSupportVisible;
     private boolean mIsOnEnterAnimationEnd;
-
-    //防止多次初始化
-    private final AtomicBoolean mInitialized = new AtomicBoolean(false);
-    //记录上一次网络连接状态
-    private int mLastNetStatus = NetworkState.NETWORK_DEFAULT;
-    //网络是否重新连接
-    private boolean mNetReConnect;
 
     @NonNull
     @Override
@@ -94,25 +81,15 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
     }
 
     @Override
-    public void onNewBundle(Bundle args) {
-        getBundle(args);
+    public void onNewBundle(Bundle bundle) {
+        super.onNewBundle(bundle);
+        if (bundle != null && !bundle.isEmpty()) {
+            getBundleExtras(bundle);
+        }
     }
 
-    @SuppressLint("MissingPermission")
     private void onVisibleLazyInit() {
-        if (mInitialized.compareAndSet(false, true)) {
-            initMvp();
-            getBundle(getArguments());
-            initData();
-            initView();
-            initEvent();
-            onLazyLoadData();
-            checkNetEvent();
-        }
-        if (isCheckNetWork()) {
-            hasNetWork(NetworkUtils.isConnected());
-        }
-        onVisibleLazyLoad();
+        RxBusHelper.post(getClass().getSimpleName().intern());
     }
 
     @SuppressWarnings("unchecked")
@@ -123,41 +100,6 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
             if (mPresenter != null) {
                 mPresenter.attachView(this);
                 getLifecycle().addObserver(mPresenter);
-            }
-        }
-    }
-
-    private void getBundle(Bundle bundle) {
-        if (bundle != null && !bundle.isEmpty()) {
-            getBundleExtras(bundle);
-        }
-    }
-
-    private void checkNetEvent() {
-        if (isCheckNetWork()) {
-            RxBusHelper.subscribeWithTags(this, (eventTag, rxBusMessage) -> {
-                if (eventTag.equals(RxBusEventTag.NETWORK_CHANGE)) {
-                    final boolean isAvailable = (boolean) rxBusMessage.mObj;
-                    hasNetWork(isAvailable);
-                }
-            }, RxBusEventTag.NETWORK_CHANGE);
-        }
-    }
-
-    private void hasNetWork(boolean isAvailable) {
-        final int currentNetStatus = isAvailable ? NetworkState.NETWORK_ON : NetworkState.NETWORK_OFF;
-        if (currentNetStatus != mLastNetStatus || mNetReConnect) {
-            //判断网络是否是重连接的
-            if (isAvailable && mLastNetStatus == NetworkState.NETWORK_OFF) {
-                mNetReConnect = true;
-            }
-            if (isSupportVisible()) {
-                onNetworkState(isAvailable);
-                if (isAvailable && mNetReConnect) {
-                    onNetReConnect();
-                    mNetReConnect = false;
-                }
-                mLastNetStatus = currentNetStatus;
             }
         }
     }
