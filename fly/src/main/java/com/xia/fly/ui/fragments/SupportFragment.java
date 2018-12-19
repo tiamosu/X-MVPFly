@@ -98,15 +98,6 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
         getBundle(args);
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        if (mPresenter != null) {
-            mPresenter.detachView();
-            mPresenter = null;
-        }
-    }
-
     @SuppressLint("MissingPermission")
     private void onVisibleLazyInit() {
         if (mInitialized.compareAndSet(false, true)) {
@@ -168,6 +159,16 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
                 }
                 mLastNetStatus = currentNetStatus;
             }
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (mPresenter != null) {
+            mPresenter.detachView();
+            getLifecycle().removeObserver(mPresenter);
+            mPresenter = null;
         }
     }
 

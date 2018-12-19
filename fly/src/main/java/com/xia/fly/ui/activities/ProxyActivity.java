@@ -2,6 +2,7 @@ package com.xia.fly.ui.activities;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.ContentFrameLayout;
@@ -25,7 +26,7 @@ public abstract class ProxyActivity extends SupportActivity {
     /**
      * @return APP被杀死重启时，是否还原到被杀死前保存的状态
      */
-    protected boolean isRestartSaved() {
+    protected boolean isRestartRestore() {
         return true;
     }
 
@@ -43,7 +44,7 @@ public abstract class ProxyActivity extends SupportActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (!isRestartSaved() && savedInstanceState != null) {
+        if (!isRestartRestore() && savedInstanceState != null) {
             finish();
             return;
         }
@@ -51,10 +52,15 @@ public abstract class ProxyActivity extends SupportActivity {
             final ContentFrameLayout container = new ContentFrameLayout(this);
             container.setId(R.id.delegate_container);
             setContentView(container);
-            if (findFragment(setRootFragment()) == null) {
-                loadRootFragment(R.id.delegate_container, FragmentUtils.newInstance(setRootFragment()));
-            }
         }
+        if (findFragment(setRootFragment()) == null) {
+            loadProxyRootFragment(R.id.delegate_container);
+        }
+    }
+
+    @CallSuper
+    protected void loadProxyRootFragment(int containerId) {
+        loadRootFragment(containerId, FragmentUtils.newInstance(setRootFragment()));
     }
 
     @Override
