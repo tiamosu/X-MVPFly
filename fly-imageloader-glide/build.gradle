@@ -1,10 +1,6 @@
-plugins {
-    id "com.android.library"
-    id "maven"
+apply {
+    from "${rootDir.path}/config_lib.gradle"
 }
-
-// in config.gradle
-configAndroidDomain project
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
