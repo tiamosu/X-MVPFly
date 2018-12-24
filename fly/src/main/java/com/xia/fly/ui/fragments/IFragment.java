@@ -73,11 +73,6 @@ public interface IFragment {
     void onVisibleLazyLoad();
 
     /**
-     * @return 是否加载头部标题栏，默认为true
-     */
-    boolean isLoadHeadView();
-
-    /**
      * @param titleBarContainer 头部标题栏容器，可用于自定义添加视图
      */
     void onCreateTitleBar(FrameLayout titleBarContainer);

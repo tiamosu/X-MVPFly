@@ -37,7 +37,7 @@ public class HomeFragment extends HeadViewFragment<HomePresenter> implements Hom
     }
 
     @Override
-    public boolean isLoadHeadView() {
+    protected boolean isLoadTitleBar() {
         return false;
     }
 

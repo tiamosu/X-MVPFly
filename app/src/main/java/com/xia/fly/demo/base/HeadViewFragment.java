@@ -13,9 +13,15 @@ import com.xia.fly.ui.fragments.SupportFragment;
  */
 public abstract class HeadViewFragment<P extends BaseMvpPresenter> extends SupportFragment<P> {
 
+    protected boolean isLoadTitleBar() {
+        return true;
+    }
+
     @Override
     public void onCreateTitleBar(FrameLayout container) {
-        final View headView = View.inflate(getContext(), R.layout.layout_head_view, null);
-        container.addView(headView);
+        if (isLoadTitleBar()) {
+            final View headView = View.inflate(getContext(), R.layout.layout_head_view, null);
+            container.addView(headView);
+        }
     }
 }

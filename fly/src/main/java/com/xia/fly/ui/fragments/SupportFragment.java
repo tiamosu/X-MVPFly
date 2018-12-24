@@ -48,11 +48,11 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.base_layout_root_view, container, false);
-        if (isLoadHeadView()) {
+        if (getLayoutId() != 0) {
+            //预留添加TitleBar
             final FrameLayout titleBarContainer = rootView.findViewById(R.id.layout_root_view_head_container);
             onCreateTitleBar(titleBarContainer);
-        }
-        if (getLayoutId() != 0) {
+            //加载页面布局（预留TitleBar之下）
             final FrameLayout contentContainer = rootView.findViewById(R.id.layout_root_view_content_container);
             View.inflate(getContext(), getLayoutId(), contentContainer);
         }
@@ -125,11 +125,6 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
 
     @Override
     public void onLazyLoadData() {
-    }
-
-    @Override
-    public boolean isLoadHeadView() {
-        return true;
     }
 
     @Override

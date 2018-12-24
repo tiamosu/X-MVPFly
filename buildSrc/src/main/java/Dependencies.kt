@@ -12,7 +12,7 @@ object Android {
 
 object Versions {
     const val support = "28.0.0"
-    const val butterknife = "9.0.0-rc2"
+    const val butterknife = "9.0.0-rc3"
     const val retrofit2 = "2.5.0"
     const val okhttp3 = "3.12.0"
     const val autodispose = "1.0.0-RC3"
@@ -75,7 +75,7 @@ object Deps {
     const val glide_compiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
 
     //util
-    const val utilcode = "com.blankj:utilcode:1.22.5"
+    const val utilcode = "com.blankj:utilcode:1.22.6"
     //fragment
     const val fragmentation_core = "me.yokeyword:fragmentation-core:1.3.6"
     //loading各种动画样式
