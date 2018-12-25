@@ -3,10 +3,6 @@ package com.xia.fly.imageloader;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.RawRes;
 import android.widget.ImageView;
 
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
@@ -21,6 +17,11 @@ import com.xia.fly.ui.imageloader.ImageLoader;
 
 import java.io.File;
 import java.net.URL;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RawRes;
 
 /**
  * 这里存放图片请求的配置信息,可以一直扩展字段,如果外部调用时想让图片加载框架

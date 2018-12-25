@@ -1,6 +1,6 @@
 package com.xia.fly.utils;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 /**
  * @author xia

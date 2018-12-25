@@ -1,7 +1,5 @@
 package com.xia.fly.ui.activities;
 
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.widget.EditText;
 
@@ -13,6 +11,10 @@ import com.xia.fly.mvp.BaseMvpPresenter;
 import com.xia.fly.mvp.BaseMvpView;
 import com.xia.fly.utils.FlyUtils;
 import com.xia.fly.utils.KeyboardHelper;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import me.yokeyword.fragmentation.AbstractSupportActivity;
 
 /**
  * @author xia

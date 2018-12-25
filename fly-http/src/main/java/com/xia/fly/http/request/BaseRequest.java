@@ -1,7 +1,5 @@
 package com.xia.fly.http.request;
 
-import android.support.annotation.NonNull;
-
 import com.xia.fly.http.api.RestService;
 import com.xia.fly.http.utils.ParamsUtils;
 import com.xia.fly.utils.FlyUtils;
@@ -10,6 +8,7 @@ import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import androidx.annotation.NonNull;
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 

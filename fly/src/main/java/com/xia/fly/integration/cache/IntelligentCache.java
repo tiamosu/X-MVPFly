@@ -1,13 +1,13 @@
 package com.xia.fly.integration.cache;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
 import com.xia.fly.utils.Preconditions;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * {@link IntelligentCache} 含有可将数据永久存储至内存中的存储容器 {@link #mMap}, 和当达到最大容量时可根据 LRU

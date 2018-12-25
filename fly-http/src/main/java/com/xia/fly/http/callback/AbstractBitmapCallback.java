@@ -1,15 +1,15 @@
 package com.xia.fly.http.callback;
 
-import android.arch.lifecycle.LifecycleOwner;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.annotation.NonNull;
 
 import com.blankj.utilcode.util.CloseUtils;
 import com.xia.fly.utils.Platform;
 
 import java.io.InputStream;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
 import okhttp3.ResponseBody;
 
 /**

@@ -1,11 +1,11 @@
 package com.xia.fly.mvp.common;
 
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleObserver;
-import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.OnLifecycleEvent;
-import android.support.annotation.NonNull;
-import android.support.annotation.UiThread;
+import androidx.annotation.NonNull;
+import androidx.annotation.UiThread;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.OnLifecycleEvent;
 
 /**
  * @author xia
@@ -38,7 +38,5 @@ public interface IMvpPresenter<V extends IMvpView> extends LifecycleObserver {
     void onDestroy(@NonNull LifecycleOwner owner);
 
     @OnLifecycleEvent(Lifecycle.Event.ON_ANY)
-    void onLifecycleChanged(@NonNull LifecycleOwner owner,
-                            @NonNull Lifecycle.Event event);
-
+    void onLifecycleChanged(@NonNull LifecycleOwner owner, @NonNull Lifecycle.Event event);
 }

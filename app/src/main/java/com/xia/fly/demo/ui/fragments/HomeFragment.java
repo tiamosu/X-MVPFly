@@ -1,9 +1,6 @@
 package com.xia.fly.demo.ui.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.AppCompatImageView;
 import android.util.Log;
 
 import com.bumptech.glide.load.DataSource;
@@ -19,6 +16,9 @@ import com.xia.fly.imageloader.TranscodeType;
 import com.xia.fly.ui.imageloader.ImageLoader;
 import com.xia.fly.utils.FragmentUtils;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatImageView;
 import butterknife.BindView;
 
 /**

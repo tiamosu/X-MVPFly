@@ -2,14 +2,15 @@ package com.xia.fly.ui.activities;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.annotation.CallSuper;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.ContentFrameLayout;
 
 import com.xia.fly.R;
 import com.xia.fly.ui.fragments.SupportFragment;
 import com.xia.fly.utils.FragmentUtils;
+
+import androidx.annotation.CallSuper;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.ContentFrameLayout;
 
 /**
  * @author xia

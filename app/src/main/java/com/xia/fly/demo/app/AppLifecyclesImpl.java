@@ -3,7 +3,6 @@ package com.xia.fly.demo.app;
 import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
-import android.support.annotation.NonNull;
 
 import com.blankj.utilcode.util.Utils;
 import com.bumptech.glide.Glide;
@@ -11,6 +10,7 @@ import com.squareup.leakcanary.LeakCanary;
 import com.xia.fly.BuildConfig;
 import com.xia.fly.base.delegate.AppLifecycles;
 
+import androidx.annotation.NonNull;
 import me.yokeyword.fragmentation.Fragmentation;
 
 import static android.content.ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN;

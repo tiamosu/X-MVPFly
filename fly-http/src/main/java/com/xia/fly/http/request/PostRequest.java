@@ -1,7 +1,5 @@
 package com.xia.fly.http.request;
 
-import android.support.annotation.NonNull;
-
 import com.xia.fly.http.body.UploadProgressRequestBody;
 
 import java.io.File;
@@ -11,6 +9,7 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.Map;
 
+import androidx.annotation.NonNull;
 import io.reactivex.Observable;
 import okhttp3.Headers;
 import okhttp3.MediaType;

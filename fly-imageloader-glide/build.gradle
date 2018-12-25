@@ -12,6 +12,10 @@ dependencies {
         exclude module: 'support-fragment'
     }
     annotationProcessor Deps.glide_compiler
+
+    //解决Glide中的注解还没有完全兼容androidx
+    api Deps.support_annotations
+    annotationProcessor Deps.support_annotations
 }
 
-apply from: '../bintray.gradle'
+apply from: "${rootDir.path}/bintray.gradle"

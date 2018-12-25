@@ -15,10 +15,11 @@ object Versions {
     const val butterknife = "9.0.0-rc3"
     const val retrofit2 = "2.5.0"
     const val okhttp3 = "3.12.0"
-    const val autodispose = "1.0.0-RC3"
+    const val autodispose = "1.1.0"
     const val leakcanary = "1.6.2"
     const val glide = "4.8.0"
     const val dagger2 = "2.20"
+    const val fragmentation = "1.0.2"
 }
 
 object Publish {
@@ -34,11 +35,10 @@ object Publish {
 object Deps {
     //support
     const val support_annotations = "com.android.support:support-annotations:${Versions.support}"
-    const val support_v4 = "com.android.support:support-v4:${Versions.support}"
-    const val appcompat_v7 = "com.android.support:appcompat-v7:${Versions.support}"
-    const val recyclerview_v7 = "com.android.support:recyclerview-v7:${Versions.support}"
-    const val multidex = "com.android.support:multidex:1.0.3"
-    const val constraint_layout = "com.android.support.constraint:constraint-layout:1.1.3"
+    const val appcompat_v7 = "androidx.appcompat:appcompat:1.1.0-alpha01"
+    const val recyclerview_v7 = "androidx.recyclerview:recyclerview:1.1.0-alpha01"
+    const val multidex = "androidx.multidex:multidex:2.0.0"
+    const val constraint_layout = "androidx.constraintlayout:constraintlayout:2.0.0-alpha3"
 
     //butterknife
     const val butterknife = "com.jakewharton:butterknife:${Versions.butterknife}"
@@ -64,7 +64,7 @@ object Deps {
     const val rxcache2 = "com.github.VictorAlbertos.RxCache:runtime:1.8.3-2.x"
     const val rxcache_gson = "com.github.VictorAlbertos.Jolyglot:gson:0.0.4"
     const val rxerrorhandler = "me.jessyan:rxerrorhandler:2.1.1"
-    const val x_rxbus = "me.xia:x-rxbus:1.0.6"
+    const val x_rxbus = "me.xia:x-rxbus:1.0.7"
 
     //okhttp
     const val okhttp3 = "com.squareup.okhttp3:okhttp:${Versions.okhttp3}"
@@ -75,9 +75,10 @@ object Deps {
     const val glide_compiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
 
     //util
-    const val utilcode = "com.blankj:utilcode:1.22.6"
+    const val utilcode = "com.blankj:utilcode:1.22.7"
     //fragment
-    const val fragmentation_core = "me.yokeyword:fragmentation-core:1.3.6"
+    const val fragmentation = "me.xia:fragmentation:${Versions.fragmentation}"
+    const val fragmentation_core = "me.xia:fragmentation_core:${Versions.fragmentation}"
     //loading各种动画样式
     const val loading_indicator_view = "com.wang.avi:library:2.1.3"
 }

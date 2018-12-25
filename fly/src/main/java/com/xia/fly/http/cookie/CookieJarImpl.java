@@ -1,12 +1,11 @@
 package com.xia.fly.http.cookie;
 
-import android.support.annotation.NonNull;
-
 import com.xia.fly.http.cookie.store.CookieStore;
 import com.xia.fly.utils.Preconditions;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import okhttp3.Cookie;
 import okhttp3.CookieJar;
 import okhttp3.HttpUrl;

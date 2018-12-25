@@ -1,7 +1,5 @@
 package com.xia.fly.http.log;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.blankj.utilcode.util.LogUtils;
@@ -11,6 +9,8 @@ import com.xia.fly.utils.CharacterHandler;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import okhttp3.MediaType;
 import okhttp3.Request;
 
@@ -62,7 +62,9 @@ public class DefaultFormatPrinter implements FormatPrinter {
         LogUtils.dTag(tag, REQUEST_UP_LINE);
         logLines(tag, new String[]{URL_TAG + request.url()}, false);
         logLines(tag, getRequest(request), true);
-        logLines(tag, requestBody.split(LINE_SEPARATOR), true);
+        if (LINE_SEPARATOR != null) {
+            logLines(tag, requestBody.split(LINE_SEPARATOR), true);
+        }
         LogUtils.dTag(tag, END_LINE);
     }
 
@@ -108,7 +110,9 @@ public class DefaultFormatPrinter implements FormatPrinter {
         LogUtils.dTag(tag, RESPONSE_UP_LINE);
         logLines(tag, urlLine, true);
         logLines(tag, getResponse(headers, chainMs, code, isSuccessful, segments, message), true);
-        logLines(tag, responseBody.split(LINE_SEPARATOR), true);
+        if (LINE_SEPARATOR != null) {
+            logLines(tag, responseBody.split(LINE_SEPARATOR), true);
+        }
         LogUtils.dTag(tag, END_LINE);
     }
 
@@ -164,11 +168,15 @@ public class DefaultFormatPrinter implements FormatPrinter {
     private static final String[] ARMS = new String[]{"-A-", "-R-", "-M-", "-S-"};
 
     private static String computeKey() {
-        if (last.get() >= 4) {
+        final Integer integer = last.get();
+        if (integer == null) {
+            return "";
+        }
+        if (integer >= 4) {
             last.set(0);
         }
-        final String s = ARMS[last.get()];
-        last.set(last.get() + 1);
+        final String s = ARMS[integer];
+        last.set(integer + 1);
         return s;
     }
 
@@ -191,7 +199,7 @@ public class DefaultFormatPrinter implements FormatPrinter {
         final String header = request.headers().toString();
         log = METHOD_TAG + request.method() + DOUBLE_SEPARATOR +
                 (isEmpty(header) ? "" : HEADERS_TAG + LINE_SEPARATOR + dotHeaders(header));
-        return log.split(LINE_SEPARATOR);
+        return log.split(LINE_SEPARATOR != null ? LINE_SEPARATOR : "");
     }
 
     private static String[] getResponse(String header, long tookMs, int code, boolean isSuccessful,
@@ -202,7 +210,7 @@ public class DefaultFormatPrinter implements FormatPrinter {
                 + isSuccessful + " - " + RECEIVED_TAG + tookMs + "ms" + DOUBLE_SEPARATOR + STATUS_CODE_TAG +
                 code + " / " + message + DOUBLE_SEPARATOR + (isEmpty(header) ? "" : HEADERS_TAG + LINE_SEPARATOR +
                 dotHeaders(header)));
-        return log.split(LINE_SEPARATOR);
+        return log.split(LINE_SEPARATOR != null ? LINE_SEPARATOR : "");
     }
 
     private static String slashSegments(List<String> segments) {
@@ -217,7 +225,7 @@ public class DefaultFormatPrinter implements FormatPrinter {
      * 对 {@code header} 按规定的格式进行处理
      */
     private static String dotHeaders(String header) {
-        final String[] headers = header.split(LINE_SEPARATOR);
+        final String[] headers = header.split(LINE_SEPARATOR != null ? LINE_SEPARATOR : "");
         final StringBuilder builder = new StringBuilder();
         String tag = "─ ";
         if (headers.length > 1) {

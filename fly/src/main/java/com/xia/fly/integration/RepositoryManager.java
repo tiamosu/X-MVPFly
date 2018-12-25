@@ -2,7 +2,6 @@ package com.xia.fly.integration;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.annotation.NonNull;
 
 import com.xia.fly.integration.cache.Cache;
 import com.xia.fly.integration.cache.CacheType;
@@ -14,6 +13,7 @@ import java.lang.reflect.Proxy;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import androidx.annotation.NonNull;
 import dagger.Lazy;
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;

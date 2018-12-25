@@ -1,11 +1,11 @@
 package com.xia.fly.http;
 
-import android.support.annotation.NonNull;
-
 import com.xia.fly.http.request.DeleteRequest;
 import com.xia.fly.http.request.GetRequest;
 import com.xia.fly.http.request.PostRequest;
 import com.xia.fly.http.request.PutRequest;
+
+import androidx.annotation.NonNull;
 
 /**
  * @author xia

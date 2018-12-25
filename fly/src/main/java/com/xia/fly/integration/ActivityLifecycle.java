@@ -3,9 +3,6 @@ package com.xia.fly.integration;
 import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 
 import com.xia.fly.base.delegate.ActivityDelegateImpl;
 import com.xia.fly.base.delegate.ActivityDelegate;
@@ -19,6 +16,9 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import dagger.Lazy;
 
 /**

@@ -1,8 +1,6 @@
 package com.xia.fly.demo.mvp.presenter;
 
 import android.app.Dialog;
-import android.arch.lifecycle.LifecycleOwner;
-import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.blankj.utilcode.util.NetworkUtils;
@@ -13,6 +11,8 @@ import com.xia.fly.http.callback.AbstractStringCallback;
 import com.xia.fly.http.subscriber.CallbackSubscriber;
 import com.xia.fly.mvp.BaseMvpPresenter;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
 import io.reactivex.disposables.Disposable;
 
 /**

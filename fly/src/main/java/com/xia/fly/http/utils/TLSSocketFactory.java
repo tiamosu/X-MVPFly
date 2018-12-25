@@ -1,7 +1,5 @@
 package com.xia.fly.http.utils;
 
-import android.support.annotation.NonNull;
-
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
@@ -13,6 +11,8 @@ import java.util.List;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
+
+import androidx.annotation.NonNull;
 
 /**
  * @author xia

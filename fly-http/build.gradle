@@ -7,4 +7,4 @@ dependencies {
     compileOnly project(':fly')
 }
 
-apply from: '../bintray.gradle'
+apply from: "${rootDir.path}/bintray.gradle"

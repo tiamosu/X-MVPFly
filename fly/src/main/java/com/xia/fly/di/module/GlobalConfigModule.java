@@ -1,7 +1,6 @@
 package com.xia.fly.di.module;
 
 import android.app.Application;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.bumptech.glide.Glide;
@@ -29,6 +28,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
 
+import androidx.annotation.Nullable;
 import dagger.Module;
 import dagger.Provides;
 import me.jessyan.rxerrorhandler.handler.listener.ResponseErrorListener;

@@ -1,7 +1,8 @@
 package com.xia.fly.ui.imageloader;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 
 /**
  * 图片加载策略,实现 {@link BaseImageLoaderStrategy}

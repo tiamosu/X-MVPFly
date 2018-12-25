@@ -1,7 +1,6 @@
 package com.xia.fly.ui.imageloader;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
 
 import com.blankj.utilcode.util.Utils;
 import com.xia.fly.utils.FlyUtils;
@@ -9,6 +8,8 @@ import com.xia.fly.utils.Preconditions;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import androidx.annotation.Nullable;
 
 /**
  * @author xia

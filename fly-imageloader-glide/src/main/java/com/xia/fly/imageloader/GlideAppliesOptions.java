@@ -1,11 +1,12 @@
 package com.xia.fly.imageloader;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.GlideBuilder;
 import com.xia.fly.ui.imageloader.BaseImageLoaderStrategy;
+
+import androidx.annotation.NonNull;
 
 /**
  * 如果你想具有配置 @{@link Glide} 的权利,则需要让 {@link BaseImageLoaderStrategy}

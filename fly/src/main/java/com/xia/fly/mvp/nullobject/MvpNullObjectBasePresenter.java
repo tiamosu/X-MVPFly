@@ -1,14 +1,14 @@
 package com.xia.fly.mvp.nullobject;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.UiThread;
-
 import com.xia.fly.mvp.common.IMvpPresenter;
 import com.xia.fly.mvp.common.IMvpView;
 
 import java.lang.ref.WeakReference;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.UiThread;
 
 /**
  * @author xia
@@ -26,16 +26,23 @@ public abstract class MvpNullObjectBasePresenter<V extends IMvpView> implements 
             Class<?> currentClass = getClass();
 
             while (viewClass == null) {
-                Type genericSuperType = currentClass.getGenericSuperclass();
-                while (!(genericSuperType instanceof ParameterizedType)) {
-                    // Scan inheritance tree until we find ParameterizedType which is probably a MvpSubclass
-                    currentClass = currentClass.getSuperclass();
+                Type genericSuperType = null;
+                if (currentClass != null) {
                     genericSuperType = currentClass.getGenericSuperclass();
+                }
+                while (!(genericSuperType instanceof ParameterizedType)) {
+                    if (currentClass != null) {
+                        // Scan inheritance tree until we find ParameterizedType which is probably a MvpSubclass
+                        currentClass = currentClass.getSuperclass();
+                        if (currentClass != null) {
+                            genericSuperType = currentClass.getGenericSuperclass();
+                        }
+                    }
                 }
 
                 final Type[] types = ((ParameterizedType) genericSuperType).getActualTypeArguments();
                 for (Type type : types) {
-                    Class<?> genericType = (Class<?>) type;
+                    final Class<?> genericType = (Class<?>) type;
                     if (genericType.isInterface() && isSubTypeOfMvpView(genericType)) {
                         viewClass = (Class<V>) genericType;
                         break;

@@ -1,12 +1,13 @@
 package com.xia.fly.ui.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.widget.FrameLayout;
 
 import com.xia.fly.integration.cache.Cache;
 import com.xia.fly.integration.cache.LruCache;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 /**
  * @author xia

@@ -1,11 +1,10 @@
 package com.xia.fly.http.request;
 
-import android.support.annotation.NonNull;
-
 import com.xia.fly.http.callback.Callback;
 import com.xia.fly.http.subscriber.CallbackSubscriber;
 import com.xia.fly.utils.RxLifecycleUtils;
 
+import androidx.annotation.NonNull;
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
 import me.jessyan.rxerrorhandler.handler.RetryWithDelay;

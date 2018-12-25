@@ -1,7 +1,5 @@
 package com.xia.fly.http.interceptors;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.xia.fly.di.module.GlobalConfigModule;
@@ -20,6 +18,8 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;

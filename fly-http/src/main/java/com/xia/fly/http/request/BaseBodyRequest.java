@@ -1,9 +1,8 @@
 package com.xia.fly.http.request;
 
-import android.support.annotation.NonNull;
-
 import com.xia.fly.http.body.upload.ProgressResponseCallBack;
 
+import androidx.annotation.NonNull;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 

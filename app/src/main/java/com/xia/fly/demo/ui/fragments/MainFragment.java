@@ -1,6 +1,5 @@
 package com.xia.fly.demo.ui.fragments;
 
-import android.support.v7.widget.AppCompatEditText;
 import android.view.View;
 
 import com.xia.fly.demo.R;
@@ -8,6 +7,7 @@ import com.xia.fly.demo.base.HeadViewFragment;
 import com.xia.fly.demo.mvp.presenter.MainPresenter;
 import com.xia.fly.demo.mvp.view.MainView;
 
+import androidx.appcompat.widget.AppCompatEditText;
 import butterknife.BindView;
 import butterknife.OnClick;
 import me.yokeyword.fragmentation.ISupportFragment;
@@ -63,6 +63,7 @@ public class MainFragment extends HeadViewFragment<MainPresenter> implements Mai
         super.onSupportVisible();
     }
 
+    @SuppressWarnings("WeakerAccess")
     @OnClick({R.id.main_login_btn, R.id.main_open_btn})
     public void onViewClicked(View view) {
         switch (view.getId()) {

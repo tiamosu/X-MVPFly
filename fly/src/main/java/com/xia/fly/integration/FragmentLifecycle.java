@@ -2,9 +2,6 @@ package com.xia.fly.integration;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.View;
 
 import com.xia.fly.base.delegate.FragmentDelegate;
@@ -16,6 +13,10 @@ import com.xia.fly.utils.Preconditions;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 /**
  * {@link FragmentManager.FragmentLifecycleCallbacks} 默认实现类

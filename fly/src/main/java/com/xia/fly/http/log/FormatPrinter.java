@@ -1,12 +1,11 @@
 package com.xia.fly.http.log;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
 import com.xia.fly.di.module.GlobalConfigModule;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import okhttp3.MediaType;
 import okhttp3.Request;
 

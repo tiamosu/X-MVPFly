@@ -1,11 +1,12 @@
 package com.xia.fly.ui.activities;
 
 import android.app.Activity;
-import android.support.annotation.NonNull;
 import android.widget.EditText;
 
 import com.xia.fly.integration.cache.Cache;
 import com.xia.fly.integration.cache.LruCache;
+
+import androidx.annotation.NonNull;
 
 /**
  * @author xia

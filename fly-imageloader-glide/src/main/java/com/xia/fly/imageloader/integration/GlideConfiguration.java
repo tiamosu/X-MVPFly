@@ -1,7 +1,6 @@
 package com.xia.fly.imageloader.integration;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.GlideBuilder;
@@ -21,6 +20,8 @@ import com.xia.fly.utils.FlyUtils;
 
 import java.io.File;
 import java.io.InputStream;
+
+import androidx.annotation.NonNull;
 
 /**
  * {@link AppGlideModule} 的默认实现类

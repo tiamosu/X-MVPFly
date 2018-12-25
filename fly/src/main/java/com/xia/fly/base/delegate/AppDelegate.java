@@ -7,11 +7,9 @@ import android.content.ComponentCallbacks2;
 import android.content.ContentProvider;
 import android.content.Context;
 import android.content.res.Configuration;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 
-import com.xia.fly.base.BaseApplication;
 import com.xia.fly.base.App;
+import com.xia.fly.base.BaseApplication;
 import com.xia.fly.di.component.AppComponent;
 import com.xia.fly.di.component.DaggerAppComponent;
 import com.xia.fly.di.module.GlobalConfigModule;
@@ -26,6 +24,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 /**
  * AppDelegate 可以代理 Application 的生命周期,在对应的生命周期,执行对应的逻辑,因为 Java 只能单继承

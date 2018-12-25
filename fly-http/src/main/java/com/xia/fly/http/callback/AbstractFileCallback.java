@@ -1,9 +1,5 @@
 package com.xia.fly.http.callback;
 
-import android.arch.lifecycle.LifecycleOwner;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
 import com.blankj.utilcode.util.CloseUtils;
 import com.blankj.utilcode.util.ThreadUtils;
 import com.xia.fly.utils.FileUtils;
@@ -16,6 +12,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.lifecycle.LifecycleOwner;
 import okhttp3.ResponseBody;
 
 /**

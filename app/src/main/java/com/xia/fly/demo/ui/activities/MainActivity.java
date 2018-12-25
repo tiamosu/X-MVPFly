@@ -1,6 +1,5 @@
 package com.xia.fly.demo.ui.activities;
 
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.EditText;
 
@@ -9,6 +8,7 @@ import com.xia.fly.demo.ui.fragments.MainFragment;
 import com.xia.fly.ui.activities.ProxyActivity;
 import com.xia.fly.ui.fragments.SupportFragment;
 
+import androidx.annotation.NonNull;
 import me.yokeyword.fragmentation.anim.DefaultVerticalAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 

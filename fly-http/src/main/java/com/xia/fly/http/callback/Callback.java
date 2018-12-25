@@ -1,13 +1,13 @@
 package com.xia.fly.http.callback;
 
-import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 
 import java.lang.ref.WeakReference;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleOwner;
 import io.reactivex.disposables.Disposable;
 import okhttp3.ResponseBody;
 

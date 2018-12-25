@@ -1,8 +1,6 @@
 package com.xia.fly.ui.dialog;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.AppCompatTextView;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
@@ -14,6 +12,8 @@ import com.xia.fly.R2;
 import com.xia.fly.ui.dialog.loader.LoaderCreator;
 import com.xia.fly.ui.dialog.loader.LoaderStyles;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatTextView;
 import butterknife.BindView;
 
 /**

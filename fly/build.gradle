@@ -69,9 +69,9 @@ dependencies {
     //常用的util库
     api Deps.utilcode
     //fragment框架
-    api Deps.fragmentation_core
+    api Deps.fragmentation
     //loading动画样式
     implementation Deps.loading_indicator_view
 }
 
-apply from: '../bintray.gradle'
+apply from: "${rootDir.path}/bintray.gradle"

@@ -3,14 +3,15 @@ package com.xia.fly.base;
 import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
-import android.support.annotation.NonNull;
-import android.support.multidex.MultiDex;
 
 import com.xia.fly.base.delegate.AppDelegate;
 import com.xia.fly.base.delegate.AppLifecycles;
 import com.xia.fly.di.component.AppComponent;
 import com.xia.fly.utils.FlyUtils;
 import com.xia.fly.utils.Preconditions;
+
+import androidx.annotation.NonNull;
+import androidx.multidex.MultiDex;
 
 /**
  * @author xia
