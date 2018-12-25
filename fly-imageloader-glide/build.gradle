@@ -14,7 +14,7 @@ dependencies {
     annotationProcessor Deps.glide_compiler
 
     //解决Glide中的注解还没有完全兼容androidx
-    implementation Deps.support_annotations
+    compileOnly Deps.support_annotations
     annotationProcessor Deps.support_annotations
 }
 

@@ -4,9 +4,12 @@ apply {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation project(':fly')
-    implementation project(':fly-http')
-    implementation project(':fly-imageloader-glide')
+//    implementation project(':fly')
+//    implementation project(':fly-http')
+//    implementation project(':fly-imageloader-glide')
+    implementation Deps.fly
+    implementation Deps.fly_http
+    implementation Deps.fly_imageloader_glide
 
     implementation Deps.okhttp3_logging_interceptor
 

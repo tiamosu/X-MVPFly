@@ -20,12 +20,13 @@ object Versions {
     const val glide = "4.8.0"
     const val dagger2 = "2.20"
     const val fragmentation = "1.0.2"
+    const val fly = "2.4.2"
 }
 
 object Publish {
     const val userOrg = "weixia" //bintray.com用户名
     const val groupId = "me.xia" //jcenter上的路径
-    const val publishVersion = "2.4.1" //版本号
+    const val publishVersion = "2.4.2" //版本号
     const val desc = "Oh hi, this is a nice description for a project, right?"
     const val website = "https://github.com/wexia/X-MVPFly"
     const val gitUrl = "https://github.com/wexia/X-MVPFly.git"
@@ -83,4 +84,9 @@ object Deps {
     const val utilcode = "com.blankj:utilcode:1.22.7"
     //loading各种动画样式
     const val loading_indicator_view = "com.wang.avi:library:2.1.3"
+
+    //fly
+    const val fly = "me.xia:fly:${Versions.fly}"
+    const val fly_http = "me.xia:fly-http:${Versions.fly}"
+    const val fly_imageloader_glide = "me.xia:fly-imageloader-glide:${Versions.fly}"
 }
