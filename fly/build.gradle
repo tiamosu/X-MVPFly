@@ -6,12 +6,17 @@ apply {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     //support
-    api Deps.multidex
-    api Deps.appcompat_v7
-    api(Deps.recyclerview_v7) {
-        exclude group: 'com.android.support'
+    api Deps.androidx_multidex
+    api Deps.androidx_appcompat
+    api(Deps.androidx_recyclerview) {
+        exclude module: 'annotation'
+        exclude module: 'core'
+        exclude module: 'customview'
     }
-    api Deps.constraint_layout
+    api(Deps.androidx_constraint_layout) {
+        exclude module: 'appcompat'
+        exclude module: 'recyclerview'
+    }
 
     //rx
     api Deps.rxjava2
@@ -21,10 +26,10 @@ dependencies {
     api(Deps.rxcache2) {
         exclude module: 'dagger'
         exclude module: 'rxjava'
-        exclude module: 'api'
     }
     implementation(Deps.rxcache_gson) {
         exclude module: 'gson'
+        exclude module: 'api'
     }
     api(Deps.retrofit2) {
         exclude module: 'okhttp'
@@ -41,27 +46,26 @@ dependencies {
         exclude module: 'rxjava'
     }
     api(Deps.autodispose_archcomponents) {
-        exclude module: 'support-annotations'
-        exclude module: 'runtime'
-        exclude module: 'rxandroid'
         exclude module: 'rxjava'
+        exclude module: 'annotation'
+        exclude module: 'lifecycle-runtime'
+        exclude module: 'rxandroid'
     }
     //okhttp
     api Deps.okhttp3
 
     //butterknife
-    implementation(Deps.butterknife) {
-        exclude module: 'support-annotations'
-        exclude module: 'support-compat'
+    api(Deps.butterknife) {
+        exclude module: 'annotation'
+        exclude module: 'core'
     }
     annotationProcessor Deps.butterknife_apt
 
     //glide
     compileOnly(Deps.glide) {
-        exclude module: 'support-annotations'
-        exclude module: 'support-fragment'
+        exclude module: 'annotation'
+        exclude module: 'fragment'
     }
-
     //dagger2
     implementation Deps.dagger2
     annotationProcessor Deps.dagger2_apt

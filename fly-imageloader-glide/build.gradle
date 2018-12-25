@@ -8,13 +8,13 @@ dependencies {
 
     //glide
     api(Deps.glide) {
-        exclude module: 'support-annotations'
-        exclude module: 'support-fragment'
+        exclude module: 'annotation'
+        exclude module: 'fragment'
     }
     annotationProcessor Deps.glide_compiler
 
     //解决Glide中的注解还没有完全兼容androidx
-    api Deps.support_annotations
+    implementation Deps.support_annotations
     annotationProcessor Deps.support_annotations
 }
 

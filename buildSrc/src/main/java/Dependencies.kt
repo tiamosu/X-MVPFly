@@ -35,10 +35,11 @@ object Publish {
 object Deps {
     //support
     const val support_annotations = "com.android.support:support-annotations:${Versions.support}"
-    const val appcompat_v7 = "androidx.appcompat:appcompat:1.1.0-alpha01"
-    const val recyclerview_v7 = "androidx.recyclerview:recyclerview:1.1.0-alpha01"
-    const val multidex = "androidx.multidex:multidex:2.0.0"
-    const val constraint_layout = "androidx.constraintlayout:constraintlayout:2.0.0-alpha3"
+    const val androidx_annotation = "androidx.annotation:annotation:1.0.1"
+    const val androidx_appcompat = "androidx.appcompat:appcompat:1.1.0-alpha01"
+    const val androidx_recyclerview = "androidx.recyclerview:recyclerview:1.1.0-alpha01"
+    const val androidx_multidex = "androidx.multidex:multidex:2.0.1"
+    const val androidx_constraint_layout = "androidx.constraintlayout:constraintlayout:2.0.0-alpha3"
 
     //butterknife
     const val butterknife = "com.jakewharton:butterknife:${Versions.butterknife}"
