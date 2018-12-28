@@ -20,7 +20,7 @@ object Versions {
     const val glide = "4.8.0"
     const val dagger2 = "2.20"
     const val fragmentation = "1.0.4"
-    const val fly = "2.4.2"
+    const val fly = "2.4.3"
 }
 
 object Publish {
