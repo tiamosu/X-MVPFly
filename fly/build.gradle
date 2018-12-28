@@ -9,14 +9,11 @@ dependencies {
     api Deps.androidx_multidex
     api Deps.androidx_appcompat
     api(Deps.androidx_recyclerview) {
-        exclude module: 'annotation'
-        exclude module: 'core'
-        exclude module: 'customview'
+        exclude group: 'androidx.annotation'
+        exclude group: 'androidx.core'
+        exclude group: 'androidx.legacy'
     }
-    api(Deps.androidx_constraint_layout) {
-        exclude module: 'appcompat'
-        exclude module: 'recyclerview'
-    }
+    api Deps.androidx_constraint_layout
 
     //rx
     api Deps.rxjava2
@@ -46,9 +43,9 @@ dependencies {
         exclude module: 'rxjava'
     }
     api(Deps.autodispose_archcomponents) {
+        exclude group: 'androidx.annotation'
+        exclude group: 'androidx.lifecycle'
         exclude module: 'rxjava'
-        exclude module: 'annotation'
-        exclude module: 'lifecycle-runtime'
         exclude module: 'rxandroid'
     }
     //okhttp
@@ -56,15 +53,15 @@ dependencies {
 
     //butterknife
     api(Deps.butterknife) {
-        exclude module: 'annotation'
-        exclude module: 'core'
+        exclude group: 'androidx.annotation'
+        exclude group: 'androidx.core'
     }
     annotationProcessor Deps.butterknife_apt
 
     //glide
     compileOnly(Deps.glide) {
-        exclude module: 'annotation'
-        exclude module: 'fragment'
+        exclude group: 'androidx.annotation'
+        exclude group: 'androidx.fragment'
     }
     //dagger2
     implementation Deps.dagger2

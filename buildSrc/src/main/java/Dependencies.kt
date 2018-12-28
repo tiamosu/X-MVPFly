@@ -19,14 +19,14 @@ object Versions {
     const val leakcanary = "1.6.2"
     const val glide = "4.8.0"
     const val dagger2 = "2.20"
-    const val fragmentation = "1.0.2"
+    const val fragmentation = "1.0.4"
     const val fly = "2.4.2"
 }
 
 object Publish {
     const val userOrg = "weixia" //bintray.com用户名
     const val groupId = "me.xia" //jcenter上的路径
-    const val publishVersion = "2.4.2" //版本号
+    const val publishVersion = "2.4.3" //版本号
     const val desc = "Oh hi, this is a nice description for a project, right?"
     const val website = "https://github.com/wexia/X-MVPFly"
     const val gitUrl = "https://github.com/wexia/X-MVPFly.git"
@@ -37,10 +37,10 @@ object Deps {
     //support
     const val support_annotations = "com.android.support:support-annotations:${Versions.support}"
     const val androidx_annotation = "androidx.annotation:annotation:1.0.1"
-    const val androidx_appcompat = "androidx.appcompat:appcompat:1.1.0-alpha01"
-    const val androidx_recyclerview = "androidx.recyclerview:recyclerview:1.1.0-alpha01"
+    const val androidx_appcompat = "androidx.appcompat:appcompat:1.0.2"
+    const val androidx_recyclerview = "androidx.recyclerview:recyclerview:1.0.0"
     const val androidx_multidex = "androidx.multidex:multidex:2.0.1"
-    const val androidx_constraint_layout = "androidx.constraintlayout:constraintlayout:2.0.0-alpha3"
+    const val androidx_constraint_layout = "androidx.constraintlayout:constraintlayout:1.1.3"
 
     //butterknife
     const val butterknife = "com.jakewharton:butterknife:${Versions.butterknife}"

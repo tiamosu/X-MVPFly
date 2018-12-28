@@ -8,8 +8,8 @@ dependencies {
 
     //glide
     api(Deps.glide) {
-        exclude module: 'annotation'
-        exclude module: 'fragment'
+        exclude group: 'androidx.annotation'
+        exclude group: 'androidx.fragment'
     }
     annotationProcessor Deps.glide_compiler
 
