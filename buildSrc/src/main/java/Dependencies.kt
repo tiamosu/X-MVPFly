@@ -14,7 +14,7 @@ object Versions {
     const val support = "28.0.0"
     const val butterknife = "9.0.0-rc3"
     const val retrofit2 = "2.5.0"
-    const val okhttp3 = "3.12.0"
+    const val okhttp3 = "3.12.1"
     const val autodispose = "1.1.0"
     const val leakcanary = "1.6.2"
     const val glide = "4.8.0"
