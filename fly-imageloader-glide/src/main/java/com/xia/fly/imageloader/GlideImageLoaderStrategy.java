@@ -23,6 +23,7 @@ import com.xia.fly.utils.Preconditions;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import io.reactivex.functions.Action;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -192,7 +193,7 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy<ImageCo
     }
 
     @Override
-    public void clear(@Nullable Context context, @Nullable ImageConfigImpl config) {
+    public void clear(@Nullable final Context context, @Nullable ImageConfigImpl config) {
         Preconditions.checkNotNull(context, "Context is required");
         Preconditions.checkNotNull(config, "ImageConfigImpl is required");
 
@@ -209,11 +210,21 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy<ImageCo
         }
 
         if (config.mIsClearDiskCache) {//清除本地缓存
-            Platform.post(Schedulers.io(), glide::clearDiskCache);
+            Platform.post(Schedulers.io(), new Action() {
+                @Override
+                public void run() {
+                    Glide.get(context).clearDiskCache();
+                }
+            });
         }
 
         if (config.mIsClearMemory) {//清除内存缓存
-            Platform.post(glide::clearMemory);
+            Platform.post(new Action() {
+                @Override
+                public void run() {
+                    Glide.get(context).clearMemory();
+                }
+            });
         }
     }
 

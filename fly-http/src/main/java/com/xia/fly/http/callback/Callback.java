@@ -26,11 +26,13 @@ public abstract class Callback<T> {
 
     public Callback(@NonNull LifecycleOwner lifecycleOwner) {
         mLifecycleOwner = lifecycleOwner;
+        Context context = null;
         if (lifecycleOwner instanceof AppCompatActivity) {
-            mContext = new WeakReference<>((AppCompatActivity) lifecycleOwner);
+            context = ((AppCompatActivity) lifecycleOwner);
         } else if (lifecycleOwner instanceof Fragment) {
-            mContext = new WeakReference<>(((Fragment) lifecycleOwner).getContext());
+            context = ((Fragment) lifecycleOwner).getContext();
         }
+        mContext = context != null ? new WeakReference<>(context) : null;
     }
 
     public void onSubscribe(Disposable d) {

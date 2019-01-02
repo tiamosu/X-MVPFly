@@ -7,6 +7,7 @@ import com.bumptech.glide.GlideBuilder;
 import com.bumptech.glide.Registry;
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.load.engine.bitmap_recycle.LruBitmapPool;
+import com.bumptech.glide.load.engine.cache.DiskCache;
 import com.bumptech.glide.load.engine.cache.DiskLruCacheWrapper;
 import com.bumptech.glide.load.engine.cache.LruResourceCache;
 import com.bumptech.glide.load.engine.cache.MemorySizeCalculator;
@@ -38,10 +39,13 @@ public class GlideConfiguration extends AppGlideModule {
     @Override
     public void applyOptions(@NonNull Context context, @NonNull GlideBuilder builder) {
         final AppComponent appComponent = FlyUtils.getAppComponent();
-        builder.setDiskCache(() -> {
-            // Careful: the external cache directory doesn't enforce permissions
-            return DiskLruCacheWrapper.create(
-                    FileUtils.createOrExistsDir(new File(appComponent.cacheFile(), "Glide")), IMAGE_DISK_CACHE_MAX_SIZE);
+        builder.setDiskCache(new DiskCache.Factory() {
+            @Override
+            public DiskCache build() {
+                // Careful: the external cache directory doesn't enforce permissions
+                return DiskLruCacheWrapper.create(
+                        FileUtils.createOrExistsDir(new File(appComponent.cacheFile(), "Glide")), IMAGE_DISK_CACHE_MAX_SIZE);
+            }
         });
 
         final MemorySizeCalculator calculator = new MemorySizeCalculator.Builder(context).build();

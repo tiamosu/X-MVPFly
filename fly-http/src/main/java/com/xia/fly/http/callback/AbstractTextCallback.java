@@ -10,6 +10,7 @@ import java.io.Reader;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
+import io.reactivex.functions.Action;
 import okhttp3.ResponseBody;
 
 /**
@@ -33,7 +34,12 @@ public abstract class AbstractTextCallback extends Callback<String> {
             builder.append(line);
         }
         final String result = builder.toString();
-        Platform.post(() -> onResponse(result));
+        Platform.post(new Action() {
+            @Override
+            public void run() {
+                onResponse(result);
+            }
+        });
         CloseUtils.closeIO(responseBody, is, reader, bufferedReader);
     }
 }

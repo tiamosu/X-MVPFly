@@ -5,10 +5,12 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.blankj.rxbus.RxBusMessage;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.xia.fly.constant.NetworkState;
+import com.xia.fly.integration.rxbus.IRxBusCallback;
 import com.xia.fly.integration.rxbus.RxBusEventTag;
 import com.xia.fly.integration.rxbus.RxBusHelper;
 import com.xia.fly.receiver.NetworkChangeReceiver;
@@ -71,10 +73,13 @@ public class ActivityDelegateImpl implements ActivityDelegate {
     private void checkNetEvent() {
         if (mIActivity.isCheckNetWork()) {
             mNetworkChangeReceiver = NetworkChangeReceiver.register(mActivity);
-            RxBusHelper.subscribeWithTags(mActivity, (eventTag, rxBusMessage) -> {
-                if (eventTag.equals(RxBusEventTag.NETWORK_CHANGE)) {
-                    final boolean isAvailable = (boolean) rxBusMessage.mObj;
-                    hasNetWork(isAvailable);
+            RxBusHelper.subscribeWithTags(mActivity, new IRxBusCallback() {
+                @Override
+                public void callback(String eventTag, RxBusMessage rxBusMessage) {
+                    if (eventTag.equals(RxBusEventTag.NETWORK_CHANGE)) {
+                        final boolean isAvailable = (boolean) rxBusMessage.mObj;
+                        hasNetWork(isAvailable);
+                    }
                 }
             }, RxBusEventTag.NETWORK_CHANGE);
         }

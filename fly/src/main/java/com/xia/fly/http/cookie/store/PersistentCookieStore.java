@@ -1,5 +1,6 @@
 package com.xia.fly.http.cookie.store;
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.util.Log;
@@ -70,7 +71,7 @@ public class PersistentCookieStore implements CookieStore {
                     final Cookie decodedCookie = decodeCookie(encodedCookie);
                     if (decodedCookie != null) {
                         if (!cookies.containsKey(entry.getKey())) {
-                            cookies.put(entry.getKey(), new ConcurrentHashMap<>());
+                            cookies.put(entry.getKey(), new ConcurrentHashMap<String, Cookie>());
                         }
                         final ConcurrentHashMap<String, Cookie> cookieConcurrentHashMap = cookies.get(entry.getKey());
                         if (cookieConcurrentHashMap != null) {
@@ -86,7 +87,7 @@ public class PersistentCookieStore implements CookieStore {
         final String name = getCookieToken(cookie);
         if (cookie.persistent()) {
             if (!cookies.containsKey(uri.host())) {
-                cookies.put(uri.host(), new ConcurrentHashMap<>());
+                cookies.put(uri.host(), new ConcurrentHashMap<String, Cookie>());
             }
             final ConcurrentHashMap<String, Cookie> cookieConcurrentHashMap = cookies.get(uri.host());
             if (cookieConcurrentHashMap != null) {
@@ -191,6 +192,7 @@ public class PersistentCookieStore implements CookieStore {
         return ret;
     }
 
+    @SuppressLint("LogNotTimber")
     protected String encodeCookie(SerializableHttpCookie cookie) {
         if (cookie == null) {
             return null;
@@ -207,6 +209,7 @@ public class PersistentCookieStore implements CookieStore {
         return byteArrayToHexString(os.toByteArray());
     }
 
+    @SuppressLint("LogNotTimber")
     protected Cookie decodeCookie(String cookieString) {
         final byte[] bytes = hexStringToByteArray(cookieString);
         final ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);

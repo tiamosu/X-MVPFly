@@ -5,6 +5,7 @@ import com.xia.fly.utils.Platform;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
+import io.reactivex.functions.Action;
 import okhttp3.ResponseBody;
 
 /**
@@ -21,7 +22,12 @@ public abstract class AbstractStringCallback extends Callback<String> {
     @Override
     public void parseNetworkResponse(ResponseBody responseBody) throws Exception {
         final String result = responseBody.string();
-        Platform.post(() -> onResponse(result));
+        Platform.post(new Action() {
+            @Override
+            public void run() {
+                onResponse(result);
+            }
+        });
         CloseUtils.closeIO(responseBody);
     }
 }

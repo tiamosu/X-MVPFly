@@ -10,6 +10,7 @@ import com.xia.fly.utils.Platform;
 
 import androidx.annotation.NonNull;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 import okhttp3.ResponseBody;
 
@@ -39,13 +40,16 @@ public class CallbackSubscriber extends ErrorHandleSubscriber<ResponseBody> {
     }
 
     @Override
-    public void onSubscribe(Disposable d) {
+    public void onSubscribe(final Disposable d) {
         mDisposable = d;
         if (!isDisposed()) {
-            Platform.post(() -> {
-                showDialog();
-                if (mCallback != null) {
-                    mCallback.onSubscribe(d);
+            Platform.post(new Action() {
+                @Override
+                public void run() {
+                    showDialog();
+                    if (mCallback != null) {
+                        mCallback.onSubscribe(d);
+                    }
                 }
             });
         }
@@ -63,32 +67,42 @@ public class CallbackSubscriber extends ErrorHandleSubscriber<ResponseBody> {
     }
 
     @Override
-    public void onError(Throwable e) {
+    public void onError(final Throwable e) {
         super.onError(e);
-        Platform.post(() -> {
-            cancelDialog();
-            if (mCallback != null) {
-                mCallback.onError(e);
-                mCallback = null;
+        Platform.post(new Action() {
+            @Override
+            public void run() {
+                cancelDialog();
+                if (mCallback != null) {
+                    mCallback.onError(e);
+                    mCallback = null;
+                }
             }
         });
     }
 
     @Override
     public void onComplete() {
-        Platform.post(() -> {
-            cancelDialog();
-            if (mCallback != null) {
-                mCallback.onComplete();
-                mCallback = null;
+        Platform.post(new Action() {
+            @Override
+            public void run() {
+                cancelDialog();
+                if (mCallback != null) {
+                    mCallback.onComplete();
+                    mCallback = null;
+                }
             }
         });
     }
 
     protected void showDialog() {
         if (isShowLoadingDialog()) {
-            Platform.getLoadingHandler().postDelayed(() ->
-                    Loader.showLoading(getLoadingDialog()), 300);
+            Platform.getLoadingHandler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Loader.showLoading(getLoadingDialog());
+                }
+            }, 300);
         }
     }
 

@@ -7,15 +7,19 @@ import com.xia.fly.integration.cache.Cache;
 import com.xia.fly.integration.cache.CacheType;
 import com.xia.fly.utils.Preconditions;
 
+import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.util.concurrent.Callable;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import dagger.Lazy;
 import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 import io.reactivex.schedulers.Schedulers;
 import io.rx_cache2.internal.RxCache;
 import retrofit2.Retrofit;
@@ -68,25 +72,31 @@ public class RepositoryManager implements IRepositoryManager {
      * @return ApiService
      */
     @SuppressWarnings("unchecked")
-    private <T> T createWrapperService(Class<T> serviceClass) {
+    private <T> T createWrapperService(final Class<T> serviceClass) {
         Preconditions.checkNotNull(serviceClass, "serviceClass == null");
-
         // 通过二次代理，对 Retrofit 代理方法的调用包进新的 Observable 里在 io 线程执行。
         return (T) Proxy.newProxyInstance(serviceClass.getClassLoader(),
-                new Class<?>[]{serviceClass}, (proxy, method, args) -> {
-                    if (method.getReturnType() == Observable.class) {
-                        // 如果方法返回值是 Observable 的话，则包一层再返回
-                        return Observable.defer(() -> {
-                            final T service = getRetrofitService(serviceClass);
-                            // 执行真正的 Retrofit 动态代理的方法
-                            return ((Observable) getRetrofitMethod(service, method)
-                                    .invoke(service, args))
-                                    .subscribeOn(Schedulers.io());
-                        }).subscribeOn(Schedulers.single());
+                new Class<?>[]{serviceClass}, new InvocationHandler() {
+                    @Override
+                    public Object invoke(Object proxy, final Method method, @Nullable final Object[] args)
+                            throws Throwable {
+                        if (method.getReturnType() == Observable.class) {
+                            // 如果方法返回值是 Observable 的话，则包一层再返回
+                            return Observable.defer(new Callable<ObservableSource<?>>() {
+                                @Override
+                                public ObservableSource<?> call() throws Exception {
+                                    final T service = getRetrofitService(serviceClass);
+                                    // 执行真正的 Retrofit 动态代理的方法
+                                    return ((Observable) getRetrofitMethod(service, method)
+                                            .invoke(service, args))
+                                            .subscribeOn(Schedulers.io());
+                                }
+                            }).subscribeOn(Schedulers.single());
+                        }
+                        // 返回值不是 Observable 的话不处理
+                        final T service = getRetrofitService(serviceClass);
+                        return getRetrofitMethod(service, method).invoke(service, args);
                     }
-                    // 返回值不是 Observable 的话不处理
-                    final T service = getRetrofitService(serviceClass);
-                    return getRetrofitMethod(service, method).invoke(service, args);
                 });
     }
 

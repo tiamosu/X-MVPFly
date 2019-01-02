@@ -10,6 +10,7 @@ import java.io.InputStream;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
+import io.reactivex.functions.Action;
 import okhttp3.ResponseBody;
 
 /**
@@ -26,7 +27,12 @@ public abstract class AbstractBitmapCallback extends Callback<Bitmap> {
     public void parseNetworkResponse(ResponseBody responseBody) {
         final InputStream is = responseBody.byteStream();
         final Bitmap bitmap = BitmapFactory.decodeStream(is);
-        Platform.post(() -> onResponse(bitmap));
+        Platform.post(new Action() {
+            @Override
+            public void run() {
+                onResponse(bitmap);
+            }
+        });
         CloseUtils.closeIO(responseBody, is);
     }
 }

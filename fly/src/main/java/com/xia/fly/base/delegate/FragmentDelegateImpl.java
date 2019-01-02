@@ -5,8 +5,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
+import com.blankj.rxbus.RxBusMessage;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.xia.fly.constant.NetworkState;
+import com.xia.fly.integration.rxbus.IRxBusCallback;
 import com.xia.fly.integration.rxbus.RxBusEventTag;
 import com.xia.fly.integration.rxbus.RxBusHelper;
 import com.xia.fly.ui.dialog.loader.Loader;
@@ -55,9 +57,12 @@ public class FragmentDelegateImpl implements FragmentDelegate {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         final String tag = mFragment.getClass().getSimpleName().intern();
-        RxBusHelper.subscribeWithTags(mFragment, (eventTag, rxBusMessage) -> {
-            if (eventTag.equals(tag)) {
-                initAll();
+        RxBusHelper.subscribeWithTags(mFragment, new IRxBusCallback() {
+            @Override
+            public void callback(String eventTag, RxBusMessage rxBusMessage) {
+                if (eventTag.equals(tag)) {
+                    initAll();
+                }
             }
         }, tag);
     }
@@ -88,10 +93,13 @@ public class FragmentDelegateImpl implements FragmentDelegate {
 
     private void checkNetEvent() {
         if (mIFragment.isCheckNetWork()) {
-            RxBusHelper.subscribeWithTags(this, (eventTag, rxBusMessage) -> {
-                if (eventTag.equals(RxBusEventTag.NETWORK_CHANGE)) {
-                    final boolean isAvailable = (boolean) rxBusMessage.mObj;
-                    hasNetWork(isAvailable);
+            RxBusHelper.subscribeWithTags(mFragment, new IRxBusCallback() {
+                @Override
+                public void callback(String eventTag, RxBusMessage rxBusMessage) {
+                    if (eventTag.equals(RxBusEventTag.NETWORK_CHANGE)) {
+                        final boolean isAvailable = (boolean) rxBusMessage.mObj;
+                        hasNetWork(isAvailable);
+                    }
                 }
             }, RxBusEventTag.NETWORK_CHANGE);
         }

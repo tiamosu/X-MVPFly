@@ -61,12 +61,12 @@ object Deps {
     const val retrofit2_converter_gson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit2}"
     const val autodispose = "com.uber.autodispose:autodispose-android:${Versions.autodispose}"
     const val autodispose_archcomponents = "com.uber.autodispose:autodispose-android-archcomponents:${Versions.autodispose}"
-    const val rxjava2 = "io.reactivex.rxjava2:rxjava:2.2.4"
+    const val rxjava2 = "io.reactivex.rxjava2:rxjava:2.2.5"
     const val rxandroid2 = "io.reactivex.rxjava2:rxandroid:2.1.0"
     const val rxcache2 = "com.github.VictorAlbertos.RxCache:runtime:1.8.3-2.x"
     const val rxcache_gson = "com.github.VictorAlbertos.Jolyglot:gson:0.0.4"
     const val rxerrorhandler = "me.jessyan:rxerrorhandler:2.1.1"
-    const val x_rxbus = "me.xia:x-rxbus:1.0.7"
+    const val x_rxbus = "me.xia:x-rxbus:1.0.8"
 
     //okhttp
     const val okhttp3 = "com.squareup.okhttp3:okhttp:${Versions.okhttp3}"
@@ -81,7 +81,7 @@ object Deps {
     const val fragmentation_core = "me.xia:fragmentation_core:${Versions.fragmentation}"
 
     //util
-    const val utilcode = "com.blankj:utilcode:1.22.7"
+    const val utilcode = "com.blankj:utilcode:1.22.9"
     //loading各种动画样式
     const val loading_indicator_view = "com.wang.avi:library:2.1.3"
 

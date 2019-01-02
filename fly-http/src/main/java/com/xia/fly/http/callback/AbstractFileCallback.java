@@ -15,6 +15,7 @@ import java.io.InputStream;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LifecycleOwner;
+import io.reactivex.functions.Action;
 import okhttp3.ResponseBody;
 
 /**
@@ -89,7 +90,12 @@ public abstract class AbstractFileCallback extends Callback<File> {
                 downloadSize += read;
                 final int progress = Math.round(downloadSize * 100f / fileSize);
                 if (lastProgress != progress) {
-                    Platform.post(() -> inProgress(progress, fileSize));
+                    Platform.post(new Action() {
+                        @Override
+                        public void run() {
+                            inProgress(progress, fileSize);
+                        }
+                    });
                 }
                 lastProgress = progress;
             }

@@ -30,7 +30,7 @@ public class RequestCall {
                     .unsubscribeOn(Schedulers.io())
                     //遇到错误时重试,第一个参数为重试几次,第二个参数为重试的间隔时间（单位：秒）
                     .retryWhen(new RetryWithDelay(3, 2))
-                    .as(RxLifecycleUtils.bindLifecycle(callback.mLifecycleOwner))
+                    .as(RxLifecycleUtils.<ResponseBody>bindLifecycle(callback.mLifecycleOwner))
                     .subscribe(subscriber);
         }
     }

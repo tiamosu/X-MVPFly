@@ -1,11 +1,13 @@
 package com.xia.fly.http.utils;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 
 import java.io.IOException;
 import java.net.SocketException;
 
 import io.reactivex.exceptions.UndeliverableException;
+import io.reactivex.functions.Consumer;
 import io.reactivex.plugins.RxJavaPlugins;
 
 /**
@@ -19,31 +21,35 @@ public final class RxJavaUtils {
         if (RxJavaPlugins.getErrorHandler() != null || RxJavaPlugins.isLockdown()) {
             return;
         }
-        RxJavaPlugins.setErrorHandler(e -> {
-            if (e instanceof UndeliverableException) {
-                e = e.getCause();
+        RxJavaPlugins.setErrorHandler(new Consumer<Throwable>() {
+            @SuppressLint("LogNotTimber")
+            @Override
+            public void accept(Throwable e) {
+                if (e instanceof UndeliverableException) {
+                    e = e.getCause();
+                }
+                if ((e instanceof SocketException) || (e instanceof IOException)) {
+                    // fine, irrelevant network problem or API that throws on cancellation
+                    return;
+                }
+                if (e instanceof InterruptedException) {
+                    // fine, some blocking code was interrupted by a dispose call
+                    return;
+                }
+                if ((e instanceof NullPointerException) || (e instanceof IllegalArgumentException)) {
+                    // that's likely a bug in the application
+                    Thread.currentThread().getUncaughtExceptionHandler()
+                            .uncaughtException(Thread.currentThread(), e);
+                    return;
+                }
+                if (e instanceof IllegalStateException) {
+                    // that's a bug in RxJava or in a custom operator
+                    Thread.currentThread().getUncaughtExceptionHandler()
+                            .uncaughtException(Thread.currentThread(), e);
+                    return;
+                }
+                Log.e(TAG, "Undeliverable exception received, not sure what to do", e);
             }
-            if ((e instanceof SocketException) || (e instanceof IOException)) {
-                // fine, irrelevant network problem or API that throws on cancellation
-                return;
-            }
-            if (e instanceof InterruptedException) {
-                // fine, some blocking code was interrupted by a dispose call
-                return;
-            }
-            if ((e instanceof NullPointerException) || (e instanceof IllegalArgumentException)) {
-                // that's likely a bug in the application
-                Thread.currentThread().getUncaughtExceptionHandler()
-                        .uncaughtException(Thread.currentThread(), e);
-                return;
-            }
-            if (e instanceof IllegalStateException) {
-                // that's a bug in RxJava or in a custom operator
-                Thread.currentThread().getUncaughtExceptionHandler()
-                        .uncaughtException(Thread.currentThread(), e);
-                return;
-            }
-            Log.e(TAG, "Undeliverable exception received, not sure what to do", e);
         });
     }
 }
