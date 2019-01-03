@@ -81,7 +81,7 @@ object Deps {
     const val fragmentation_core = "me.xia:fragmentation_core:${Versions.fragmentation}"
 
     //util
-    const val utilcode = "com.blankj:utilcode:1.22.9"
+    const val utilcode = "com.blankj:utilcode:1.22.10"
     //loading各种动画样式
     const val loading_indicator_view = "com.wang.avi:library:2.1.3"
 
