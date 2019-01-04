@@ -24,14 +24,14 @@ dependencies {
         exclude module: 'dagger'
         exclude module: 'rxjava'
     }
-    implementation(Deps.rxcache_gson) {
+    api(Deps.rxcache_gson) {
         exclude module: 'gson'
         exclude module: 'api'
     }
     api(Deps.retrofit2) {
         exclude module: 'okhttp'
     }
-    implementation(Deps.retrofit2_adapter_rxjava2) {
+    api(Deps.retrofit2_adapter_rxjava2) {
         exclude module: 'retrofit'
         exclude module: 'rxjava'
     }
@@ -58,13 +58,8 @@ dependencies {
     }
     annotationProcessor Deps.butterknife_apt
 
-    //glide
-    compileOnly(Deps.glide) {
-        exclude group: 'androidx.annotation'
-        exclude group: 'androidx.fragment'
-    }
     //dagger2
-    implementation Deps.dagger2
+    api Deps.dagger2
     annotationProcessor Deps.dagger2_apt
 
     //常用的util库
@@ -72,7 +67,13 @@ dependencies {
     //fragment框架
     api Deps.fragmentation
     //loading动画样式
-    implementation Deps.loading_indicator_view
+    api Deps.loading_indicator_view
+
+    //glide
+    compileOnly(Deps.glide) {
+        exclude group: 'androidx.annotation'
+        exclude group: 'androidx.fragment'
+    }
 }
 
 apply from: "${rootDir.path}/bintray.gradle"
