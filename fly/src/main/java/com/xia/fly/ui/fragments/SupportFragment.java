@@ -106,8 +106,8 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    public void onDestroy() {
+        super.onDestroy();
         if (mPresenter != null) {
             mPresenter.detachView();
             getLifecycle().removeObserver(mPresenter);
