@@ -1,6 +1,9 @@
 package com.xia.fly.imageloader.integration;
 
+import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.content.Context;
+import android.os.Build;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.GlideBuilder;
@@ -13,6 +16,7 @@ import com.bumptech.glide.load.engine.cache.LruResourceCache;
 import com.bumptech.glide.load.engine.cache.MemorySizeCalculator;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.module.AppGlideModule;
+import com.bumptech.glide.request.RequestOptions;
 import com.xia.fly.di.component.AppComponent;
 import com.xia.fly.imageloader.GlideAppliesOptions;
 import com.xia.fly.ui.imageloader.BaseImageLoaderStrategy;
@@ -23,6 +27,10 @@ import java.io.File;
 import java.io.InputStream;
 
 import androidx.annotation.NonNull;
+
+import static android.content.Context.ACTIVITY_SERVICE;
+import static com.bumptech.glide.load.DecodeFormat.PREFER_ARGB_8888;
+import static com.bumptech.glide.load.DecodeFormat.PREFER_RGB_565;
 
 /**
  * {@link AppGlideModule} 的默认实现类
@@ -36,6 +44,7 @@ import androidx.annotation.NonNull;
 public class GlideConfiguration extends AppGlideModule {
     private static final int IMAGE_DISK_CACHE_MAX_SIZE = 100 * 1024 * 1024;//图片缓存文件最大值为100Mb
 
+    @SuppressLint("CheckResult")
     @Override
     public void applyOptions(@NonNull Context context, @NonNull GlideBuilder builder) {
         final AppComponent appComponent = FlyUtils.getAppComponent();
@@ -57,6 +66,17 @@ public class GlideConfiguration extends AppGlideModule {
 
         builder.setMemoryCache(new LruResourceCache(customMemoryCacheSize));
         builder.setBitmapPool(new LruBitmapPool(customBitmapPoolSize));
+
+        final RequestOptions defaultOptions = new RequestOptions();
+        // Prefer higher quality images unless we're on a low RAM device
+        final ActivityManager activityManager =
+                (ActivityManager) context.getSystemService(ACTIVITY_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            defaultOptions.format(activityManager.isLowRamDevice() ? PREFER_RGB_565 : PREFER_ARGB_8888);
+        }
+        // Disable hardware bitmaps as they don't play nicely with Palette
+        defaultOptions.disallowHardwareConfig();
+        builder.setDefaultRequestOptions(defaultOptions);
 
         //将配置 Glide 的机会转交给 GlideImageLoaderStrategy,如你觉得框架提供的 GlideImageLoaderStrategy
         //并不能满足自己的需求,想自定义 BaseImageLoaderStrategy,那请你最好实现 GlideAppliesOptions
