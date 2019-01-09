@@ -5,8 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
-import com.xia.fly.R;
 import com.xia.fly.integration.cache.Cache;
 import com.xia.fly.integration.cache.CacheType;
 import com.xia.fly.integration.rxbus.IRxBusCallback;
@@ -48,15 +48,25 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.base_layout_root_view, container, false);
-        if (getLayoutId() != 0) {
-            //预留添加TitleBar
-            final FrameLayout titleBarContainer = rootView.findViewById(R.id.layout_root_view_head_container);
-            onCreateTitleBar(titleBarContainer);
-            //加载页面布局（预留TitleBar之下）
-            final FrameLayout contentContainer = rootView.findViewById(R.id.layout_root_view_content_container);
-            View.inflate(getContext(), getLayoutId(), contentContainer);
+        if (getLayoutId() == 0) {
+            return super.onCreateView(inflater, container, savedInstanceState);
         }
+
+        final LinearLayout rootView = new LinearLayout(getContext());
+        rootView.setLayoutParams(new LinearLayout.LayoutParams(-1, -1));
+        rootView.setOrientation(LinearLayout.VERTICAL);
+
+        //预留添加TitleBar
+        final FrameLayout titleBarContainer = new FrameLayout(getContext());
+        titleBarContainer.setLayoutParams(new FrameLayout.LayoutParams(-1, -2));
+        rootView.addView(titleBarContainer);
+        onCreateTitleBar(titleBarContainer);
+
+        //加载页面布局（预留TitleBar之下）
+        final FrameLayout contentContainer = new FrameLayout(getContext());
+        contentContainer.setLayoutParams(new FrameLayout.LayoutParams(-1, -1));
+        rootView.addView(contentContainer);
+        View.inflate(getContext(), getLayoutId(), contentContainer);
         return rootView;
     }
 
@@ -119,6 +129,7 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
         return mPresenter == null ? newP() : mPresenter;
     }
 
+    @NonNull
     @Override
     public FragmentActivity getContext() {
         return super.getContext();
