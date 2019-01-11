@@ -16,7 +16,7 @@ object Versions {
     const val retrofit2 = "2.5.0"
     const val okhttp3 = "3.12.1"
     const val autodispose = "1.1.0"
-    const val leakcanary = "1.6.2"
+    const val leakcanary = "1.6.3"
     const val glide = "4.8.0"
     const val dagger2 = "2.20"
     const val fragmentation = "1.0.6"
