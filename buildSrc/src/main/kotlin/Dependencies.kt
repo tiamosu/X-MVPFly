@@ -69,7 +69,7 @@ object Deps {
     const val x_rxbus = "me.xia:x-rxbus:1.0.8"
 
     //util
-    const val utilcode = "com.blankj:utilcode:1.23.2"
+    const val utilcode = "com.blankj:utilcode:1.23.3"
 
     //okhttp
     const val okhttp3 = "com.squareup.okhttp3:okhttp:${Versions.okhttp3}"
