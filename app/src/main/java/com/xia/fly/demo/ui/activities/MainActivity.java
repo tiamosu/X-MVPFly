@@ -3,7 +3,6 @@ package com.xia.fly.demo.ui.activities;
 import android.util.Log;
 import android.widget.EditText;
 
-import com.xia.fly.demo.R;
 import com.xia.fly.demo.ui.fragments.MainFragment;
 import com.xia.fly.ui.activities.ProxyActivity;
 import com.xia.fly.ui.fragments.SupportFragment;
@@ -32,15 +31,15 @@ public class MainActivity extends ProxyActivity {
         return false;
     }
 
-    @Override
-    public int getLayoutId() {
-        return R.layout.activity_main;
-    }
-
-    @Override
-    protected void loadProxyRootFragment(int proxyContainerId) {
-        super.loadProxyRootFragment(R.id.main_container_fl);
-    }
+//    @Override
+//    public int getLayoutId() {
+//        return R.layout.activity_main;
+//    }
+//
+//    @Override
+//    protected void loadProxyRootFragment(int proxyContainerId) {
+//        super.loadProxyRootFragment(R.id.main_container_fl);
+//    }
 
     @NonNull
     @Override

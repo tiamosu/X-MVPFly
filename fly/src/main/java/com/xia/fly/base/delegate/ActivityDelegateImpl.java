@@ -50,9 +50,10 @@ public class ActivityDelegateImpl implements ActivityDelegate {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        if (savedInstanceState != null && mActivity instanceof ProxyActivity) {
-            final ProxyActivity proxyActivity = (ProxyActivity) mActivity;
-            if (!proxyActivity.isRestartRestore()) {
+        ProxyActivity proxyActivity = null;
+        if (mActivity instanceof ProxyActivity) {
+            proxyActivity = (ProxyActivity) mActivity;
+            if (savedInstanceState != null && !proxyActivity.isRestartRestore()) {
                 return;
             }
         }
@@ -61,11 +62,15 @@ public class ActivityDelegateImpl implements ActivityDelegate {
             mActivity.setContentView(rootView);
             mUnbinder = ButterKnife.bind(mActivity, rootView);
         }
+
         mIActivity.initMvp();
-        mIActivity.initData();
-        mIActivity.initView();
-        mIActivity.initEvent();
-        mIActivity.onLazyLoadData();
+        //Activity为ProxyActivity时，下面方法置于ProxyActivity中执行
+        if (proxyActivity == null) {
+            mIActivity.initData();
+            mIActivity.initView();
+            mIActivity.initEvent();
+            mIActivity.onLazyLoadData();
+        }
 
         checkNetEvent();
     }

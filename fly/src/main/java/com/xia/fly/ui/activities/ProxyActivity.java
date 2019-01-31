@@ -1,11 +1,11 @@
 package com.xia.fly.ui.activities;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import com.xia.fly.R;
 import com.xia.fly.ui.fragments.SupportFragment;
 import com.xia.fly.utils.FragmentUtils;
+import com.xia.fly.utils.Preconditions;
 
 import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
@@ -16,6 +16,7 @@ import androidx.appcompat.widget.ContentFrameLayout;
  * @author xia
  * @date 2018/7/3.
  */
+@SuppressWarnings("all")
 public abstract class ProxyActivity extends SupportActivity {
 
     /**
@@ -27,7 +28,6 @@ public abstract class ProxyActivity extends SupportActivity {
     /**
      * @return APP被杀死重启时，是否还原到被杀死前保存的状态
      */
-    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean isRestartRestore() {
         return true;
     }
@@ -42,7 +42,13 @@ public abstract class ProxyActivity extends SupportActivity {
         return 0;
     }
 
-    @SuppressLint("RestrictedApi")
+    private ContentFrameLayout mContainerLayout;
+
+    @Nullable
+    public ContentFrameLayout getContainerLayout() {
+        return mContainerLayout;
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,20 +56,32 @@ public abstract class ProxyActivity extends SupportActivity {
             finish();
             return;
         }
+
+        final int containerId = R.id.delegate_container;
         if (getLayoutId() == 0) {
-            final ContentFrameLayout container = new ContentFrameLayout(this);
-            container.setId(R.id.delegate_container);
-            setContentView(container);
+            mContainerLayout = new ContentFrameLayout(getContext());
+            mContainerLayout.setId(containerId);
+            setContentView(mContainerLayout);
         }
-        if (findFragment(setRootFragment()) == null) {
-            loadProxyRootFragment(R.id.delegate_container);
-        }
+
+        loadProxyRootFragment(containerId);
+        initData();
+        initView();
+        initEvent();
+        onLazyLoadData();
     }
 
     @CallSuper
     protected void loadProxyRootFragment(int proxyContainerId) {
-        final int containerId = getLayoutId() == 0 ? R.id.delegate_container : proxyContainerId;
-        loadRootFragment(containerId, FragmentUtils.newInstance(setRootFragment()));
+        Preconditions.checkNotNull(setRootFragment(),
+                "you must set the rootFragment not be null!");
+        if (findFragment(setRootFragment()) == null) {
+            if (getLayoutId() != 0 && proxyContainerId == R.id.delegate_container) {
+                Preconditions.checkArgument(false,
+                        "you should override loadProxyRootFragment(proxyContainerId)!");
+            }
+            loadRootFragment(proxyContainerId, FragmentUtils.newInstance(setRootFragment()));
+        }
     }
 
     @Override

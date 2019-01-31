@@ -89,7 +89,7 @@ public final class Preconditions {
         if (index < 0) {
             return format("%s (%s) must not be negative", desc, index);
         } else if (size < 0) {
-            throw new IllegalArgumentException((new StringBuilder(26)).append("negative size: ").append(size).toString());
+            throw new IllegalArgumentException("negative size: " + size);
         } else {
             return format("%s (%s) must be less than size (%s)", desc, index, size);
         }
@@ -111,7 +111,7 @@ public final class Preconditions {
         if (index < 0) {
             return format("%s (%s) must not be negative", desc, index);
         } else if (size < 0) {
-            throw new IllegalArgumentException((new StringBuilder(26)).append("negative size: ").append(size).toString());
+            throw new IllegalArgumentException("negative size: " + size);
         } else {
             return format("%s (%s) must not be greater than size (%s)", desc, index, size);
         }
