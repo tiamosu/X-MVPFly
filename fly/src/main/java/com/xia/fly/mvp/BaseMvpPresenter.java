@@ -51,6 +51,7 @@ public abstract class BaseMvpPresenter<V extends BaseMvpView> extends MvpNullObj
     @MainThread
     @Override
     public void onDestroy(@NonNull LifecycleOwner owner) {
+        owner.getLifecycle().removeObserver(this);
     }
 
     @CallSuper

@@ -1,6 +1,7 @@
 package com.xia.fly.ui.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -116,11 +117,16 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
     }
 
     @Override
+    public void onDestroyView() {
+        Log.e("weixi", "onDestroyView: ");
+        super.onDestroyView();
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         if (mPresenter != null) {
             mPresenter.detachView();
-            getLifecycle().removeObserver(mPresenter);
             mPresenter = null;
         }
     }

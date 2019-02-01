@@ -52,7 +52,6 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
         super.onDestroy();
         if (mPresenter != null) {
             mPresenter.detachView();
-            getLifecycle().removeObserver(mPresenter);
             mPresenter = null;
         }
     }

@@ -163,12 +163,12 @@ public class FragmentDelegateImpl implements FragmentDelegate {
 
     @Override
     public void onDestroyView() {
+        Platform.getHandler().removeCallbacksAndMessages(null);
+        RxBusHelper.unregister(mFragment);
     }
 
     @Override
     public void onDestroy() {
-        Platform.getHandler().removeCallbacksAndMessages(null);
-        RxBusHelper.unregister(mFragment);
         if (mUnbinder != null && mUnbinder != Unbinder.EMPTY) {
             try {
                 //fix Bindings already cleared
