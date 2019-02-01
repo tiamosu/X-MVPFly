@@ -120,6 +120,7 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
         super.onDestroy();
         if (mPresenter != null) {
             mPresenter.detachView();
+            getLifecycle().removeObserver(mPresenter);
             mPresenter = null;
         }
     }
