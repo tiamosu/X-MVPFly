@@ -163,8 +163,8 @@ public class FragmentDelegateImpl implements FragmentDelegate {
 
     @Override
     public void onDestroyView() {
-        Platform.getHandler().removeCallbacksAndMessages(null);
         RxBusHelper.unregister(mFragment);
+        Platform.getHandler().removeCallbacksAndMessages(null);
     }
 
     @Override
