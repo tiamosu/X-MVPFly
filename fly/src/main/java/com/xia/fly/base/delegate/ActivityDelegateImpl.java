@@ -138,8 +138,10 @@ public class ActivityDelegateImpl implements ActivityDelegate {
 
     @Override
     public void onDestroy() {
-        Platform.getHandler().removeCallbacksAndMessages(null);
         RxBusHelper.unregister(mActivity);
+        Platform.getHandler().removeCallbacksAndMessages(null);
+        Platform.getLoadingHandler().removeCallbacksAndMessages(null);
+        Loader.stopLoading();
         if (mUnbinder != null && mUnbinder != Unbinder.EMPTY) {
             mUnbinder.unbind();
             mUnbinder = null;
