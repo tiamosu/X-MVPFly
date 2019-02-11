@@ -149,8 +149,6 @@ public class FragmentDelegateImpl implements FragmentDelegate {
 
     @Override
     public void onPause() {
-        Platform.getLoadingHandler().removeCallbacksAndMessages(null);
-        Loader.stopLoading();
     }
 
     @Override

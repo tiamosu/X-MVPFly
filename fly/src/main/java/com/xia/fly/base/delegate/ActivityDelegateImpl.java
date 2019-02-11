@@ -128,8 +128,6 @@ public class ActivityDelegateImpl implements ActivityDelegate {
 
     @Override
     public void onPause() {
-        Platform.getLoadingHandler().removeCallbacksAndMessages(null);
-        Loader.stopLoading();
     }
 
     @Override
