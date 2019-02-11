@@ -121,12 +121,11 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
         if (mPresenter != null) {
             mPresenter.detachView();
             getLifecycle().removeObserver(mPresenter);
-            mPresenter = null;
         }
     }
 
     protected P getP() {
-        return mPresenter == null ? newP() : mPresenter;
+        return mPresenter;
     }
 
     @NonNull

@@ -53,7 +53,6 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
         if (mPresenter != null) {
             mPresenter.detachView();
             getLifecycle().removeObserver(mPresenter);
-            mPresenter = null;
         }
     }
 
@@ -65,7 +64,7 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
 
     @SuppressWarnings("unchecked")
     protected P getP() {
-        return mPresenter == null ? newP() : mPresenter;
+        return mPresenter;
     }
 
     @Override
