@@ -6,10 +6,10 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     compileOnly project(':fly')
 
-    //glide
     api(Deps.glide) {
         exclude group: 'androidx.annotation'
         exclude group: 'androidx.fragment'
+        exclude group: 'androidx.vectordrawable'
     }
     annotationProcessor Deps.glide_compiler
 
