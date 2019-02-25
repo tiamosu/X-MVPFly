@@ -12,7 +12,6 @@ import com.xia.fly.constant.NetworkState;
 import com.xia.fly.integration.rxbus.IRxBusCallback;
 import com.xia.fly.integration.rxbus.RxBusEventTag;
 import com.xia.fly.integration.rxbus.RxBusHelper;
-import com.xia.fly.ui.dialog.loader.Loader;
 import com.xia.fly.ui.fragments.SupportFragment;
 import com.xia.fly.utils.Platform;
 

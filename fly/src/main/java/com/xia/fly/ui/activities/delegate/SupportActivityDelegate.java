@@ -15,7 +15,6 @@ import com.xia.fly.integration.rxbus.RxBusHelper;
 import com.xia.fly.receiver.NetworkChangeReceiver;
 import com.xia.fly.ui.activities.ProxyActivity;
 import com.xia.fly.ui.activities.SupportActivity;
-import com.xia.fly.ui.dialog.loader.Loader;
 import com.xia.fly.utils.Platform;
 
 import butterknife.ButterKnife;
