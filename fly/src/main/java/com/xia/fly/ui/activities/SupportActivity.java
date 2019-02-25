@@ -1,5 +1,6 @@
 package com.xia.fly.ui.activities;
 
+import android.os.Bundle;
 import android.view.MotionEvent;
 import android.widget.EditText;
 
@@ -9,10 +10,12 @@ import com.xia.fly.integration.rxbus.IRxBusCallback;
 import com.xia.fly.integration.rxbus.RxBusHelper;
 import com.xia.fly.mvp.BaseMvpPresenter;
 import com.xia.fly.mvp.BaseMvpView;
+import com.xia.fly.ui.activities.delegate.SupportActivityDelegate;
 import com.xia.fly.utils.FlyUtils;
 import com.xia.fly.utils.KeyboardHelper;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import me.yokeyword.fragmentation.AbstractSupportActivity;
 
@@ -23,6 +26,7 @@ import me.yokeyword.fragmentation.AbstractSupportActivity;
 public abstract class SupportActivity<P extends BaseMvpPresenter>
         extends AbstractSupportActivity implements IActivity, BaseMvpView<P> {
 
+    private final SupportActivityDelegate mDelegate = new SupportActivityDelegate(this);
     private P mPresenter;
     private Cache<String, Object> mCache;
 
@@ -33,6 +37,18 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
             mCache = FlyUtils.getAppComponent().cacheFactory().build(CacheType.ACTIVITY_CACHE);
         }
         return mCache;
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mDelegate.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mDelegate.onResume();
     }
 
     @SuppressWarnings("unchecked")
@@ -54,6 +70,7 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
             mPresenter.detachView();
             getLifecycle().removeObserver(mPresenter);
         }
+        mDelegate.onDestroy();
     }
 
     @Override

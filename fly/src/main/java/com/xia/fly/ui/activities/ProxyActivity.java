@@ -65,6 +65,7 @@ public abstract class ProxyActivity extends SupportActivity {
         }
 
         loadProxyRootFragment(containerId);
+        initMvp();
         initData();
         initView();
         initEvent();
