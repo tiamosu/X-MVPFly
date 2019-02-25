@@ -2,6 +2,9 @@ package com.xia.fly.http.subscriber;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.AppUtils;
@@ -29,6 +32,8 @@ public class CallbackSubscriber extends ErrorHandleSubscriber<ResponseBody> {
     public Callback mCallback;
     private Disposable mDisposable;
 
+    private static final Handler LOADING_HANDLER = new Handler(Looper.getMainLooper());
+
     public CallbackSubscriber(@NonNull Callback callback) {
         super(FlyUtils.getAppComponent().rxErrorHandler());
         mCallback = callback;
@@ -39,10 +44,11 @@ public class CallbackSubscriber extends ErrorHandleSubscriber<ResponseBody> {
     }
 
     protected Dialog getLoadingDialog() {
-        if (mCallback == null || mCallback.getContext() == null) {
+        Context context;
+        if (mCallback == null || (context = mCallback.getContext()) == null) {
             return null;
         }
-        return new LoadingDialog(mCallback.getContext());
+        return new LoadingDialog(context);
     }
 
     @Override
@@ -103,7 +109,7 @@ public class CallbackSubscriber extends ErrorHandleSubscriber<ResponseBody> {
 
     protected void showDialog() {
         if (isShowLoadingDialog() && isPageVisible()) {
-            Platform.getLoadingHandler().postDelayed(new Runnable() {
+            LOADING_HANDLER.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     Loader.showLoading(getLoadingDialog());
@@ -114,7 +120,7 @@ public class CallbackSubscriber extends ErrorHandleSubscriber<ResponseBody> {
 
     protected void cancelDialog() {
         if (isShowLoadingDialog()) {
-            Platform.getLoadingHandler().removeCallbacksAndMessages(null);
+            LOADING_HANDLER.removeCallbacksAndMessages(null);
             Loader.stopLoading();
         }
         if (!isDisposed()) {

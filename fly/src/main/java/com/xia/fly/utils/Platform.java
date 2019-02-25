@@ -19,14 +19,9 @@ public final class Platform {
     }
 
     private static final Handler HANDLER = new Handler(Looper.getMainLooper());
-    private static final Handler LOADING_HANDLER = new Handler(Looper.getMainLooper());
 
     public static Handler getHandler() {
         return HANDLER;
-    }
-
-    public static Handler getLoadingHandler() {
-        return LOADING_HANDLER;
     }
 
     public static void post(final Action action) {
