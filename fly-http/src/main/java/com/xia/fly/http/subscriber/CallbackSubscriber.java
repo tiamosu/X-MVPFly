@@ -72,11 +72,11 @@ public class CallbackSubscriber extends ErrorHandleSubscriber<ResponseBody> {
         Platform.post(new Action() {
             @Override
             public void run() {
-                cancelDialog();
                 if (mCallback != null) {
                     mCallback.onError(e);
                     mCallback = null;
                 }
+                cancelDialog();
             }
         });
     }
@@ -86,11 +86,11 @@ public class CallbackSubscriber extends ErrorHandleSubscriber<ResponseBody> {
         Platform.post(new Action() {
             @Override
             public void run() {
-                cancelDialog();
                 if (mCallback != null) {
                     mCallback.onComplete();
                     mCallback = null;
                 }
+                cancelDialog();
             }
         });
     }
