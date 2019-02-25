@@ -140,8 +140,6 @@ public final class SupportFragmentDelegate {
     public void onDestroy() {
         RxBusHelper.unregister(mFragment);
         Platform.getHandler().removeCallbacksAndMessages(null);
-        Platform.getLoadingHandler().removeCallbacksAndMessages(null);
-        Loader.stopLoading();
         if (mUnbinder != null && mUnbinder != Unbinder.EMPTY) {
             try {
                 //fix Bindings already cleared

@@ -110,8 +110,6 @@ public final class SupportActivityDelegate {
     public void onDestroy() {
         RxBusHelper.unregister(mActivity);
         Platform.getHandler().removeCallbacksAndMessages(null);
-        Platform.getLoadingHandler().removeCallbacksAndMessages(null);
-        Loader.stopLoading();
         if (mUnbinder != null && mUnbinder != Unbinder.EMPTY) {
             mUnbinder.unbind();
             mUnbinder = null;
