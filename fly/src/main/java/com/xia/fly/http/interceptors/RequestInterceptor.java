@@ -151,7 +151,7 @@ public class RequestInterceptor extends BaseInterceptor {
             }
             final BufferedSource source = responseBody.source();
             source.request(Long.MAX_VALUE); // Buffer the entire body.
-            final Buffer buffer = source.getBuffer();
+            final Buffer buffer = source.buffer();
 
             //获取content的压缩类型
             final String encoding = response.headers().get("Content-Encoding");
