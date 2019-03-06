@@ -14,6 +14,8 @@ import com.xia.fly.ui.activities.delegate.SupportActivityDelegate;
 import com.xia.fly.utils.FlyUtils;
 import com.xia.fly.utils.KeyboardHelper;
 
+import org.jetbrains.annotations.NotNull;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +25,7 @@ import me.yokeyword.fragmentation.AbstractSupportActivity;
  * @author xia
  * @date 2018/8/16.
  */
+@SuppressWarnings("unused")
 public abstract class SupportActivity<P extends BaseMvpPresenter>
         extends AbstractSupportActivity implements IActivity, BaseMvpView<P> {
 
@@ -84,6 +87,7 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
         return mPresenter;
     }
 
+    @NotNull
     @Override
     public AppCompatActivity getContext() {
         return this;
@@ -108,7 +112,7 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
     }
 
     @Override
-    public void onDispatchTouchHideKeyboard(EditText editText) {
+    public void onDispatchTouchHideKeyboard(@NotNull EditText editText) {
     }
 
     protected void subscribeWithTags(final IRxBusCallback callback, final String... tags) {

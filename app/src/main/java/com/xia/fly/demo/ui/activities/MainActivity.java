@@ -9,6 +9,8 @@ import com.xia.fly.demo.ui.fragments.MainFragment;
 import com.xia.fly.ui.activities.ProxyActivity;
 import com.xia.fly.ui.fragments.SupportFragment;
 
+import org.jetbrains.annotations.NotNull;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.ContentFrameLayout;
 import me.yokeyword.fragmentation.anim.DefaultVerticalAnimator;
@@ -59,7 +61,7 @@ public class MainActivity extends ProxyActivity {
     }
 
     @Override
-    public void onDispatchTouchHideKeyboard(EditText editText) {
+    public void onDispatchTouchHideKeyboard(@NotNull EditText editText) {
         editText.setFocusable(false);
     }
 
