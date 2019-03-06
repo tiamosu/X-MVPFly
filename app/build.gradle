@@ -14,7 +14,7 @@ dependencies {
     implementation Deps.okhttp3_logging_interceptor
 
     implementation Deps.butterknife
-    annotationProcessor Deps.butterknife_apt
+    kapt Deps.butterknife_apt
 
     debugImplementation Deps.leakcanary_android
     releaseImplementation Deps.leakcanary_android_no_op

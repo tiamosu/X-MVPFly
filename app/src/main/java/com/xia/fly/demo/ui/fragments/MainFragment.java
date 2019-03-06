@@ -4,8 +4,6 @@ import android.view.View;
 
 import com.xia.fly.demo.R;
 import com.xia.fly.demo.base.HeadViewFragment;
-import com.xia.fly.demo.mvp.presenter.MainPresenter;
-import com.xia.fly.demo.mvp.view.MainView;
 
 import androidx.appcompat.widget.AppCompatEditText;
 import butterknife.BindView;
@@ -16,7 +14,7 @@ import me.yokeyword.fragmentation.ISupportFragment;
  * @author xia
  * @date 2018/7/3.
  */
-public class MainFragment extends HeadViewFragment<MainPresenter> implements MainView {
+public class MainFragment extends HeadViewFragment {
     @BindView(R.id.main_user_id_edit)
     AppCompatEditText mUserIdEditText;
     @BindView(R.id.main_user_psd_edit)
@@ -30,8 +28,8 @@ public class MainFragment extends HeadViewFragment<MainPresenter> implements Mai
     }
 
     @Override
-    public MainPresenter newP() {
-        return new MainPresenter();
+    public Object newP() {
+        return null;
     }
 
     @Override
