@@ -11,6 +11,7 @@ object Android {
 }
 
 object Versions {
+    const val kotlin = "1.3.21"
     const val support = "28.0.0"
     const val butterknife = "10.1.0"
     const val retrofit2 = "2.5.0"

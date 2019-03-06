@@ -1,5 +1,7 @@
 apply {
     plugin "com.android.library"
+    plugin "kotlin-android"
+    plugin "kotlin-android-extensions"
 }
 
 android {
@@ -19,6 +21,12 @@ android {
     lintOptions {
         abortOnError false
     }
+}
+
+dependencies {
+    api "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
 }
 
 allprojects {
