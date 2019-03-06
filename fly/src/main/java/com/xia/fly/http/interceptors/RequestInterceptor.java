@@ -182,9 +182,9 @@ public class RequestInterceptor extends BaseInterceptor {
         if (charset == null) {
             return "";
         }
-        if (encoding != null && encoding.equalsIgnoreCase("gzip")) {//content 使用 gzip 压缩
+        if ("gzip".equalsIgnoreCase(encoding)) {//content 使用 gzip 压缩
             return ZipHelper.decompressForGzip(clone.readByteArray(), convertCharset(charset));//解压
-        } else if (encoding != null && encoding.equalsIgnoreCase("zlib")) {//content 使用 zlib 压缩
+        } else if ("zlib".equalsIgnoreCase(encoding)) {//content 使用 zlib 压缩
             return ZipHelper.decompressToStringForZlib(clone.readByteArray(), convertCharset(charset));//解压
         } else {//content 没有被压缩, 或者使用其他未知压缩方式
             return clone.readString(charset);
