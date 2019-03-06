@@ -47,11 +47,9 @@ class SecondFragment : HeadViewFragment<HomePresenter>(), HomeView {
 
     override fun setData(content: String) {}
 
-    override fun getBoolean(): Boolean {
-        return false
-    }
+    override val boolean: Boolean
+        get() = false
 
-    override fun getNum(): Int {
-        return 0
-    }
+    override val num: Int
+        get() = 0
 }

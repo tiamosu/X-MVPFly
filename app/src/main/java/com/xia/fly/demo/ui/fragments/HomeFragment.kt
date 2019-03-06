@@ -99,11 +99,9 @@ class HomeFragment : HeadViewFragment<HomePresenter>(), HomeView {
 //        Log.e("weixi", "content:$content")
     }
 
-    override fun getBoolean(): Boolean {
-        return true
-    }
+    override val boolean: Boolean
+        get() = true
 
-    override fun getNum(): Int {
-        return 99
-    }
+    override val num: Int
+        get() = 99
 }
