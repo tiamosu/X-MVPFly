@@ -1,23 +1,17 @@
 package com.xia.fly.http.subscriber;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.blankj.utilcode.util.ActivityUtils;
-import com.blankj.utilcode.util.AppUtils;
 import com.xia.fly.http.callback.Callback;
 import com.xia.fly.ui.dialog.LoadingDialog;
 import com.xia.fly.ui.dialog.loader.Loader;
-import com.xia.fly.ui.fragments.SupportFragment;
 import com.xia.fly.utils.FlyUtils;
 import com.xia.fly.utils.Platform;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LifecycleOwner;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
@@ -129,24 +123,10 @@ public class CallbackSubscriber extends ErrorHandleSubscriber<ResponseBody> {
     }
 
     private boolean isPageVisible() {
-        if (mCallback == null) {
-            return false;
+        if (mCallback != null) {
+            return FlyUtils.isCurrentVisible(mCallback.mLifecycleOwner);
         }
-
-        boolean isVisible = false;
-        final LifecycleOwner owner = mCallback.mLifecycleOwner;
-        if (owner instanceof Activity) {
-            final Activity activity = (Activity) owner;
-            isVisible = AppUtils.isAppForeground()
-                    && ActivityUtils.getTopActivity() == activity;
-        } else if (owner instanceof SupportFragment) {
-            final SupportFragment fragment = (SupportFragment) owner;
-            isVisible = fragment.isSupportVisible();
-        } else if (owner instanceof Fragment) {
-            final Fragment fragment = (Fragment) owner;
-            isVisible = fragment.isVisible();
-        }
-        return isVisible;
+        return false;
     }
 
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")

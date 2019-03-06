@@ -39,7 +39,7 @@ class KeyboardHelper private constructor() {
         private fun isShouldHideKeyboard(activity: SupportActivity<*>, v: View?, event: MotionEvent): Boolean {
             if (v is EditText) {
                 val editText = v as EditText?
-                activity.onDispatchTouchHideKeyboard(editText)
+                activity.onDispatchTouchHideKeyboard(editText!!)
                 val l = intArrayOf(0, 0)
                 v.getLocationInWindow(l)
                 val left = l[0]
