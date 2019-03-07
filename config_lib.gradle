@@ -2,6 +2,7 @@ apply {
     plugin "com.android.library"
     plugin "kotlin-android"
     plugin "kotlin-android-extensions"
+    plugin "kotlin-kapt"
 }
 
 android {

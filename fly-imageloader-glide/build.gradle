@@ -11,11 +11,11 @@ dependencies {
         exclude group: 'androidx.fragment'
         exclude group: 'androidx.vectordrawable'
     }
-    annotationProcessor Deps.glide_compiler
+    kapt Deps.glide_compiler
 
     //解决Glide中的注解还没有完全兼容androidx
     compileOnly Deps.support_annotations
-    annotationProcessor Deps.support_annotations
+    kapt Deps.support_annotations
 }
 
 apply from: "${rootDir.path}/bintray.gradle"

@@ -1,0 +1,29 @@
+package com.xia.fly.ui.dialog.loader
+
+import android.app.Dialog
+import com.xia.fly.ui.dialog.BaseDialog
+import java.util.*
+
+/**
+ * @author xia
+ * @date 2018/8/21.
+ */
+object Loader {
+    private val LOADERS = ArrayList<Dialog>()
+
+    @JvmStatic
+    fun showLoading(dialog: Dialog?) {
+        if (dialog != null) {
+            LOADERS.add(dialog)
+            BaseDialog.safeShowDialog(dialog)
+        }
+    }
+
+    @JvmStatic
+    fun stopLoading() {
+        for (dialog in LOADERS) {
+            BaseDialog.safeCloseDialog(dialog)
+        }
+        LOADERS.clear()
+    }
+}

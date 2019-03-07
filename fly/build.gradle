@@ -56,11 +56,11 @@ dependencies {
         exclude group: 'androidx.annotation'
         exclude group: 'androidx.core'
     }
-    annotationProcessor Deps.butterknife_apt
+    kapt Deps.butterknife_apt
 
     //dagger2
     api Deps.dagger2
-    annotationProcessor Deps.dagger2_apt
+    kapt Deps.dagger2_apt
 
     //常用的util库
     api Deps.utilcode

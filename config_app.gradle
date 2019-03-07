@@ -1,8 +1,8 @@
 apply {
     plugin "com.android.application"
     plugin "kotlin-android"
-    plugin "kotlin-kapt"
     plugin "kotlin-android-extensions"
+    plugin "kotlin-kapt"
 }
 
 android {
