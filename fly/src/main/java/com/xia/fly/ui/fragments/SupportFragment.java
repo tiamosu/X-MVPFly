@@ -15,6 +15,8 @@ import com.xia.fly.mvp.BaseMvpView;
 import com.xia.fly.ui.fragments.delegate.SupportFragmentDelegate;
 import com.xia.fly.utils.FlyUtils;
 
+import org.jetbrains.annotations.NotNull;
+
 import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,6 +28,7 @@ import me.yokeyword.fragmentation.ISupportFragment;
  * @author xia
  * @date 2018/8/1.
  */
+@SuppressWarnings("unused")
 public abstract class SupportFragment<P extends BaseMvpPresenter>
         extends AbstractSupportFragment implements IFragment, BaseMvpView<P> {
 
@@ -106,11 +109,11 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
     }
 
     @Override
-    public void onCreateTitleBar(FrameLayout titleBarContainer) {
+    public void onCreateTitleBar(@NotNull FrameLayout titleBarContainer) {
     }
 
     @Override
-    public void getBundleExtras(Bundle bundle) {
+    public void getBundleExtras(@NotNull Bundle bundle) {
     }
 
     @CallSuper

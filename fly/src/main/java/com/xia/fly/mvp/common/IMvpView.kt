@@ -8,7 +8,7 @@ import android.content.Context
  */
 interface IMvpView<P> {
 
-    val context: Context
+    fun getContext(): Context
 
-    fun newP(): P
+    fun newP(): P?
 }

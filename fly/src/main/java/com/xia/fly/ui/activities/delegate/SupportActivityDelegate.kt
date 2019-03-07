@@ -36,8 +36,8 @@ class SupportActivityDelegate(private var mActivity: SupportActivity<*>) {
                 return
             }
         }
-        if (mActivity.layoutId != 0) {
-            val rootView = mActivity.layoutInflater.inflate(mActivity.layoutId, null)
+        if (mActivity.getLayoutId() != 0) {
+            val rootView = mActivity.layoutInflater.inflate(mActivity.getLayoutId(), null)
             mActivity.setContentView(rootView)
             mUnbinder = ButterKnife.bind(mActivity, rootView)
         }
@@ -54,7 +54,7 @@ class SupportActivityDelegate(private var mActivity: SupportActivity<*>) {
     }
 
     private fun checkNetEvent() {
-        if (mActivity.isCheckNetWork) {
+        if (mActivity.isCheckNetWork()) {
             mConnectionLiveData = ConnectionLiveData(mActivity)
             mConnectionLiveData!!.observe(mActivity, Observer { isAvailable ->
                 isAvailable?.let {
@@ -86,7 +86,7 @@ class SupportActivityDelegate(private var mActivity: SupportActivity<*>) {
     }
 
     fun onResume() {
-        if (mActivity.isCheckNetWork) {
+        if (mActivity.isCheckNetWork()) {
             hasNetWork(NetworkUtils.isConnected())
         }
     }

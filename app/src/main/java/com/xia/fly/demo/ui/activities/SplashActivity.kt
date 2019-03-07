@@ -19,11 +19,13 @@ class SplashActivity<P : BaseMvpPresenter<*>> : SupportActivity<P>() {
     private var mIsRequestPermission = true
     private var mIsToAppSetting = false
 
-    override val isCheckNetWork: Boolean
-        get() = true
+    override fun getLayoutId(): Int {
+        return R.layout.activity_splash
+    }
 
-    override val layoutId: Int
-        get() = R.layout.activity_splash
+    override fun isCheckNetWork(): Boolean {
+        return true
+    }
 
     override fun newP(): P? {
         return null
@@ -53,7 +55,7 @@ class SplashActivity<P : BaseMvpPresenter<*>> : SupportActivity<P>() {
 
     private fun permission() {
         PermissionUtils.permission(PermissionConstants.CAMERA, PermissionConstants.STORAGE)
-                .rationale { shouldRequest -> DialogHelper.showRationaleDialog(context, shouldRequest) }
+                .rationale { shouldRequest -> DialogHelper.showRationaleDialog(getContext(), shouldRequest) }
                 .callback(object : PermissionUtils.FullCallback {
                     override fun onGranted(permissionsGranted: List<String>) {
                         ActivityUtils.startActivity(MainActivity::class.java)
@@ -61,7 +63,7 @@ class SplashActivity<P : BaseMvpPresenter<*>> : SupportActivity<P>() {
 
                     override fun onDenied(permissionsDeniedForever: List<String>,
                                           permissionsDenied: List<String>) {
-                        DialogHelper.showOpenAppSettingDialog(context)
+                        DialogHelper.showOpenAppSettingDialog(getContext())
                     }
                 })
                 .request()

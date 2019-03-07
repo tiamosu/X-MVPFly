@@ -1,16 +1,16 @@
-package com.xia.fly.ui.activities
+package com.xia.fly.ui.fragments
 
-import android.app.Activity
-import android.widget.EditText
-
+import android.os.Bundle
+import android.widget.FrameLayout
+import androidx.fragment.app.Fragment
 import com.xia.fly.integration.cache.Cache
 import com.xia.fly.integration.cache.LruCache
 
 /**
  * @author xia
- * @date 2018/9/11.
+ * @date 2018/8/1.
  */
-interface IActivity {
+interface IFragment {
 
     /**
      * @return 用于布局加载
@@ -24,13 +24,8 @@ interface IActivity {
     fun isCheckNetWork(): Boolean
 
     /**
-     * @return 是否点击空白区域隐藏软键盘，默认为true
-     */
-    fun isDispatchTouchHideKeyboard(): Boolean
-
-    /**
-     * 提供在 [Activity] 生命周期内的缓存容器, 可向此 [Activity] 存取一些必要的数据
-     * 此缓存容器和 [Activity] 的生命周期绑定, 如果 [Activity] 在屏幕旋转或者配置更改的情况下
+     * 提供在 [Fragment] 生命周期内的缓存容器, 可向此 [Fragment] 存取一些必要的数据
+     * 此缓存容器和 [Fragment] 的生命周期绑定, 如果 [Fragment] 在屏幕旋转或者配置更改的情况下
      * 重新创建, 那此缓存容器中的数据也会被清空, 如果你想避免此种情况请使用 [LifecycleModel](https://github.com/JessYanCoding/LifecycleModel)
      *
      * @return like [LruCache]
@@ -59,12 +54,34 @@ interface IActivity {
 
     /**
      * 该方法执行于
-     * [SupportActivity.initData]
-     * [SupportActivity.initView]
-     * [SupportActivity.initEvent]
+     * [SupportFragment.initData]
+     * [SupportFragment.initView]
+     * [SupportFragment.initEvent]
      * 之后，可用于加载网络数据等
      */
     fun onLazyLoadData()
+
+    /**
+     * 该方法确保已执行完[SupportFragment.onEnterAnimationEnd]
+     * 保证转场动画的流畅性。
+     * 可见时执行
+     * 并执行于
+     * [SupportFragment.initData]
+     * [SupportFragment.initView]
+     * [SupportFragment.initEvent]
+     * 之后
+     */
+    fun onVisibleLazyLoad()
+
+    /**
+     * @param titleBarContainer 头部标题栏容器，可用于自定义添加视图
+     */
+    fun onCreateTitleBar(titleBarContainer: FrameLayout)
+
+    /**
+     * @param bundle 用于获取页面跳转传参数据
+     */
+    fun getBundleExtras(bundle: Bundle)
 
     /**
      * @param isAvailable 网络是否连接可用
@@ -75,9 +92,4 @@ interface IActivity {
      * 用于网络连接恢复后加载
      */
     fun onNetReConnect()
-
-    /**
-     * 点击空白区域，隐藏软键盘时，EditText进行相关设置
-     */
-    fun onDispatchTouchHideKeyboard(editText: EditText)
 }

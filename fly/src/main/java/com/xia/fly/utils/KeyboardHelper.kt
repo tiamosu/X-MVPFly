@@ -24,7 +24,7 @@ class KeyboardHelper private constructor() {
          */
         @JvmStatic
         fun dispatchTouchEvent(activity: SupportActivity<*>, ev: MotionEvent) {
-            if (activity.isDispatchTouchHideKeyboard && ev.action == MotionEvent.ACTION_DOWN) {
+            if (activity.isDispatchTouchHideKeyboard() && ev.action == MotionEvent.ACTION_DOWN) {
                 val v = activity.currentFocus
                 if (isShouldHideKeyboard(activity, v, ev)) {
                     val iBinder = v!!.windowToken

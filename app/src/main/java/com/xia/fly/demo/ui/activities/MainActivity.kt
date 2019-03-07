@@ -15,12 +15,17 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator
  */
 class MainActivity : ProxyActivity() {
 
-    override val isCheckNetWork: Boolean = true
+    override fun isCheckNetWork(): Boolean {
+        return true
+    }
 
-    override val isDispatchTouchHideKeyboard: Boolean = true
+    override fun isDispatchTouchHideKeyboard(): Boolean {
+        return true
+    }
 
-    override val layoutId: Int
-        get() = R.layout.activity_main
+    override fun getLayoutId(): Int {
+        return R.layout.activity_main
+    }
 
     override fun isRestartRestore(): Boolean {
         return false
