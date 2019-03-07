@@ -91,12 +91,12 @@ class HomeFragment : HeadViewFragment<HomePresenter>(), HomeView {
         )
     }
 
-    override fun onNetReConnect() {
-        Log.e("xia", "$this    onNetReConnect: ")
-    }
-
     override fun onNetworkState(isAvailable: Boolean) {
         Log.e("xia", "$this    onNetworkState: $isAvailable")
+    }
+
+    override fun onNetReConnect() {
+        Log.e("xia", "$this    onNetReConnect: ")
     }
 
     override fun setData(content: String) {

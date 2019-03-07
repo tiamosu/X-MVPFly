@@ -52,12 +52,11 @@ abstract class MvpNullObjectBasePresenter<V : IMvpView<*>> protected constructor
             mNullView = NoOp.of(viewClass)
         } catch (t: Throwable) {
             throw IllegalArgumentException(
-                    "The generic type <V extends MvpView> must be the first generic type argument of class "
+                    "The generic type <V : IMvpView<*>> must be the first generic type argument of class "
                             + javaClass.simpleName
                             + " (per convention). Otherwise we can't determine which type of View this"
                             + " Presenter coordinates.", t)
         }
-
     }
 
     /**
