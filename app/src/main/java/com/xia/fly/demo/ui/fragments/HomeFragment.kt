@@ -46,7 +46,11 @@ class HomeFragment : HeadViewFragment<HomePresenter>(), HomeView {
         return R.layout.fragment_home
     }
 
-    override fun initData() {}
+    override fun initData() {
+        val str: String? = null
+        val ss = str ?: "aa"
+        Log.e("weixi", ss)
+    }
 
     override fun initView() {
         mAppCompatButton.text = "跳转下一页"

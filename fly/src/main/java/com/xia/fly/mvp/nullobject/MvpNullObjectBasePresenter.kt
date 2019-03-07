@@ -19,13 +19,8 @@ abstract class MvpNullObjectBasePresenter<V : IMvpView<*>> protected constructor
     protected val v: V
         @UiThread
         get() {
-            if (mView != null) {
-                val realView = mView!!.get()
-                if (realView != null) {
-                    return realView
-                }
-            }
-            return mNullView
+            val realView = mView?.get()
+            return realView ?: mNullView
         }
 
     init {

@@ -30,7 +30,7 @@ class SplashActivity<P : BaseMvpPresenter<*>> : SupportActivity<P>() {
     }
 
     override fun initData() {
-        Log.e("weixi", "initData")
+//        Log.e("weixi", "initData")
     }
 
     override fun initView() {}
