@@ -119,6 +119,7 @@ public class ImageConfigImpl extends ImageConfig {
         return new Builder(o);
     }
 
+    @SuppressWarnings("unused")
     public static class Builder {
         private Object mObject;//所要加载的资源
         private ImageView mImageView;

@@ -32,6 +32,7 @@ import okhttp3.OkHttpClient;
  * @author xia
  * @date 2018/9/14.
  */
+@SuppressWarnings("unused")
 @Singleton
 @Component(modules = {AppModule.class, ClientModule.class, GlobalConfigModule.class})
 public interface AppComponent {
