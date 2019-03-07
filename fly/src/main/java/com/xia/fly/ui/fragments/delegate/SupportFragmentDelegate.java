@@ -1,6 +1,5 @@
 package com.xia.fly.ui.fragments.delegate;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -80,7 +79,6 @@ public final class SupportFragmentDelegate {
         }
     }
 
-    @SuppressLint("MissingPermission")
     private void onVisibleLazyInit() {
         if (mInitialized.compareAndSet(false, true)) {
             mFragment.initMvp();
