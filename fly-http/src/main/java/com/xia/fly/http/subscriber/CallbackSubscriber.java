@@ -124,7 +124,7 @@ public class CallbackSubscriber extends ErrorHandleSubscriber<ResponseBody> {
 
     private boolean isPageVisible() {
         if (mCallback != null) {
-            return FlyUtils.isCurrentVisible(mCallback.mLifecycleOwner);
+            return FlyUtils.isCurrentVisible(mCallback.getLifecycleOwner());
         }
         return false;
     }

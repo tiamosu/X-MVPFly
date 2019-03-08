@@ -16,12 +16,11 @@ abstract class MvpNullObjectBasePresenter<V : IMvpView<*>> protected constructor
     private var mView: WeakReference<V>? = null
     private val mNullView: V
 
-    protected val v: V
-        @UiThread
-        get() {
-            val realView = mView?.get()
-            return realView ?: mNullView
-        }
+    @UiThread
+    protected fun getV(): V {
+        val realView = mView?.get()
+        return realView ?: mNullView
+    }
 
     init {
         try {

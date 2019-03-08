@@ -23,12 +23,12 @@ class HomePresenter : BaseMvpPresenter<HomeView>() {
 //        Log.e("weixi", "boolean:${v.boolean}")
 //        Log.e("weixi", "${v.num}")
 
-        v.setData("你好啊！！！")
+        getV().setData("你好啊！！！")
 
         RxHttp.get("/friend/json")
                 .build()
                 .request(object : CallbackSubscriber(object : AbstractStringCallback(mLifecycleOwner) {
-                    override fun onResponse(response: String) {
+                    override fun onResponse(response: String?) {
                         Log.e("weixi", "onResponse$index :$response")
                     }
                 }) {

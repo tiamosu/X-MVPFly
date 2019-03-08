@@ -1,12 +1,12 @@
-package com.xia.fly.http.body.upload;
+package com.xia.fly.http.body.upload
 
 /**
  * @author xia
  * @date 2018/8/3.
- * <p>
+ *
  * 描述：上传进度回调接口
  */
-public interface ProgressResponseCallBack {
+interface ProgressResponseCallBack {
 
     /**
      * 回调进度
@@ -15,5 +15,5 @@ public interface ProgressResponseCallBack {
      * @param contentLength 总长度
      * @param done          是否读取完成
      */
-    void onResponseProgress(long bytesWritten, long contentLength, boolean done);
+    fun onResponseProgress(bytesWritten: Long, contentLength: Long, done: Boolean)
 }
