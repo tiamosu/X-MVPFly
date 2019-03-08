@@ -20,6 +20,8 @@ import com.xia.fly.integration.cache.IntelligentCache;
 import com.xia.fly.utils.FlyUtils;
 import com.xia.fly.utils.Preconditions;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -145,7 +147,7 @@ public class AppDelegate implements App, AppLifecycles {
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
+    public void onConfigurationChanged(@NotNull Configuration newConfig) {
         if (mAppLifecycles != null && mAppLifecycles.size() > 0) {
             for (AppLifecycles lifecycle : mAppLifecycles) {
                 lifecycle.onConfigurationChanged(newConfig);
@@ -211,7 +213,7 @@ public class AppDelegate implements App, AppLifecycles {
      * 响应 {@link ComponentCallbacks2#onTrimMemory(int)} 回调, 开发者的 App 会存活的更持久, 有利于用户体验
      * 不响应 {@link ComponentCallbacks2#onTrimMemory(int)} 回调, 系统 kill 掉进程的几率更大
      */
-    @SuppressWarnings("WeakerAccess")
+    @SuppressWarnings({"WeakerAccess", "unused"})
     private static class AppComponentCallbacks implements ComponentCallbacks2 {
         private final Application mApplication;
         private final AppComponent mAppComponent;

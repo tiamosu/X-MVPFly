@@ -1,4 +1,4 @@
-package com.xia.fly.receiver
+package com.xia.fly.integration.eventbus
 
 import android.annotation.TargetApi
 import android.content.BroadcastReceiver
