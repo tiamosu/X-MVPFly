@@ -6,6 +6,7 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import butterknife.ButterKnife
 import butterknife.Unbinder
+import com.blankj.rxbus.RxBusMessage
 import com.blankj.utilcode.util.NetworkUtils
 import com.xia.fly.constant.NetworkState
 import com.xia.fly.integration.rxbus.IRxBusCallback
@@ -94,10 +95,12 @@ class SupportFragmentDelegate(private var mFragment: SupportFragment<*>) {
 
     private fun checkNetEvent() {
         if (mFragment.isCheckNetWork()) {
-            RxBusHelper.subscribeWithTags(mFragment, IRxBusCallback { eventTag, rxBusMessage ->
-                if (eventTag == RxBusEventTag.NETWORK_CHANGE) {
-                    val isAvailable = rxBusMessage.mObj as Boolean
-                    hasNetWork(isAvailable)
+            RxBusHelper.subscribeWithTags(mFragment, object : IRxBusCallback {
+                override fun callback(eventTag: String, rxBusMessage: RxBusMessage) {
+                    if (eventTag == RxBusEventTag.NETWORK_CHANGE) {
+                        val isAvailable = rxBusMessage.mObj as Boolean
+                        hasNetWork(isAvailable)
+                    }
                 }
             }, RxBusEventTag.NETWORK_CHANGE)
         }

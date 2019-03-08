@@ -17,10 +17,10 @@ abstract class HeadViewFragment<P : BaseMvpPresenter<*>> : SupportFragment<P>() 
         return false
     }
 
-    override fun onCreateTitleBar(container: FrameLayout) {
+    override fun onCreateTitleBar(titleBarContainer: FrameLayout) {
         if (isLoadTitleBar()) {
             val headView = View.inflate(context, R.layout.layout_head_view, null)
-            container.addView(headView)
+            titleBarContainer.addView(headView)
         }
     }
 }

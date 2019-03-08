@@ -69,8 +69,8 @@ object Deps {
     const val rxerrorhandler = "me.jessyan:rxerrorhandler:2.1.1"
     const val x_rxbus = "me.xia:x-rxbus:1.0.8"
 
-    //util
-    const val utilcode = "com.blankj:utilcode:1.23.6"
+    //utilcode
+    const val utilcode = "com.blankj:utilcode:1.23.7"
 
     //okhttp
     const val okhttp3 = "com.squareup.okhttp3:okhttp:${Versions.okhttp3}"

@@ -1,6 +1,7 @@
 package com.xia.fly.demo.ui.fragments
 
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import androidx.appcompat.widget.AppCompatButton
@@ -16,9 +17,11 @@ import com.xia.fly.demo.mvp.presenter.HomePresenter
 import com.xia.fly.demo.mvp.view.HomeView
 import com.xia.fly.imageloader.ImageConfigImpl
 import com.xia.fly.imageloader.TranscodeType
+import com.xia.fly.integration.handler.WeakHandler
 import com.xia.fly.ui.imageloader.ImageLoader
 import com.xia.fly.utils.FragmentUtils
 import me.yokeyword.fragmentation.AbstractSupportFragment
+import java.lang.ref.WeakReference
 
 /**
  * @author xia
@@ -53,6 +56,13 @@ class HomeFragment : HeadViewFragment<HomePresenter>(), HomeView {
 
         val bundle: Bundle? = null
         Log.e("weixi", "${bundle?.isEmpty} zz ${bundle?.javaClass?.name}")
+
+        val callback: Handler.Callback? = null
+        Log.e("weixi", "" + WeakReference<Handler.Callback>(callback))
+
+        WeakHandler().post(Runnable {
+            Log.e("weixi", "run")
+        })
     }
 
     override fun initView() {

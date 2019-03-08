@@ -11,6 +11,7 @@ import com.blankj.utilcode.util.Utils
 /**
  * @author xia
  */
+@Suppress("UNUSED_ANONYMOUS_PARAMETER")
 object DialogHelper {
     const val APP_SETTINGS_CODE = 2
 

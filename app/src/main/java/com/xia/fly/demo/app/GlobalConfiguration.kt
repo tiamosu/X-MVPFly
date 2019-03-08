@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit
  * @author xia
  * @date 2018/9/18.
  */
-@Suppress("unused")
+@Suppress("unused", "UNUSED_ANONYMOUS_PARAMETER")
 class GlobalConfiguration : ConfigModule {
 
     override fun applyOptions(context: Context, builder: GlobalConfigModule.Builder) {
