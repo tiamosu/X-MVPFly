@@ -21,7 +21,7 @@ class Platform private constructor() {
     companion object {
 
         @JvmStatic
-        val handler = Handler(Looper.getMainLooper())
+        fun getHandler() = Handler(Looper.getMainLooper())
 
         @JvmStatic
         fun post(action: Action) {

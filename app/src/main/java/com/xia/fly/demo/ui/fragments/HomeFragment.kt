@@ -52,7 +52,7 @@ class HomeFragment : HeadViewFragment<HomePresenter>(), HomeView {
         Log.e("weixi", ss)
 
         val bundle: Bundle? = null
-        Log.e("weixi", "${bundle?.isEmpty}")
+        Log.e("weixi", "${bundle?.isEmpty} zz ${bundle?.javaClass?.name}")
     }
 
     override fun initView() {

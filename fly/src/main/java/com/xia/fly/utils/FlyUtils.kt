@@ -23,15 +23,14 @@ class FlyUtils private constructor() {
     companion object {
 
         @JvmStatic
-        val appComponent: AppComponent
-            get() {
-                Preconditions.checkNotNull(Utils.getApp(),
-                        "%s == null", Utils.getApp().javaClass.name)
-                Preconditions.checkState(Utils.getApp() is App,
-                        "%s must be implements %s",
-                        Utils.getApp().javaClass.name, App::class.java.name)
-                return (Utils.getApp() as App).appComponent
-            }
+        fun getAppComponent(): AppComponent {
+            Preconditions.checkNotNull(Utils.getApp(),
+                    "%s == null", Utils.getApp().javaClass.name)
+            Preconditions.checkState(Utils.getApp() is App,
+                    "%s must be implements %s",
+                    Utils.getApp().javaClass.name, App::class.java.name)
+            return (Utils.getApp() as App).getAppComponent()
+        }
 
         @JvmStatic
         fun isCurrentVisible(lifecycleOwner: LifecycleOwner): Boolean {

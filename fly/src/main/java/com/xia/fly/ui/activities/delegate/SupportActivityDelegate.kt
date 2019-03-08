@@ -93,7 +93,7 @@ class SupportActivityDelegate(private var mActivity: SupportActivity<*>) {
 
     fun onDestroy() {
         RxBusHelper.unregister(mActivity)
-        Platform.handler.removeCallbacksAndMessages(null)
+        Platform.getHandler().removeCallbacksAndMessages(null)
         if (mUnbinder != null && mUnbinder !== Unbinder.EMPTY) {
             mUnbinder!!.unbind()
             mUnbinder = null

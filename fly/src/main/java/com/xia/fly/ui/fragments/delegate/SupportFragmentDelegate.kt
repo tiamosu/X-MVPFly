@@ -123,7 +123,7 @@ class SupportFragmentDelegate(private var mFragment: SupportFragment<*>) {
 
     fun onDestroy() {
         RxBusHelper.unregister(mFragment)
-        Platform.handler.removeCallbacksAndMessages(null)
+        Platform.getHandler().removeCallbacksAndMessages(null)
         if (mUnbinder != null && mUnbinder !== Unbinder.EMPTY) {
             try {
                 //fix Bindings already cleared

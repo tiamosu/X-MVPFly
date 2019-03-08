@@ -9,10 +9,15 @@ import java.util.*
  * @date 2018/7/29.
  */
 object LoaderCreator {
+
     private val LOADING_MAP = WeakHashMap<String, Indicator>()
 
     fun create(type: String, avLoadingIndicatorView: AVLoadingIndicatorView): AVLoadingIndicatorView {
-        val indicator = LOADING_MAP[type] ?: getIndicator(type)
+        var indicator = LOADING_MAP[type]
+        if (indicator == null) {
+            indicator = getIndicator(type)
+            LOADING_MAP[type] = indicator
+        }
         avLoadingIndicatorView.indicator = indicator
         return avLoadingIndicatorView
     }
