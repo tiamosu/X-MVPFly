@@ -25,7 +25,7 @@ class HomePresenter : BaseMvpPresenter<HomeView>() {
 
         getV().setData("你好啊！！！")
 
-        RxHttp.get("/friend/json")
+        RxHttp["/friend/json"]
                 .build()
                 .request(object : CallbackSubscriber(object : AbstractStringCallback(mLifecycleOwner) {
                     override fun onResponse(response: String?) {
