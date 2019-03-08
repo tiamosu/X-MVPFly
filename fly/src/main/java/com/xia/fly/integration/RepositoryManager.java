@@ -125,7 +125,7 @@ public class RepositoryManager implements IRepositoryManager {
     @SuppressWarnings("unchecked")
     private <T> T getRetrofitService(Class<T> serviceClass) {
         if (mRetrofitServiceCache == null) {
-            mRetrofitServiceCache = mCacheFactory.build(CacheType.RETROFIT_SERVICE_CACHE);
+            mRetrofitServiceCache = mCacheFactory.build(CacheType.Companion.getRETROFIT_SERVICE_CACHE());
         }
         Preconditions.checkNotNull(mRetrofitServiceCache,
                 "Cannot return null from a Cache.Factory#build(int) method");
@@ -155,7 +155,7 @@ public class RepositoryManager implements IRepositoryManager {
         Preconditions.checkNotNull(cacheClass, "cacheClass == null");
 
         if (mCacheServiceCache == null) {
-            mCacheServiceCache = mCacheFactory.build(CacheType.CACHE_SERVICE_CACHE);
+            mCacheServiceCache = mCacheFactory.build(CacheType.Companion.getCACHE_SERVICE_CACHE());
         }
         Preconditions.checkNotNull(mCacheServiceCache,
                 "Cannot return null from a Cache.Factory#build(int) method");

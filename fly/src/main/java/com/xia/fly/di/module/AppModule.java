@@ -50,7 +50,7 @@ public abstract class AppModule {
     @Singleton
     @Provides
     static Cache<String, Object> provideExtras(Cache.Factory<String, Object> cacheFactory) {
-        return cacheFactory.build(CacheType.EXTRAS);
+        return cacheFactory.build(CacheType.Companion.getEXTRAS());
     }
 
     @Binds

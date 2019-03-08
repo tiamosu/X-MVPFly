@@ -40,7 +40,7 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
     @Override
     public synchronized Cache<String, Object> provideCache() {
         if (mCache == null) {
-            mCache = FlyUtils.getAppComponent().cacheFactory().build(CacheType.FRAGMENT_CACHE);
+            mCache = FlyUtils.getAppComponent().cacheFactory().build(CacheType.Companion.getFRAGMENT_CACHE());
         }
         return mCache;
     }

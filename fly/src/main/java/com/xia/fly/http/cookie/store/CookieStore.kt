@@ -7,7 +7,7 @@ interface CookieStore {
 
     fun add(url: HttpUrl, cookies: MutableList<Cookie>)
 
-    fun get(url: HttpUrl): MutableList<Cookie>
+    operator fun get(url: HttpUrl): MutableList<Cookie>
 
     fun getCookies(): MutableList<Cookie>
 

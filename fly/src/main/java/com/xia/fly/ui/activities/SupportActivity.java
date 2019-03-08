@@ -37,7 +37,7 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
     @Override
     public synchronized Cache<String, Object> provideCache() {
         if (mCache == null) {
-            mCache = FlyUtils.getAppComponent().cacheFactory().build(CacheType.ACTIVITY_CACHE);
+            mCache = FlyUtils.getAppComponent().cacheFactory().build(CacheType.Companion.getACTIVITY_CACHE());
         }
         return mCache;
     }
