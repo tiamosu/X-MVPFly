@@ -46,8 +46,8 @@ class GlobalConfiguration : ConfigModule {
                             .retryOnConnectionFailure(true)
                             //cookie认证
                             .cookieJar(CookieJarImpl(MemoryCookieStore()))
-                            .hostnameVerifier(HttpsUtils.SAFE_HOSTNAME_VERIFIER())
-                            .sslSocketFactory(SSL_PARAMS.sSLSocketFactory, SSL_PARAMS.trustManager)
+                            .hostnameVerifier(HttpsUtils.SafeHostnameVerifier())
+                            .sslSocketFactory(SSL_PARAMS.sSLSocketFactory!!, SSL_PARAMS.trustManager!!)
                 }
                 .retrofitConfiguration { context12, retrofitBuilder -> }
                 .responseErrorListener(ResponseErrorListenerImpl())
