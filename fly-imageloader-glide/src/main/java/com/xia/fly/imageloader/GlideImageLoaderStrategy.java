@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.GlideBuilder;
 import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
@@ -46,23 +47,23 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy<ImageCo
 
         //缓存策略
         switch (config.mCacheStrategy) {
-            case DiskCacheStrategy.ALL:
-                glideRequest.diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL);
+            case CustomDiskCacheStrategy.ALL:
+                glideRequest.diskCacheStrategy(DiskCacheStrategy.ALL);
                 break;
-            case DiskCacheStrategy.NONE:
-                glideRequest.diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.NONE);
+            case CustomDiskCacheStrategy.NONE:
+                glideRequest.diskCacheStrategy(DiskCacheStrategy.NONE);
                 break;
-            case DiskCacheStrategy.RESOURCE:
-                glideRequest.diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.RESOURCE);
+            case CustomDiskCacheStrategy.RESOURCE:
+                glideRequest.diskCacheStrategy(DiskCacheStrategy.RESOURCE);
                 break;
-            case DiskCacheStrategy.DATA:
-                glideRequest.diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.DATA);
+            case CustomDiskCacheStrategy.DATA:
+                glideRequest.diskCacheStrategy(DiskCacheStrategy.DATA);
                 break;
-            case DiskCacheStrategy.AUTOMATIC:
-                glideRequest.diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.AUTOMATIC);
+            case CustomDiskCacheStrategy.AUTOMATIC:
+                glideRequest.diskCacheStrategy(DiskCacheStrategy.AUTOMATIC);
                 break;
             default:
-                glideRequest.diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL);
+                glideRequest.diskCacheStrategy(DiskCacheStrategy.ALL);
                 break;
         }
 
