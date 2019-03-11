@@ -31,7 +31,7 @@ class ImageConfigImpl private constructor(builder: Builder) : ImageConfig() {
     @JvmField
     var mRequestOptions: RequestOptions? = null//加载配置
     @JvmField
-    var mRequestListener: RequestListener<*>? = null//加载监听
+    var mRequestListener: RequestListener<Any>? = null//加载监听
     @JvmField
     var mTransformation: BitmapTransformation? = null//glide用它来改变图形的形状
     @JvmField
@@ -103,7 +103,7 @@ class ImageConfigImpl private constructor(builder: Builder) : ImageConfig() {
     class Builder constructor(val mObject: Any?//所要加载的资源
     ) {
         var mImageView: ImageView? = null
-        var mTarget: Target<*>? = null
+        var mTarget: Target<Any>? = null
         var mPlaceholder: Int = 0//占位符
         var mError: Int = 0//错误占位符
         var mFallback: Int = 0 //请求 url 为空,则使用此图片作为占位符
@@ -111,7 +111,7 @@ class ImageConfigImpl private constructor(builder: Builder) : ImageConfig() {
         var mErrorDrawable: Drawable? = null
         var mFallbackDrawable: Drawable? = null
         var mRequestOptions: RequestOptions? = null//加载配置
-        var mRequestListener: RequestListener<*>? = null//加载监听
+        var mRequestListener: RequestListener<Any>? = null//加载监听
         var mTransformation: BitmapTransformation? = null//glide用它来改变图形的形状
         var mImageViews: Array<ImageView>? = null//视图控件数组
         var mCacheStrategy: Int = 0//缓存策略
@@ -133,7 +133,7 @@ class ImageConfigImpl private constructor(builder: Builder) : ImageConfig() {
             return this
         }
 
-        fun into(target: Target<*>): Builder {
+        fun into(target: Target<Any>): Builder {
             this.mTarget = target
             return this
         }
@@ -251,7 +251,7 @@ class ImageConfigImpl private constructor(builder: Builder) : ImageConfig() {
             return this
         }
 
-        fun addListener(requestListener: RequestListener<*>): Builder {
+        fun addListener(requestListener: RequestListener<Any>): Builder {
             this.mRequestListener = requestListener
             return this
         }

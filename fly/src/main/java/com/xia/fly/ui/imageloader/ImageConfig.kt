@@ -17,7 +17,7 @@ open class ImageConfig {
     @JvmField
     var mImageView: ImageView? = null
     @JvmField
-    var mTarget: Target<*>? = null
+    var mTarget: Target<Any>? = null
     @JvmField
     var mPlaceholder: Int = 0//占位符
     @JvmField
