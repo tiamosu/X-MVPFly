@@ -64,7 +64,7 @@ abstract class AppModule {
         @JvmStatic
         @Singleton
         @Provides
-        fun provideFragmentLifecycles(): List<FragmentManager.FragmentLifecycleCallbacks> {
+        fun provideFragmentLifecycles(): MutableList<FragmentManager.FragmentLifecycleCallbacks> {
             return ArrayList()
         }
     }
