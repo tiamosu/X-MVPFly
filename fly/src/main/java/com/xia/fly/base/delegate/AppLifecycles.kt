@@ -12,7 +12,7 @@ import android.content.res.Configuration
  */
 interface AppLifecycles {
 
-    fun attachBaseContext(base: Context)
+    fun attachBaseContext(context: Context)
 
     fun onCreate(application: Application)
 

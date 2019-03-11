@@ -17,7 +17,7 @@ import me.yokeyword.fragmentation.Fragmentation
  */
 class AppLifecyclesImpl : AppLifecycles {
 
-    override fun attachBaseContext(base: Context) {}
+    override fun attachBaseContext(context: Context) {}
 
     override fun onCreate(application: Application) {
         if (!LeakCanary.isInAnalyzerProcess(application)) {
