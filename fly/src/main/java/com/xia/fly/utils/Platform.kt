@@ -12,29 +12,22 @@ import io.reactivex.functions.Action
  * @author xia
  * @date 2018/4/24.
  */
-class Platform private constructor() {
+object Platform {
 
-    init {
-        throw IllegalStateException("u can't instantiate me!")
+    @JvmStatic
+    fun getHandler() = Handler(Looper.getMainLooper())
+
+    @JvmStatic
+    fun post(action: Action) {
+        Completable.fromAction(action)
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe()
     }
 
-    companion object {
-
-        @JvmStatic
-        fun getHandler() = Handler(Looper.getMainLooper())
-
-        @JvmStatic
-        fun post(action: Action) {
-            Completable.fromAction(action)
-                    .subscribeOn(AndroidSchedulers.mainThread())
-                    .subscribe()
-        }
-
-        @JvmStatic
-        fun post(scheduler: Scheduler, action: Action) {
-            Completable.fromAction(action)
-                    .subscribeOn(scheduler)
-                    .subscribe()
-        }
+    @JvmStatic
+    fun post(scheduler: Scheduler, action: Action) {
+        Completable.fromAction(action)
+                .subscribeOn(scheduler)
+                .subscribe()
     }
 }

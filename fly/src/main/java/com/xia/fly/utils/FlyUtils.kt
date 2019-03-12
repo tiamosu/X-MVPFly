@@ -14,42 +14,35 @@ import com.xia.fly.ui.fragments.SupportFragment
  * @author xia
  * @date 2018/9/14.
  */
-class FlyUtils private constructor() {
+object FlyUtils {
 
-    init {
-        throw IllegalStateException("u can't instantiate me!")
+    @JvmStatic
+    fun getAppComponent(): AppComponent {
+        Preconditions.checkNotNull(Utils.getApp(),
+                "%s == null", Utils.getApp().javaClass.name)
+        Preconditions.checkState(Utils.getApp() is App,
+                "%s must be implements %s",
+                Utils.getApp().javaClass.name, App::class.java.name)
+        return (Utils.getApp() as App).getAppComponent()
     }
 
-    companion object {
-
-        @JvmStatic
-        fun getAppComponent(): AppComponent {
-            Preconditions.checkNotNull(Utils.getApp(),
-                    "%s == null", Utils.getApp().javaClass.name)
-            Preconditions.checkState(Utils.getApp() is App,
-                    "%s must be implements %s",
-                    Utils.getApp().javaClass.name, App::class.java.name)
-            return (Utils.getApp() as App).getAppComponent()
-        }
-
-        @JvmStatic
-        fun isCurrentVisible(lifecycleOwner: LifecycleOwner): Boolean {
-            when (lifecycleOwner) {
-                is Activity -> {
-                    val activity = lifecycleOwner as Activity?
-                    return AppUtils.isAppForeground()
-                            && ActivityUtils.getTopActivity() == activity!!
-                }
-                is SupportFragment<*> -> {
-                    val fragment = lifecycleOwner as SupportFragment<*>?
-                    return fragment!!.isSupportVisible
-                }
-                is Fragment -> {
-                    val fragment = lifecycleOwner as Fragment?
-                    return fragment!!.isVisible
-                }
-                else -> return false
+    @JvmStatic
+    fun isCurrentVisible(lifecycleOwner: LifecycleOwner): Boolean {
+        when (lifecycleOwner) {
+            is Activity -> {
+                val activity = lifecycleOwner as Activity?
+                return AppUtils.isAppForeground()
+                        && ActivityUtils.getTopActivity() == activity!!
             }
+            is SupportFragment<*> -> {
+                val fragment = lifecycleOwner as SupportFragment<*>?
+                return fragment!!.isSupportVisible
+            }
+            is Fragment -> {
+                val fragment = lifecycleOwner as Fragment?
+                return fragment!!.isVisible
+            }
+            else -> return false
         }
     }
 }

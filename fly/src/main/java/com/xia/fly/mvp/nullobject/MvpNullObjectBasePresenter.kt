@@ -12,7 +12,7 @@ import java.lang.reflect.Type
  * @date 2018/7/19.
  */
 @Suppress("UNCHECKED_CAST")
-abstract class MvpNullObjectBasePresenter<V : IMvpView<*>> protected constructor() : IMvpPresenter<V> {
+abstract class MvpNullObjectBasePresenter<V : IMvpView<*>> : IMvpPresenter<V> {
     private var mView: WeakReference<V>? = null
     private val mNullView: V
 

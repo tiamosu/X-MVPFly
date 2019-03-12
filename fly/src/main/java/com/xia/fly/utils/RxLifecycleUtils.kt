@@ -10,19 +10,12 @@ import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
  * @author xia
  * @date 2018/9/3.
  */
-class RxLifecycleUtils private constructor() {
+object RxLifecycleUtils {
 
-    init {
-        throw IllegalStateException("u can't instantiate me!")
-    }
-
-    companion object {
-
-        @JvmStatic
-        fun <T> bindLifecycle(lifecycleOwner: LifecycleOwner): AutoDisposeConverter<T> {
-            return AutoDispose.autoDisposable(
-                    AndroidLifecycleScopeProvider.from(lifecycleOwner, Lifecycle.Event.ON_DESTROY)
-            )
-        }
+    @JvmStatic
+    fun <T> bindLifecycle(lifecycleOwner: LifecycleOwner): AutoDisposeConverter<T> {
+        return AutoDispose.autoDisposable(
+                AndroidLifecycleScopeProvider.from(lifecycleOwner, Lifecycle.Event.ON_DESTROY)
+        )
     }
 }
