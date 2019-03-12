@@ -4,7 +4,6 @@ import android.app.Dialog
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
-
 import com.xia.fly.http.callback.Callback
 import com.xia.fly.ui.dialog.LoadingDialog
 import com.xia.fly.ui.dialog.loader.Loader
@@ -19,7 +18,7 @@ import okhttp3.ResponseBody
  * @author xia
  * @date 2018/8/3.
  */
-@Suppress("unused", "MemberVisibilityCanBePrivate")
+@Suppress("MemberVisibilityCanBePrivate")
 open class CallbackSubscriber(var mCallback: Callback<*>?)
     : ErrorHandleSubscriber<ResponseBody>(FlyUtils.getAppComponent().rxErrorHandler()) {
 

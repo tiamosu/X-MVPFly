@@ -13,20 +13,15 @@ import java.lang.ref.WeakReference
  * @date 2018/7/27.
  */
 @Suppress("UNUSED_PARAMETER")
-abstract class Callback<T>() {
+abstract class Callback<T>(private val lifecycleOwner: LifecycleOwner) {
     private var mContext: WeakReference<Context>? = null
-    private var mLifecycleOwner: LifecycleOwner? = null
-
-    constructor(lifecycleOwner: LifecycleOwner) : this() {
-        mLifecycleOwner = lifecycleOwner
-    }
 
     init {
         var context: Context? = null
-        if (mLifecycleOwner is AppCompatActivity) {
-            context = mLifecycleOwner as AppCompatActivity
-        } else if (mLifecycleOwner is Fragment) {
-            context = (mLifecycleOwner as Fragment).context
+        if (lifecycleOwner is AppCompatActivity) {
+            context = lifecycleOwner
+        } else if (lifecycleOwner is Fragment) {
+            context = lifecycleOwner.context
         }
         context?.let {
             mContext = WeakReference(it)
@@ -38,7 +33,7 @@ abstract class Callback<T>() {
     }
 
     fun getLifecycleOwner(): LifecycleOwner {
-        return mLifecycleOwner!!
+        return lifecycleOwner
     }
 
     fun onSubscribe(d: Disposable) {}
