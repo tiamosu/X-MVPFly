@@ -13,6 +13,7 @@ import com.xia.fly.integration.rxbus.IRxBusCallback
 import com.xia.fly.integration.rxbus.RxBusEventTag
 import com.xia.fly.integration.rxbus.RxBusHelper
 import com.xia.fly.ui.fragments.SupportFragment
+import com.xia.fly.utils.FlyUtils
 import com.xia.fly.utils.Platform
 import java.util.concurrent.atomic.AtomicBoolean
 
@@ -113,7 +114,7 @@ class SupportFragmentDelegate(private var mFragment: SupportFragment<*>) {
             if (isAvailable && mLastNetStatus == NetworkState.NETWORK_OFF) {
                 mNetReConnect = true
             }
-            if (mFragment.isSupportVisible) {
+            if (FlyUtils.isCurrentVisible(mFragment)) {
                 mFragment.onNetworkState(isAvailable)
                 if (isAvailable && mNetReConnect) {
                     mFragment.onNetReConnect()
