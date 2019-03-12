@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import androidx.fragment.app.FragmentManager
 import com.xia.fly.base.delegate.AppLifecycles
+import com.xia.fly.di.module.ClientModule
 import com.xia.fly.di.module.GlobalConfigModule
 import com.xia.fly.http.cookie.CookieJarImpl
 import com.xia.fly.http.cookie.store.MemoryCookieStore
@@ -12,7 +13,9 @@ import com.xia.fly.http.utils.HttpsUtils
 import com.xia.fly.http.utils.RxJavaUtils
 import com.xia.fly.imageloader.GlideImageLoaderStrategy
 import com.xia.fly.integration.ConfigModule
+import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
 import java.net.Proxy
 import java.util.concurrent.TimeUnit
 
@@ -32,27 +35,32 @@ class GlobalConfiguration : ConfigModule {
         //        }
         builder.baseurl("http://www.wanandroid.com")
                 .imageLoaderStrategy(GlideImageLoaderStrategy())
-                .okhttpConfiguration { context1, okHttpBuilder ->
-                    okHttpBuilder
-                            //打印返回信息
-                            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-                            //阻止第三方使用 Fiddler 或 Charles 进行抓包
-                            .proxy(Proxy.NO_PROXY)
-                            //设置超时
-                            .connectTimeout(10, TimeUnit.SECONDS)
-                            .readTimeout(10, TimeUnit.SECONDS)
-                            .writeTimeout(10, TimeUnit.SECONDS)
-                            //错误重连
-                            .retryOnConnectionFailure(true)
-                            //cookie认证
-                            .cookieJar(CookieJarImpl(MemoryCookieStore()))
-                            .hostnameVerifier(HttpsUtils.SafeHostnameVerifier())
+                .okhttpConfiguration(object : ClientModule.OkHttpConfiguration {
+                    override fun configOkHttp(context: Context, okHttpBuilder: OkHttpClient.Builder) {
+                        okHttpBuilder
+                                //打印返回信息
+                                .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+                                //阻止第三方使用 Fiddler 或 Charles 进行抓包
+                                .proxy(Proxy.NO_PROXY)
+                                //设置超时
+                                .connectTimeout(10, TimeUnit.SECONDS)
+                                .readTimeout(10, TimeUnit.SECONDS)
+                                .writeTimeout(10, TimeUnit.SECONDS)
+                                //错误重连
+                                .retryOnConnectionFailure(true)
+                                //cookie认证
+                                .cookieJar(CookieJarImpl(MemoryCookieStore()))
+                                .hostnameVerifier(HttpsUtils.SafeHostnameVerifier())
 
-                    if (SSL_PARAMS.sslSocketFactory != null && SSL_PARAMS.trustManager != null) {
-                        okHttpBuilder.sslSocketFactory(SSL_PARAMS.sslSocketFactory!!, SSL_PARAMS.trustManager!!)
+                        if (SSL_PARAMS.sslSocketFactory != null && SSL_PARAMS.trustManager != null) {
+                            okHttpBuilder.sslSocketFactory(SSL_PARAMS.sslSocketFactory!!, SSL_PARAMS.trustManager!!)
+                        }
                     }
-                }
-                .retrofitConfiguration { context12, retrofitBuilder -> }
+                })
+                .retrofitConfiguration(object : ClientModule.RetrofitConfiguration {
+                    override fun configRetrofit(context: Context, retrofitBuilder: Retrofit.Builder) {
+                    }
+                })
                 .responseErrorListener(ResponseErrorListenerImpl())
     }
 
