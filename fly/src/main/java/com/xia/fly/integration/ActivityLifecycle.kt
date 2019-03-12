@@ -100,12 +100,13 @@ constructor() : Application.ActivityLifecycleCallbacks {
 
             //mFragmentLifecycle 为 Fragment 生命周期实现类, 用于框架内部对每个 Fragment 的必要操作, 如给每个 Fragment 配置 FragmentDelegate
             //注册框架内部已实现的 Fragment 生命周期逻辑
-            activity.supportFragmentManager
-                    .registerFragmentLifecycleCallbacks(mFragmentLifecycle!!.get(), true)
+            if (mFragmentLifecycle != null) {
+                activity.supportFragmentManager.registerFragmentLifecycleCallbacks(mFragmentLifecycle!!.get(), true)
+            }
 
-            if (mExtras!!.containsKey(IntelligentCache.getKeyOfKeep(ConfigModule::class.java.name))) {
+            if (mExtras?.containsKey(IntelligentCache.getKeyOfKeep(ConfigModule::class.java.name)) == true) {
                 val modules = mExtras!![IntelligentCache.getKeyOfKeep(ConfigModule::class.java.name)] as List<ConfigModule>?
-                if (modules != null && modules.isNotEmpty()) {
+                if (modules?.isNotEmpty() == true && mApplication != null && mFragmentLifecycles != null) {
                     for (module in modules) {
                         module.injectFragmentLifecycle(mApplication!!, mFragmentLifecycles!!.get())
                     }
@@ -114,9 +115,10 @@ constructor() : Application.ActivityLifecycleCallbacks {
             }
 
             //注册框架外部, 开发者扩展的 Fragment 生命周期逻辑
-            for (fragmentLifecycle in mFragmentLifecycles!!.get()) {
-                activity.supportFragmentManager
-                        .registerFragmentLifecycleCallbacks(fragmentLifecycle, true)
+            if (mFragmentLifecycles != null) {
+                for (fragmentLifecycle in mFragmentLifecycles!!.get()) {
+                    activity.supportFragmentManager.registerFragmentLifecycleCallbacks(fragmentLifecycle, true)
+                }
             }
         }
     }

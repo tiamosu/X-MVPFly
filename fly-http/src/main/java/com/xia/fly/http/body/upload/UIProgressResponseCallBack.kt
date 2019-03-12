@@ -32,8 +32,11 @@ abstract class UIProgressResponseCallBack : ProgressResponseCallBack {
                         //获得进度实体类
                         val progressModel = msg.obj as ProgressModel
                         //回调抽象方法
-                        uiProgressResponseListener.onUIResponseProgress(progressModel.getCurrentBytes(),
-                                progressModel.getContentLength(), progressModel.isDone())
+                        uiProgressResponseListener.onUIResponseProgress(
+                                progressModel.getCurrentBytes(),
+                                progressModel.getContentLength(),
+                                progressModel.isDone()
+                        )
                     }
                 }
                 else -> super.handleMessage(msg)

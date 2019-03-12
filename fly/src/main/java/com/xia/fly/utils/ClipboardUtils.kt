@@ -41,14 +41,13 @@ class ClipboardUtils private constructor() {
          * @return 剪贴板的文本
          */
         @JvmStatic
-        val text: CharSequence?
-            get() {
-                val cm = Utils.getApp().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                val clip: ClipData? = cm.primaryClip
-                return if (clip != null && clip.itemCount > 0) {
-                    clip.getItemAt(0).coerceToText(Utils.getApp())
-                } else null
-            }
+        fun getText(): CharSequence? {
+            val cm = Utils.getApp().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clip: ClipData? = cm.primaryClip
+            return if (clip != null && clip.itemCount > 0) {
+                clip.getItemAt(0).coerceToText(Utils.getApp())
+            } else null
+        }
 
         /**
          * 复制uri到剪贴板
@@ -67,14 +66,13 @@ class ClipboardUtils private constructor() {
          * @return 剪贴板的uri
          */
         @JvmStatic
-        val uri: Uri?
-            get() {
-                val cm = Utils.getApp().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                val clip: ClipData? = cm.primaryClip
-                return if (clip != null && clip.itemCount > 0) {
-                    clip.getItemAt(0).uri
-                } else null
-            }
+        fun getUri(): Uri? {
+            val cm = Utils.getApp().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clip: ClipData? = cm.primaryClip
+            return if (clip != null && clip.itemCount > 0) {
+                clip.getItemAt(0).uri
+            } else null
+        }
 
         /**
          * 复制意图到剪贴板
@@ -93,13 +91,12 @@ class ClipboardUtils private constructor() {
          * @return 剪贴板的意图
          */
         @JvmStatic
-        val intent: Intent?
-            get() {
-                val cm = Utils.getApp().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                val clip: ClipData? = cm.primaryClip
-                return if (clip != null && clip.itemCount > 0) {
-                    clip.getItemAt(0).intent
-                } else null
-            }
+        fun getIntent(): Intent? {
+            val cm = Utils.getApp().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clip: ClipData? = cm.primaryClip
+            return if (clip != null && clip.itemCount > 0) {
+                clip.getItemAt(0).intent
+            } else null
+        }
     }
 }

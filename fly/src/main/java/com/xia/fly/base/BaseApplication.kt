@@ -61,8 +61,8 @@ open class BaseApplication : Application(), App {
      * @see FlyUtils.getAppComponent
      */
     override fun getAppComponent(): AppComponent {
-        Preconditions.checkNotNull<Any>(mAppDelegate, "%s cannot be null", mAppDelegate!!.javaClass.name)
-        Preconditions.checkState(mAppDelegate is App, "%s must be implements %s", mAppDelegate!!.javaClass.name, App::class.java.name)
+        Preconditions.checkNotNull<Any>(mAppDelegate, "%s cannot be null", AppLifecycles::class.java.name)
+        Preconditions.checkState(mAppDelegate is App, "%s must be implements %s", AppLifecycles::class.java.name, App::class.java.name)
         return (mAppDelegate as App).getAppComponent()
     }
 }

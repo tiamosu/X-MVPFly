@@ -21,7 +21,7 @@ object HttpsUtils {
     }
 
     class SSLParams {
-        var sSLSocketFactory: SSLSocketFactory? = null
+        var sslSocketFactory: SSLSocketFactory? = null
         var trustManager: X509TrustManager? = null
     }
 
@@ -39,7 +39,7 @@ object HttpsUtils {
                 trustManager = UnSafeTrustManager()
             }
             sslContext.init(keyManagers, arrayOf<TrustManager>(trustManager), null)
-            sslParams.sSLSocketFactory = TLSSocketFactory(sslContext)
+            sslParams.sslSocketFactory = TLSSocketFactory(sslContext)
             sslParams.trustManager = trustManager
             return sslParams
         } catch (e: NoSuchAlgorithmException) {
@@ -49,7 +49,6 @@ object HttpsUtils {
         } catch (e: KeyStoreException) {
             throw AssertionError(e)
         }
-
     }
 
     class SafeHostnameVerifier : HostnameVerifier {

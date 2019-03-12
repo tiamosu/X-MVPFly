@@ -17,6 +17,8 @@ import com.xia.fly.ui.imageloader.BaseImageLoaderStrategy;
 import com.xia.fly.utils.FileUtils;
 import com.xia.fly.utils.Preconditions;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -186,7 +188,7 @@ public class GlobalConfigModule {
         return mCacheFactory != null ? mCacheFactory : new Cache.Factory<String, Object>() {
             @NonNull
             @Override
-            public Cache<String, Object> build(CacheType type) {
+            public Cache<String, Object> build(@NotNull CacheType type) {
                 //若想自定义 LruCache 的 size, 或者不想使用 LruCache, 想使用自己自定义的策略
                 //使用 GlobalConfigModule.Builder#cacheFactory() 即可扩展
                 switch (type.getCacheTypeId()) {
@@ -218,7 +220,7 @@ public class GlobalConfigModule {
         );
     }
 
-    @SuppressWarnings("UnusedReturnValue")
+    @SuppressWarnings({"UnusedReturnValue", "unused"})
     public static final class Builder {
         private HttpUrl mApiUrl;
         private BaseUrl mBaseUrl;

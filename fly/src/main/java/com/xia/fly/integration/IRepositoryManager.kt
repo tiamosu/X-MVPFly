@@ -34,7 +34,7 @@ interface IRepositoryManager {
      * @param <T>   RxCache service 类型
      * @return RxCache service
     </T> */
-    fun <T> obtainCacheService(cache: Class<T>): T
+    fun <T> obtainCacheService(cache: Class<T>): T?
 
     /**
      * 清理所有缓存

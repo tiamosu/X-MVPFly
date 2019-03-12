@@ -52,7 +52,7 @@ class TLSSocketFactory(context: SSLContext) : SSLSocketFactory() {
         if (socket is SSLSocket) {
             val protocols = socket.enabledProtocols
             val supports = ArrayList<String>()
-            if (protocols != null && protocols.isNotEmpty()) {
+            if (protocols?.isNotEmpty() == true) {
                 supports.addAll(Arrays.asList(*protocols))
             }
             Collections.addAll(supports, "TLSv1.1", "TLSv1.2")

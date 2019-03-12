@@ -36,7 +36,7 @@ open class CallbackSubscriber(var mCallback: Callback<*>?)
 
     override fun onSubscribe(d: Disposable) {
         mDisposable = d
-        if (!isDisposed) {
+        if (!isDisposed()) {
             Platform.post(Action {
                 showDialog()
                 mCallback?.onSubscribe(d)
@@ -45,7 +45,7 @@ open class CallbackSubscriber(var mCallback: Callback<*>?)
     }
 
     override fun onNext(responseBody: ResponseBody) {
-        if (!isDisposed) {
+        if (!isDisposed()) {
             mCallback?.parseNetworkResponse(responseBody)
         }
     }
@@ -68,7 +68,7 @@ open class CallbackSubscriber(var mCallback: Callback<*>?)
     }
 
     protected fun showDialog() {
-        if (isShowLoadingDialog() && isPageVisible) {
+        if (isShowLoadingDialog() && isPageVisible()) {
             LOADING_HANDLER.postDelayed({
                 Loader.showLoading(getLoadingDialog())
             }, 300)
@@ -80,24 +80,24 @@ open class CallbackSubscriber(var mCallback: Callback<*>?)
             LOADING_HANDLER.removeCallbacksAndMessages(null)
             Loader.stopLoading()
         }
-        if (!isDisposed) {
+        if (!isDisposed()) {
             dispose()
         }
     }
 
-    protected fun dispose() {
-        if (mDisposable != null) {
-            mDisposable!!.dispose()
-        }
-    }
-
-    private val isPageVisible: Boolean
-        get() = if (mCallback != null) {
+    private fun isPageVisible(): Boolean {
+        return if (mCallback != null) {
             FlyUtils.isCurrentVisible(mCallback!!.getLifecycleOwner())
         } else false
+    }
 
-    protected val isDisposed: Boolean
-        get() = mDisposable != null && mDisposable!!.isDisposed
+    protected fun isDisposed(): Boolean {
+        return mDisposable?.isDisposed == true
+    }
+
+    protected fun dispose() {
+        mDisposable?.dispose()
+    }
 
     companion object {
 

@@ -28,8 +28,8 @@ abstract class Callback<T>() {
         } else if (mLifecycleOwner is Fragment) {
             context = (mLifecycleOwner as Fragment).context
         }
-        context?.apply {
-            mContext = WeakReference(this)
+        context?.let {
+            mContext = WeakReference(it)
         }
     }
 

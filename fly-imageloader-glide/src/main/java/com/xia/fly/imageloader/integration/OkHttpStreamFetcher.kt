@@ -7,7 +7,6 @@ import com.bumptech.glide.load.HttpException
 import com.bumptech.glide.load.data.DataFetcher
 import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.util.ContentLengthInputStream
-import com.bumptech.glide.util.Preconditions
 import okhttp3.Call
 import okhttp3.Request
 import okhttp3.Response
@@ -40,38 +39,34 @@ class OkHttpStreamFetcher(private val client: Call.Factory, private val url: Gli
         this.callback = callback
 
         call = client.newCall(request)
-        call!!.enqueue(this)
+        call?.enqueue(this)
     }
 
     override fun onFailure(call: Call, e: IOException) {
         if (Log.isLoggable(TAG, Log.DEBUG)) {
             Log.d(TAG, "OkHttp failed to obtain result", e)
         }
-        callback!!.onLoadFailed(e)
+        callback?.onLoadFailed(e)
     }
 
     override fun onResponse(call: Call, response: Response) {
         responseBody = response.body()
-        if (response.isSuccessful) {
-            val contentLength = Preconditions.checkNotNull(responseBody).contentLength()
+        if (response.isSuccessful && responseBody != null) {
+            val contentLength = responseBody!!.contentLength()
             stream = ContentLengthInputStream.obtain(responseBody!!.byteStream(), contentLength)
-            callback!!.onDataReady(stream)
+            callback?.onDataReady(stream)
         } else {
-            callback!!.onLoadFailed(HttpException(response.message(), response.code()))
+            callback?.onLoadFailed(HttpException(response.message(), response.code()))
         }
     }
 
     override fun cleanup() {
         try {
-            if (stream != null) {
-                stream!!.close()
-            }
+            stream?.close()
         } catch (ignored: IOException) {
         }
 
-        if (responseBody != null) {
-            responseBody!!.close()
-        }
+        responseBody?.close()
         callback = null
     }
 

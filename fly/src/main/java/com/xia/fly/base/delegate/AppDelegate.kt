@@ -64,7 +64,7 @@ class AppDelegate(context: Context) : App, AppLifecycles {
 
     override fun attachBaseContext(context: Context) {
         //遍历 mAppLifecycles, 执行所有已注册的 AppLifecycles 的 attachBaseContext() 方法 (框架外部, 开发者扩展的逻辑)
-        if (mAppLifecycles != null && mAppLifecycles!!.size > 0) {
+        if (mAppLifecycles?.isNotEmpty() == true) {
             for (lifecycle in mAppLifecycles!!) {
                 lifecycle.attachBaseContext(context)
             }
@@ -94,8 +94,10 @@ class AppDelegate(context: Context) : App, AppLifecycles {
         //注册框架外部, 开发者扩展的 Activity 生命周期逻辑
         //每个 ConfigModule 的实现类可以声明多个 Activity 的生命周期回调
         //也可以有 N 个 ConfigModule 的实现类 (完美支持组件化项目 各个 Module 的各种独特需求)
-        for (lifecycle in mActivityLifecycles!!) {
-            application.registerActivityLifecycleCallbacks(lifecycle)
+        if (mActivityLifecycles != null) {
+            for (lifecycle in mActivityLifecycles!!) {
+                application.registerActivityLifecycleCallbacks(lifecycle)
+            }
         }
 
         mComponentCallback = AppComponentCallbacks(application, mAppComponent!!)
@@ -104,7 +106,7 @@ class AppDelegate(context: Context) : App, AppLifecycles {
         application.registerComponentCallbacks(mComponentCallback)
 
         //执行框架外部, 开发者扩展的 App onCreate 逻辑
-        if (mAppLifecycles != null && mAppLifecycles!!.size > 0) {
+        if (mAppLifecycles?.isNotEmpty() == true) {
             for (lifecycle in mAppLifecycles!!) {
                 lifecycle.onCreate(application)
             }
@@ -118,12 +120,12 @@ class AppDelegate(context: Context) : App, AppLifecycles {
         if (mComponentCallback != null) {
             mApplication?.unregisterComponentCallbacks(mComponentCallback)
         }
-        if (mActivityLifecycles != null && mActivityLifecycles!!.size > 0) {
+        if (mActivityLifecycles?.isNotEmpty() == true) {
             for (lifecycle in mActivityLifecycles!!) {
                 mApplication?.unregisterActivityLifecycleCallbacks(lifecycle)
             }
         }
-        if (mAppLifecycles != null && mAppLifecycles!!.size > 0) {
+        if (mAppLifecycles?.isNotEmpty() == true && mApplication != null) {
             for (lifecycle in mAppLifecycles!!) {
                 lifecycle.onTerminate(mApplication!!)
             }
@@ -137,7 +139,7 @@ class AppDelegate(context: Context) : App, AppLifecycles {
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
-        if (mAppLifecycles != null && mAppLifecycles!!.size > 0) {
+        if (mAppLifecycles?.isNotEmpty() == true) {
             for (lifecycle in mAppLifecycles!!) {
                 lifecycle.onConfigurationChanged(newConfig)
             }
@@ -145,7 +147,7 @@ class AppDelegate(context: Context) : App, AppLifecycles {
     }
 
     override fun onLowMemory() {
-        if (mAppLifecycles != null && mAppLifecycles!!.size > 0) {
+        if (mAppLifecycles?.isNotEmpty() == true) {
             for (lifecycle in mAppLifecycles!!) {
                 lifecycle.onLowMemory()
             }
@@ -153,7 +155,7 @@ class AppDelegate(context: Context) : App, AppLifecycles {
     }
 
     override fun onTrimMemory(level: Int) {
-        if (mAppLifecycles != null && mAppLifecycles!!.size > 0) {
+        if (mAppLifecycles?.isNotEmpty() == true) {
             for (lifecycle in mAppLifecycles!!) {
                 lifecycle.onTrimMemory(level)
             }

@@ -4,16 +4,16 @@ import com.xia.fly.utils.Preconditions
 import java.util.*
 
 /**
- * [IntelligentCache] 含有可将数据永久存储至内存中的存储容器 [.mMap], 和当达到最大容量时可根据 LRU
- * 算法抛弃不合规数据的存储容器 [.mCache]
+ * [IntelligentCache] 含有可将数据永久存储至内存中的存储容器 [mMap], 和当达到最大容量时可根据 LRU
+ * 算法抛弃不合规数据的存储容器 [mCache]
  *
  *
  * [IntelligentCache] 可根据您传入的 `key` 智能的判断您需要将数据存储至哪个存储容器, 从而针对数据
  * 的不同特性进行不同的存储优化
  *
  *
- * 调用 [IntelligentCache.put] 方法, 使用 [.KEY_KEEP] + `key` 作为 key 传入的
- * `value` 可存储至 [.mMap] (数据永久存储至内存中, 适合比较重要的数据) 中, 否则储存至 [.mCache]
+ * 调用 [IntelligentCache.put] 方法, 使用 [KEY_KEEP] + `key` 作为 key 传入的
+ * `value` 可存储至 [mMap] (数据永久存储至内存中, 适合比较重要的数据) 中, 否则储存至 [mCache]
  *
  *
  *

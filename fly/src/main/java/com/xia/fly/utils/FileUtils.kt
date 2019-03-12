@@ -47,19 +47,16 @@ class FileUtils private constructor() {
          * 返回缓存文件夹
          */
         @JvmStatic
-        val cacheFile: File
-            get() {
-                return if (SDCardUtils.isSDCardEnableByEnvironment()) {
-                    //获取系统管理的sd卡缓存文件
-                    var file = Utils.getApp().externalCacheDir
-                    //如果获取的文件为空,就使用自己定义的缓存文件夹做缓存路径
-                    if (file == null) {
-                        file = createDir(Utils.getApp().packageName)
-                    }
-                    file!!
-                } else {
-                    Utils.getApp().cacheDir
-                }
+        fun getCacheFile(): File {
+            return if (SDCardUtils.isSDCardEnableByEnvironment()) {
+                //获取系统管理的sd卡缓存文件
+                var file = Utils.getApp().externalCacheDir
+                //如果获取的文件为空,就使用自己定义的缓存文件夹做缓存路径
+                file = file ?: createDir(Utils.getApp().packageName)
+                file!!
+            } else {
+                Utils.getApp().cacheDir
             }
+        }
     }
 }

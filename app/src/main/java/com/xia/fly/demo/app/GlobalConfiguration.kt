@@ -47,7 +47,10 @@ class GlobalConfiguration : ConfigModule {
                             //cookie认证
                             .cookieJar(CookieJarImpl(MemoryCookieStore()))
                             .hostnameVerifier(HttpsUtils.SafeHostnameVerifier())
-                            .sslSocketFactory(SSL_PARAMS.sSLSocketFactory!!, SSL_PARAMS.trustManager!!)
+
+                    if (SSL_PARAMS.sslSocketFactory != null && SSL_PARAMS.trustManager != null) {
+                        okHttpBuilder.sslSocketFactory(SSL_PARAMS.sslSocketFactory!!, SSL_PARAMS.trustManager!!)
+                    }
                 }
                 .retrofitConfiguration { context12, retrofitBuilder -> }
                 .responseErrorListener(ResponseErrorListenerImpl())

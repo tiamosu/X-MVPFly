@@ -1,11 +1,12 @@
 package com.xia.fly.utils
 
+import android.app.Activity
 import android.content.Context
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import com.xia.fly.ui.activities.SupportActivity
+import com.xia.fly.ui.activities.IActivity
 
 /**
  * @author xia
@@ -23,10 +24,11 @@ class KeyboardHelper private constructor() {
          * 处理控制 点击屏幕空白区域隐藏软键盘
          */
         @JvmStatic
-        fun dispatchTouchEvent(activity: SupportActivity<*>, ev: MotionEvent) {
-            if (activity.isDispatchTouchHideKeyboard() && ev.action == MotionEvent.ACTION_DOWN) {
+        fun dispatchTouchEvent(iActivity: IActivity, ev: MotionEvent) {
+            if (iActivity.isDispatchTouchHideKeyboard() && ev.action == MotionEvent.ACTION_DOWN) {
+                val activity = iActivity as Activity? ?: return
                 val v = activity.currentFocus
-                if (isShouldHideKeyboard(activity, v, ev)) {
+                if (isShouldHideKeyboard(iActivity, v, ev)) {
                     val iBinder = v!!.windowToken
                     val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                     if (iBinder != null) {
@@ -36,10 +38,10 @@ class KeyboardHelper private constructor() {
             }
         }
 
-        private fun isShouldHideKeyboard(activity: SupportActivity<*>, v: View?, event: MotionEvent): Boolean {
+        private fun isShouldHideKeyboard(iActivity: IActivity, v: View?, event: MotionEvent): Boolean {
             if (v is EditText) {
-                val editText = v as EditText?
-                activity.onDispatchTouchHideKeyboard(editText!!)
+                val editText = v as EditText? ?: return false
+                iActivity.onDispatchTouchHideKeyboard(editText)
                 val l = intArrayOf(0, 0)
                 v.getLocationInWindow(l)
                 val left = l[0]

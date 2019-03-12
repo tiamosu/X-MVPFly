@@ -63,6 +63,7 @@ constructor() : IRepositoryManager {
      * @param <T>          ApiService class
      * @return ApiService
     </T> */
+    @Suppress("UNUSED_ANONYMOUS_PARAMETER")
     private fun <T> createWrapperService(serviceClass: Class<T>): T {
         Preconditions.checkNotNull<Any>(serviceClass, "serviceClass == null")
 
@@ -103,14 +104,14 @@ constructor() : IRepositoryManager {
      * @param <T>          ApiService class
      * @return ApiService
     </T> */
-    private fun <T> getRetrofitService(serviceClass: Class<T>): T {
+    private fun <T> getRetrofitService(serviceClass: Class<T>): T? {
         if (mRetrofitServiceCache == null) {
             mRetrofitServiceCache = mCacheFactory!!.build(CacheType.RETROFIT_SERVICE_CACHE)
         }
         Preconditions.checkNotNull<Any>(mRetrofitServiceCache,
                 "Cannot return null from a Cache.Factory#build(int) method")
         var retrofitService = mRetrofitServiceCache!![serviceClass.canonicalName!!] as T?
-        if (retrofitService == null) {
+        if (retrofitService == null && mRetrofit != null) {
             retrofitService = mRetrofit!!.get().create(serviceClass)
             mRetrofitServiceCache!!.put(serviceClass.canonicalName!!, retrofitService!!)
         }
@@ -130,7 +131,7 @@ constructor() : IRepositoryManager {
      * @return Cache
     </T> */
     @Synchronized
-    override fun <T> obtainCacheService(cache: Class<T>): T {
+    override fun <T> obtainCacheService(cache: Class<T>): T? {
         Preconditions.checkNotNull<Any>(cache, "cacheClass == null")
 
         if (mCacheServiceCache == null) {
@@ -139,7 +140,7 @@ constructor() : IRepositoryManager {
         Preconditions.checkNotNull<Any>(mCacheServiceCache,
                 "Cannot return null from a Cache.Factory#build(int) method")
         var cacheService = mCacheServiceCache!![cache.canonicalName!!] as T?
-        if (cacheService == null) {
+        if (cacheService == null && mRxCache != null) {
             cacheService = mRxCache!!.get().using(cache)
             mCacheServiceCache!!.put(cache.canonicalName!!, cacheService!!)
         }
@@ -150,7 +151,7 @@ constructor() : IRepositoryManager {
      * 清理所有缓存
      */
     override fun clearAllCache() {
-        mRxCache!!.get().evictAll().subscribe()
+        mRxCache?.get()?.evictAll()?.subscribe()
     }
 
     override fun getContext(): Context {

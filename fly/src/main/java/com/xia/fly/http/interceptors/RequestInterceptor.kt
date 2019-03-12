@@ -160,9 +160,7 @@ constructor() : BaseInterceptor() {
         if (contentType != null) {
             charset = contentType.charset(charset)
         }
-        if (charset == null) {
-            return ""
-        }
+        charset ?: return ""
         return when {
             "gzip".equals(encoding, ignoreCase = true) -> //content 使用 gzip 压缩
                 ZipHelper.decompressForGzip(clone.readByteArray(), convertCharset(charset))//解压
@@ -220,32 +218,32 @@ constructor() : BaseInterceptor() {
 
         @JvmStatic
         fun isText(mediaType: MediaType?): Boolean {
-            return mediaType != null && "text" == mediaType.type()
+            return "text" == mediaType?.type()
         }
 
         @JvmStatic
         fun isPlain(mediaType: MediaType?): Boolean {
-            return mediaType != null && mediaType.subtype().toLowerCase().contains("plain")
+            return mediaType?.subtype()?.toLowerCase()?.contains("plain") == true
         }
 
         @JvmStatic
         fun isJson(mediaType: MediaType?): Boolean {
-            return mediaType != null && mediaType.subtype().toLowerCase().contains("json")
+            return mediaType?.subtype()?.toLowerCase()?.contains("json") == true
         }
 
         @JvmStatic
         fun isXml(mediaType: MediaType?): Boolean {
-            return mediaType != null && mediaType.subtype().toLowerCase().contains("xml")
+            return mediaType?.subtype()?.toLowerCase()?.contains("xml") == true
         }
 
         @JvmStatic
         fun isHtml(mediaType: MediaType?): Boolean {
-            return mediaType != null && mediaType.subtype().toLowerCase().contains("html")
+            return mediaType?.subtype()?.toLowerCase()?.contains("html") == true
         }
 
         @JvmStatic
         fun isForm(mediaType: MediaType?): Boolean {
-            return mediaType != null && mediaType.subtype().toLowerCase().contains("x-www-form-urlencoded")
+            return mediaType?.subtype()?.toLowerCase()?.contains("x-www-form-urlencoded") == true
         }
 
         @JvmStatic
