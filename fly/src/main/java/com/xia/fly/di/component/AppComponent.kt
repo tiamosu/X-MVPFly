@@ -31,8 +31,6 @@ import javax.inject.Singleton
 @Component(modules = [AppModule::class, ClientModule::class, GlobalConfigModule::class])
 interface AppComponent {
 
-    fun application(): Application
-
     /**
      * 用于管理网络请求层, 以及数据缓存层
      *
