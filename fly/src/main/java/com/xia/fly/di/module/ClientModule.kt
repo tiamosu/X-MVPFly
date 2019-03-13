@@ -119,7 +119,7 @@ abstract class ClientModule {
                           configuration: OkHttpConfiguration?,
                           builder: OkHttpClient.Builder,
                           intercept: Interceptor,
-                          interceptors: List<@JvmSuppressWildcards Interceptor>?,
+                          interceptors: MutableList<Interceptor>?,
                           handler: GlobalHttpHandler?,
                           executorService: ExecutorService): OkHttpClient {
             builder

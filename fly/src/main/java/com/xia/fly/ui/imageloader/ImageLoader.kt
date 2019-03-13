@@ -16,7 +16,7 @@ class ImageLoader @Inject constructor() {
 
     @JvmField
     @Inject
-    internal var mStrategy: BaseImageLoaderStrategy<@JvmSuppressWildcards ImageConfig>? = null
+    internal var mStrategy: BaseImageLoaderStrategy<*>? = null
 
     /**
      * 加载图片

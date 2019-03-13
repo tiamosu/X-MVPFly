@@ -13,7 +13,6 @@ import com.xia.fly.integration.cache.CacheType
 import com.xia.fly.integration.cache.IntelligentCache
 import com.xia.fly.integration.cache.LruCache
 import com.xia.fly.ui.imageloader.BaseImageLoaderStrategy
-import com.xia.fly.ui.imageloader.ImageConfig
 import com.xia.fly.utils.FileUtils
 import com.xia.fly.utils.Preconditions
 import dagger.Module
@@ -38,9 +37,9 @@ import javax.inject.Singleton
 class GlobalConfigModule private constructor(builder: Builder) {
     private val mApiUrl: HttpUrl?
     private val mBaseUrl: BaseUrl?
-    private val mLoaderStrategy: BaseImageLoaderStrategy<ImageConfig>?
+    private val mLoaderStrategy: BaseImageLoaderStrategy<*>?
     private val mHandler: GlobalHttpHandler?
-    private val mInterceptors: List<Interceptor>?
+    private val mInterceptors: MutableList<Interceptor>?
     private val mErrorListener: ResponseErrorListener?
     private val mCacheFile: File?
     private val mRetrofitConfiguration: ClientModule.RetrofitConfiguration?
@@ -72,7 +71,7 @@ class GlobalConfigModule private constructor(builder: Builder) {
 
     @Singleton
     @Provides
-    internal fun provideInterceptors(): List<Interceptor>? {
+    internal fun provideInterceptors(): MutableList<Interceptor>? {
         return mInterceptors
     }
 
@@ -90,7 +89,7 @@ class GlobalConfigModule private constructor(builder: Builder) {
      */
     @Singleton
     @Provides
-    internal fun provideImageLoaderStrategy(): BaseImageLoaderStrategy<ImageConfig>? {
+    internal fun provideImageLoaderStrategy(): BaseImageLoaderStrategy<*>? {
         return mLoaderStrategy
     }
 
@@ -193,7 +192,7 @@ class GlobalConfigModule private constructor(builder: Builder) {
     class Builder {
         var mApiUrl: HttpUrl? = null
         var mBaseUrl: BaseUrl? = null
-        var mImageLoaderStrategy: BaseImageLoaderStrategy<ImageConfig>? = null
+        var mImageLoaderStrategy: BaseImageLoaderStrategy<*>? = null
         var mHttpHandler: GlobalHttpHandler? = null
         var mInterceptors: MutableList<Interceptor>? = null
         var mResponseErrorListener: ResponseErrorListener? = null
@@ -220,7 +219,7 @@ class GlobalConfigModule private constructor(builder: Builder) {
             return this
         }
 
-        fun imageLoaderStrategy(loaderStrategy: BaseImageLoaderStrategy<ImageConfig>): Builder {//用来请求网络图片
+        fun imageLoaderStrategy(loaderStrategy: BaseImageLoaderStrategy<*>): Builder {//用来请求网络图片
             this.mImageLoaderStrategy = loaderStrategy
             return this
         }
