@@ -3,7 +3,6 @@ apply {
     plugin "kotlin-android"
     plugin "kotlin-android-extensions"
     plugin "kotlin-kapt"
-    plugin "com.blankj.bus"
 }
 
 android {
@@ -31,4 +30,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+}
+
+dependencies {
+    implementation Deps.butterknife
+    kapt Deps.butterknife_apt
 }

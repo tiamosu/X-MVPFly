@@ -13,23 +13,29 @@ import me.yokeyword.fragmentation.ISupportFragment
 object FragmentUtils {
 
     @JvmStatic
-    fun <T : ISupportFragment> newInstance(cls: Class<*>): T? {
+    fun <T : ISupportFragment> newInstance(cls: Class<out ISupportFragment>): T? {
         return newInstance(cls, null)
     }
 
     @JvmStatic
-    fun <T : ISupportFragment> newInstance(
-            cls: Class<*>, bundle: Bundle?): T? {
+    fun <T : ISupportFragment> newInstance(cls: Class<out ISupportFragment>, bundle: Bundle?): T? {
         try {
-            val t = cls.newInstance() as T
-            if (bundle != null && !bundle.isEmpty) {
-                (t as Fragment).arguments = bundle
-                t.putNewBundle(bundle)
+            val t = cls.newInstance() as? T
+            if (t != null) {
+                return newInstance(t, bundle)
             }
-            return t
         } catch (ignored: IllegalAccessException) {
         } catch (ignored: InstantiationException) {
         }
         return null
+    }
+
+    @JvmStatic
+    fun <T : ISupportFragment> newInstance(fragment: ISupportFragment, bundle: Bundle?): T {
+        if (bundle != null && !bundle.isEmpty) {
+            (fragment as Fragment).arguments = bundle
+            fragment.putNewBundle(bundle)
+        }
+        return fragment as T
     }
 }

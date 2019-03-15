@@ -43,6 +43,15 @@ object Deps {
     const val androidx_multidex = "androidx.multidex:multidex:2.0.1"
     const val androidx_constraint_layout = "androidx.constraintlayout:constraintlayout:1.1.3"
 
+    //kotlin
+    const val kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
+    const val kotlin_stdlib_jdk7 = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
+    const val kotlin_stdlib_jdk8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
+
+    //arouter
+    const val arouter_api = "com.alibaba:arouter-api:1.4.1"
+    const val arouter_compiler = "com.alibaba:arouter-compiler:1.2.2"
+
     //butterknife
     const val butterknife = "com.jakewharton:butterknife:${Versions.butterknife}"
     const val butterknife_apt = "com.jakewharton:butterknife-compiler:${Versions.butterknife}"
@@ -70,7 +79,7 @@ object Deps {
     const val x_rxbus = "me.xia:x-rxbus:1.0.8"
 
     //utilcode
-    const val utilcode = "com.blankj:utilcode:1.23.7"
+    const val utilcode = "com.blankj:utilcodex:1.23.7"
 
     //okhttp
     const val okhttp3 = "com.squareup.okhttp3:okhttp:${Versions.okhttp3}"

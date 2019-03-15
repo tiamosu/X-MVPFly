@@ -9,8 +9,6 @@ buildscript {
         classpath "com.jakewharton:butterknife-gradle-plugin:${Versions.butterknife}"
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
-        //模块化通信插件
-        classpath 'com.blankj:bus-gradle-plugin:1.6'
     }
 }
 

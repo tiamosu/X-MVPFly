@@ -1,8 +1,7 @@
 package com.xia.fly.module.common.router
 
-import com.blankj.utilcode.util.BusUtils
+import com.alibaba.android.arouter.launcher.ARouter
 import com.xia.fly.module.common.ui.EmptyFragment
-
 import me.yokeyword.fragmentation.ISupportFragment
 
 /**
@@ -11,18 +10,16 @@ import me.yokeyword.fragmentation.ISupportFragment
  */
 object Router {
 
-    fun obtainACls(): Class<out ISupportFragment> {
-        val aClass = BusUtils.post<Class<*>?>(BusContant.PAGE_A)
-        return obtainCls(aClass)
+    fun obtainFragmentA(): ISupportFragment {
+        return obtainFragment(RouterContant.FRAGMENT_A)
     }
 
-    fun obtainBCls(): Class<out ISupportFragment> {
-        val aClass = BusUtils.post<Class<*>?>(BusContant.PAGE_B)
-        return obtainCls(aClass)
+    fun obtainFragmentB(): ISupportFragment {
+        return obtainFragment(RouterContant.FRAGMENT_B)
     }
 
-    @Suppress("UNCHECKED_CAST")
-    private fun obtainCls(cls: Class<*>?): Class<out ISupportFragment> {
-        return cls as Class<out ISupportFragment>? ?: EmptyFragment::class.java
+    private fun obtainFragment(routerPath: String): ISupportFragment {
+        val fragment = ARouter.getInstance().build(routerPath).navigation() as? ISupportFragment?
+        return fragment ?: EmptyFragment()
     }
 }

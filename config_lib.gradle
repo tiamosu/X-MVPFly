@@ -12,6 +12,12 @@ android {
         targetSdkVersion Android.targetSdkVersion
         versionCode Android.versionCode
         versionName Android.versionName
+
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+            }
+        }
     }
     buildTypes {
         release {
@@ -25,9 +31,19 @@ android {
 }
 
 dependencies {
-    api "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
+    api Deps.kotlin_stdlib
+    api(Deps.kotlin_stdlib_jdk7) {
+        exclude module: "kotlin-stdlib"
+    }
+    api(Deps.kotlin_stdlib_jdk8) {
+        exclude module: "kotlin-stdlib"
+        exclude module: "kotlin-stdlib-jdk7"
+    }
+
+    api(Deps.arouter_api) {
+        exclude group: "androidx.legacy"
+    }
+    kapt Deps.arouter_compiler
 }
 
 allprojects {

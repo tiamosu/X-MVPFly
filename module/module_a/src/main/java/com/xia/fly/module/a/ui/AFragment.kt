@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageView
 import butterknife.BindView
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
@@ -19,6 +20,7 @@ import com.xia.fly.module.a.mvp.presenter.APresenter
 import com.xia.fly.module.a.mvp.view.AView
 import com.xia.fly.module.common.base.BaseFragment
 import com.xia.fly.module.common.router.Router
+import com.xia.fly.module.common.router.RouterContant
 import com.xia.fly.ui.imageloader.ImageLoader
 import com.xia.fly.utils.FragmentUtils
 import me.yokeyword.fragmentation.AbstractSupportFragment
@@ -28,6 +30,7 @@ import java.lang.ref.WeakReference
  * @author weixia
  * @date 2019/3/15.
  */
+@Route(path = RouterContant.FRAGMENT_A)
 class AFragment : BaseFragment<APresenter>(), AView {
     @BindView(R2.id.jump_btn)
     lateinit var mAppCompatButton: AppCompatButton
@@ -60,6 +63,8 @@ class AFragment : BaseFragment<APresenter>(), AView {
         WeakHandler().post(Runnable {
             Log.e("weixi", "run")
         })
+
+        Log.e("weixi", "cls:" + Router.obtainFragmentB())
     }
 
     override fun initView() {
@@ -70,9 +75,9 @@ class AFragment : BaseFragment<APresenter>(), AView {
         mAppCompatButton.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("Hello", "你好")
-            val pageBCls = Router.obtainBCls()
+            val fragmentB = Router.obtainFragmentB()
             (getParentDelegate<AbstractSupportFragment>() ?: this)
-                    .start(FragmentUtils.newInstance(pageBCls, bundle))
+                    .start(FragmentUtils.newInstance(fragmentB, bundle))
         }
     }
 
