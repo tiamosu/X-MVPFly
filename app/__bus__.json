@@ -1,0 +1,4 @@
+{
+  "PAGE_A": "java.lang.Class com.xia.fly.module.a.router.ARouterImpl.INSTANCE.obtainACls()",
+  "PAGE_B": "java.lang.Class com.xia.fly.module.b.router.BRouterImpl.INSTANCE.obtainBCls()"
+}

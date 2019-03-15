@@ -5,15 +5,17 @@ import androidx.appcompat.widget.AppCompatEditText
 import butterknife.BindView
 import butterknife.OnClick
 import com.xia.fly.demo.R
-import com.xia.fly.demo.base.HeadViewFragment
+import com.xia.fly.module.common.base.BaseFragment
+import com.xia.fly.module.common.router.Router
 import com.xia.fly.mvp.BaseMvpPresenter
+import com.xia.fly.utils.FragmentUtils
 import me.yokeyword.fragmentation.ISupportFragment
 
 /**
  * @author xia
  * @date 2018/7/3.
  */
-class MainFragment : HeadViewFragment<BaseMvpPresenter<*>>() {
+class MainFragment : BaseFragment<BaseMvpPresenter<*>>() {
     @BindView(R.id.main_user_id_edit)
     lateinit var mUserIdEditText: AppCompatEditText
     @BindView(R.id.main_user_psd_edit)
@@ -34,9 +36,10 @@ class MainFragment : HeadViewFragment<BaseMvpPresenter<*>>() {
     }
 
     override fun initData() {
-        val firstFragment = findChildFragment(HomeFragment::class.java)
+        val pageACls = Router.obtainACls()
+        val firstFragment = findChildFragment(pageACls)
         if (firstFragment == null) {
-            mFragments[0] = HomeFragment()
+            mFragments[0] = FragmentUtils.newInstance(pageACls)
             loadMultipleRootFragment(R.id.main_fl, 0, *mFragments)
         } else {
             mFragments[0] = firstFragment

@@ -1,22 +1,18 @@
 apply {
-    plugin "com.android.application"
+    plugin "com.android.library"
     plugin "kotlin-android"
     plugin "kotlin-android-extensions"
     plugin "kotlin-kapt"
-    plugin "com.blankj.bus"
+    plugin "com.jakewharton.butterknife"
 }
 
 android {
     compileSdkVersion Android.compileSdkVersion
     defaultConfig {
-        applicationId "com.xia.fly.demo"
         minSdkVersion Android.minSdkVersion
         targetSdkVersion Android.targetSdkVersion
         versionCode Android.versionCode
         versionName Android.versionName
-
-        //启用multiDex的支持
-        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -27,8 +23,9 @@ android {
     lintOptions {
         abortOnError false
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
+}
+
+dependencies {
+    implementation Deps.butterknife
+    kapt Deps.butterknife_apt
 }
