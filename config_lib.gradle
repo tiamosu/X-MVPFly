@@ -12,12 +12,6 @@ android {
         targetSdkVersion Android.targetSdkVersion
         versionCode Android.versionCode
         versionName Android.versionName
-
-        kapt {
-            arguments {
-                arg("AROUTER_MODULE_NAME", project.getName())
-            }
-        }
     }
     buildTypes {
         release {
@@ -39,11 +33,6 @@ dependencies {
         exclude module: "kotlin-stdlib"
         exclude module: "kotlin-stdlib-jdk7"
     }
-
-    api(Deps.arouter_api) {
-        exclude group: "androidx.legacy"
-    }
-    kapt Deps.arouter_compiler
 }
 
 allprojects {

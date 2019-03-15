@@ -13,6 +13,12 @@ android {
         targetSdkVersion Android.targetSdkVersion
         versionCode Android.versionCode
         versionName Android.versionName
+
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+            }
+        }
     }
     buildTypes {
         release {
@@ -28,4 +34,9 @@ android {
 dependencies {
     implementation Deps.butterknife
     kapt Deps.butterknife_apt
+
+    api(Deps.arouter_api) {
+        exclude group: "androidx.legacy"
+    }
+    kapt Deps.arouter_compiler
 }
