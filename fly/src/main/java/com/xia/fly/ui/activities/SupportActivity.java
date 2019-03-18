@@ -95,6 +95,11 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
     }
 
     @Override
+    public boolean isLoadTitleBar() {
+        return false;
+    }
+
+    @Override
     public void onCreateTitleBar(@NotNull FrameLayout titleBarContainer) {
     }
 

@@ -21,6 +21,10 @@ class BFragment : BaseFragment<BPresenter>(), BView {
     @BindView(R2.id.tv_content)
     lateinit var mContentTv: AppCompatTextView
 
+    override fun isLoadTitleBar(): Boolean {
+        return true
+    }
+
     override fun newP(): BPresenter? {
         return BPresenter()
     }

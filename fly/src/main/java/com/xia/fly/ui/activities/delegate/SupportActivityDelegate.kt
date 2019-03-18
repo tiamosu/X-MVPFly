@@ -40,22 +40,27 @@ class SupportActivityDelegate(private var mActivity: SupportActivity<*>) {
             }
         }
         if (mActivity.getLayoutId() != 0) {
-            val rootView = LinearLayout(mActivity)
-            rootView.layoutParams = LinearLayout.LayoutParams(-1, -1)
-            rootView.orientation = LinearLayout.VERTICAL
+            val rootView: View
+            if (!mActivity.isLoadTitleBar()) {
+                rootView = mActivity.layoutInflater.inflate(mActivity.getLayoutId(), null)
+            } else {
+                rootView = LinearLayout(mActivity)
+                rootView.layoutParams = LinearLayout.LayoutParams(-1, -1)
+                rootView.orientation = LinearLayout.VERTICAL
 
-            //预留添加TitleBar
-            val titleBarContainer = FrameLayout(mActivity)
-            titleBarContainer.layoutParams = FrameLayout.LayoutParams(-1, -2)
-            rootView.addView(titleBarContainer)
-            mActivity.onCreateTitleBar(titleBarContainer)
+                //预留添加TitleBar
+                val titleBarContainer = FrameLayout(mActivity)
+                titleBarContainer.layoutParams = FrameLayout.LayoutParams(-1, -2)
+                rootView.addView(titleBarContainer)
+                mActivity.onCreateTitleBar(titleBarContainer)
 
-            //加载页面布局（预留TitleBar之下）
-            val contentContainer = FrameLayout(mActivity)
-            contentContainer.layoutParams = FrameLayout.LayoutParams(-1, -1)
-            rootView.addView(contentContainer)
+                //加载页面布局（预留TitleBar之下）
+                val contentContainer = FrameLayout(mActivity)
+                contentContainer.layoutParams = FrameLayout.LayoutParams(-1, -1)
+                rootView.addView(contentContainer)
 
-            View.inflate(mActivity, mActivity.getLayoutId(), contentContainer)
+                View.inflate(mActivity, mActivity.getLayoutId(), contentContainer)
+            }
             mActivity.setContentView(rootView)
             mUnbinder = ButterKnife.bind(mActivity, rootView)
         }

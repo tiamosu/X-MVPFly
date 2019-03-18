@@ -48,7 +48,7 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return mDelegate.onCreateView();
+        return mDelegate.onCreateView(inflater, container);
     }
 
     /**
@@ -106,6 +106,11 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
 
     @Override
     public void onLazyLoadData() {
+    }
+
+    @Override
+    public boolean isLoadTitleBar() {
+        return false;
     }
 
     @Override

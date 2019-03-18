@@ -68,6 +68,11 @@ interface IActivity {
     fun onLazyLoadData()
 
     /**
+     *是否加载TitleBar容器[onCreateTitleBar]
+     */
+    fun isLoadTitleBar(): Boolean
+
+    /**
      * @param titleBarContainer 头部标题栏容器，可用于自定义添加视图
      */
     fun onCreateTitleBar(titleBarContainer: FrameLayout)

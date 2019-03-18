@@ -1,7 +1,9 @@
 package com.xia.fly.ui.fragments.delegate
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import butterknife.ButterKnife
@@ -33,27 +35,32 @@ class SupportFragmentDelegate(private var mFragment: SupportFragment<*>) {
     private var mIsOnSupportVisible: Boolean = false
     private var mIsOnEnterAnimationEnd: Boolean = false
 
-    fun onCreateView(): View? {
+    fun onCreateView(inflater: LayoutInflater, container: ViewGroup): View? {
         if (mFragment.getLayoutId() == 0) {
             return null
         }
 
-        val rootView = LinearLayout(mFragment.context)
-        rootView.layoutParams = LinearLayout.LayoutParams(-1, -1)
-        rootView.orientation = LinearLayout.VERTICAL
+        val rootView: View
+        if (!mFragment.isLoadTitleBar()) {
+            rootView = inflater.inflate(mFragment.getLayoutId(), container, false)
+        } else {
+            rootView = LinearLayout(mFragment.context)
+            rootView.layoutParams = LinearLayout.LayoutParams(-1, -1)
+            rootView.orientation = LinearLayout.VERTICAL
 
-        //预留添加TitleBar
-        val titleBarContainer = FrameLayout(mFragment.context)
-        titleBarContainer.layoutParams = FrameLayout.LayoutParams(-1, -2)
-        rootView.addView(titleBarContainer)
-        mFragment.onCreateTitleBar(titleBarContainer)
+            //预留添加TitleBar
+            val titleBarContainer = FrameLayout(mFragment.context)
+            titleBarContainer.layoutParams = FrameLayout.LayoutParams(-1, -2)
+            rootView.addView(titleBarContainer)
+            mFragment.onCreateTitleBar(titleBarContainer)
 
-        //加载页面布局（预留TitleBar之下）
-        val contentContainer = FrameLayout(mFragment.context)
-        contentContainer.layoutParams = FrameLayout.LayoutParams(-1, -1)
-        rootView.addView(contentContainer)
+            //加载页面布局（预留TitleBar之下）
+            val contentContainer = FrameLayout(mFragment.context)
+            contentContainer.layoutParams = FrameLayout.LayoutParams(-1, -1)
+            rootView.addView(contentContainer)
 
-        View.inflate(mFragment.context, mFragment.getLayoutId(), contentContainer)
+            View.inflate(mFragment.context, mFragment.getLayoutId(), contentContainer)
+        }
         mUnbinder = ButterKnife.bind(mFragment, rootView)
         return rootView
     }

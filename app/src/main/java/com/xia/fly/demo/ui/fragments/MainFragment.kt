@@ -26,6 +26,10 @@ class MainFragment : BaseFragment<BaseMvpPresenter<*>>() {
         return false
     }
 
+    override fun isLoadTitleBar(): Boolean {
+        return true
+    }
+
     override fun newP(): BaseMvpPresenter<*>? {
         return null
     }

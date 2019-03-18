@@ -15,10 +15,6 @@ import com.xia.fly.ui.fragments.SupportFragment
  */
 abstract class BaseFragment<P : BaseMvpPresenter<*>> : SupportFragment<P>() {
 
-    protected open fun isLoadTitleBar(): Boolean {
-        return false
-    }
-
     override fun onCreateTitleBar(titleBarContainer: FrameLayout) {
         if (isLoadTitleBar()) {
             val view = View.inflate(context, R.layout.layout_head_view, null)

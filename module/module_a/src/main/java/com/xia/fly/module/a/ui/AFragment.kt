@@ -41,6 +41,10 @@ class AFragment : BaseFragment<APresenter>(), AView {
         return true
     }
 
+    override fun isLoadTitleBar(): Boolean {
+        return false
+    }
+
     override fun newP(): APresenter? {
         return APresenter()
     }
