@@ -30,13 +30,13 @@ abstract class Callback<T>(private val lifecycleOwner: LifecycleOwner) {
         return lifecycleOwner
     }
 
-    fun onSubscribe(d: Disposable) {}
+    open fun onSubscribe(d: Disposable) {}
 
-    fun onError(e: Throwable) {}
+    open fun onError(e: Throwable) {}
 
-    fun onComplete() {}
+    open fun onComplete() {}
 
-    fun inProgress(progress: Float, total: Long) {}
+    open fun inProgress(progress: Float, total: Long) {}
 
     @Throws(Exception::class)
     abstract fun parseNetworkResponse(responseBody: ResponseBody)

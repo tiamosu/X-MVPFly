@@ -35,7 +35,7 @@ class SupportFragmentDelegate(private var mFragment: SupportFragment<*>) {
     private var mIsOnSupportVisible: Boolean = false
     private var mIsOnEnterAnimationEnd: Boolean = false
 
-    fun onCreateView(inflater: LayoutInflater, container: ViewGroup): View? {
+    fun onCreateView(inflater: LayoutInflater, container: ViewGroup?): View? {
         if (mFragment.getLayoutId() == 0) {
             return null
         }

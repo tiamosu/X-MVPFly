@@ -24,11 +24,11 @@ open class CallbackSubscriber(var mCallback: Callback<*>?)
 
     private var mDisposable: Disposable? = null
 
-    protected fun isShowLoadingDialog(): Boolean {
+    protected open fun isShowLoadingDialog(): Boolean {
         return true
     }
 
-    protected fun getLoadingDialog(): Dialog? {
+    protected open fun getLoadingDialog(): Dialog? {
         val context: Context? = mCallback?.getContext()
         return if (context == null) null else LoadingDialog(context)
     }
