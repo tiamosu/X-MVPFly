@@ -2,6 +2,7 @@ package com.xia.fly.ui.activities
 
 import android.app.Activity
 import android.widget.EditText
+import android.widget.FrameLayout
 
 import com.xia.fly.integration.cache.Cache
 import com.xia.fly.integration.cache.LruCache
@@ -65,6 +66,11 @@ interface IActivity {
      * 之后，可用于加载网络数据等
      */
     fun onLazyLoadData()
+
+    /**
+     * @param titleBarContainer 头部标题栏容器，可用于自定义添加视图
+     */
+    fun onCreateTitleBar(titleBarContainer: FrameLayout)
 
     /**
      * @param isAvailable 网络是否连接可用

@@ -3,6 +3,7 @@ package com.xia.fly.ui.activities;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 
 import com.xia.fly.integration.cache.Cache;
 import com.xia.fly.integration.cache.CacheType;
@@ -91,6 +92,10 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
     @Override
     public AppCompatActivity getContext() {
         return this;
+    }
+
+    @Override
+    public void onCreateTitleBar(@NotNull FrameLayout titleBarContainer) {
     }
 
     @Override

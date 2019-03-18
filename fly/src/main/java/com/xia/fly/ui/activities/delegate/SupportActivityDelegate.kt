@@ -1,15 +1,18 @@
 package com.xia.fly.ui.activities.delegate
 
 import android.os.Bundle
+import android.view.View
+import android.widget.FrameLayout
+import android.widget.LinearLayout
 import androidx.lifecycle.Observer
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import com.blankj.rxbus.RxBusMessage
 import com.blankj.utilcode.util.NetworkUtils
 import com.xia.fly.constant.NetworkState
+import com.xia.fly.integration.ConnectionLiveData
 import com.xia.fly.integration.rxbus.RxBusEventTag
 import com.xia.fly.integration.rxbus.RxBusHelper
-import com.xia.fly.integration.ConnectionLiveData
 import com.xia.fly.ui.activities.ProxyActivity
 import com.xia.fly.ui.activities.SupportActivity
 import com.xia.fly.utils.FlyUtils
@@ -37,7 +40,22 @@ class SupportActivityDelegate(private var mActivity: SupportActivity<*>) {
             }
         }
         if (mActivity.getLayoutId() != 0) {
-            val rootView = mActivity.layoutInflater.inflate(mActivity.getLayoutId(), null)
+            val rootView = LinearLayout(mActivity)
+            rootView.layoutParams = LinearLayout.LayoutParams(-1, -1)
+            rootView.orientation = LinearLayout.VERTICAL
+
+            //预留添加TitleBar
+            val titleBarContainer = FrameLayout(mActivity)
+            titleBarContainer.layoutParams = FrameLayout.LayoutParams(-1, -2)
+            rootView.addView(titleBarContainer)
+            mActivity.onCreateTitleBar(titleBarContainer)
+
+            //加载页面布局（预留TitleBar之下）
+            val contentContainer = FrameLayout(mActivity)
+            contentContainer.layoutParams = FrameLayout.LayoutParams(-1, -1)
+            rootView.addView(contentContainer)
+
+            View.inflate(mActivity, mActivity.getLayoutId(), contentContainer)
             mActivity.setContentView(rootView)
             mUnbinder = ButterKnife.bind(mActivity, rootView)
         }

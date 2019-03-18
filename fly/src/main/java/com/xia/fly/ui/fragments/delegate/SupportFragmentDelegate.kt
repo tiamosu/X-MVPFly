@@ -52,6 +52,7 @@ class SupportFragmentDelegate(private var mFragment: SupportFragment<*>) {
         val contentContainer = FrameLayout(mFragment.context)
         contentContainer.layoutParams = FrameLayout.LayoutParams(-1, -1)
         rootView.addView(contentContainer)
+
         View.inflate(mFragment.context, mFragment.getLayoutId(), contentContainer)
         mUnbinder = ButterKnife.bind(mFragment, rootView)
         return rootView

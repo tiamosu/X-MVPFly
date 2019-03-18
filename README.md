@@ -44,6 +44,7 @@ compile 'me.xia:fly-imageloader-glide:2.5.8'
 * [AutoDispose](https://github.com/uber/AutoDispose)
 * [Retrofit](https://github.com/square/retrofit)
 * [OkHttp](https://github.com/square/okhttp)
+* [OkHttpUtils](https://github.com/hongyangAndroid/okhttputils)
 * [Gson](https://github.com/google/gson)
 * [RxCache](https://github.com/VictorAlbertos/RxCache)
 * [RxErroHandler](https://github.com/JessYanCoding/RxErrorHandler)
