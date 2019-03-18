@@ -33,7 +33,7 @@ class GlobalConfiguration : ConfigModule {
         //        if (!BuildConfig.DEBUG) { //Release 时,让框架不再打印 Http 请求和响应的信息
         builder.printHttpLogLevel(RequestInterceptor.Level.NONE)
         //        }
-        builder.baseurl("http://www.wanandroid.com")
+        builder.baseurl("https://www.wanandroid.com")
                 .imageLoaderStrategy(GlideImageLoaderStrategy())
                 .okhttpConfiguration(object : ClientModule.OkHttpConfiguration {
                     override fun configOkHttp(context: Context, okHttpBuilder: OkHttpClient.Builder) {
@@ -52,9 +52,9 @@ class GlobalConfiguration : ConfigModule {
                                 .cookieJar(CookieJarImpl(MemoryCookieStore()))
                                 .hostnameVerifier(HttpsUtils.SafeHostnameVerifier())
 
-                        if (SSL_PARAMS.sslSocketFactory != null && SSL_PARAMS.trustManager != null) {
-                            okHttpBuilder.sslSocketFactory(SSL_PARAMS.sslSocketFactory!!, SSL_PARAMS.trustManager!!)
-                        }
+//                        if (SSL_PARAMS.sslSocketFactory != null && SSL_PARAMS.trustManager != null) {
+//                            okHttpBuilder.sslSocketFactory(SSL_PARAMS.sslSocketFactory!!, SSL_PARAMS.trustManager!!)
+//                        }
                     }
                 })
                 .retrofitConfiguration(object : ClientModule.RetrofitConfiguration {
