@@ -1,12 +1,15 @@
 package com.xia.fly.http.utils
 
 import android.annotation.SuppressLint
+import android.text.TextUtils
+import com.blankj.utilcode.util.CloseUtils
 import java.io.IOException
 import java.io.InputStream
 import java.security.*
 import java.security.cert.CertificateException
 import java.security.cert.CertificateFactory
 import java.security.cert.X509Certificate
+import java.util.*
 import javax.net.ssl.*
 
 /**
@@ -30,15 +33,15 @@ object HttpsUtils {
         val sslParams = SSLParams()
         try {
             val trustManagers = prepareTrustManager(certificates)
-            val keyManagers = prepareKeyManager(bksFile, password)
-            val sslContext = SSLContext.getInstance("TLS")
             val trustManager: X509TrustManager
             if (trustManagers != null) {
                 trustManager = MyTrustManager(chooseTrustManager(trustManagers)!!)
             } else {
                 trustManager = UnSafeTrustManager()
             }
-            sslContext.init(keyManagers, arrayOf<TrustManager>(trustManager), null)
+            val keyManagers = prepareKeyManager(bksFile, password)
+            val sslContext = SSLContext.getInstance("TLS")
+            sslContext.init(keyManagers, arrayOf<TrustManager>(trustManager), SecureRandom())
             sslParams.sslSocketFactory = TLSSocketFactory(sslContext)
             sslParams.trustManager = trustManager
             return sslParams
@@ -52,9 +55,12 @@ object HttpsUtils {
     }
 
     class SafeHostnameVerifier : HostnameVerifier {
-        @SuppressLint("BadHostnameVerifier")
+        private val verifyHostNameArray = arrayOf<String>()
+
         override fun verify(hostname: String, session: SSLSession): Boolean {
-            return true
+            return if (TextUtils.isEmpty(hostname)) {
+                false
+            } else !Arrays.asList(*verifyHostNameArray).contains(hostname)
         }
     }
 
@@ -83,14 +89,10 @@ object HttpsUtils {
             for ((index, certificate) in certificates.withIndex()) {
                 val certificateAlias = Integer.toString(index)
                 keyStore.setCertificateEntry(certificateAlias, certificateFactory.generateCertificate(certificate))
-                try {
-                    certificate.close()
-                } catch (ignored: IOException) {
-                }
+                CloseUtils.closeIO(certificate)
             }
             val trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm())
             trustManagerFactory.init(keyStore)
-
             return trustManagerFactory.trustManagers
         } catch (e: NoSuchAlgorithmException) {
             e.printStackTrace()
@@ -101,7 +103,6 @@ object HttpsUtils {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-
         return null
     }
 
@@ -128,7 +129,6 @@ object HttpsUtils {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-
         return null
     }
 
@@ -146,9 +146,9 @@ object HttpsUtils {
         private val defaultTrustManager: X509TrustManager?
 
         init {
-            val var4 = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm())
-            var4.init(null as KeyStore?)
-            defaultTrustManager = chooseTrustManager(var4.trustManagers)
+            val factory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm())
+            factory.init(null as KeyStore?)
+            defaultTrustManager = chooseTrustManager(factory.trustManagers)
         }
 
         @SuppressLint("TrustAllX509TrustManager")
@@ -158,11 +158,10 @@ object HttpsUtils {
         @Throws(CertificateException::class)
         override fun checkServerTrusted(chain: Array<X509Certificate>, authType: String) {
             try {
-                defaultTrustManager!!.checkServerTrusted(chain, authType)
+                defaultTrustManager?.checkServerTrusted(chain, authType)
             } catch (ce: CertificateException) {
                 localTrustManager.checkServerTrusted(chain, authType)
             }
-
         }
 
         override fun getAcceptedIssuers(): Array<X509Certificate?> {
