@@ -52,9 +52,9 @@ class GlobalConfiguration : ConfigModule {
                                 .cookieJar(CookieJarImpl(MemoryCookieStore()))
                                 .hostnameVerifier(HttpsUtils.SafeHostnameVerifier())
 
-//                        if (SSL_PARAMS.sslSocketFactory != null && SSL_PARAMS.trustManager != null) {
-//                            okHttpBuilder.sslSocketFactory(SSL_PARAMS.sslSocketFactory!!, SSL_PARAMS.trustManager!!)
-//                        }
+                        if (SSL_PARAMS.sslSocketFactory != null && SSL_PARAMS.trustManager != null) {
+                            okHttpBuilder.sslSocketFactory(SSL_PARAMS.sslSocketFactory!!, SSL_PARAMS.trustManager!!)
+                        }
                     }
                 })
                 .retrofitConfiguration(object : ClientModule.RetrofitConfiguration {

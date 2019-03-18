@@ -115,6 +115,8 @@ object HttpsUtils {
             clientKeyStore.load(bksFile, password.toCharArray())
             val keyManagerFactory = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm())
             keyManagerFactory.init(clientKeyStore, password.toCharArray())
+            CloseUtils.closeIO(bksFile)
+
             return keyManagerFactory.keyManagers
         } catch (e: KeyStoreException) {
             e.printStackTrace()

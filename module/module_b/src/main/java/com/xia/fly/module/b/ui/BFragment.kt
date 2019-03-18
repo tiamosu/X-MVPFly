@@ -42,10 +42,10 @@ class BFragment : BaseFragment<BPresenter>(), BView {
 
     override fun onLazyLoadData() {
         p.load(1)
-        p.load(2)
-        p.load(3)
-        p.load(4)
-        p.load(5)
+//        p.load(2)
+//        p.load(3)
+//        p.load(4)
+//        p.load(5)
     }
 
     override fun setContent(content: String?) {
