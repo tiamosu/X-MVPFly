@@ -1,6 +1,7 @@
 package com.xia.fly.utils
 
 import android.app.Activity
+import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import com.blankj.utilcode.util.ActivityUtils
@@ -8,6 +9,7 @@ import com.blankj.utilcode.util.AppUtils
 import com.blankj.utilcode.util.Utils
 import com.xia.fly.base.App
 import com.xia.fly.di.component.AppComponent
+import com.xia.fly.ui.activities.SupportActivity
 import com.xia.fly.ui.fragments.SupportFragment
 
 /**
@@ -24,6 +26,25 @@ object FlyUtils {
                 "%s must be implements %s",
                 Utils.getApp().javaClass.name, App::class.java.name)
         return (Utils.getApp() as App).getAppComponent()
+    }
+
+    @JvmStatic
+    fun getContext(lifecycleOwner: LifecycleOwner): Context? {
+        return when (lifecycleOwner) {
+            is SupportFragment<*> -> {
+                lifecycleOwner.context
+            }
+            is Fragment -> {
+                lifecycleOwner.context
+            }
+            is SupportActivity<*> -> {
+                lifecycleOwner.getContext()
+            }
+            is Activity -> {
+                lifecycleOwner
+            }
+            else -> null
+        }
     }
 
     @JvmStatic

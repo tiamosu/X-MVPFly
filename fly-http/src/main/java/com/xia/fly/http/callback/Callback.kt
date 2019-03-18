@@ -1,9 +1,8 @@
 package com.xia.fly.http.callback
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
+import com.xia.fly.utils.FlyUtils
 import io.reactivex.disposables.Disposable
 import okhttp3.ResponseBody
 import java.lang.ref.WeakReference
@@ -17,12 +16,7 @@ abstract class Callback<T>(private val lifecycleOwner: LifecycleOwner) {
     private var mContext: WeakReference<Context>? = null
 
     init {
-        var context: Context? = null
-        if (lifecycleOwner is AppCompatActivity) {
-            context = lifecycleOwner
-        } else if (lifecycleOwner is Fragment) {
-            context = lifecycleOwner.context
-        }
+        val context: Context? = FlyUtils.getContext(lifecycleOwner)
         context?.let {
             mContext = WeakReference(it)
         }

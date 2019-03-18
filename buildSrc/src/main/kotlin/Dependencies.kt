@@ -15,7 +15,7 @@ object Versions {
     const val support = "28.0.0"
     const val butterknife = "10.1.0"
     const val retrofit2 = "2.5.0"
-    const val okhttp3 = "3.12.1" //最新版本3.13.1，运行于Android 4 上报错
+    const val okhttp3 = "3.12.2" //版本3.12.X，兼容Android 4
     const val autodispose = "1.1.0"
     const val leakcanary = "1.6.3"
     const val glide = "4.9.0"
