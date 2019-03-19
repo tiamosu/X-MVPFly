@@ -48,7 +48,7 @@ class WeakHandler {
         return mExec.postAtTime(wrapRunnable(r), uptimeMillis)
     }
 
-    fun postAtTime(r: Runnable, token: Any, uptimeMillis: Long): Boolean {
+    fun postAtTime(r: Runnable, token: Any?, uptimeMillis: Long): Boolean {
         return mExec.postAtTime(wrapRunnable(r), token, uptimeMillis)
     }
 
@@ -67,7 +67,7 @@ class WeakHandler {
         }
     }
 
-    fun removeCallbacks(r: Runnable, token: Any) {
+    fun removeCallbacks(r: Runnable, token: Any?) {
         val runnable = mChainedRef.remove(r)
         if (runnable != null) {
             mExec.removeCallbacks(runnable, token)
@@ -106,11 +106,11 @@ class WeakHandler {
         mExec.removeMessages(what)
     }
 
-    fun removeMessages(what: Int, `object`: Any) {
+    fun removeMessages(what: Int, `object`: Any?) {
         mExec.removeMessages(what, `object`)
     }
 
-    fun removeCallbacksAndMessages(token: Any) {
+    fun removeCallbacksAndMessages(token: Any?) {
         mExec.removeCallbacksAndMessages(token)
     }
 
@@ -118,7 +118,7 @@ class WeakHandler {
         return mExec.hasMessages(what)
     }
 
-    fun hasMessages(what: Int, `object`: Any): Boolean {
+    fun hasMessages(what: Int, `object`: Any?): Boolean {
         return mExec.hasMessages(what, `object`)
     }
 

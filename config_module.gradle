@@ -32,7 +32,10 @@ android {
 }
 
 dependencies {
-    implementation Deps.butterknife
+    implementation(Deps.butterknife) {
+        exclude group: 'androidx.annotation'
+        exclude group: 'androidx.core'
+    }
     kapt Deps.butterknife_apt
 
     api(Deps.arouter_api) {
