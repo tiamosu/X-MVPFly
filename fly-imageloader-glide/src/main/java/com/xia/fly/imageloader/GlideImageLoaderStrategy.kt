@@ -111,36 +111,31 @@ class GlideImageLoaderStrategy : BaseImageLoaderStrategy<ImageConfigImpl>, Glide
             glideRequest.dontAnimate()
         }
 
-        var finalRequest: GlideRequest<in Any> = glideRequest
+        //是否使用淡入淡出过渡动画
         if (config.mTranscodeType == TranscodeType.AS_DRAWABLE) {
-            val drawableGlideRequest = glideRequest as GlideRequest<Drawable>
-            //是否使用淡入淡出过渡动画
             if (config.mIsCrossFade) {
                 val drawableTransitionOptions = DrawableTransitionOptions()
                         .crossFade(DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build())
-                drawableGlideRequest.transition(drawableTransitionOptions)
+                (glideRequest as GlideRequest<Drawable>).transition(drawableTransitionOptions)
             }
-            finalRequest = drawableGlideRequest as GlideRequest<Any>
         } else if (config.mTranscodeType == TranscodeType.AS_BITMAP) {
-            val bitmapGlideRequest = glideRequest as GlideRequest<Bitmap>
             if (config.mIsCrossFade) {
                 val bitmapTransitionOptions = BitmapTransitionOptions()
                         .crossFade(DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build())
-                bitmapGlideRequest.transition(bitmapTransitionOptions)
+                (glideRequest as GlideRequest<Bitmap>).transition(bitmapTransitionOptions)
             }
-            finalRequest = bitmapGlideRequest as GlideRequest<Any>
         }
+
         if (config.mImageView != null) {
-            finalRequest.into(config.mImageView!!)
+            glideRequest.into(config.mImageView!!)
         } else if (config.mTarget != null) {
-            finalRequest.into(config.mTarget!!)
+            (glideRequest as? GlideRequest<in Any>)?.into(config.mTarget!!)
         }
     }
 
     private fun getGlideRequest(context: Context, config: ImageConfigImpl): GlideRequest<Any> {
         val request = GlideApp.with(context)
-        val glideRequest: GlideRequest<Any>
-        glideRequest = when (config.mTranscodeType) {
+        val glideRequest: GlideRequest<Any> = when (config.mTranscodeType) {
             TranscodeType.AS_BITMAP -> request.asBitmap() as GlideRequest<Any>
             TranscodeType.AS_FILE -> request.asFile() as GlideRequest<Any>
             TranscodeType.AS_GIF -> request.asGif() as GlideRequest<Any>

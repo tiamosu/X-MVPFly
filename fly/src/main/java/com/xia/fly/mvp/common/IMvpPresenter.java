@@ -11,7 +11,6 @@ import androidx.lifecycle.OnLifecycleEvent;
  * @author weixia
  * @date 2019/3/19.
  */
-
 @SuppressWarnings("unused")
 public interface IMvpPresenter<V extends IMvpView> extends LifecycleObserver {
 
