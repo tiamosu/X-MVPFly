@@ -111,7 +111,7 @@ class GlideImageLoaderStrategy : BaseImageLoaderStrategy<ImageConfigImpl>, Glide
             glideRequest.dontAnimate()
         }
 
-        var finalRequest: GlideRequest<Any> = glideRequest
+        var finalRequest: GlideRequest<in Any> = glideRequest
         if (config.mTranscodeType == TranscodeType.AS_DRAWABLE) {
             val drawableGlideRequest = glideRequest as GlideRequest<Drawable>
             //是否使用淡入淡出过渡动画

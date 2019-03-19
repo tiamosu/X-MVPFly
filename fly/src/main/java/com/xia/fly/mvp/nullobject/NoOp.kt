@@ -14,6 +14,7 @@ object NoOp {
 
     private val DEFAULT_VALUE = DefaultValueInvocationHandler()
 
+    @JvmStatic
     fun <T> of(interfaceClass: Class<T>): T {
         return newProxyInstance(interfaceClass.classLoader,
                 arrayOf<Class<*>>(interfaceClass),

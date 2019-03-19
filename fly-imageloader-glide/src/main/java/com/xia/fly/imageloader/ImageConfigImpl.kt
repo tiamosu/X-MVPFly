@@ -103,7 +103,7 @@ class ImageConfigImpl private constructor(builder: Builder) : ImageConfig() {
     class Builder constructor(val mObject: Any?//所要加载的资源
     ) {
         var mImageView: ImageView? = null
-        var mTarget: Target<Any>? = null
+        var mTarget: Target<out Any>? = null
         var mPlaceholder: Int = 0//占位符
         var mError: Int = 0//错误占位符
         var mFallback: Int = 0 //请求 url 为空,则使用此图片作为占位符
@@ -133,7 +133,7 @@ class ImageConfigImpl private constructor(builder: Builder) : ImageConfig() {
             return this
         }
 
-        fun into(target: Target<Any>): Builder {
+        fun into(target: Target<out Any>): Builder {
             this.mTarget = target
             return this
         }

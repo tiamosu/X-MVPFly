@@ -1,5 +1,6 @@
 package com.xia.fly.module.a.ui
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -7,10 +8,8 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageView
 import butterknife.BindView
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
+import com.bumptech.glide.request.target.DrawableImageViewTarget
+import com.bumptech.glide.request.transition.Transition
 import com.xia.fly.imageloader.ImageConfigImpl
 import com.xia.fly.imageloader.TranscodeType
 import com.xia.fly.integration.handler.WeakHandler
@@ -97,18 +96,34 @@ class AFragment : BaseFragment<APresenter>(), AView {
                         .crossFade()
                         .centerCrop()
                         .circleCrop()
-                        .into(mImageView)
-                        .addListener(object : RequestListener<Any> {
-                            override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Any>?, isFirstResource: Boolean): Boolean {
-                                return false
-                            }
-
-                            override fun onResourceReady(resource: Any?, model: Any?, target: Target<Any>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
-                                return false
+                        .into(object : DrawableImageViewTarget(mImageView) {
+                            override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
+                                super.onResourceReady(resource, transition)
+                                mAppCompatButton.text = "加载完毕，点击进入下一页"
                             }
                         })
                         .build()
         )
+
+//        ImageLoader.loadImage(
+//                ImageConfigImpl
+//                        .load(R.mipmap.ic_launcher)
+//                        .`as`(TranscodeType.AS_DRAWABLE)
+//                        .crossFade()
+//                        .centerCrop()
+//                        .circleCrop()
+//                        .into(mImageView)
+//                        .addListener(object : RequestListener<Any> {
+//                            override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Any>?, isFirstResource: Boolean): Boolean {
+//                                return false
+//                            }
+//
+//                            override fun onResourceReady(resource: Any?, model: Any?, target: Target<Any>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+//                                return false
+//                            }
+//                        })
+//                        .build()
+//        )
     }
 
     override fun onNetworkState(isAvailable: Boolean) {
