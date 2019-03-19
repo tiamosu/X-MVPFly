@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN
 import android.content.Context
 import android.content.res.Configuration
+import com.alibaba.android.arouter.launcher.ARouter
 import com.blankj.utilcode.util.Utils
 import com.bumptech.glide.Glide
 import com.squareup.leakcanary.LeakCanary
@@ -30,9 +31,17 @@ class AppLifecyclesImpl : AppLifecycles {
                 .debug(BuildConfig.DEBUG)
                 .handleException { }
                 .install()
+
+        if (BuildConfig.DEBUG) {
+            ARouter.openLog()     // 打印日志
+            ARouter.openDebug()   // 开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
+        }
+        ARouter.init(application)
     }
 
-    override fun onTerminate(application: Application) {}
+    override fun onTerminate(application: Application) {
+        ARouter.getInstance().destroy()
+    }
 
     override fun onConfigurationChanged(newConfig: Configuration) {}
 
