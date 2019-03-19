@@ -5,7 +5,11 @@ apply {
     plugin "kotlin-kapt"
 }
 
+configAppSigning(project)
+configApkName(project)
+
 android {
+    flavorDimensions "define"
     compileSdkVersion Android.compileSdkVersion
     defaultConfig {
         applicationId "com.xia.fly.demo"
@@ -29,6 +33,37 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+def configAppSigning(Project project) {
+    def signFile = file("${rootDir.path}/sign/keystore.properties")
+    if (signFile == null || !signFile.exists()) {
+        return
+    }
+    project.android {
+        Properties properties = new Properties()
+        properties.load(new FileInputStream(signFile))
+        signingConfigs {
+            release {
+                keyAlias properties['keyAlias']
+                keyPassword properties['keyPassword']
+                storeFile new File(signFile.getParent(), properties['storeFile'])
+                storePassword properties['storePassword']
+            }
+        }
+        buildTypes.release.signingConfig signingConfigs.release
+    }
+}
+
+static def configApkName(Project project) {
+    project.android.applicationVariants.all { variant ->
+        if (variant.buildType.name != "debug") {//防止AS无法安装debug包(apk)
+            variant.getPackageApplication().outputDirectory = new File(project.rootDir.absolutePath + "/apk")
+        }
+        variant.getPackageApplication().outputScope.apkDatas.forEach { output ->
+            output.outputFileName = "fly_v${variant.versionName}.apk"
+        }
     }
 }
 
