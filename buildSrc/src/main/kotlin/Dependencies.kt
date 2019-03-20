@@ -76,7 +76,7 @@ object Deps {
     const val rxcache2 = "com.github.VictorAlbertos.RxCache:runtime:1.8.3-2.x"
     const val rxcache_gson = "com.github.VictorAlbertos.Jolyglot:gson:0.0.4"
     const val rxerrorhandler = "me.jessyan:rxerrorhandler:2.1.1"
-    const val x_rxbus = "me.xia:x-rxbus:1.0.8"
+    const val x_rxbus = "me.xia:x-rxbus:1.0.9"
 
     //utilcode
     const val utilcode = "com.blankj:utilcodex:1.23.7"

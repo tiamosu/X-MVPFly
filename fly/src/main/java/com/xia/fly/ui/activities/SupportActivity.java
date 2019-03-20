@@ -69,12 +69,12 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
+        mDelegate.onDestroy();
         if (mPresenter != null) {
             mPresenter.detachView();
             getLifecycle().removeObserver(mPresenter);
         }
-        mDelegate.onDestroy();
+        super.onDestroy();
     }
 
     @Override
