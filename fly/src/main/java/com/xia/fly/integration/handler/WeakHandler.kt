@@ -14,25 +14,30 @@ import java.util.concurrent.locks.ReentrantLock
  */
 @Suppress("unused")
 class WeakHandler {
-    private var mExec: ExecHandler
+    private val mCallback: Handler.Callback?//hard reference to Callback. We need to keep callback in memory
+    private val mExec: ExecHandler
     private val mLock = ReentrantLock()
 
     @VisibleForTesting
     private val mChainedRef = ChainedRef(mLock, null)
 
     constructor() {
+        mCallback = null
         mExec = ExecHandler()
     }
 
     constructor(callback: Handler.Callback) {
+        mCallback = callback
         mExec = ExecHandler(WeakReference(callback))
     }
 
     constructor(looper: Looper) {
+        mCallback = null
         mExec = ExecHandler(looper)
     }
 
     constructor(looper: Looper, callback: Handler.Callback) {
+        mCallback = callback
         mExec = ExecHandler(looper, WeakReference(callback))
     }
 
@@ -129,22 +134,26 @@ class WeakHandler {
     }
 
     private class ExecHandler : Handler {
-        private lateinit var mCallback: WeakReference<Handler.Callback>
+        private val mCallback: WeakReference<Handler.Callback>?
 
-        internal constructor()
+        internal constructor() {
+            mCallback = null
+        }
 
         internal constructor(callback: WeakReference<Handler.Callback>) {
             mCallback = callback
         }
 
-        internal constructor(looper: Looper) : super(looper)
+        internal constructor(looper: Looper) : super(looper) {
+            mCallback = null
+        }
 
         internal constructor(looper: Looper, callback: WeakReference<Handler.Callback>) : super(looper) {
             mCallback = callback
         }
 
         override fun handleMessage(msg: Message) {
-            mCallback.get()?.handleMessage(msg)
+            mCallback?.get()?.handleMessage(msg)
         }
     }
 
