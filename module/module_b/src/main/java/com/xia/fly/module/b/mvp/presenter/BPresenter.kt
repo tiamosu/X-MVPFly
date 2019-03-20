@@ -24,7 +24,7 @@ class BPresenter : BaseMvpPresenter<BView>() {
                 .request(object : CallbackSubscriber(object : AbstractStringCallback(mLifecycleOwner) {
                     override fun onResponse(response: String?) {
                         Log.e("weixi", "onResponse$index :$response")
-                        getV().setContent(response)
+                        v.setContent(response)
                     }
                 }) {
                     @SuppressLint("MissingPermission")

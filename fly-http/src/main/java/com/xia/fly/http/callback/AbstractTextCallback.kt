@@ -20,7 +20,7 @@ abstract class AbstractTextCallback(lifecycleOwner: LifecycleOwner) : Callback<S
         val `is` = responseBody.byteStream()
         val reader = InputStreamReader(`is`, "utf-8")
         val bufferedReader = BufferedReader(reader)
-        var line: String
+        var line: String?
         val builder = StringBuilder()
 
         do {
