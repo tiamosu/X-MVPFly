@@ -19,7 +19,7 @@ import com.xia.fly.module.a.mvp.presenter.APresenter
 import com.xia.fly.module.a.mvp.view.AView
 import com.xia.fly.module.common.base.BaseFragment
 import com.xia.fly.module.common.router.Router
-import com.xia.fly.module.common.router.RouterContant
+import com.xia.fly.module.common.router.RouterConstant
 import com.xia.fly.ui.imageloader.ImageLoader
 import com.xia.fly.utils.FragmentUtils
 import me.yokeyword.fragmentation.AbstractSupportFragment
@@ -29,7 +29,7 @@ import java.lang.ref.WeakReference
  * @author weixia
  * @date 2019/3/15.
  */
-@Route(path = RouterContant.FRAGMENT_A)
+@Route(path = RouterConstant.FRAGMENT_A)
 class AFragment : BaseFragment<APresenter>(), AView {
     @BindView(R2.id.jump_btn)
     lateinit var mAppCompatButton: AppCompatButton

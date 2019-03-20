@@ -4,7 +4,7 @@ package com.xia.fly.module.common.router
  * @author weixia
  * @date 2019/3/15.
  */
-object RouterContant {
+object RouterConstant {
 
     //==========================//
     //        ModuleA分组        //

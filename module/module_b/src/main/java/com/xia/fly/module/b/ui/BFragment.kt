@@ -9,13 +9,13 @@ import com.xia.fly.module.b.R2
 import com.xia.fly.module.b.mvp.presenter.BPresenter
 import com.xia.fly.module.b.mvp.view.BView
 import com.xia.fly.module.common.base.BaseFragment
-import com.xia.fly.module.common.router.RouterContant
+import com.xia.fly.module.common.router.RouterConstant
 
 /**
  * @author weixia
  * @date 2019/3/15.
  */
-@Route(path = RouterContant.FRAGMENT_B)
+@Route(path = RouterConstant.FRAGMENT_B)
 class BFragment : BaseFragment<BPresenter>(), BView {
 
     @BindView(R2.id.tv_content)

@@ -11,11 +11,11 @@ import me.yokeyword.fragmentation.ISupportFragment
 object Router {
 
     fun obtainFragmentA(): ISupportFragment {
-        return obtainFragment(RouterContant.FRAGMENT_A)
+        return obtainFragment(RouterConstant.FRAGMENT_A)
     }
 
     fun obtainFragmentB(): ISupportFragment {
-        return obtainFragment(RouterContant.FRAGMENT_B)
+        return obtainFragment(RouterConstant.FRAGMENT_B)
     }
 
     private fun obtainFragment(routerPath: String): ISupportFragment {
