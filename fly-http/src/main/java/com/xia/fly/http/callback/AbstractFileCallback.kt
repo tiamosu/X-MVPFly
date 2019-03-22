@@ -29,7 +29,8 @@ abstract class AbstractFileCallback(lifecycleOwner: LifecycleOwner,
         }
     }
 
-    private inner class DownloadTask internal constructor(private val mResponseBody: ResponseBody) : ThreadUtils.SimpleTask<File>() {
+    private inner class DownloadTask internal constructor
+    (private val mResponseBody: ResponseBody) : ThreadUtils.SimpleTask<File>() {
 
         override fun doInBackground(): File? {
             return saveFile(mResponseBody)

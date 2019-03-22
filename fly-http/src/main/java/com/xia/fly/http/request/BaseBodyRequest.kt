@@ -25,36 +25,36 @@ abstract class BaseBodyRequest<R : BaseBodyRequest<R>>(url: String) : BaseReques
     @JvmField
     protected var mUpdateFileCallback: ProgressResponseCallBack? = null//上传回调监听
 
-    fun upRequestBody(requestBody: RequestBody): R {
+    fun upRequestBody(requestBody: RequestBody?): R {
         mRequestBody = requestBody
         return this as R
     }
 
-    fun upJson(json: String): R {
+    fun upJson(json: String?): R {
         mJson = json
         mMediaType = MediaType.parse("application/json; charset=utf-8")
         return this as R
     }
 
-    fun upObject(`object`: Any): R {
+    fun upObject(`object`: Any?): R {
         mObject = `object`
         return this as R
     }
 
-    fun upByte(bytes: ByteArray): R {
+    fun upByte(bytes: ByteArray?): R {
         mBytes = bytes
         mMediaType = MediaType.parse("application/octet-stream")
         return this as R
     }
 
     @JvmOverloads
-    fun upString(string: String, mediaType: MediaType? = null): R {
+    fun upString(string: String?, mediaType: MediaType? = null): R {
         mString = string
         mMediaType = mediaType ?: MediaType.parse("text/plain; charset=utf-8")
         return this as R
     }
 
-    fun updateFileCallback(updateFileCallback: ProgressResponseCallBack): R {
+    fun updateFileCallback(updateFileCallback: ProgressResponseCallBack?): R {
         mUpdateFileCallback = updateFileCallback
         return this as R
     }

@@ -19,11 +19,11 @@ class UploadProgressRequestBody : RequestBody {
     private var delegate: RequestBody? = null
     private val progressCallBack: ProgressResponseCallBack?
 
-    constructor(listener: ProgressResponseCallBack) {
+    constructor(listener: ProgressResponseCallBack?) {
         this.progressCallBack = listener
     }
 
-    constructor(delegate: RequestBody, progressCallBack: ProgressResponseCallBack) {
+    constructor(delegate: RequestBody?, progressCallBack: ProgressResponseCallBack?) {
         this.delegate = delegate
         this.progressCallBack = progressCallBack
     }

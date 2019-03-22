@@ -1,5 +1,7 @@
 package com.xia.fly.http.utils
 
+import java.io.File
+
 /**
  * @author xia
  * @date 2018/10/8.
@@ -10,12 +12,28 @@ package com.xia.fly.http.utils
 object ParamsUtils {
 
     @JvmStatic
-    fun escapeParams(map: MutableMap<String, String>?) {
+    fun escapeParams(map: MutableMap<String, String?>?): Map<String, String> {
         if (map?.isNotEmpty() == true) {
-            for (entry in map.entries) {
-                val value: String? = entry.value
-                map[entry.key] = value ?: ""
+            val mapTemp = hashMapOf<String, String>()
+            for ((key, value) in map) {
+                mapTemp[key] = value ?: ""
             }
+            return mapTemp
         }
+        return mapOf()
+    }
+
+    @JvmStatic
+    fun escapeFileParams(map: MutableMap<String, File?>?): Map<String, File> {
+        if (map?.isNotEmpty() == true) {
+            val mapTemp = hashMapOf<String, File>()
+            for ((key, value) in map) {
+                if (value != null) {
+                    mapTemp[key] = value
+                }
+            }
+            return mapTemp
+        }
+        return mapOf()
     }
 }

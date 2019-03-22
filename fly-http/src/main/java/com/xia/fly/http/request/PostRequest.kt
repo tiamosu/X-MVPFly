@@ -36,8 +36,7 @@ class PostRequest(url: String) : BaseBodyRequest<PostRequest>(url) {
         return if (mFileParams.isEmpty()) {
             BaseRequest.mRestService.post(mUrl, mParams)
         } else {
-            val builder = MultipartBody.Builder()
-                    .setType(MultipartBody.FORM)
+            val builder = MultipartBody.Builder().setType(MultipartBody.FORM)
             val body = addParams(builder)
             BaseRequest.mRestService.uploadFiles(mUrl, body)
         }
@@ -53,9 +52,8 @@ class PostRequest(url: String) : BaseBodyRequest<PostRequest>(url) {
         }
         if (!mFileParams.isEmpty()) {
             for ((key, file) in mFileParams) {
-                val fileBody = RequestBody.create(
-                        MediaType.parse(guessMimeType(file.name)), file)
-                val uploadProgressRequestBody = UploadProgressRequestBody(fileBody, mUpdateFileCallback!!)
+                val fileBody = RequestBody.create(MediaType.parse(guessMimeType(file.name)), file)
+                val uploadProgressRequestBody = UploadProgressRequestBody(fileBody, mUpdateFileCallback)
                 builder.addFormDataPart(key, file.name, uploadProgressRequestBody)
             }
         }

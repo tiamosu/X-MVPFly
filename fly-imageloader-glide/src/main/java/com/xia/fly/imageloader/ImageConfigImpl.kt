@@ -128,12 +128,12 @@ class ImageConfigImpl private constructor(builder: Builder) : ImageConfig() {
         var mIsClearDiskCache: Boolean = false//清理本地缓存
         var mIsDontAnimate: Boolean = false//不显示动画
 
-        fun into(imageView: ImageView): Builder {
+        fun into(imageView: ImageView?): Builder {
             this.mImageView = imageView
             return this
         }
 
-        fun into(target: Target<out Any>): Builder {
+        fun into(target: Target<out Any>?): Builder {
             this.mTarget = target
             return this
         }
@@ -153,7 +153,7 @@ class ImageConfigImpl private constructor(builder: Builder) : ImageConfig() {
             return this
         }
 
-        fun placeholder(placeholder: Drawable): Builder {
+        fun placeholder(placeholder: Drawable?): Builder {
             this.mPlaceholderDrawable = placeholder
             return this
         }
@@ -163,7 +163,7 @@ class ImageConfigImpl private constructor(builder: Builder) : ImageConfig() {
             return this
         }
 
-        fun error(error: Drawable): Builder {
+        fun error(error: Drawable?): Builder {
             this.mErrorDrawable = error
             return this
         }
@@ -173,7 +173,7 @@ class ImageConfigImpl private constructor(builder: Builder) : ImageConfig() {
             return this
         }
 
-        fun fallback(fallback: Drawable): Builder {
+        fun fallback(fallback: Drawable?): Builder {
             this.mFallbackDrawable = fallback
             return this
         }
@@ -205,7 +205,7 @@ class ImageConfigImpl private constructor(builder: Builder) : ImageConfig() {
          * 请使用 [.mIsCircleCrop], [.mIsCenterCrop], [.mRoundingRadius] 替代
          * 如果有其他自定义 BitmapTransformation 的需求, 请自行扩展 [BaseImageLoaderStrategy]
          */
-        fun transform(transformation: BitmapTransformation): Builder {
+        fun transform(transformation: BitmapTransformation?): Builder {
             this.mTransformation = transformation
             return this
         }
@@ -246,12 +246,12 @@ class ImageConfigImpl private constructor(builder: Builder) : ImageConfig() {
             return this
         }
 
-        fun apply(requestOptions: RequestOptions): Builder {
+        fun apply(requestOptions: RequestOptions?): Builder {
             this.mRequestOptions = requestOptions
             return this
         }
 
-        fun addListener(requestListener: RequestListener<Any>): Builder {
+        fun addListener(requestListener: RequestListener<Any>?): Builder {
             this.mRequestListener = requestListener
             return this
         }

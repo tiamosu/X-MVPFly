@@ -24,23 +24,20 @@ abstract class BaseRequest<R : BaseRequest<R>>(@JvmField protected val mUrl: Str
         return this as R
     }
 
-    fun params(params: MutableMap<String, String>?): R {
-        if (params != null) {
-            mParams.putAll(params)
-            ParamsUtils.escapeParams(mParams)
+    fun params(params: MutableMap<String, String?>?): R {
+        mParams.putAll(ParamsUtils.escapeParams(params))
+        return this as R
+    }
+
+    fun addFileParam(key: String, file: File?): R {
+        if (file != null) {
+            mFileParams[key] = file
         }
         return this as R
     }
 
-    fun addFileParam(key: String, file: File): R {
-        mFileParams[key] = file
-        return this as R
-    }
-
-    fun fileParams(fileParams: MutableMap<String, File>?): R {
-        if (fileParams != null) {
-            mFileParams.putAll(fileParams)
-        }
+    fun fileParams(fileParams: MutableMap<String, File?>?): R {
+        mFileParams.putAll(ParamsUtils.escapeFileParams(fileParams))
         return this as R
     }
 
