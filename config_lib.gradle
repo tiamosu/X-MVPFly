@@ -24,17 +24,6 @@ android {
     }
 }
 
-dependencies {
-    api Deps.kotlin_stdlib
-    api(Deps.kotlin_stdlib_jdk7) {
-        exclude module: "kotlin-stdlib"
-    }
-    api(Deps.kotlin_stdlib_jdk8) {
-        exclude module: "kotlin-stdlib"
-        exclude module: "kotlin-stdlib-jdk7"
-    }
-}
-
 allprojects {
     tasks.withType(Javadoc) {//防止编码问题
         options.addStringOption('Xdoclint:none', '-quiet')

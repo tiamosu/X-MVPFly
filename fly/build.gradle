@@ -5,6 +5,15 @@ apply {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api Deps.kotlin_stdlib
+    api(Deps.kotlin_stdlib_jdk7) {
+        exclude module: "kotlin-stdlib"
+    }
+    api(Deps.kotlin_stdlib_jdk8) {
+        exclude module: "kotlin-stdlib"
+        exclude module: "kotlin-stdlib-jdk7"
+    }
+
     //support
     api Deps.androidx_multidex
     api Deps.androidx_appcompat
@@ -63,7 +72,9 @@ dependencies {
     kapt Deps.dagger2_apt
 
     //常用的util库
-    api Deps.utilcode
+    api(Deps.utilcode) {
+        exclude module: 'gson'
+    }
     //fragment框架
     api Deps.fragmentation
     //loading动画样式
@@ -73,6 +84,7 @@ dependencies {
     compileOnly(Deps.glide) {
         exclude group: 'androidx.annotation'
         exclude group: 'androidx.fragment'
+        exclude group: 'androidx.vectordrawable'
     }
 }
 
