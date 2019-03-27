@@ -55,7 +55,7 @@ class SplashActivity<P : BaseMvpPresenter<*>> : SupportActivity<P>() {
 
     private fun permission() {
         PermissionUtils.permission(PermissionConstants.CAMERA, PermissionConstants.STORAGE)
-                .rationale { shouldRequest -> DialogHelper.showRationaleDialog(getContext(), shouldRequest) }
+                .rationale { shouldRequest -> DialogHelper.showRationaleDialog(context, shouldRequest) }
                 .callback(object : PermissionUtils.FullCallback {
                     override fun onGranted(permissionsGranted: List<String>) {
                         ActivityUtils.startActivity(MainActivity::class.java)
@@ -63,7 +63,7 @@ class SplashActivity<P : BaseMvpPresenter<*>> : SupportActivity<P>() {
 
                     override fun onDenied(permissionsDeniedForever: List<String>,
                                           permissionsDenied: List<String>) {
-                        DialogHelper.showOpenAppSettingDialog(getContext())
+                        DialogHelper.showOpenAppSettingDialog(context)
                     }
                 })
                 .request()
