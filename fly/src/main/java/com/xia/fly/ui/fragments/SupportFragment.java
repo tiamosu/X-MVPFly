@@ -129,7 +129,7 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
 
     @Override
     public boolean isCheckNetWork() {
-        return false;
+        return true;
     }
 
     @Override

@@ -36,10 +36,6 @@ class AFragment : BaseFragment<APresenter>(), AView {
     @BindView(R2.id.photo_iv)
     lateinit var mImageView: AppCompatImageView
 
-    override fun isCheckNetWork(): Boolean {
-        return true
-    }
-
     override fun isLoadTitleBar(): Boolean {
         return false
     }

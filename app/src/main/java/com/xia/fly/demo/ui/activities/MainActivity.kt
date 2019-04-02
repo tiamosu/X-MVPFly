@@ -15,10 +15,6 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator
  */
 class MainActivity : ProxyActivity() {
 
-    override fun isCheckNetWork(): Boolean {
-        return true
-    }
-
     override fun isDispatchTouchHideKeyboard(): Boolean {
         return true
     }

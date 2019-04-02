@@ -23,10 +23,6 @@ class SplashActivity<P : BaseMvpPresenter<*>> : SupportActivity<P>() {
         return R.layout.activity_splash
     }
 
-    override fun isCheckNetWork(): Boolean {
-        return true
-    }
-
     override fun newP(): P? {
         return null
     }

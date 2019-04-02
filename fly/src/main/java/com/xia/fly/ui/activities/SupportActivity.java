@@ -105,7 +105,7 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
 
     @Override
     public boolean isCheckNetWork() {
-        return false;
+        return true;
     }
 
     @Override
