@@ -94,8 +94,9 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
         super.onDestroy();
     }
 
+    @Nullable
     protected P getP() {
-        return mPresenter;
+        return mPresenter != null ? mPresenter : newP();
     }
 
     @NonNull

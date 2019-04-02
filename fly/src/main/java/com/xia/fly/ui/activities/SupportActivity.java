@@ -83,9 +83,9 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
         return super.dispatchTouchEvent(ev);
     }
 
-    @SuppressWarnings("unchecked")
+    @Nullable
     protected P getP() {
-        return mPresenter;
+        return mPresenter != null ? mPresenter : newP();
     }
 
     @NotNull
