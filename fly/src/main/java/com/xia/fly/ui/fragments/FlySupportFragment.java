@@ -21,7 +21,6 @@ import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import me.yokeyword.fragmentation.ISupportFragment;
 import me.yokeyword.fragmentation.SupportFragment;
 
@@ -103,12 +102,6 @@ public abstract class FlySupportFragment<P extends BaseMvpPresenter>
 
     protected P getP() {
         return mPresenter != null ? mPresenter : newP();
-    }
-
-    @NonNull
-    @Override
-    public FragmentActivity getContext() {
-        return _mActivity;
     }
 
     @Override

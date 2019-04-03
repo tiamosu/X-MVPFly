@@ -19,7 +19,6 @@ import org.jetbrains.annotations.NotNull;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import me.yokeyword.fragmentation.SupportActivity;
 
 /**
@@ -85,12 +84,6 @@ public abstract class FlySupportActivity<P extends BaseMvpPresenter>
 
     protected P getP() {
         return mPresenter != null ? mPresenter : newP();
-    }
-
-    @NotNull
-    @Override
-    public AppCompatActivity getContext() {
-        return this;
     }
 
     @Override

@@ -19,7 +19,7 @@ object Versions {
     const val leakcanary = "1.6.3"
     const val glide = "4.9.0"
     const val dagger2 = "2.21"
-    const val fragmentation = "1.0.2"
+    const val fragmentation = "1.0.3"
     const val fly = "2.5.7"
 }
 
