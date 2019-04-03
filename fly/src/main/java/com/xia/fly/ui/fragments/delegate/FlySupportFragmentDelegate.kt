@@ -23,7 +23,7 @@ import java.util.concurrent.atomic.AtomicBoolean
  * @author weixia
  * @date 2019/2/25.
  */
-class SupportFragmentDelegate(private var mFragment: FlySupportFragment<*>) {
+class FlySupportFragmentDelegate(private var mFragment: FlySupportFragment<*>) {
     private var mUnbinder: Unbinder? = null
     //防止多次初始化
     private val mInitialized = AtomicBoolean(false)

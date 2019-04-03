@@ -12,7 +12,7 @@ import com.xia.fly.integration.rxbus.IRxBusCallback;
 import com.xia.fly.integration.rxbus.RxBusHelper;
 import com.xia.fly.mvp.BaseMvpPresenter;
 import com.xia.fly.mvp.BaseMvpView;
-import com.xia.fly.ui.fragments.delegate.SupportFragmentDelegate;
+import com.xia.fly.ui.fragments.delegate.FlySupportFragmentDelegate;
 import com.xia.fly.utils.FlyUtils;
 
 import org.jetbrains.annotations.NotNull;
@@ -33,7 +33,7 @@ import me.yokeyword.fragmentation.SupportFragment;
 public abstract class FlySupportFragment<P extends BaseMvpPresenter>
         extends SupportFragment implements IFragment, BaseMvpView<P> {
 
-    private final SupportFragmentDelegate mDelegate = new SupportFragmentDelegate(this);
+    private final FlySupportFragmentDelegate mDelegate = new FlySupportFragmentDelegate(this);
     private P mPresenter;
     private Cache<String, Object> mCache;
 
