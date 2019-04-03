@@ -18,4 +18,4 @@ dependencies {
     kapt Deps.support_annotations
 }
 
-apply from: "${rootDir.path}/bintray.gradle"
+apply from: "${rootDir.path}/config_bintray.gradle"

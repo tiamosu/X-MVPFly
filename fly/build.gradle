@@ -88,4 +88,4 @@ dependencies {
     }
 }
 
-apply from: "${rootDir.path}/bintray.gradle"
+apply from: "${rootDir.path}/config_bintray.gradle"
