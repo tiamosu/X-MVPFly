@@ -9,13 +9,13 @@ import com.blankj.utilcode.util.PermissionUtils
 import com.xia.fly.demo.R
 import com.xia.fly.demo.helper.DialogHelper
 import com.xia.fly.mvp.BaseMvpPresenter
-import com.xia.fly.ui.activities.SupportActivity
+import com.xia.fly.ui.activities.FlySupportActivity
 
 /**
  * @author xia
  * @date 2018/8/16.
  */
-class SplashActivity<P : BaseMvpPresenter<*>> : SupportActivity<P>() {
+class SplashActivity<P : BaseMvpPresenter<*>> : FlySupportActivity<P>() {
     private var mIsRequestPermission = true
     private var mIsToAppSetting = false
 

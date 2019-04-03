@@ -54,21 +54,21 @@ interface IFragment {
 
     /**
      * 该方法执行于
-     * [SupportFragment.initData]
-     * [SupportFragment.initView]
-     * [SupportFragment.initEvent]
+     * [FlySupportFragment.initData]
+     * [FlySupportFragment.initView]
+     * [FlySupportFragment.initEvent]
      * 之后，可用于加载网络数据等
      */
     fun onLazyLoadData()
 
     /**
-     * 该方法确保已执行完[SupportFragment.onEnterAnimationEnd]
+     * 该方法确保已执行完[FlySupportFragment.onEnterAnimationEnd]
      * 保证转场动画的流畅性。
      * 可见时执行
      * 并执行于
-     * [SupportFragment.initData]
-     * [SupportFragment.initView]
-     * [SupportFragment.initEvent]
+     * [FlySupportFragment.initData]
+     * [FlySupportFragment.initView]
+     * [FlySupportFragment.initEvent]
      * 之后
      */
     fun onVisibleLazyLoad()

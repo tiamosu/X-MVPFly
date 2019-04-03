@@ -6,7 +6,7 @@ import android.widget.EditText
 import com.xia.fly.demo.R
 import com.xia.fly.demo.ui.fragments.MainFragment
 import com.xia.fly.ui.activities.ProxyActivity
-import com.xia.fly.ui.fragments.SupportFragment
+import com.xia.fly.ui.fragments.FlySupportFragment
 import me.yokeyword.fragmentation.anim.DefaultVerticalAnimator
 import me.yokeyword.fragmentation.anim.FragmentAnimator
 
@@ -31,7 +31,7 @@ class MainActivity : ProxyActivity() {
         super.loadProxyRootFragment(R.id.main_container_fl)
     }
 
-    override fun setRootFragment(): Class<out SupportFragment<*>> {
+    override fun setRootFragment(): Class<out FlySupportFragment<*>> {
         return MainFragment::class.java
     }
 

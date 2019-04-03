@@ -22,7 +22,7 @@ import com.xia.fly.module.common.router.Router
 import com.xia.fly.module.common.router.RouterConstant
 import com.xia.fly.ui.imageloader.ImageLoader
 import com.xia.fly.utils.FragmentUtils
-import me.yokeyword.fragmentation.AbstractSupportFragment
+import me.yokeyword.fragmentation.SupportFragment
 import java.lang.ref.WeakReference
 
 /**
@@ -75,7 +75,7 @@ class AFragment : BaseFragment<APresenter>(), AView {
             val bundle = Bundle()
             bundle.putString("Hello", "你好")
             val fragmentB = Router.obtainFragmentB()
-            (getParentDelegate<AbstractSupportFragment>() ?: this)
+            getParentDelegate<SupportFragment>()
                     .start(FragmentUtils.newInstance(fragmentB, bundle))
         }
     }

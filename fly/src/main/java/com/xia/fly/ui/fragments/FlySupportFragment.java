@@ -20,17 +20,18 @@ import org.jetbrains.annotations.NotNull;
 import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import me.yokeyword.fragmentation.AbstractSupportFragment;
 import me.yokeyword.fragmentation.ISupportFragment;
+import me.yokeyword.fragmentation.SupportFragment;
 
 /**
  * @author xia
  * @date 2018/8/1.
  */
-@SuppressWarnings("unused")
-public abstract class SupportFragment<P extends BaseMvpPresenter>
-        extends AbstractSupportFragment implements IFragment, BaseMvpView<P> {
+@SuppressWarnings("all")
+public abstract class FlySupportFragment<P extends BaseMvpPresenter>
+        extends SupportFragment implements IFragment, BaseMvpView<P> {
 
     private final SupportFragmentDelegate mDelegate = new SupportFragmentDelegate(this);
     private P mPresenter;
@@ -45,6 +46,11 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
         return mCache;
     }
 
+    public <T extends SupportFragment> T getParentDelegate() {
+        final Fragment parentFragment = getParentFragment();
+        return (T) (parentFragment != null ? parentFragment : this);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -55,20 +61,21 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
      * 在{@link #loadMultipleRootFragment(int, int, ISupportFragment...)}的情况下，
      * 该方法将会先于{{@link #onSupportVisible()}先执行
      */
+    @CallSuper
     @Override
     public void onEnterAnimationEnd(Bundle savedInstanceState) {
         mDelegate.onEnterAnimationEnd();
     }
 
+    @CallSuper
     @Override
     public void onSupportVisible() {
-        super.onSupportVisible();
         mDelegate.onSupportVisible();
     }
 
+    @CallSuper
     @Override
     public void onNewBundle(Bundle bundle) {
-        super.onNewBundle(bundle);
         mDelegate.getBundle(bundle);
     }
 
@@ -94,7 +101,6 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
         super.onDestroy();
     }
 
-    @Nullable
     protected P getP() {
         return mPresenter != null ? mPresenter : newP();
     }
@@ -102,7 +108,7 @@ public abstract class SupportFragment<P extends BaseMvpPresenter>
     @NonNull
     @Override
     public FragmentActivity getContext() {
-        return super.getContext();
+        return _mActivity;
     }
 
     @Override

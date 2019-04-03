@@ -1,9 +1,9 @@
 package com.xia.fly.ui.activities;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import com.xia.fly.R;
-import com.xia.fly.ui.fragments.SupportFragment;
 import com.xia.fly.utils.FragmentUtils;
 import com.xia.fly.utils.Preconditions;
 
@@ -11,19 +11,19 @@ import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.ContentFrameLayout;
+import me.yokeyword.fragmentation.ISupportFragment;
 
 /**
  * @author xia
  * @date 2018/7/3.
  */
-@SuppressWarnings("all")
-public abstract class ProxyActivity extends SupportActivity {
+public abstract class ProxyActivity extends FlySupportActivity {
 
     /**
      * @return 设置根Fragment
      */
     @NonNull
-    protected abstract Class<? extends SupportFragment> setRootFragment();
+    protected abstract Class<? extends ISupportFragment> setRootFragment();
 
     /**
      * @return APP被杀死重启时，是否还原到被杀死前保存的状态
@@ -49,6 +49,7 @@ public abstract class ProxyActivity extends SupportActivity {
         return mContainerLayout;
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +82,11 @@ public abstract class ProxyActivity extends SupportActivity {
                 Preconditions.checkArgument(false,
                         "you should override loadProxyRootFragment(proxyContainerId)!");
             }
-            loadRootFragment(proxyContainerId, FragmentUtils.newInstance(setRootFragment()));
+
+            final ISupportFragment toFragment = FragmentUtils.newInstance(setRootFragment());
+            if (toFragment != null) {
+                loadRootFragment(proxyContainerId, toFragment);
+            }
         }
     }
 

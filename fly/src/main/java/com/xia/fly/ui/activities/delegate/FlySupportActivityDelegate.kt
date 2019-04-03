@@ -14,7 +14,7 @@ import com.xia.fly.integration.ConnectionLiveData
 import com.xia.fly.integration.rxbus.RxBusEventTag
 import com.xia.fly.integration.rxbus.RxBusHelper
 import com.xia.fly.ui.activities.ProxyActivity
-import com.xia.fly.ui.activities.SupportActivity
+import com.xia.fly.ui.activities.FlySupportActivity
 import com.xia.fly.utils.FlyUtils
 import com.xia.fly.utils.Platform
 
@@ -22,7 +22,7 @@ import com.xia.fly.utils.Platform
  * @author weixia
  * @date 2019/2/25.
  */
-class SupportActivityDelegate(private var mActivity: SupportActivity<*>) {
+class FlySupportActivityDelegate(private var mActivity: FlySupportActivity<*>) {
     private var mUnbinder: Unbinder? = null
     //网络状态监听广播
     private var mConnectionLiveData: ConnectionLiveData? = null

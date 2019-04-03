@@ -11,7 +11,7 @@ import com.xia.fly.integration.rxbus.IRxBusCallback;
 import com.xia.fly.integration.rxbus.RxBusHelper;
 import com.xia.fly.mvp.BaseMvpPresenter;
 import com.xia.fly.mvp.BaseMvpView;
-import com.xia.fly.ui.activities.delegate.SupportActivityDelegate;
+import com.xia.fly.ui.activities.delegate.FlySupportActivityDelegate;
 import com.xia.fly.utils.FlyUtils;
 import com.xia.fly.utils.KeyboardHelper;
 
@@ -20,17 +20,17 @@ import org.jetbrains.annotations.NotNull;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import me.yokeyword.fragmentation.AbstractSupportActivity;
+import me.yokeyword.fragmentation.SupportActivity;
 
 /**
  * @author xia
  * @date 2018/8/16.
  */
-@SuppressWarnings("unused")
-public abstract class SupportActivity<P extends BaseMvpPresenter>
-        extends AbstractSupportActivity implements IActivity, BaseMvpView<P> {
+@SuppressWarnings("all")
+public abstract class FlySupportActivity<P extends BaseMvpPresenter>
+        extends SupportActivity implements IActivity, BaseMvpView<P> {
 
-    private final SupportActivityDelegate mDelegate = new SupportActivityDelegate(this);
+    private final FlySupportActivityDelegate mDelegate = new FlySupportActivityDelegate(this);
     private P mPresenter;
     private Cache<String, Object> mCache;
 
@@ -83,7 +83,6 @@ public abstract class SupportActivity<P extends BaseMvpPresenter>
         return super.dispatchTouchEvent(ev);
     }
 
-    @Nullable
     protected P getP() {
         return mPresenter != null ? mPresenter : newP();
     }

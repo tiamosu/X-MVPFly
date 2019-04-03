@@ -60,9 +60,9 @@ interface IActivity {
 
     /**
      * 该方法执行于
-     * [SupportActivity.initData]
-     * [SupportActivity.initView]
-     * [SupportActivity.initEvent]
+     * [FlySupportActivity.initData]
+     * [FlySupportActivity.initView]
+     * [FlySupportActivity.initEvent]
      * 之后，可用于加载网络数据等
      */
     fun onLazyLoadData()

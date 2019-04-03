@@ -14,7 +14,7 @@ import com.xia.fly.constant.NetworkState
 import com.xia.fly.integration.rxbus.IRxBusCallback
 import com.xia.fly.integration.rxbus.RxBusEventTag
 import com.xia.fly.integration.rxbus.RxBusHelper
-import com.xia.fly.ui.fragments.SupportFragment
+import com.xia.fly.ui.fragments.FlySupportFragment
 import com.xia.fly.utils.FlyUtils
 import com.xia.fly.utils.Platform
 import java.util.concurrent.atomic.AtomicBoolean
@@ -23,7 +23,7 @@ import java.util.concurrent.atomic.AtomicBoolean
  * @author weixia
  * @date 2019/2/25.
  */
-class SupportFragmentDelegate(private var mFragment: SupportFragment<*>) {
+class SupportFragmentDelegate(private var mFragment: FlySupportFragment<*>) {
     private var mUnbinder: Unbinder? = null
     //防止多次初始化
     private val mInitialized = AtomicBoolean(false)

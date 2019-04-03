@@ -12,7 +12,6 @@ object Android {
 
 object Versions {
     const val kotlin = "1.3.21"
-    const val support = "28.0.0"
     const val butterknife = "10.1.0"
     const val retrofit2 = "2.5.0"
     const val okhttp3 = "3.12.2" //版本3.12.X，兼容Android 4
@@ -20,14 +19,14 @@ object Versions {
     const val leakcanary = "1.6.3"
     const val glide = "4.9.0"
     const val dagger2 = "2.21"
-    const val fragmentation = "1.0.8"
+    const val fragmentation = "1.0.2"
     const val fly = "2.5.7"
 }
 
 object Publish {
     const val userOrg = "weixia" //bintray.com用户名
     const val groupId = "me.xia" //jcenter上的路径
-    const val publishVersion = "2.6.9" //版本号
+    const val publishVersion = "2.7.0" //版本号
     const val desc = "Oh hi, this is a nice description for a project, right?"
     const val website = "https://github.com/wexia/X-MVPFly"
     const val gitUrl = "https://github.com/wexia/X-MVPFly.git"
@@ -36,7 +35,7 @@ object Publish {
 
 object Deps {
     //support
-    const val support_annotations = "com.android.support:support-annotations:${Versions.support}"
+    const val support_annotations = "com.android.support:support-annotations:28.0.0"
     const val androidx_annotation = "androidx.annotation:annotation:1.0.1"
     const val androidx_appcompat = "androidx.appcompat:appcompat:1.0.2"
     const val androidx_recyclerview = "androidx.recyclerview:recyclerview:1.0.0"
@@ -90,8 +89,10 @@ object Deps {
     const val glide_compiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
 
     //fragment
-    const val fragmentation = "me.xia:fragmentation:${Versions.fragmentation}"
-    const val fragmentation_core = "me.xia:fragmentation_core:${Versions.fragmentation}"
+    const val fragmentation_core_androidx = "me.xia:fragmentation-core-androidx:${Versions.fragmentation}"
+    const val fragmentation_support_androidx = "me.xia:fragmentation-with-androidx:${Versions.fragmentation}"
+    const val fragmentation_swipeback_androidx = "me.xia:fragmentation-swipeback-androidx:${Versions.fragmentation}"
+    const val fragmentation_eventbus_activity_scope_androidx = "me.xia:eventbus-activity-scope-androidx:${Versions.fragmentation}"
 
     //loading各种动画样式
     const val loading_indicator_view = "com.wang.avi:library:2.1.3"
