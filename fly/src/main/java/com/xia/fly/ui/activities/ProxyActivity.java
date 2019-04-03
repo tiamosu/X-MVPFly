@@ -77,6 +77,7 @@ public abstract class ProxyActivity extends FlySupportActivity {
     protected void loadProxyRootFragment(int proxyContainerId) {
         Preconditions.checkNotNull(setRootFragment(),
                 "you must set the rootFragment not be null!");
+
         if (findFragment(setRootFragment()) == null) {
             if (getLayoutId() != 0 && proxyContainerId == R.id.delegate_container) {
                 Preconditions.checkArgument(false,
