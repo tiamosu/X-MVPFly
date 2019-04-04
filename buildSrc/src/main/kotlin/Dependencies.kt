@@ -19,14 +19,14 @@ object Versions {
     const val leakcanary = "1.6.3"
     const val glide = "4.9.0"
     const val dagger2 = "2.21"
-    const val fragmentation = "1.0.3"
+    const val fragmentation = "1.0.4"
     const val fly = "2.5.7"
 }
 
 object Publish {
     const val userOrg = "weixia" //bintray.com用户名
     const val groupId = "me.xia" //jcenter上的路径
-    const val publishVersion = "2.7.1" //版本号
+    const val publishVersion = "2.7.2" //版本号
     const val desc = "Oh hi, this is a nice description for a project, right?"
     const val website = "https://github.com/wexia/X-MVPFly"
     const val gitUrl = "https://github.com/wexia/X-MVPFly.git"
