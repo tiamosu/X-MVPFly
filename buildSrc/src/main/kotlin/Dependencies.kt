@@ -15,7 +15,7 @@ object Versions {
     const val butterknife = "10.1.0"
     const val retrofit2 = "2.5.0"
     const val okhttp3 = "3.12.2" //版本3.12.X，兼容Android 4
-    const val autodispose = "1.1.0"
+    const val autodispose = "1.2.0"
     const val leakcanary = "1.6.3"
     const val glide = "4.9.0"
     const val dagger2 = "2.21"
