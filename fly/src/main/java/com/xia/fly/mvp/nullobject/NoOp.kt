@@ -15,14 +15,14 @@ object NoOp {
     private val DEFAULT_VALUE = DefaultValueInvocationHandler()
 
     @JvmStatic
-    fun <T> of(interfaceClass: Class<T>): T {
+    fun <T> of(interfaceClass: Class<T>): T? {
         return newProxyInstance(interfaceClass.classLoader,
                 arrayOf<Class<*>>(interfaceClass),
-                DEFAULT_VALUE) as T
+                DEFAULT_VALUE) as? T
     }
 
     private class DefaultValueInvocationHandler : InvocationHandler {
-        override fun invoke(proxy: Any, method: Method, args: Array<Any>): Any {
+        override fun invoke(proxy: Any, method: Method, args: Array<Any>): Any? {
             return Defaults.defaultValue(method.returnType)
         }
     }
