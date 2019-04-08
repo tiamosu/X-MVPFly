@@ -10,6 +10,7 @@ buildscript {
         google()
         jcenter()
         //添加maven地址
+        maven { url "https://jitpack.io" }
         maven { url 'https://dl.bintray.com/weixia/maven' }
     }
 }
