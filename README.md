@@ -1,21 +1,5 @@
 # X-MVPFly
 
-## Gradle
--------
-
-```
-buildscript {
-
-    repositories {
-        google()
-        jcenter()
-        //添加maven地址
-        maven { url 'https://dl.bintray.com/weixia/maven' }
-    }
-}
-
-```
-
 ### fly
 [ ![Download](https://api.bintray.com/packages/weixia/maven/fly/images/download.svg) ](https://bintray.com/weixia/maven/fly/_latestVersion)
 ```
@@ -33,7 +17,6 @@ compile 'me.xia:fly-http:2.7.3'
 ```
 compile 'me.xia:fly-imageloader-glide:2.7.3'
 ```
--------
 
 ## 特别感谢
 * [Mosby](https://github.com/sockeqwe/mosby/)
