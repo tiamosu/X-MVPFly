@@ -20,13 +20,13 @@ object Versions {
     const val glide = "4.9.0"
     const val dagger2 = "2.22.1"
     const val fragmentation = "1.0.4"
-    const val fly = "2.5.7"
+    const val fly = "2.7.4"
 }
 
 object Publish {
     const val userOrg = "weixia" //bintray.com用户名
     const val groupId = "me.xia" //jcenter上的路径
-    const val publishVersion = "2.7.3" //版本号
+    const val publishVersion = "2.7.4" //版本号
     const val desc = "Oh hi, this is a nice description for a project, right?"
     const val website = "https://github.com/wexia/X-MVPFly"
     const val gitUrl = "https://github.com/wexia/X-MVPFly.git"
@@ -75,7 +75,7 @@ object Deps {
     const val rxcache2 = "com.github.VictorAlbertos.RxCache:runtime:1.8.3-2.x"
     const val rxcache_gson = "com.github.VictorAlbertos.Jolyglot:gson:0.0.4"
     const val rxerrorhandler = "me.jessyan:rxerrorhandler:2.1.1"
-    const val x_rxbus = "me.xia:x-rxbus:1.0.9"
+    const val x_rxbus = "me.xia:x-rxbus:1.1.0"
 
     //utilcode
     const val utilcode = "com.blankj:utilcodex:1.23.7"
