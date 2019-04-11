@@ -29,6 +29,11 @@ object FragmentUtils {
     }
 
     @JvmStatic
+    fun <T : ISupportFragment> newInstance(fragment: ISupportFragment?): T? {
+        return FragmentUtils.newInstance(fragment, null)
+    }
+
+    @JvmStatic
     fun <T : ISupportFragment> newInstance(fragment: ISupportFragment?, bundle: Bundle?): T? {
         fragment?.apply {
             if (bundle != null && !bundle.isEmpty) {
