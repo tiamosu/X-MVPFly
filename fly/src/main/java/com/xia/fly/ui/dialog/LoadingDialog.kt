@@ -34,6 +34,7 @@ class LoadingDialog(context: Context, @LoaderStyles.LoaderStyle type: String, pr
     }
 
     override fun initDialog() {
+        setCanceledOnTouchOutside(false)
         window?.apply {
             setGravity(Gravity.CENTER)
             setDimAmount(0.2f)
