@@ -17,6 +17,8 @@ import com.xia.fly.utils.FlyUtils;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.ref.WeakReference;
+
 import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,6 +37,11 @@ public abstract class FlySupportFragment<P extends BaseMvpPresenter>
     private final FlySupportFragmentDelegate mDelegate = new FlySupportFragmentDelegate(this);
     private P mPresenter;
     private Cache<String, Object> mCache;
+    private WeakReference<View> mRootView;
+
+    public View getRootView() {
+        return mRootView.get();
+    }
 
     @NonNull
     @Override
@@ -53,7 +60,17 @@ public abstract class FlySupportFragment<P extends BaseMvpPresenter>
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return mDelegate.onCreateView(inflater, container);
+        if (mRootView == null || getRootView() == null) {
+            final View view = mDelegate.onCreateView(inflater, container);
+            mRootView = new WeakReference<>(view);
+        } else {
+            // 缓存的rootView需要判断是否已经被加过parent， 如果有parent需要从parent删除，要不然会发生这个rootview已经有parent的错误。
+            final ViewGroup parent = (ViewGroup) getRootView().getParent();
+            if (parent != null) {
+                parent.removeView(getRootView());
+            }
+        }
+        return getRootView();
     }
 
     /**
