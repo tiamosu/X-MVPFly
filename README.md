@@ -1,9 +1,9 @@
 # X-MVPFly
 
-## Gradle
--------
+## Download
 
-```
+Gradle:
+```groovy
 buildscript {
 
     repositories {
@@ -34,9 +34,8 @@ compile 'me.xia:fly-http:2.7.6'
 ```
 compile 'me.xia:fly-imageloader-glide:2.7.6'
 ```
--------
 
-## 特别感谢
+## *特别感谢*
 * [Mosby](https://github.com/sockeqwe/mosby/)
 * [MVPArms](https://github.com/JessYanCoding/MVPArms)
 * [Fragmentation](https://github.com/YoKeyword/Fragmentation)
