@@ -4,8 +4,7 @@
 
 Gradle:
 ```groovy
-buildscript {
-
+allprojects {
     repositories {
         google()
         jcenter()
