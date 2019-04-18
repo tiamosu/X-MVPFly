@@ -13,7 +13,6 @@ allprojects {
         maven { url 'https://dl.bintray.com/weixia/maven' }
     }
 }
-
 ```
 
 ### fly
