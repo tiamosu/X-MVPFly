@@ -30,7 +30,7 @@ import me.yokeyword.fragmentation.SupportFragment;
  * @author xia
  * @date 2018/8/1.
  */
-@SuppressWarnings("all")
+@SuppressWarnings({"WeakerAccess", "unused"})
 public abstract class FlySupportFragment<P extends BaseMvpPresenter>
         extends SupportFragment implements IFragment, BaseMvpView<P> {
 
@@ -39,7 +39,7 @@ public abstract class FlySupportFragment<P extends BaseMvpPresenter>
     private Cache<String, Object> mCache;
     private WeakReference<View> mRootView;
 
-    public View getRootView() {
+    protected View getRootView() {
         return mRootView.get();
     }
 
@@ -52,6 +52,7 @@ public abstract class FlySupportFragment<P extends BaseMvpPresenter>
         return mCache;
     }
 
+    @SuppressWarnings("unchecked")
     public <T extends SupportFragment> T getParentDelegate() {
         final Fragment parentFragment = getParentFragment();
         return (T) (parentFragment != null ? parentFragment : this);

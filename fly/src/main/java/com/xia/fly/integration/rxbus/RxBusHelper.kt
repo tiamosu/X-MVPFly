@@ -1,13 +1,14 @@
 package com.xia.fly.integration.rxbus
 
-import com.blankj.rxbus.RxBus
-import com.blankj.rxbus.RxBusManager
-import com.blankj.rxbus.RxBusMessage
+import com.xia.flyrxbus.RxBus
+import com.xia.flyrxbus.RxBusManager
+import com.xia.flyrxbus.RxBusMessage
 
 /**
  * @author xia
  * @date 2018/8/13.
  */
+@Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE", "unused")
 object RxBusHelper {
 
     @JvmStatic
@@ -28,6 +29,16 @@ object RxBusHelper {
     @JvmStatic
     fun postSticky(event: RxBusMessage, tag: String) {
         RxBusManager.postSticky(event, tag)
+    }
+
+    @JvmStatic
+    fun removeSticky(event: Any) {
+        RxBusManager.removeSticky(event)
+    }
+
+    @JvmStatic
+    fun removeSticky(event: Any, tag: String) {
+        RxBusManager.removeSticky(event, tag)
     }
 
     @JvmStatic

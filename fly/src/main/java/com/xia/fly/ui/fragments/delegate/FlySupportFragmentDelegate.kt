@@ -8,7 +8,6 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import butterknife.ButterKnife
 import butterknife.Unbinder
-import com.blankj.rxbus.RxBusMessage
 import com.blankj.utilcode.util.NetworkUtils
 import com.xia.fly.constant.NetworkState
 import com.xia.fly.integration.rxbus.IRxBusCallback
@@ -17,6 +16,7 @@ import com.xia.fly.integration.rxbus.RxBusHelper
 import com.xia.fly.ui.fragments.FlySupportFragment
 import com.xia.fly.utils.FlyUtils
 import com.xia.fly.utils.Platform
+import com.xia.flyrxbus.RxBusMessage
 import java.util.concurrent.atomic.AtomicBoolean
 
 /**

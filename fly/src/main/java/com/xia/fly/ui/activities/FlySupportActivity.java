@@ -25,7 +25,7 @@ import me.yokeyword.fragmentation.SupportActivity;
  * @author xia
  * @date 2018/8/16.
  */
-@SuppressWarnings("all")
+@SuppressWarnings("unused")
 public abstract class FlySupportActivity<P extends BaseMvpPresenter>
         extends SupportActivity implements IActivity, BaseMvpView<P> {
 

@@ -1,6 +1,6 @@
 package com.xia.fly.integration.rxbus
 
-import com.blankj.rxbus.RxBusMessage
+import com.xia.flyrxbus.RxBusMessage
 
 /**
  * @author xia
