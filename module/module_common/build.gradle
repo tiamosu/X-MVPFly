@@ -11,6 +11,4 @@ dependencies {
     implementation Deps.okhttp3_logging_interceptor
 
     debugImplementation Deps.leakcanary_android
-    releaseImplementation Deps.leakcanary_android_no_op
-    debugImplementation Deps.leakcanary_support_fragment
 }
