@@ -5,15 +5,6 @@ apply {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    api Deps.kotlin_stdlib
-    api(Deps.kotlin_stdlib_jdk7) {
-        exclude module: "kotlin-stdlib"
-    }
-    api(Deps.kotlin_stdlib_jdk8) {
-        exclude module: "kotlin-stdlib"
-        exclude module: "kotlin-stdlib-jdk7"
-    }
-
     //support
     api Deps.androidx_multidex
     api Deps.androidx_appcompat
