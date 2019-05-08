@@ -10,7 +10,7 @@ import com.bumptech.glide.load.resource.bitmap.BitmapTransformation
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
-import com.xia.fly.imageloader.CustomDiskCacheStrategy.StrategyType
+import com.xia.fly.imageloader.GlideDiskCacheStrategy.StrategyType
 import com.xia.fly.imageloader.TranscodeType.Type
 import com.xia.fly.ui.imageloader.BaseImageLoaderStrategy
 import com.xia.fly.ui.imageloader.ImageConfig

@@ -35,11 +35,11 @@ class GlideImageLoaderStrategy : BaseImageLoaderStrategy<ImageConfigImpl>, Glide
 
         //缓存策略
         when (config.mCacheStrategy) {
-            CustomDiskCacheStrategy.ALL -> glideRequest.diskCacheStrategy(DiskCacheStrategy.ALL)
-            CustomDiskCacheStrategy.NONE -> glideRequest.diskCacheStrategy(DiskCacheStrategy.NONE)
-            CustomDiskCacheStrategy.RESOURCE -> glideRequest.diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-            CustomDiskCacheStrategy.DATA -> glideRequest.diskCacheStrategy(DiskCacheStrategy.DATA)
-            CustomDiskCacheStrategy.AUTOMATIC -> glideRequest.diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+            GlideDiskCacheStrategy.ALL -> glideRequest.diskCacheStrategy(DiskCacheStrategy.ALL)
+            GlideDiskCacheStrategy.NONE -> glideRequest.diskCacheStrategy(DiskCacheStrategy.NONE)
+            GlideDiskCacheStrategy.RESOURCE -> glideRequest.diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+            GlideDiskCacheStrategy.DATA -> glideRequest.diskCacheStrategy(DiskCacheStrategy.DATA)
+            GlideDiskCacheStrategy.AUTOMATIC -> glideRequest.diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
             else -> glideRequest.diskCacheStrategy(DiskCacheStrategy.ALL)
         }
 
@@ -142,8 +142,7 @@ class GlideImageLoaderStrategy : BaseImageLoaderStrategy<ImageConfigImpl>, Glide
             else -> request.asDrawable() as GlideRequest<Any>
         }
 
-        val o = config.mObject
-        return when (o) {
+        return when (val o = config.mObject) {
             is Bitmap -> glideRequest.load(o as Bitmap?)
             is Drawable -> glideRequest.load(o as Drawable?)
             is Int -> glideRequest.load(o as Int?)

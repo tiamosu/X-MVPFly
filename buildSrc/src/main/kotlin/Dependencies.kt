@@ -14,13 +14,13 @@ object Versions {
     const val kotlin = "1.3.30"
     const val butterknife = "10.1.0"
     const val retrofit2 = "2.5.0"
-    const val okhttp3 = "3.12.2" //版本3.12.X，兼容Android 4
+    const val okhttp3 = "3.12.3" //版本3.12.X，兼容Android 4
     const val autodispose = "1.2.0"
     const val leakcanary = "1.6.3"
     const val glide = "4.9.0"
     const val dagger2 = "2.22.1"
     const val fragmentation = "1.0.4"
-    const val fly = "2.7.4"
+    const val fly = "2.7.7"
 }
 
 object Publish {

@@ -6,7 +6,7 @@ import androidx.annotation.IntDef
  * @author xia
  * @date 2018/9/19.
  */
-object CustomDiskCacheStrategy {
+object GlideDiskCacheStrategy {
     const val ALL = 0
     const val NONE = 1
     const val RESOURCE = 2
