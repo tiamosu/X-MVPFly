@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.xia.fly.BuildConfig
 import com.xia.fly.base.delegate.AppLifecycles
 import me.yokeyword.fragmentation.Fragmentation
+import me.yokeyword.fragmentation.helper.ExceptionHandler
 
 /**
  * @author xia
@@ -24,7 +25,9 @@ class AppLifecyclesImpl : AppLifecycles {
                 //设置 栈视图 模式为 （默认）悬浮球模式   SHAKE: 摇一摇唤出  NONE：隐藏， 仅在Debug环境生效
                 .stackViewMode(Fragmentation.BUBBLE)
                 .debug(BuildConfig.DEBUG)
-                .handleException { }
+                .handleException(object : ExceptionHandler {
+                    override fun onException(e: Exception) {}
+                })
                 .install()
 
         if (BuildConfig.DEBUG) {

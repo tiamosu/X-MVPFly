@@ -51,7 +51,7 @@ class SplashActivity<P : BaseMvpPresenter<*>> : FlySupportActivity<P>() {
 
     private fun permission() {
         PermissionUtils.permission(PermissionConstants.CAMERA, PermissionConstants.STORAGE)
-                .rationale { shouldRequest -> DialogHelper.showRationaleDialog(context, shouldRequest) }
+                .rationale { shouldRequest -> DialogHelper.showRationaleDialog(getContext(), shouldRequest) }
                 .callback(object : PermissionUtils.FullCallback {
                     override fun onGranted(permissionsGranted: List<String>) {
                         ActivityUtils.startActivity(MainActivity::class.java)
@@ -59,7 +59,7 @@ class SplashActivity<P : BaseMvpPresenter<*>> : FlySupportActivity<P>() {
 
                     override fun onDenied(permissionsDeniedForever: List<String>,
                                           permissionsDenied: List<String>) {
-                        DialogHelper.showOpenAppSettingDialog(context)
+                        DialogHelper.showOpenAppSettingDialog(getContext())
                     }
                 })
                 .request()

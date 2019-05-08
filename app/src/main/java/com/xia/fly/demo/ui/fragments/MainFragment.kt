@@ -43,7 +43,7 @@ class MainFragment : BaseFragment<BaseMvpPresenter<*>>() {
         val firstFragment = findChildFragment(fragmentA.javaClass)
         if (firstFragment == null) {
             mFragments[0] = fragmentA
-            loadMultipleRootFragment(R.id.main_fl, 0, *mFragments)
+            loadMultipleRootFragment(R.id.main_fl, 0, mFragments)
         } else {
             mFragments[0] = firstFragment
         }

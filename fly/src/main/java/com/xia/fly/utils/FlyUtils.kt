@@ -38,7 +38,7 @@ object FlyUtils {
                 lifecycleOwner.context
             }
             is FlySupportActivity<*> -> {
-                lifecycleOwner.context
+                lifecycleOwner.getContext()
             }
             is Activity -> {
                 lifecycleOwner
@@ -57,7 +57,7 @@ object FlyUtils {
             }
             is FlySupportFragment<*> -> {
                 val fragment = lifecycleOwner as FlySupportFragment<*>?
-                return fragment!!.isSupportVisible
+                return fragment!!.isSupportVisible()
             }
             is Fragment -> {
                 val fragment = lifecycleOwner as Fragment?

@@ -11,7 +11,7 @@ object Android {
 }
 
 object Versions {
-    const val kotlin = "1.3.30"
+    const val kotlin = "1.3.31"
     const val butterknife = "10.1.0"
     const val retrofit2 = "2.5.0"
     const val okhttp3 = "3.12.3" //版本3.12.X，兼容Android 4
@@ -19,7 +19,7 @@ object Versions {
     const val leakcanary = "1.6.3"
     const val glide = "4.9.0"
     const val dagger2 = "2.22.1"
-    const val fragmentation = "1.0.4"
+    const val fragmentation = "1.0.6"
     const val fly = "2.7.7"
 }
 
@@ -48,8 +48,9 @@ object Deps {
     const val kotlin_stdlib_jdk8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
 
     //arouter
-    const val arouter_api = "com.alibaba:arouter-api:1.4.1"
+    const val arouter_api = "com.alibaba:arouter-api:1.5.0"
     const val arouter_compiler = "com.alibaba:arouter-compiler:1.2.2"
+    const val arouter_annotation = "com.alibaba:arouter-annotation:1.0.6"
 
     //butterknife
     const val butterknife = "com.jakewharton:butterknife:${Versions.butterknife}"

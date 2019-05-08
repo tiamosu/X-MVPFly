@@ -76,7 +76,7 @@ class AFragment : BaseFragment<APresenter>(), AView {
             bundle.putString("Hello", "你好")
             val fragmentB = Router.obtainFragmentB()
             getParentDelegate<SupportFragment>()
-                    .start(FragmentUtils.newInstance(fragmentB, bundle))
+                    .start(FragmentUtils.newInstance(fragmentB, bundle)!!)
         }
     }
 
