@@ -7,7 +7,6 @@ import android.util.Log
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageView
 import butterknife.BindView
-import com.alibaba.android.arouter.facade.annotation.Route
 import com.bumptech.glide.request.target.DrawableImageViewTarget
 import com.bumptech.glide.request.transition.Transition
 import com.xia.fly.imageloader.ImageConfigImpl
@@ -19,7 +18,6 @@ import com.xia.fly.module.a.mvp.presenter.APresenter
 import com.xia.fly.module.a.mvp.view.AView
 import com.xia.fly.module.common.base.BaseFragment
 import com.xia.fly.module.common.router.Router
-import com.xia.fly.module.common.router.RouterConstant
 import com.xia.fly.ui.imageloader.ImageLoader
 import com.xia.fly.utils.FragmentUtils
 import me.yokeyword.fragmentation.SupportFragment
@@ -29,7 +27,6 @@ import java.lang.ref.WeakReference
  * @author weixia
  * @date 2019/3/15.
  */
-@Route(path = RouterConstant.FRAGMENT_A)
 class AFragment : BaseFragment<APresenter>(), AView {
     @BindView(R2.id.jump_btn)
     lateinit var mAppCompatButton: AppCompatButton
@@ -63,7 +60,7 @@ class AFragment : BaseFragment<APresenter>(), AView {
             Log.e("weixi", "run")
         })
 
-        Log.e("weixi", "cls:" + Router.obtainFragmentB())
+        Log.e("weixi", "cls:" + Router.obtainFragmentBCls())
     }
 
     override fun initView() {
@@ -74,7 +71,7 @@ class AFragment : BaseFragment<APresenter>(), AView {
         mAppCompatButton.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("Hello", "你好")
-            val fragmentB = Router.obtainFragmentB()
+            val fragmentB = Router.obtainFragmentBCls()
             getParentDelegate<SupportFragment>()
                     .start(FragmentUtils.newInstance(fragmentB, bundle)!!)
         }

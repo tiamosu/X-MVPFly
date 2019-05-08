@@ -10,12 +10,12 @@ object RouterConstant {
     //        ModuleA分组        //
     // =========================//
     private const val MODULE_A = "/moduleA/"
-    const val FRAGMENT_A = MODULE_A + "AFragment"
+    const val PROVIDER_A = MODULE_A + "PROVIDER_A"
 
 
     //==========================//
     //        ModuleB分组        //
     // =========================//
     private const val MODULE_B = "/moduleB/"
-    const val FRAGMENT_B = MODULE_B + "BFragment"
+    const val PROVIDER_B = MODULE_B + "PROVIDER_B"
 }

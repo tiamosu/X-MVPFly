@@ -8,6 +8,7 @@ import com.xia.fly.demo.R
 import com.xia.fly.module.common.base.BaseFragment
 import com.xia.fly.module.common.router.Router
 import com.xia.fly.mvp.BaseMvpPresenter
+import com.xia.fly.utils.FragmentUtils
 import me.yokeyword.fragmentation.ISupportFragment
 
 /**
@@ -39,10 +40,10 @@ class MainFragment : BaseFragment<BaseMvpPresenter<*>>() {
     }
 
     override fun initData() {
-        val fragmentA = Router.obtainFragmentA()
-        val firstFragment = findChildFragment(fragmentA.javaClass)
+        val fragmentA = Router.obtainFragmentACls()
+        val firstFragment = findChildFragment(fragmentA)
         if (firstFragment == null) {
-            mFragments[0] = fragmentA
+            mFragments[0] = FragmentUtils.newInstance(fragmentA)
             loadMultipleRootFragment(R.id.main_fl, 0, mFragments)
         } else {
             mFragments[0] = firstFragment

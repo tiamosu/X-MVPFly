@@ -10,16 +10,25 @@ import me.yokeyword.fragmentation.ISupportFragment
  */
 object Router {
 
-    fun obtainFragmentA(): ISupportFragment {
-        return obtainFragment(RouterConstant.FRAGMENT_A)
+    fun obtainFragmentACls(): Class<out ISupportFragment> {
+        return obtainFragmentCls(getProviderA().obtainACls())
     }
 
-    fun obtainFragmentB(): ISupportFragment {
-        return obtainFragment(RouterConstant.FRAGMENT_B)
+    fun obtainFragmentBCls(): Class<out ISupportFragment> {
+        return obtainFragmentCls(getProviderB().obtainBCls())
     }
 
-    private fun obtainFragment(routerPath: String): ISupportFragment {
-        val fragment = ARouter.getInstance().build(routerPath).navigation() as? ISupportFragment?
-        return fragment ?: EmptyFragment()
+    private fun getProviderA(): IProviderA {
+        return ARouter.getInstance()
+                .build(RouterConstant.PROVIDER_A).navigation() as IProviderA
+    }
+
+    private fun getProviderB(): IProviderB {
+        return ARouter.getInstance()
+                .build(RouterConstant.PROVIDER_B).navigation() as IProviderB
+    }
+
+    private fun obtainFragmentCls(cls: Class<out ISupportFragment>?): Class<out ISupportFragment> {
+        return cls ?: EmptyFragment::class.java
     }
 }
