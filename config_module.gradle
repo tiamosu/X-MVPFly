@@ -41,6 +41,5 @@ dependencies {
     api(Deps.arouter_api) {
         exclude group: "androidx.legacy"
     }
-    api Deps.arouter_annotation
     kapt Deps.arouter_compiler
 }

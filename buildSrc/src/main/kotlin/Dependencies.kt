@@ -20,13 +20,13 @@ object Versions {
     const val glide = "4.9.0"
     const val dagger2 = "2.22.1"
     const val fragmentation = "1.0.6"
-    const val fly = "2.7.7"
+    const val fly = "2.7.8"
 }
 
 object Publish {
     const val userOrg = "weixia" //bintray.com用户名
     const val groupId = "me.xia" //jcenter上的路径
-    const val publishVersion = "2.7.7" //版本号
+    const val publishVersion = "2.7.8" //版本号
     const val desc = "Oh hi, this is a nice description for a project, right?"
     const val website = "https://github.com/wexia/X-MVPFly"
     const val gitUrl = "https://github.com/wexia/X-MVPFly.git"
@@ -48,9 +48,8 @@ object Deps {
     const val kotlin_stdlib_jdk8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
 
     //arouter
-    const val arouter_api = "com.alibaba:arouter-api:1.5.0"
+    const val arouter_api = "com.alibaba:arouter-api:1.4.1"
     const val arouter_compiler = "com.alibaba:arouter-compiler:1.2.2"
-    const val arouter_annotation = "com.alibaba:arouter-annotation:1.0.6"
 
     //butterknife
     const val butterknife = "com.jakewharton:butterknife:${Versions.butterknife}"

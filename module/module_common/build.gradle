@@ -4,11 +4,13 @@ apply {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+//    api Deps.fly
+//    api Deps.fly_http
+//    api Deps.fly_imageloader_glide
     api project(':fly')
     api project(':fly-http')
     api project(':fly-imageloader-glide')
 
     implementation Deps.okhttp3_logging_interceptor
-
     debugImplementation Deps.leakcanary_android
 }
