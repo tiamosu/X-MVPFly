@@ -43,14 +43,14 @@ class PostRequest(url: String) : BaseBodyRequest<PostRequest>(url) {
     }
 
     private fun addParams(builder: MultipartBody.Builder): RequestBody {
-        if (!mParams.isEmpty()) {
+        if (mParams.isNotEmpty()) {
             for ((key, value) in mParams) {
-                builder.addPart(Headers.of("Content-Disposition",
-                        "form-data; name=\"$key\""),
+                builder.addPart(Headers.of(
+                        "Content-Disposition", "form-data; name=\"$key\""),
                         RequestBody.create(null, value))
             }
         }
-        if (!mFileParams.isEmpty()) {
+        if (mFileParams.isNotEmpty()) {
             for ((key, file) in mFileParams) {
                 val fileBody = RequestBody.create(MediaType.parse(guessMimeType(file.name)), file)
                 val uploadProgressRequestBody = UploadProgressRequestBody(fileBody, mUpdateFileCallback)
@@ -68,6 +68,6 @@ class PostRequest(url: String) : BaseBodyRequest<PostRequest>(url) {
         } catch (e: UnsupportedEncodingException) {
             e.printStackTrace()
         }
-        return contentTypeFor?:"application/octet-stream"
+        return contentTypeFor ?: "application/octet-stream"
     }
 }

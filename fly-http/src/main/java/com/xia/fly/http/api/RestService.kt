@@ -16,6 +16,7 @@ interface RestService {
     // =========================//
 
     @POST
+    @Headers("Content-Type: application/x-www-form-urlencoded; charset=UTF-8", "Accept: */*")
     @FormUrlEncoded
     fun post(@Url url: String, @FieldMap maps: MutableMap<String, String>): Observable<ResponseBody>
 
@@ -26,7 +27,7 @@ interface RestService {
     fun postBody(@Url url: String, @Body body: RequestBody): Observable<ResponseBody>
 
     @POST
-    @Headers("Content-Type: application/json", "Accept: application/json")
+    @Headers("Content-Type: application/json; charset=utf-8", "Accept: application/json")
     fun postJson(@Url url: String, @Body jsonBody: RequestBody): Observable<ResponseBody>
 
 
@@ -52,7 +53,7 @@ interface RestService {
     fun deleteBody(@Url url: String, @Body body: RequestBody): Observable<ResponseBody>
 
     @DELETE
-    @Headers("Content-Type: application/json", "Accept: application/json")
+    @Headers("Content-Type: application/json; charset=utf-8", "Accept: application/json")
     fun deleteJson(@Url url: String, @Body jsonBody: RequestBody): Observable<ResponseBody>
 
 
@@ -70,7 +71,7 @@ interface RestService {
     fun putBody(@Url url: String, @Body body: RequestBody): Observable<ResponseBody>
 
     @PUT
-    @Headers("Content-Type: application/json", "Accept: application/json")
+    @Headers("Content-Type: application/json; charset=utf-8", "Accept: application/json")
     fun putJson(@Url url: String, @Body jsonBody: RequestBody): Observable<ResponseBody>
 
 
