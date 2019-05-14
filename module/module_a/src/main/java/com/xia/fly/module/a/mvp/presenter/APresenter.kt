@@ -13,11 +13,11 @@ class APresenter : BaseMvpPresenter<AView>() {
 
     fun load(index: Int) {
         Log.e("weixi", "load")
-        Log.e("weixi", "getView:${getV()}")
-        Log.e("weixi", "boolean:${getV().boolean}")
-        Log.e("weixi", "${getV().num}")
+        Log.e("weixi", "getView:$v")
+        Log.e("weixi", "boolean:${v.boolean}")
+        Log.e("weixi", "${v.num}")
 
-        getV().setData("你好啊！！！")
+        v.setData("你好啊！！！")
     }
 
     @Suppress("RedundantOverride")
