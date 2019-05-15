@@ -6,6 +6,9 @@ import com.xia.fly.ui.fragments.FlySupportFragment;
 
 import androidx.annotation.NonNull;
 
+/**
+ * @author weixia
+ */
 public class MainActivity extends ProxyActivity {
 
     @NonNull

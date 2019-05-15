@@ -13,6 +13,7 @@ import com.xia.fly.constant.NetworkState
 import com.xia.fly.integration.rxbus.IRxBusCallback
 import com.xia.fly.integration.rxbus.RxBusEventTag
 import com.xia.fly.integration.rxbus.RxBusHelper
+import com.xia.fly.mvp.BaseMvpPresenter
 import com.xia.fly.ui.fragments.FlySupportFragment
 import com.xia.fly.utils.FlyUtils
 import com.xia.fly.utils.Platform
@@ -133,9 +134,13 @@ class FlySupportFragmentDelegate(private var mFragment: FlySupportFragment<*>) {
         }
     }
 
-    fun onDestroy() {
+    fun <P : BaseMvpPresenter<*>> onDestroy(presenter: P?) {
         RxBusHelper.unregister(mFragment)
         Platform.getHandler().removeCallbacksAndMessages(null)
+        if (presenter != null) {
+            presenter.detachView()
+            mFragment.lifecycle.removeObserver(presenter)
+        }
         if (mUnbinder != null && mUnbinder !== Unbinder.EMPTY) {
             try {
                 //fix Bindings already cleared

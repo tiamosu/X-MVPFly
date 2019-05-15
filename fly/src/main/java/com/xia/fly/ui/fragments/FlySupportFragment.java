@@ -92,7 +92,7 @@ public abstract class FlySupportFragment<P extends BaseMvpPresenter>
 
     @CallSuper
     @Override
-    public void onNewBundle(Bundle bundle) {
+    public void onNewBundle(@NotNull Bundle bundle) {
         mDelegate.getBundle(bundle);
     }
 
@@ -110,11 +110,7 @@ public abstract class FlySupportFragment<P extends BaseMvpPresenter>
 
     @Override
     public void onDestroy() {
-        mDelegate.onDestroy();
-        if (mPresenter != null) {
-            mPresenter.detachView();
-            getLifecycle().removeObserver(mPresenter);
-        }
+        mDelegate.onDestroy(mPresenter);
         super.onDestroy();
     }
 

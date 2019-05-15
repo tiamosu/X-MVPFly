@@ -12,8 +12,9 @@ import com.xia.fly.constant.NetworkState
 import com.xia.fly.integration.ConnectionLiveData
 import com.xia.fly.integration.rxbus.RxBusEventTag
 import com.xia.fly.integration.rxbus.RxBusHelper
-import com.xia.fly.ui.activities.ProxyActivity
+import com.xia.fly.mvp.BaseMvpPresenter
 import com.xia.fly.ui.activities.FlySupportActivity
+import com.xia.fly.ui.activities.ProxyActivity
 import com.xia.fly.utils.FlyUtils
 import com.xia.fly.utils.Platform
 import com.xia.flyrxbus.RxBusMessage
@@ -114,11 +115,19 @@ class FlySupportActivityDelegate(private var mActivity: FlySupportActivity<*>) {
         }
     }
 
-    fun onDestroy() {
+    fun <P : BaseMvpPresenter<*>> onDestroy(presenter: P?) {
         RxBusHelper.unregister(mActivity)
         Platform.getHandler().removeCallbacksAndMessages(null)
+        if (presenter != null) {
+            presenter.detachView()
+            mActivity.lifecycle.removeObserver(presenter)
+        }
         if (mUnbinder != null && mUnbinder !== Unbinder.EMPTY) {
-            mUnbinder!!.unbind()
+            try {
+                //fix Bindings already cleared
+                mUnbinder!!.unbind()
+            } catch (ignored: IllegalStateException) {
+            }
             mUnbinder = null
         }
         if (mConnectionLiveData != null) {

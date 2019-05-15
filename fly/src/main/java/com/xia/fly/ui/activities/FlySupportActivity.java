@@ -68,16 +68,12 @@ public abstract class FlySupportActivity<P extends BaseMvpPresenter>
 
     @Override
     protected void onDestroy() {
-        mDelegate.onDestroy();
-        if (mPresenter != null) {
-            mPresenter.detachView();
-            getLifecycle().removeObserver(mPresenter);
-        }
+        mDelegate.onDestroy(mPresenter);
         super.onDestroy();
     }
 
     @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
+    public boolean dispatchTouchEvent(@NotNull MotionEvent ev) {
         KeyboardHelper.dispatchTouchEvent(this, ev);
         return super.dispatchTouchEvent(ev);
     }
