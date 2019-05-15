@@ -15,7 +15,7 @@ interface IActivity {
 
     /**
      * @return 用于布局加载
-     * 如果[.getLayoutId]返回0，则不会生产视图
+     * 如果[getLayoutId]返回0，则不会生产视图
      */
     fun getLayoutId(): Int
 
