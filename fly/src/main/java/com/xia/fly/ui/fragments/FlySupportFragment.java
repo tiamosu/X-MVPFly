@@ -40,7 +40,7 @@ public abstract class FlySupportFragment<P extends BaseMvpPresenter>
     private WeakReference<View> mRootView;
 
     protected View getRootView() {
-        return mRootView.get();
+        return mRootView != null ? mRootView.get() : null;
     }
 
     @NonNull
