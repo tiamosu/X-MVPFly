@@ -15,12 +15,11 @@ object Versions {
     const val butterknife = "10.1.0"
     const val retrofit2 = "2.5.0"
     const val okhttp3 = "3.12.3" //版本3.12.X，兼容Android 4
-    const val autodispose = "1.2.0"
-    const val leakcanary = "1.6.3"
+    const val autodispose = "1.3.0"
     const val glide = "4.9.0"
     const val dagger2 = "2.22.1"
     const val fragmentation = "1.0.7"
-    const val fly = "2.7.8"
+    const val fly = "2.8.0"
 }
 
 object Publish {
