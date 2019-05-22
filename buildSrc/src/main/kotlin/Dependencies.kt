@@ -59,7 +59,7 @@ object Deps {
     const val dagger2_apt = "com.google.dagger:dagger-compiler:${Versions.dagger2}"
 
     //leakcanary
-    const val leakcanary_android = "com.squareup.leakcanary:leakcanary-android:2.0-alpha-1"
+    const val leakcanary_android = "com.squareup.leakcanary:leakcanary-android:2.0-alpha-2"
 
     //rx
     const val retrofit2 = "com.squareup.retrofit2:retrofit:${Versions.retrofit2}"
@@ -72,7 +72,7 @@ object Deps {
     const val rxcache2 = "com.github.VictorAlbertos.RxCache:runtime:1.8.3-2.x"
     const val rxcache_gson = "com.github.VictorAlbertos.Jolyglot:gson:0.0.4"
     const val rxerrorhandler = "me.jessyan:rxerrorhandler:2.1.1"
-    const val x_rxbus = "me.xia:x-flyrxbus:1.0.2"
+    const val x_rxbus = "me.xia:x-flyrxbus:1.0.5"
 
     //utilcode
     const val utilcode = "com.blankj:utilcodex:1.23.7"
