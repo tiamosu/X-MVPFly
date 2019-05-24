@@ -24,7 +24,17 @@ open class CallbackSubscriber(var mCallback: Callback<*>?)
 
     private var mDisposable: Disposable? = null
 
+    /**
+     * 是否网络数据请求时，显示加载框
+     */
     protected open fun isShowLoadingDialog(): Boolean {
+        return true
+    }
+
+    /**
+     * 是否进行全局错误统一处理
+     */
+    protected open fun isGlobalErrorHandle(): Boolean {
         return true
     }
 
@@ -50,7 +60,9 @@ open class CallbackSubscriber(var mCallback: Callback<*>?)
     }
 
     override fun onError(e: Throwable) {
-        super.onError(e)
+        if (isGlobalErrorHandle()) {
+            super.onError(e)
+        }
         Platform.post(Action {
             mCallback?.onError(e)
             mCallback = null
