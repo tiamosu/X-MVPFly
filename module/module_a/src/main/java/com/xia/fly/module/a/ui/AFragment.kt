@@ -4,22 +4,20 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import androidx.appcompat.widget.AppCompatButton
-import androidx.appcompat.widget.AppCompatImageView
-import butterknife.BindView
+import android.view.View
 import com.bumptech.glide.request.target.DrawableImageViewTarget
 import com.bumptech.glide.request.transition.Transition
 import com.xia.fly.imageloader.ImageConfigImpl
 import com.xia.fly.imageloader.TranscodeType
 import com.xia.fly.integration.handler.WeakHandler
 import com.xia.fly.module.a.R
-import com.xia.fly.module.a.R2
 import com.xia.fly.module.a.mvp.presenter.APresenter
 import com.xia.fly.module.a.mvp.view.AView
 import com.xia.fly.module.common.base.BaseFragment
 import com.xia.fly.module.common.router.Router
 import com.xia.fly.ui.imageloader.ImageLoader
 import com.xia.fly.utils.FragmentUtils
+import kotlinx.android.synthetic.main.fragment_a.*
 import me.yokeyword.fragmentation.SupportFragment
 import java.lang.ref.WeakReference
 
@@ -27,11 +25,7 @@ import java.lang.ref.WeakReference
  * @author weixia
  * @date 2019/3/15.
  */
-class AFragment : BaseFragment<APresenter>(), AView {
-    @BindView(R2.id.jump_btn)
-    lateinit var mAppCompatButton: AppCompatButton
-    @BindView(R2.id.photo_iv)
-    lateinit var mImageView: AppCompatImageView
+class AFragment : BaseFragment<APresenter>(), AView, View.OnClickListener {
 
     override fun isLoadTitleBar(): Boolean {
         return false
@@ -64,17 +58,12 @@ class AFragment : BaseFragment<APresenter>(), AView {
     }
 
     override fun initView() {
-        mAppCompatButton.text = "跳转下一页"
+        jump_btn.text = "跳转下一页"
     }
 
     override fun initEvent() {
-        mAppCompatButton.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putString("Hello", "你好")
-            val fragmentB = Router.obtainFragmentBCls()
-            getParentDelegate<SupportFragment>()
-                    .start(FragmentUtils.newInstance(fragmentB, bundle)!!)
-        }
+        jump_btn.setOnClickListener(this)
+        test_btn.setOnClickListener(this)
     }
 
     override fun onVisibleLazyLoad() {
@@ -89,10 +78,10 @@ class AFragment : BaseFragment<APresenter>(), AView {
                         .crossFade()
                         .centerCrop()
                         .circleCrop()
-                        .into(object : DrawableImageViewTarget(mImageView) {
+                        .into(object : DrawableImageViewTarget(photo_iv) {
                             override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
                                 super.onResourceReady(resource, transition)
-                                mAppCompatButton.text = "加载完毕，点击进入下一页"
+                                jump_btn.text = "加载完毕，点击进入下一页"
                             }
                         })
                         .build()
@@ -136,4 +125,19 @@ class AFragment : BaseFragment<APresenter>(), AView {
 
     override val num: Int
         get() = 99
+
+    override fun onClick(view: View?) {
+        when (view?.id) {
+            R.id.jump_btn -> {
+                val bundle = Bundle()
+                bundle.putString("Hello", "你好")
+                val fragmentB = Router.obtainFragmentBCls()
+                getParentDelegate<SupportFragment>()
+                        .start(FragmentUtils.newInstance(fragmentB, bundle)!!)
+            }
+            R.id.test_btn -> {
+                p.test()
+            }
+        }
+    }
 }

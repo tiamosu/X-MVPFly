@@ -20,6 +20,9 @@ class APresenter : BaseMvpPresenter<AView>() {
         v.setData("你好啊！！！")
     }
 
+    fun test() {
+    }
+
     @Suppress("RedundantOverride")
     override fun onCreate(owner: LifecycleOwner) {
         super.onCreate(owner)

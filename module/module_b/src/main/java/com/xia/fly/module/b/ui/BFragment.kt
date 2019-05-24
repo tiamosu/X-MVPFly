@@ -1,22 +1,17 @@
 package com.xia.fly.module.b.ui
 
 import android.view.View
-import androidx.appcompat.widget.AppCompatTextView
-import butterknife.BindView
 import com.xia.fly.module.b.R
-import com.xia.fly.module.b.R2
 import com.xia.fly.module.b.mvp.presenter.BPresenter
 import com.xia.fly.module.b.mvp.view.BView
 import com.xia.fly.module.common.base.BaseFragment
+import kotlinx.android.synthetic.main.fragment_b.*
 
 /**
  * @author weixia
  * @date 2019/3/15.
  */
 class BFragment : BaseFragment<BPresenter>(), BView {
-
-    @BindView(R2.id.tv_content)
-    lateinit var mContentTv: AppCompatTextView
 
     override fun isLoadTitleBar(): Boolean {
         return true
@@ -50,6 +45,6 @@ class BFragment : BaseFragment<BPresenter>(), BView {
     }
 
     override fun setContent(content: String?) {
-        mContentTv.text = content ?: ""
+        tv_content.text = content ?: ""
     }
 }

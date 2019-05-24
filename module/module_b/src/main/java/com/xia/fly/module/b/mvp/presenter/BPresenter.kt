@@ -1,15 +1,11 @@
 package com.xia.fly.module.b.mvp.presenter
 
-import android.annotation.SuppressLint
 import android.util.Log
-import com.blankj.utilcode.util.NetworkUtils
-import com.blankj.utilcode.util.ToastUtils
 import com.xia.fly.http.RxHttp
 import com.xia.fly.http.callback.AbstractStringCallback
 import com.xia.fly.http.subscriber.CallbackSubscriber
 import com.xia.fly.module.b.mvp.view.BView
 import com.xia.fly.mvp.BaseMvpPresenter
-import io.reactivex.disposables.Disposable
 
 /**
  * @author weixia
@@ -26,16 +22,6 @@ class BPresenter : BaseMvpPresenter<BView>() {
                         Log.e("weixi", "onResponse$index :$response")
                         v.setContent(response)
                     }
-                }) {
-                    @SuppressLint("MissingPermission")
-                    override fun onSubscribe(d: Disposable) {
-                        if (!NetworkUtils.isConnected()) {
-                            d.dispose()
-                            ToastUtils.showShort("无法连接网络")
-                            return
-                        }
-                        super.onSubscribe(d)
-                    }
-                })
+                }) {})
     }
 }
