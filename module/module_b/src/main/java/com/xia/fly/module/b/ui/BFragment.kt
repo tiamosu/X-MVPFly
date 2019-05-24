@@ -45,6 +45,6 @@ class BFragment : BaseFragment<BPresenter>(), BView {
     }
 
     override fun setContent(content: String?) {
-        tv_content.text = content ?: ""
+        tv_content?.text = content ?: ""
     }
 }
