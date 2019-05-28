@@ -22,8 +22,8 @@ abstract class BaseFragment<P : BaseMvpPresenter<*>> : FlySupportFragment<P>() {
         }
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         ARouter.getInstance().inject(this)
     }
 }

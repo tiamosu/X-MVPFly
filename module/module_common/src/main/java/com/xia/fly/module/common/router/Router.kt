@@ -11,21 +11,21 @@ import me.yokeyword.fragmentation.ISupportFragment
 object Router {
 
     fun obtainFragmentACls(): Class<out ISupportFragment> {
-        return obtainFragmentCls(getProviderA().obtainACls())
+        return obtainFragmentCls(getProviderA()?.obtainACls())
     }
 
     fun obtainFragmentBCls(): Class<out ISupportFragment> {
-        return obtainFragmentCls(getProviderB().obtainBCls())
+        return obtainFragmentCls(getProviderB()?.obtainBCls())
     }
 
-    private fun getProviderA(): IProviderA {
+    private fun getProviderA(): IProviderA? {
         return ARouter.getInstance()
-                .build(RouterConstant.PROVIDER_A).navigation() as IProviderA
+                .build(RouterConstant.PROVIDER_A).navigation() as? IProviderA
     }
 
-    private fun getProviderB(): IProviderB {
+    private fun getProviderB(): IProviderB? {
         return ARouter.getInstance()
-                .build(RouterConstant.PROVIDER_B).navigation() as IProviderB
+                .build(RouterConstant.PROVIDER_B).navigation() as? IProviderB
     }
 
     private fun obtainFragmentCls(cls: Class<out ISupportFragment>?): Class<out ISupportFragment> {
