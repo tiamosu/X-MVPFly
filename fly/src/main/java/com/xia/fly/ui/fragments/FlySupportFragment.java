@@ -15,8 +15,6 @@ import com.xia.fly.mvp.BaseMvpView;
 import com.xia.fly.ui.fragments.delegate.FlySupportFragmentDelegate;
 import com.xia.fly.utils.FlyUtils;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.lang.ref.WeakReference;
 
 import androidx.annotation.CallSuper;
@@ -92,7 +90,7 @@ public abstract class FlySupportFragment<P extends BaseMvpPresenter>
 
     @CallSuper
     @Override
-    public void onNewBundle(@NotNull Bundle bundle) {
+    public void onNewBundle(@NonNull Bundle bundle) {
         mDelegate.getBundle(bundle);
     }
 
@@ -128,11 +126,11 @@ public abstract class FlySupportFragment<P extends BaseMvpPresenter>
     }
 
     @Override
-    public void onCreateTitleBar(@NotNull FrameLayout titleBarContainer) {
+    public void onCreateTitleBar(@NonNull FrameLayout titleBarContainer) {
     }
 
     @Override
-    public void getBundleExtras(@NotNull Bundle bundle) {
+    public void getBundleExtras(@NonNull Bundle bundle) {
     }
 
     @CallSuper

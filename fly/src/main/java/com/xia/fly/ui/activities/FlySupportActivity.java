@@ -15,8 +15,6 @@ import com.xia.fly.ui.activities.delegate.FlySupportActivityDelegate;
 import com.xia.fly.utils.FlyUtils;
 import com.xia.fly.utils.KeyboardHelper;
 
-import org.jetbrains.annotations.NotNull;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import me.yokeyword.fragmentation.SupportActivity;
@@ -73,7 +71,7 @@ public abstract class FlySupportActivity<P extends BaseMvpPresenter>
     }
 
     @Override
-    public boolean dispatchTouchEvent(@NotNull MotionEvent ev) {
+    public boolean dispatchTouchEvent(@NonNull MotionEvent ev) {
         KeyboardHelper.dispatchTouchEvent(this, ev);
         return super.dispatchTouchEvent(ev);
     }
@@ -88,7 +86,7 @@ public abstract class FlySupportActivity<P extends BaseMvpPresenter>
     }
 
     @Override
-    public void onCreateTitleBar(@NotNull FrameLayout titleBarContainer) {
+    public void onCreateTitleBar(@NonNull FrameLayout titleBarContainer) {
     }
 
     @Override
@@ -110,7 +108,7 @@ public abstract class FlySupportActivity<P extends BaseMvpPresenter>
     }
 
     @Override
-    public void onDispatchTouchHideKeyboard(@NotNull EditText editText) {
+    public void onDispatchTouchHideKeyboard(@NonNull EditText editText) {
     }
 
     protected void subscribeWithTags(final IRxBusCallback callback, final String... tags) {
