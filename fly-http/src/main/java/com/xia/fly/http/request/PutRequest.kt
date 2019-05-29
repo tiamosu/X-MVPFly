@@ -12,19 +12,19 @@ class PutRequest(url: String) : BaseBodyRequest<PutRequest>(url) {
 
     override fun generateRequest(): Observable<ResponseBody> {
         if (mRequestBody != null) {
-            return BaseRequest.mRestService.putBody(mUrl, mRequestBody!!)
+            return mRestService.putBody(mUrl, mRequestBody!!)
         }
         if (mJson != null) {
             val body = RequestBody.create(mMediaType, mJson!!)
-            return BaseRequest.mRestService.putJson(mUrl, body)
+            return mRestService.putJson(mUrl, body)
         }
         if (mObject != null) {
-            return BaseRequest.mRestService.putBody(mUrl, mObject!!)
+            return mRestService.putBody(mUrl, mObject!!)
         }
         if (mString != null) {
             val body = RequestBody.create(mMediaType, mString!!)
-            return BaseRequest.mRestService.putBody(mUrl, body)
+            return mRestService.putBody(mUrl, body)
         }
-        return BaseRequest.mRestService.put(mUrl, mParams)
+        return mRestService.put(mUrl, mParams)
     }
 }

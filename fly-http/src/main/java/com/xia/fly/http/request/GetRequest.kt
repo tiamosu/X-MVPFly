@@ -18,7 +18,7 @@ class GetRequest(url: String) : BaseRequest<GetRequest>(url) {
 
     override fun generateRequest(): Observable<ResponseBody> {
         return if (mIsDownload) {
-            BaseRequest.mRestService.downloadFile(mUrl)
-        } else BaseRequest.mRestService[mUrl, mParams]
+            mRestService.downloadFile(mUrl)
+        } else mRestService[mUrl, mParams]
     }
 }
