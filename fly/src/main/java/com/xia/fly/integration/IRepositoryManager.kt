@@ -4,10 +4,10 @@ import android.content.Context
 
 /**
  * 用来管理网络请求层,以及数据缓存层,以后可能添加数据库请求层
+ * @see [RepositoryManager wiki 官方文档](https://github.com/JessYanCoding/MVPArms/wiki#2.3)
  *
  * @author xia
  * @date 2018/9/14.
- * @see [RepositoryManager wiki 官方文档](https://github.com/JessYanCoding/MVPArms/wiki.2.3)
  */
 interface IRepositoryManager {
 

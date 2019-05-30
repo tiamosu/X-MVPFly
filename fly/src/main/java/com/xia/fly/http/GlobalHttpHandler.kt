@@ -8,10 +8,10 @@ import okhttp3.Response
 /**
  * 处理 Http 请求和响应结果的处理类
  * 使用 [GlobalConfigModule.Builder.globalHttpHandler] 方法配置
+ * @see [GlobalHttpHandler Wiki 官方文档](https://github.com/JessYanCoding/MVPArms/wiki#3.2)
  *
  * @author xia
  * @date 2018/9/14.
- * @see [GlobalHttpHandler Wiki 官方文档](https://github.com/JessYanCoding/MVPArms/wiki.3.2)
  */
 interface GlobalHttpHandler {
 

@@ -5,7 +5,7 @@ import okhttp3.MediaType
 import okhttp3.Request
 
 /**
- * 对 OkHttp 的请求和响应信息进行更规范和清晰的打印, 开发者可更根据自己的需求自行扩展打印格式
+ * 对 [okhttp3] 的请求和响应信息进行更规范和清晰的打印, 开发者可更根据自己的需求自行扩展打印格式
  *
  * @author xia
  * @date 2018/9/14.

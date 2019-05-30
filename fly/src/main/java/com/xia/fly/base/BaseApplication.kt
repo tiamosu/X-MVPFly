@@ -55,10 +55,10 @@ open class BaseApplication : Application(), App {
 
     /**
      * 将 [AppComponent] 返回出去, 供其它地方使用,
-     * [AppComponent] 接口中声明的方法所返回的实例, 在 [.getAppComponent] 拿到对象后都可以直接使用
+     * [AppComponent] 接口中声明的方法所返回的实例, 在 [getAppComponent] 拿到对象后都可以直接使用
      *
-     * @return AppComponent
-     * @see FlyUtils.getAppComponent
+     * @return [AppComponent]
+     * @see [FlyUtils.getAppComponent]
      */
     override fun getAppComponent(): AppComponent {
         Preconditions.checkNotNull<Any>(mAppDelegate, "%s cannot be null", AppLifecycles::class.java.name)

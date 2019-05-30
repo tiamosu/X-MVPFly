@@ -7,12 +7,11 @@ import androidx.fragment.app.Fragment
 
 /**
  * [Fragment] 代理类,用于框架内部在每个 [Fragment] 的对应生命周期中插入需要的逻辑
+ * @see [FragmentDelegateImpl]
+ * @see [FragmentDelegate wiki 官方文档](https://github.com/JessYanCoding/MVPArms/wiki#3.13)
  *
  * @author xia
  * @date 2018/9/20.
- * @see FragmentDelegateImpl
- *
- * @see [FragmentDelegate wiki 官方文档](https://github.com/JessYanCoding/MVPArms/wiki.3.13)
  */
 interface FragmentDelegate {
 

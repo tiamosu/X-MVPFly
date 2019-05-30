@@ -16,7 +16,6 @@ import java.util.*
  * `value` 可存储至 [mMap] (数据永久存储至内存中, 适合比较重要的数据) 中, 否则储存至 [mCache]
  *
  *
- *
  * @author xia
  * @date 2018/9/14.
  */
@@ -30,7 +29,7 @@ class IntelligentCache<V>(size: Int) : Cache<String, V> {
     }
 
     /**
-     * 将 [.mMap] 和 [.mCache] 的 `size` 相加后返回
+     * 将 [mMap] 和 [mCache] 的 `size` 相加后返回
      *
      * @return 相加后的 `size`
      */
@@ -40,7 +39,7 @@ class IntelligentCache<V>(size: Int) : Cache<String, V> {
     }
 
     /**
-     * 将 [.mMap] 和 [.mCache] 的 `maxSize` 相加后返回
+     * 将 [mMap] 和 [mCache] 的 `maxSize` 相加后返回
      *
      * @return 相加后的 `maxSize`
      */
@@ -50,7 +49,7 @@ class IntelligentCache<V>(size: Int) : Cache<String, V> {
     }
 
     /**
-     * 如果在 `key` 中使用 [.KEY_KEEP] 作为其前缀, 则操作 [.mMap], 否则操作 [.mCache]
+     * 如果在 `key` 中使用 [KEY_KEEP] 作为其前缀, 则操作 [mMap], 否则操作 [mCache]
      *
      * @param key `key`
      * @return `value`
@@ -63,7 +62,7 @@ class IntelligentCache<V>(size: Int) : Cache<String, V> {
     }
 
     /**
-     * 如果在 `key` 中使用 [.KEY_KEEP] 作为其前缀, 则操作 [.mMap], 否则操作 [.mCache]
+     * 如果在 `key` 中使用 [KEY_KEEP] 作为其前缀, 则操作 [mMap], 否则操作 [mCache]
      *
      * @param key   `key`
      * @param value `value`
@@ -77,7 +76,7 @@ class IntelligentCache<V>(size: Int) : Cache<String, V> {
     }
 
     /**
-     * 如果在 `key` 中使用 [.KEY_KEEP] 作为其前缀, 则操作 [.mMap], 否则操作 [.mCache]
+     * 如果在 `key` 中使用 [KEY_KEEP] 作为其前缀, 则操作 [mMap], 否则操作 [mCache]
      *
      * @param key `key`
      * @return 如果这个 `key` 在容器中已经储存有 `value` 并且删除成功则返回删除的 `value`, 否则返回 `null`
@@ -90,7 +89,7 @@ class IntelligentCache<V>(size: Int) : Cache<String, V> {
     }
 
     /**
-     * 如果在 `key` 中使用 [.KEY_KEEP] 作为其前缀, 则操作 [.mMap], 否则操作 [.mCache]
+     * 如果在 `key` 中使用 [KEY_KEEP] 作为其前缀, 则操作 [mMap], 否则操作 [mCache]
      *
      * @param key `key`
      * @return `true` 为在容器中含有这个 `key`, 否则为 `false`
@@ -103,7 +102,7 @@ class IntelligentCache<V>(size: Int) : Cache<String, V> {
     }
 
     /**
-     * 将 [.mMap] 和 [.mCache] 的 `keySet` 合并返回
+     * 将 [mMap] 和 [mCache] 的 `keySet` 合并返回
      *
      * @return 合并后的 `keySet`
      */
@@ -115,7 +114,7 @@ class IntelligentCache<V>(size: Int) : Cache<String, V> {
     }
 
     /**
-     * 清空 [.mMap] 和 [.mCache] 容器
+     * 清空 [mMap] 和 [mCache] 容器
      */
     override fun clear() {
         mCache.clear()

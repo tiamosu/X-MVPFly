@@ -17,7 +17,7 @@ class LruCache<K, V>
 /**
  * Constructor for LruCache.
  *
- * @param initialMaxSize 这个缓存的最大 size,这个 size 所使用的单位必须和 [.getItemSize] 所使用的单位一致.
+ * @param initialMaxSize 这个缓存的最大 size,这个 size 所使用的单位必须和 [getItemSize] 所使用的单位一致.
  */
 (private val initialMaxSize: Int) : Cache<K, V> {
     private val cache = LinkedHashMap<K, V>(100, 0.75f, true)
@@ -29,8 +29,8 @@ class LruCache<K, V>
     }
 
     /**
-     * 设置一个系数应用于当时构造函数中所传入的 size, 从而得到一个新的 [.maxSize]
-     * 并会立即调用 [.evict] 开始清除满足条件的条目
+     * 设置一个系数应用于当时构造函数中所传入的 size, 从而得到一个新的 [maxSize]
+     * 并会立即调用 [evict] 开始清除满足条件的条目
      *
      * @param multiplier 系数
      */
@@ -121,8 +121,8 @@ class LruCache<K, V>
      * 则此 `value` 被新的 `value` 替换并返回,如果为 `null` 说明是一个新条目
      *
      *
-     * 如果 [.getItemSize] 返回的 size 大于或等于缓存所能允许的最大 size, 则不能向缓存中添加此条目
-     * 此时会回调 [.onItemEvicted] 通知此方法当前被驱逐的条目
+     * 如果 [getItemSize] 返回的 size 大于或等于缓存所能允许的最大 size, 则不能向缓存中添加此条目
+     * 此时会回调 [onItemEvicted] 通知此方法当前被驱逐的条目
      *
      * @param key   通过这个 `key` 添加条目
      * @param value 需要添加的 `value`
@@ -190,7 +190,7 @@ class LruCache<K, V>
     }
 
     /**
-     * 当缓存中已占用的总 size 大于所能允许的最大 size ,会使用  [.trimToSize] 开始清除满足条件的条目
+     * 当缓存中已占用的总 size 大于所能允许的最大 size ,会使用  [trimToSize] 开始清除满足条件的条目
      */
     private fun evict() {
         trimToSize(maxSize)
