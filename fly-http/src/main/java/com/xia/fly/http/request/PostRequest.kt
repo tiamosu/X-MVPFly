@@ -2,7 +2,10 @@ package com.xia.fly.http.request
 
 import com.xia.fly.http.body.UploadProgressRequestBody
 import io.reactivex.Observable
-import okhttp3.*
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.ResponseBody
 import java.io.UnsupportedEncodingException
 import java.net.URLConnection
 import java.net.URLEncoder
@@ -45,9 +48,7 @@ class PostRequest(url: String) : BaseBodyRequest<PostRequest>(url) {
     private fun addParams(builder: MultipartBody.Builder): RequestBody {
         if (mParams.isNotEmpty()) {
             for ((key, value) in mParams) {
-                builder.addPart(Headers.of(
-                        "Content-Disposition", "form-data; name=\"$key\""),
-                        RequestBody.create(null, value))
+                builder.addFormDataPart(key, value)
             }
         }
         if (mFileParams.isNotEmpty()) {
