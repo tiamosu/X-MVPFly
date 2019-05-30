@@ -90,8 +90,11 @@ abstract class ClientModule {
                             configuration: RetrofitConfiguration?,
                             builder: Retrofit.Builder, client: OkHttpClient,
                             httpUrl: HttpUrl?, gson: Gson): Retrofit {
+
+            checkNotNull(httpUrl,lazyMessage = { "baseUrl == null" })
+
             builder
-                    .baseUrl(httpUrl!!)//域名
+                    .baseUrl(httpUrl)//域名
                     .client(client)//设置 OkHttp
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())//使用 RxJava
                     .addConverterFactory(GsonConverterFactory.create(gson))//使用 Gson

@@ -81,7 +81,7 @@ class GlobalConfigModule private constructor(builder: Builder) {
     @Singleton
     @Provides
     internal fun provideBaseUrl(): HttpUrl? {
-        return mBaseUrl?.url() ?: (mApiUrl ?: HttpUrl.parse("https://api.github.com/"))
+        return mBaseUrl?.url() ?: mApiUrl
     }
 
     /**
