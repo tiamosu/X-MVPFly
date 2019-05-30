@@ -21,7 +21,7 @@ class RequestCall(private val mObservable: Observable<ResponseBody>?) {
             subscribeOn(Schedulers.io())
                     .unsubscribeOn(Schedulers.io())
                     //遇到错误时重试,第一个参数为重试几次,第二个参数为重试的间隔时间（单位：秒）
-                    .retryWhen(RetryWithDelay(3, 2))
+                    .retryWhen(RetryWithDelay(2, 2))
                     .`as`<ObservableSubscribeProxy<ResponseBody>>(RxLifecycleUtils.bindLifecycle(callback.getLifecycleOwner()))
                     .subscribe(subscriber)
         }
