@@ -15,25 +15,11 @@ import java.io.IOException
  * 2.防止频繁回调，上层无用的刷新<br></br>
  */
 @Suppress("unused")
-class UploadProgressRequestBody : RequestBody {
-    private var delegate: RequestBody? = null
-    private val progressCallBack: ProgressResponseCallBack?
-
-    constructor(listener: ProgressResponseCallBack?) {
-        this.progressCallBack = listener
-    }
-
-    constructor(delegate: RequestBody?, progressCallBack: ProgressResponseCallBack?) {
-        this.delegate = delegate
-        this.progressCallBack = progressCallBack
-    }
-
-    fun setRequestBody(delegate: RequestBody) {
-        this.delegate = delegate
-    }
+class UploadProgressRequestBody(private val delegate: RequestBody,
+                                private val progressCallBack: ProgressResponseCallBack?) : RequestBody() {
 
     override fun contentType(): MediaType? {
-        return delegate?.contentType()
+        return delegate.contentType()
     }
 
     /**
@@ -41,7 +27,7 @@ class UploadProgressRequestBody : RequestBody {
      */
     override fun contentLength(): Long {
         return try {
-            delegate?.contentLength() ?: 0
+            delegate.contentLength()
         } catch (e: IOException) {
             -1
         }
@@ -51,7 +37,7 @@ class UploadProgressRequestBody : RequestBody {
     override fun writeTo(sink: BufferedSink) {
         val countingSink = CountingSink(sink)
         val bufferedSink = Okio.buffer(countingSink)
-        delegate?.writeTo(bufferedSink)
+        delegate.writeTo(bufferedSink)
         bufferedSink.flush()
     }
 
@@ -71,11 +57,11 @@ class UploadProgressRequestBody : RequestBody {
 
             val curTime = System.currentTimeMillis()
             //每100毫秒刷新一次数据,防止频繁无用的刷新
-            if (curTime - lastRefreshUiTime >= 100 || bytesWritten == contentLength) {
-                progressCallBack?.onResponseProgress(bytesWritten, contentLength, bytesWritten == contentLength)
+            val done = bytesWritten == contentLength
+            if (curTime - lastRefreshUiTime >= 100 || done) {
+                progressCallBack?.onResponseProgress(bytesWritten, contentLength, done)
                 lastRefreshUiTime = System.currentTimeMillis()
             }
         }
     }
 }
-

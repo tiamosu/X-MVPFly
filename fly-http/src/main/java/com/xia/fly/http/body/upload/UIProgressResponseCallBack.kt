@@ -25,21 +25,16 @@ abstract class UIProgressResponseCallBack : ProgressResponseCallBack {
         private val weakReference: WeakReference<UIProgressResponseCallBack> = WeakReference(uiProgressResponseListener)
 
         override fun handleMessage(msg: Message) {
-            when (msg.what) {
-                RESPONSE_UPDATE -> {
-                    val uiProgressResponseListener = weakReference.get()
-                    if (uiProgressResponseListener != null) {
-                        //获得进度实体类
-                        val progressModel = msg.obj as ProgressModel
-                        //回调抽象方法
-                        uiProgressResponseListener.onUIResponseProgress(
-                                progressModel.getCurrentBytes(),
-                                progressModel.getContentLength(),
-                                progressModel.isDone()
-                        )
-                    }
-                }
-                else -> super.handleMessage(msg)
+            if (msg.what == RESPONSE_UPDATE) {
+                val uiProgressResponseListener = weakReference.get() ?: return
+                //获得进度实体类
+                val progressModel = msg.obj as ProgressModel
+                //回调抽象方法
+                uiProgressResponseListener.onUIResponseProgress(
+                        progressModel.getCurrentBytes(),
+                        progressModel.getContentLength(),
+                        progressModel.isDone()
+                )
             }
         }
     }
