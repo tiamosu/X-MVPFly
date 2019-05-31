@@ -5,9 +5,6 @@ import android.text.TextUtils
 import com.bumptech.glide.Glide
 import com.xia.fly.http.BaseUrl
 import com.xia.fly.http.GlobalHttpHandler
-import com.xia.fly.http.interceptors.RequestInterceptor
-import com.xia.fly.http.log.DefaultFormatPrinter
-import com.xia.fly.http.log.FormatPrinter
 import com.xia.fly.integration.cache.Cache
 import com.xia.fly.integration.cache.CacheType
 import com.xia.fly.integration.cache.IntelligentCache
@@ -46,8 +43,6 @@ class GlobalConfigModule private constructor(builder: Builder) {
     private val mOkHttpConfiguration: ClientModule.OkHttpConfiguration?
     private val mRxCacheConfiguration: ClientModule.RxCacheConfiguration?
     private val mGsonConfiguration: AppModule.GsonConfiguration?
-    private val mPrintHttpLogLevel: RequestInterceptor.Level?
-    private val mFormatPrinter: FormatPrinter?
     private val mCacheFactory: Cache.Factory<String, Any>?
     private val mExecutorService: ExecutorService?
 
@@ -63,8 +58,6 @@ class GlobalConfigModule private constructor(builder: Builder) {
         this.mOkHttpConfiguration = builder.mOkHttpConfiguration
         this.mRxCacheConfiguration = builder.mRxCacheConfiguration
         this.mGsonConfiguration = builder.mGsonConfiguration
-        this.mPrintHttpLogLevel = builder.mPrintHttpLogLevel
-        this.mFormatPrinter = builder.mFormatPrinter
         this.mCacheFactory = builder.mCacheFactory
         this.mExecutorService = builder.mExecutorService
     }
@@ -146,18 +139,6 @@ class GlobalConfigModule private constructor(builder: Builder) {
 
     @Singleton
     @Provides
-    internal fun providePrintHttpLogLevel(): RequestInterceptor.Level {
-        return mPrintHttpLogLevel ?: RequestInterceptor.Level.NONE
-    }
-
-    @Singleton
-    @Provides
-    internal fun provideFormatPrinter(): FormatPrinter {
-        return mFormatPrinter ?: DefaultFormatPrinter()
-    }
-
-    @Singleton
-    @Provides
     internal fun provideCacheFactory(application: Application): Cache.Factory<String, Any> {
         return mCacheFactory ?: object : Cache.Factory<String, Any> {
             override fun build(type: CacheType): Cache<String, Any> {
@@ -201,8 +182,6 @@ class GlobalConfigModule private constructor(builder: Builder) {
         var mOkHttpConfiguration: ClientModule.OkHttpConfiguration? = null
         var mRxCacheConfiguration: ClientModule.RxCacheConfiguration? = null
         var mGsonConfiguration: AppModule.GsonConfiguration? = null
-        var mPrintHttpLogLevel: RequestInterceptor.Level? = null
-        var mFormatPrinter: FormatPrinter? = null
         var mCacheFactory: Cache.Factory<String, Any>? = null
         var mExecutorService: ExecutorService? = null
 
@@ -264,16 +243,6 @@ class GlobalConfigModule private constructor(builder: Builder) {
 
         fun gsonConfiguration(gsonConfiguration: AppModule.GsonConfiguration): Builder {
             this.mGsonConfiguration = gsonConfiguration
-            return this
-        }
-
-        fun printHttpLogLevel(printHttpLogLevel: RequestInterceptor.Level): Builder {//是否让框架打印 Http 的请求和响应信息
-            this.mPrintHttpLogLevel = Preconditions.checkNotNull(printHttpLogLevel, "The printHttpLogLevel can not be null, use RequestInterceptor.Level.NONE instead.")
-            return this
-        }
-
-        fun formatPrinter(formatPrinter: FormatPrinter): Builder {
-            this.mFormatPrinter = Preconditions.checkNotNull(formatPrinter, FormatPrinter::class.java.canonicalName!! + "can not be null.")
             return this
         }
 

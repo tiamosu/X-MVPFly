@@ -8,7 +8,6 @@ import com.xia.fly.di.module.ClientModule
 import com.xia.fly.di.module.GlobalConfigModule
 import com.xia.fly.http.cookie.CookieJarImpl
 import com.xia.fly.http.cookie.store.MemoryCookieStore
-import com.xia.fly.http.interceptors.RequestInterceptor
 import com.xia.fly.http.utils.HttpsUtils
 import com.xia.fly.http.utils.RxJavaUtils
 import com.xia.fly.imageloader.GlideImageLoaderStrategy
@@ -30,9 +29,6 @@ class GlobalConfiguration : ConfigModule {
         //RxJava2 取消订阅后，抛出的异常无法捕获，将导致程序崩溃
         RxJavaUtils.setRxJavaErrorHandler()
 
-        //        if (!BuildConfig.DEBUG) { //Release 时,让框架不再打印 Http 请求和响应的信息
-        builder.printHttpLogLevel(RequestInterceptor.Level.NONE)
-        //        }
         builder.baseurl("https://www.wanandroid.com")
                 .imageLoaderStrategy(GlideImageLoaderStrategy())
                 .okhttpConfiguration(object : ClientModule.OkHttpConfiguration {

@@ -5,9 +5,7 @@ import android.content.Context
 import com.google.gson.Gson
 import com.xia.fly.di.named.RxCacheDirectoryNamed
 import com.xia.fly.http.GlobalHttpHandler
-import com.xia.fly.http.interceptors.RequestInterceptor
 import com.xia.fly.utils.FileUtils
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import io.rx_cache2.internal.RxCache
@@ -35,9 +33,6 @@ import javax.inject.Singleton
 @Suppress("unused")
 @Module
 abstract class ClientModule {
-
-    @Binds
-    abstract fun bindInterceptor(interceptor: RequestInterceptor): Interceptor
 
     /**
      * [Retrofit] 自定义配置接口
@@ -91,7 +86,7 @@ abstract class ClientModule {
                             builder: Retrofit.Builder, client: OkHttpClient,
                             httpUrl: HttpUrl?, gson: Gson): Retrofit {
 
-            checkNotNull(httpUrl,lazyMessage = { "baseUrl == null" })
+            checkNotNull(httpUrl, lazyMessage = { "baseUrl == null" })
 
             builder
                     .baseUrl(httpUrl)//域名
@@ -109,7 +104,6 @@ abstract class ClientModule {
          * @param application     [Application]
          * @param configuration   [OkHttpConfiguration]
          * @param builder         [OkHttpClient.Builder]
-         * @param intercept       [Interceptor]
          * @param interceptors    [<]
          * @param handler         [GlobalHttpHandler]
          * @param executorService [ExecutorService]
@@ -121,7 +115,6 @@ abstract class ClientModule {
         fun provideClient(application: Application,
                           configuration: OkHttpConfiguration?,
                           builder: OkHttpClient.Builder,
-                          intercept: Interceptor,
                           interceptors: MutableList<Interceptor>?,
                           handler: GlobalHttpHandler?,
                           executorService: ExecutorService): OkHttpClient {
@@ -129,14 +122,13 @@ abstract class ClientModule {
                     .connectTimeout(TIME_OUT.toLong(), TimeUnit.SECONDS)
                     .readTimeout(TIME_OUT.toLong(), TimeUnit.SECONDS)
                     .writeTimeout(TIME_OUT.toLong(), TimeUnit.SECONDS)
-                    .addNetworkInterceptor(intercept)
 
             if (handler != null) {
                 builder.addInterceptor { chain -> chain.proceed(handler.onHttpRequestBefore(chain, chain.request())) }
             }
 
             //如果外部提供了interceptor的集合则遍历添加
-            if (interceptors != null) {
+            if (interceptors?.isNotEmpty() == true) {
                 for (interceptor in interceptors) {
                     builder.addInterceptor(interceptor)
                 }
@@ -180,10 +172,7 @@ abstract class ClientModule {
                            @RxCacheDirectoryNamed cacheDirectory: File?,
                            gson: Gson): RxCache {
             val builder = RxCache.Builder()
-            var rxCache: RxCache? = null
-            if (configuration != null) {
-                rxCache = configuration.configRxCache(application, builder)
-            }
+            val rxCache = configuration?.configRxCache(application, builder)
             return rxCache ?: builder.persistence(cacheDirectory, GsonSpeaker(gson))
         }
 

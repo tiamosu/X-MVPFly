@@ -134,7 +134,7 @@ class IntelligentCache<V>(size: Int) : Cache<String, V> {
         @JvmStatic
         fun getKeyOfKeep(key: String): String {
             Preconditions.checkNotNull<Any>(key, "key == null")
-            return IntelligentCache.KEY_KEEP + key
+            return KEY_KEEP + key
         }
     }
 }
