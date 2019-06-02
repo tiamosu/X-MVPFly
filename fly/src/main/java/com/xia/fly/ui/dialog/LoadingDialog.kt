@@ -16,14 +16,14 @@ import com.xia.fly.ui.dialog.loader.LoaderStyles
  * @author xia
  * @date 2018/7/29.
  */
-class LoadingDialog(context: Context, @LoaderStyles.LoaderStyle type: String, private val mMessage: String) : BaseDialog(context) {
+class LoadingDialog @JvmOverloads constructor(
+        context: Context, @LoaderStyles.LoaderStyle type: String = DEFAULT_LOADER,
+        private var mMessage: String = "") : BaseDialog(context) {
+
     @BindView(R2.id.dialog_loading_iv)
     lateinit var mAVLoadingIndicatorView: AVLoadingIndicatorView
     @BindView(R2.id.dialog_loading_show_tv)
     lateinit var mLoadingTv: AppCompatTextView
-
-    @JvmOverloads
-    constructor(context: Context, message: String = "") : this(context, DEFAULT_LOADER, message)
 
     init {
         LoaderCreator.create(type, mAVLoadingIndicatorView)
@@ -46,12 +46,12 @@ class LoadingDialog(context: Context, @LoaderStyles.LoaderStyle type: String, pr
             mLoadingTv.text = mMessage
             mLoadingTv.visibility = View.VISIBLE
         }
-        mAVLoadingIndicatorView.show()
+        mAVLoadingIndicatorView.smoothToShow()
         super.show()
     }
 
     override fun cancel() {
-        mAVLoadingIndicatorView.hide()
+        mAVLoadingIndicatorView.smoothToHide()
         super.cancel()
     }
 
