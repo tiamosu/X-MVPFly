@@ -1,6 +1,7 @@
 package com.xia.fly.http.request
 
 import com.xia.fly.http.body.UploadProgressRequestBody
+import com.xia.fly.http.body.upload.ProgressResponseCallBack
 import io.reactivex.Observable
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -15,6 +16,12 @@ import java.net.URLEncoder
  * @date 2018/8/3.
  */
 class PostRequest(url: String) : BaseBodyRequest<PostRequest>(url) {
+    private var mUpdateFileCallback: ProgressResponseCallBack? = null//上传回调监听
+
+    fun updateFileCallback(updateFileCallback: ProgressResponseCallBack?): PostRequest {
+        mUpdateFileCallback = updateFileCallback
+        return this
+    }
 
     override fun generateRequest(): Observable<ResponseBody> {
         if (mRequestBody != null) {

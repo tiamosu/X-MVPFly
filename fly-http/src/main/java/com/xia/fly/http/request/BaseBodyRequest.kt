@@ -1,6 +1,5 @@
 package com.xia.fly.http.request
 
-import com.xia.fly.http.body.upload.ProgressResponseCallBack
 import okhttp3.MediaType
 import okhttp3.RequestBody
 
@@ -22,8 +21,6 @@ abstract class BaseBodyRequest<R : BaseBodyRequest<R>>(url: String) : BaseReques
     protected var mString: String? = null                            //上传的文本内容
     @JvmField
     protected var mMediaType: MediaType? = null
-    @JvmField
-    protected var mUpdateFileCallback: ProgressResponseCallBack? = null//上传回调监听
 
     fun upRequestBody(requestBody: RequestBody?): R {
         mRequestBody = requestBody
@@ -51,11 +48,6 @@ abstract class BaseBodyRequest<R : BaseBodyRequest<R>>(url: String) : BaseReques
     fun upString(string: String?, mediaType: MediaType? = null): R {
         mString = string
         mMediaType = mediaType ?: MediaType.parse("text/plain; charset=utf-8")
-        return this as R
-    }
-
-    fun updateFileCallback(updateFileCallback: ProgressResponseCallBack?): R {
-        mUpdateFileCallback = updateFileCallback
         return this as R
     }
 }

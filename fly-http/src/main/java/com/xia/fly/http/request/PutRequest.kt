@@ -21,6 +21,10 @@ class PutRequest(url: String) : BaseBodyRequest<PutRequest>(url) {
         if (mObject != null) {
             return mRestService.putBody(mUrl, mObject!!, mHeaders)
         }
+        if (mBytes != null) {
+            val body = RequestBody.create(mMediaType, mBytes!!)
+            return mRestService.putBody(mUrl, body, mHeaders)
+        }
         if (mString != null) {
             val body = RequestBody.create(mMediaType, mString!!)
             return mRestService.putBody(mUrl, body, mHeaders)

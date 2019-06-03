@@ -21,6 +21,10 @@ class DeleteRequest(url: String) : BaseBodyRequest<DeleteRequest>(url) {
         if (mObject != null) {
             return mRestService.deleteBody(mUrl, mObject!!, mHeaders)
         }
+        if (mBytes != null) {
+            val body = RequestBody.create(mMediaType, mBytes!!)
+            return mRestService.deleteBody(mUrl, body, mHeaders)
+        }
         if (mString != null) {
             val body = RequestBody.create(mMediaType, mString!!)
             return mRestService.deleteBody(mUrl, body, mHeaders)
