@@ -18,17 +18,21 @@ interface RestService {
     @POST
     @Headers("Content-Type: application/x-www-form-urlencoded; charset=UTF-8", "Accept: */*")
     @FormUrlEncoded
-    fun post(@Url url: String, @FieldMap maps: MutableMap<String, String>): Observable<ResponseBody>
+    fun post(@Url url: String, @FieldMap maps: MutableMap<String, String>,
+             @HeaderMap headers: MutableMap<String, String>): Observable<ResponseBody>
 
     @POST
-    fun postBody(@Url url: String, @Body `object`: Any): Observable<ResponseBody>
+    fun postBody(@Url url: String, @Body `object`: Any,
+                 @HeaderMap headers: MutableMap<String, String>): Observable<ResponseBody>
 
     @POST
-    fun postBody(@Url url: String, @Body body: RequestBody): Observable<ResponseBody>
+    fun postBody(@Url url: String, @Body body: RequestBody,
+                 @HeaderMap headers: MutableMap<String, String>): Observable<ResponseBody>
 
     @POST
     @Headers("Content-Type: application/json; charset=utf-8", "Accept: application/json")
-    fun postJson(@Url url: String, @Body jsonBody: RequestBody): Observable<ResponseBody>
+    fun postJson(@Url url: String, @Body jsonBody: RequestBody,
+                 @HeaderMap headers: MutableMap<String, String>): Observable<ResponseBody>
 
 
     //==========================//
@@ -36,7 +40,8 @@ interface RestService {
     // =========================//
 
     @GET
-    operator fun get(@Url url: String, @QueryMap params: MutableMap<String, String>): Observable<ResponseBody>
+    operator fun get(@Url url: String, @QueryMap params: MutableMap<String, String>,
+                     @HeaderMap headers: MutableMap<String, String>): Observable<ResponseBody>
 
 
     //==========================//
@@ -44,17 +49,21 @@ interface RestService {
     // =========================//
 
     @DELETE
-    fun delete(@Url url: String, @QueryMap maps: MutableMap<String, String>): Observable<ResponseBody>
+    fun delete(@Url url: String, @QueryMap maps: MutableMap<String, String>,
+               @HeaderMap headers: MutableMap<String, String>): Observable<ResponseBody>
 
     @DELETE
-    fun deleteBody(@Url url: String, @Body `object`: Any): Observable<ResponseBody>
+    fun deleteBody(@Url url: String, @Body `object`: Any,
+                   @HeaderMap headers: MutableMap<String, String>): Observable<ResponseBody>
 
     @DELETE
-    fun deleteBody(@Url url: String, @Body body: RequestBody): Observable<ResponseBody>
+    fun deleteBody(@Url url: String, @Body body: RequestBody,
+                   @HeaderMap headers: MutableMap<String, String>): Observable<ResponseBody>
 
     @DELETE
     @Headers("Content-Type: application/json; charset=utf-8", "Accept: application/json")
-    fun deleteJson(@Url url: String, @Body jsonBody: RequestBody): Observable<ResponseBody>
+    fun deleteJson(@Url url: String, @Body jsonBody: RequestBody,
+                   @HeaderMap headers: MutableMap<String, String>): Observable<ResponseBody>
 
 
     //==========================//
@@ -62,17 +71,21 @@ interface RestService {
     // =========================//
 
     @PUT
-    fun put(@Url url: String, @QueryMap maps: MutableMap<String, String>): Observable<ResponseBody>
+    fun put(@Url url: String, @QueryMap maps: MutableMap<String, String>,
+            @HeaderMap headers: MutableMap<String, String>): Observable<ResponseBody>
 
     @PUT
-    fun putBody(@Url url: String, @Body `object`: Any): Observable<ResponseBody>
+    fun putBody(@Url url: String, @Body `object`: Any,
+                @HeaderMap headers: MutableMap<String, String>): Observable<ResponseBody>
 
     @PUT
-    fun putBody(@Url url: String, @Body body: RequestBody): Observable<ResponseBody>
+    fun putBody(@Url url: String, @Body body: RequestBody,
+                @HeaderMap headers: MutableMap<String, String>): Observable<ResponseBody>
 
     @PUT
     @Headers("Content-Type: application/json; charset=utf-8", "Accept: application/json")
-    fun putJson(@Url url: String, @Body jsonBody: RequestBody): Observable<ResponseBody>
+    fun putJson(@Url url: String, @Body jsonBody: RequestBody,
+                @HeaderMap headers: MutableMap<String, String>): Observable<ResponseBody>
 
 
     //==========================//
@@ -80,9 +93,11 @@ interface RestService {
     // =========================//
 
     @POST
-    fun uploadFiles(@Url url: String, @Body body: RequestBody): Observable<ResponseBody>
+    fun uploadFiles(@Url url: String, @Body body: RequestBody,
+                    @HeaderMap headers: MutableMap<String, String>): Observable<ResponseBody>
 
     @Streaming
     @GET
-    fun downloadFile(@Url url: String): Observable<ResponseBody>
+    fun downloadFile(@Url url: String,
+                     @HeaderMap headers: MutableMap<String, String>): Observable<ResponseBody>
 }

@@ -6,7 +6,6 @@ import com.xia.fly.utils.FlyUtils
 import io.reactivex.Observable
 import okhttp3.ResponseBody
 import java.io.File
-import java.util.*
 
 /**
  * @author xia
@@ -18,13 +17,15 @@ abstract class BaseRequest<R : BaseRequest<R>>(@JvmField protected val mUrl: Str
     protected val mParams = LinkedHashMap<String, String>()
     @JvmField
     protected val mFileParams = LinkedHashMap<String, File>()
+    @JvmField
+    protected val mHeaders = LinkedHashMap<String, String>()
 
     fun addParam(key: String, value: String?): R {
         mParams[key] = value ?: ""
         return this as R
     }
 
-    fun params(params: MutableMap<String, String?>?): R {
+    fun addParams(params: MutableMap<String, String?>?): R {
         mParams.putAll(ParamsUtils.escapeParams(params))
         return this as R
     }
@@ -36,8 +37,20 @@ abstract class BaseRequest<R : BaseRequest<R>>(@JvmField protected val mUrl: Str
         return this as R
     }
 
-    fun fileParams(fileParams: MutableMap<String, File?>?): R {
+    fun addFileParams(fileParams: MutableMap<String, File?>?): R {
         mFileParams.putAll(ParamsUtils.escapeFileParams(fileParams))
+        return this as R
+    }
+
+    fun addHeader(key: String, value: String?): R {
+        mHeaders[key] = value ?: ""
+        return this as R
+    }
+
+    fun addHeaders(headers: MutableMap<String, String>?): R {
+        if (headers?.isNotEmpty() == true) {
+            mHeaders.putAll(headers)
+        }
         return this as R
     }
 

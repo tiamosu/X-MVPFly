@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
+import androidx.annotation.NonNull
 import com.xia.fly.http.callback.Callback
 import com.xia.fly.ui.dialog.LoadingDialog
 import com.xia.fly.ui.dialog.loader.Loader
@@ -12,6 +13,7 @@ import com.xia.fly.utils.Platform
 import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Action
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber
+import me.jessyan.rxerrorhandler.handler.RetryWithDelay
 import okhttp3.ResponseBody
 
 /**
@@ -36,6 +38,14 @@ open class CallbackSubscriber(var mCallback: Callback<*>?)
      */
     protected open fun isGlobalErrorHandle(): Boolean {
         return true
+    }
+
+    /**
+     * 遇到错误时重试,第一个参数为重试几次,第二个参数为重试的间隔时间（单位：秒）
+     */
+    @NonNull
+    open fun getRetryWithDelay(): RetryWithDelay {
+        return RetryWithDelay(2, 2)
     }
 
     protected open fun getLoadingDialog(): Dialog? {

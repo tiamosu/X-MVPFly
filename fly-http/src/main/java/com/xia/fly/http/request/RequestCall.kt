@@ -5,7 +5,6 @@ import com.xia.fly.http.subscriber.CallbackSubscriber
 import com.xia.fly.utils.RxLifecycleUtils
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
-import me.jessyan.rxerrorhandler.handler.RetryWithDelay
 import okhttp3.ResponseBody
 
 /**
@@ -20,8 +19,7 @@ class RequestCall(private val mObservable: Observable<ResponseBody>?) {
 
             subscribeOn(Schedulers.io())
                     .unsubscribeOn(Schedulers.io())
-                    //遇到错误时重试,第一个参数为重试几次,第二个参数为重试的间隔时间（单位：秒）
-                    .retryWhen(RetryWithDelay(2, 2))
+                    .retryWhen(subscriber.getRetryWithDelay())
                     .`as`<ObservableSubscribeProxy<ResponseBody>>(RxLifecycleUtils.bindLifecycle(callback.getLifecycleOwner()))
                     .subscribe(subscriber)
         }
