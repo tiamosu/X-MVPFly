@@ -27,8 +27,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        exclude 'META-INF/*'
+    }
     lintOptions {
         abortOnError false
+    }
+    dexOptions {
+        preDexLibraries true
+        javaMaxHeapSize "8g"
+        maxProcessCount 8
+        dexInProcess = true
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -41,6 +50,8 @@ def configAppSigning(Project project) {
     if (signFile == null || !signFile.exists()) {
         return
     }
+
+    println "$project.name config sign start..."
     project.android {
         Properties properties = new Properties()
         properties.load(new FileInputStream(signFile))
@@ -54,6 +65,7 @@ def configAppSigning(Project project) {
         }
         buildTypes.release.signingConfig signingConfigs.release
     }
+    println "$project.name config sign end..."
 }
 
 static def configApkName(Project project) {
