@@ -29,6 +29,7 @@ android {
     }
     packagingOptions {
         exclude 'META-INF/*'
+        exclude 'LICENSE.txt'
     }
     lintOptions {
         abortOnError false
