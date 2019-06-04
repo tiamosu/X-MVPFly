@@ -42,19 +42,22 @@ class AFragment : BaseFragment<APresenter>(), AView, View.OnClickListener {
     override fun initData() {
         val str: String? = null
         val ss = str ?: "aa"
-        Log.e("weixi", ss)
+        Log.e("susu", ss)
 
         val bundle: Bundle? = null
-        Log.e("weixi", "${bundle?.isEmpty} zz ${bundle?.javaClass?.name}")
+        Log.e("susu", "${bundle?.isEmpty} zz ${bundle?.javaClass?.name}")
 
         val callback: Handler.Callback? = null
-        Log.e("weixi", "" + WeakReference<Handler.Callback>(callback))
+        Log.e("susu", "" + WeakReference<Handler.Callback>(callback))
 
         WeakHandler().post(Runnable {
-            Log.e("weixi", "run")
+            Log.e("susu", "run")
         })
 
-        Log.e("weixi", "cls:" + Router.obtainFragmentBCls())
+        Log.e("susu", "cls:" + Router.obtainFragmentBCls())
+
+        val equals: String? = null
+        Log.e("susu", "boolean:" + ("" == equals))
     }
 
     override fun initView() {
@@ -117,7 +120,7 @@ class AFragment : BaseFragment<APresenter>(), AView, View.OnClickListener {
     }
 
     override fun setData(content: String) {
-//        Log.e("weixi", "content:$content")
+//        Log.e("susu", "content:$content")
     }
 
     override val boolean: Boolean
