@@ -13,7 +13,7 @@ object Android {
 object Versions {
     const val kotlin = "1.3.31"
     const val butterknife = "10.1.0"
-    const val retrofit2 = "2.5.0"
+    const val retrofit2 = "2.6.0"
     const val okhttp3 = "3.12.3" //版本3.12.X，兼容Android 4
     const val autodispose = "1.3.0"
     const val glide = "4.9.0"
@@ -75,7 +75,7 @@ object Deps {
     const val x_rxbus = "me.xia:x-flyrxbus:1.0.5"
 
     //utilcode
-    const val utilcode = "com.blankj:utilcodex:1.24.0"
+    const val utilcode = "com.blankj:utilcodex:1.24.2"
 
     //okhttp
     const val okhttp3 = "com.squareup.okhttp3:okhttp:${Versions.okhttp3}"
