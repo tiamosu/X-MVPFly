@@ -18,8 +18,8 @@ object Versions {
     const val autodispose = "1.3.0"
     const val glide = "4.9.0"
     const val dagger2 = "2.23.1"
-    const val fragmentation = "1.0.8"
-    const val fly = "2.8.0"
+    const val fragmentation = "1.0.9"
+    const val fly = "2.8.8"
 }
 
 object Publish {
