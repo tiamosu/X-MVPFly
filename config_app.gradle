@@ -8,6 +8,13 @@ apply {
 configAppSigning(project)
 configApkName(project)
 
+kapt {
+    useBuildCache = true
+    javacOptions {
+        option("-Xmaxerrs", 500)
+    }
+}
+
 android {
     flavorDimensions "define"
     compileSdkVersion Android.compileSdkVersion
