@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit
  * @author xia
  * @date 2018/9/18.
  */
-@Suppress("unused", "UNUSED_ANONYMOUS_PARAMETER")
+@Suppress("unused")
 class GlobalConfiguration : ConfigModule {
 
     override fun applyOptions(context: Context, builder: GlobalConfigModule.Builder) {
@@ -46,11 +46,6 @@ class GlobalConfiguration : ConfigModule {
                                 .retryOnConnectionFailure(true)
                                 //cookie认证
                                 .cookieJar(CookieJarImpl(MemoryCookieStore()))
-                                .hostnameVerifier(HttpsUtils.SafeHostnameVerifier())
-
-                        if (SSL_PARAMS.sslSocketFactory != null && SSL_PARAMS.trustManager != null) {
-                            okHttpBuilder.sslSocketFactory(SSL_PARAMS.sslSocketFactory!!, SSL_PARAMS.trustManager!!)
-                        }
                     }
                 })
                 .retrofitConfiguration(object : ClientModule.RetrofitConfiguration {

@@ -8,7 +8,7 @@ import com.xia.flyrxbus.RxBusMessage
  * @author xia
  * @date 2018/8/13.
  */
-@Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE", "unused")
+@Suppress("unused")
 object RxBusHelper {
 
     @JvmStatic
@@ -46,8 +46,8 @@ object RxBusHelper {
                           callback: IRxBusCallback?,
                           vararg tags: String) {
         RxBusManager.subscribeWithTags(subscriber, object : RxBus.Callback<RxBusMessage>() {
-            override fun onEvent(tag: String, rxBusMessage: RxBusMessage) {
-                callback?.callback(tag, rxBusMessage)
+            override fun onEvent(tag: String, t: RxBusMessage) {
+                callback?.callback(tag, t)
             }
         }, *tags)
     }
@@ -57,14 +57,14 @@ object RxBusHelper {
                                 callback: IRxBusCallback?,
                                 vararg tags: String) {
         RxBusManager.subscribeStickyWithTags(subscriber, object : RxBus.Callback<RxBusMessage>() {
-            override fun onEvent(tag: String, rxBusMessage: RxBusMessage) {
-                callback?.callback(tag, rxBusMessage)
+            override fun onEvent(tag: String, t: RxBusMessage) {
+                callback?.callback(tag, t)
             }
         }, *tags)
     }
 
     @JvmStatic
-    fun unregister(subscriber: Any) {
+    fun unregister(subscriber: Any?) {
         RxBusManager.unregister(subscriber)
     }
 }
