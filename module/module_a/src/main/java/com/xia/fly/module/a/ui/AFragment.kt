@@ -31,7 +31,7 @@ class AFragment : BaseFragment<APresenter>(), AView, View.OnClickListener {
         return false
     }
 
-    override fun newP(): APresenter? {
+    override fun newP(): APresenter {
         return APresenter()
     }
 

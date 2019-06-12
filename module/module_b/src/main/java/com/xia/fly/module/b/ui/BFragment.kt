@@ -17,7 +17,7 @@ class BFragment : BaseFragment<BPresenter>(), BView {
         return true
     }
 
-    override fun newP(): BPresenter? {
+    override fun newP(): BPresenter {
         return BPresenter()
     }
 

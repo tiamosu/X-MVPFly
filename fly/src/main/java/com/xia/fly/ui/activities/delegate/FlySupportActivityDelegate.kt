@@ -33,10 +33,10 @@ class FlySupportActivityDelegate(private var mActivity: FlySupportActivity<*>) {
     private var mNetReConnect: Boolean = false
 
     fun onCreate(savedInstanceState: Bundle?) {
-        var proxyActivity: ProxyActivity? = null
+        var proxyActivity: ProxyActivity<*>? = null
         if (mActivity is ProxyActivity) {
             proxyActivity = mActivity as ProxyActivity
-            if (savedInstanceState != null && !proxyActivity.isRestartRestore) {
+            if (savedInstanceState != null && !proxyActivity.isRestartRestore()) {
                 return
             }
         }

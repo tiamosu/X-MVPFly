@@ -14,7 +14,7 @@ import androidx.annotation.UiThread;
  * @author weixia
  * @date 2019/3/19.
  */
-public abstract class MvpNullObjectBasePresenter<V extends IMvpView> implements IMvpPresenter<V> {
+public abstract class MvpNullObjectBasePresenter<V extends IMvpView<?>> implements IMvpPresenter<V> {
     private WeakReference<V> mView;
     private final V mNullView;
 

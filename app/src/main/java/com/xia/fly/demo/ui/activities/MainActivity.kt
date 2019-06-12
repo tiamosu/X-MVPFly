@@ -5,6 +5,7 @@ import android.util.Log
 import android.widget.EditText
 import com.xia.fly.demo.R
 import com.xia.fly.demo.ui.fragments.MainFragment
+import com.xia.fly.mvp.BaseMvpPresenter
 import com.xia.fly.ui.activities.ProxyActivity
 import com.xia.fly.ui.fragments.FlySupportFragment
 import me.yokeyword.fragmentation.anim.DefaultVerticalAnimator
@@ -13,7 +14,7 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator
 /**
  * @author xia
  */
-class MainActivity : ProxyActivity() {
+class MainActivity<P : BaseMvpPresenter<*>> : ProxyActivity<P>() {
 
     override fun isDispatchTouchHideKeyboard(): Boolean {
         return true
@@ -36,7 +37,7 @@ class MainActivity : ProxyActivity() {
     }
 
     override fun initView() {
-        val layout = containerLayout
+        val layout = getContainerLayout()
         layout?.setBackgroundColor(Color.GRAY)
     }
 
