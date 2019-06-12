@@ -16,6 +16,7 @@ import androidx.lifecycle.LifecycleOwner
  */
 abstract class BaseMvpPresenter<V : BaseMvpView<*>> : MvpNullObjectBasePresenter<V>() {
     protected lateinit var mLifecycleOwner: LifecycleOwner
+    @JvmField
     protected var mContext: Context? = null
 
     @CallSuper
