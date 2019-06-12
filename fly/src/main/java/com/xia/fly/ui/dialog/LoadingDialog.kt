@@ -55,6 +55,9 @@ class LoadingDialog @JvmOverloads constructor(
         super.cancel()
     }
 
+    override fun onWidgetClick(view: View) {
+    }
+
     companion object {
 
         private const val DEFAULT_LOADER = LoaderStyles.LINE_SPIN_FADE_LOADER_INDICATOR
