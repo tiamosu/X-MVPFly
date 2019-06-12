@@ -1,5 +1,6 @@
 package com.xia.fly.module.b.mvp.presenter
 
+import android.util.Log
 import com.xia.fly.http.RxHttp
 import com.xia.fly.http.callback.GenericsCallback
 import com.xia.fly.http.converter.GsonConverter
@@ -42,7 +43,12 @@ class BPresenter : BaseMvpPresenter<BView>() {
                     override fun onResponse(response: Friend?) {
                         val data = response?.getData()
                         if (data?.isNotEmpty() == true) {
-                            v.setContent(data[0].toString())
+                            Log.e("susu", "data:${data[0]}")
+
+                            val bol = getV().boolean
+                            Log.e("susu", "bol:$bol")
+//                            Log.e("susu", "getV:" + (getV() ?: "null"))
+                            getV().setContent(data[0].toString())
                         }
                     }
                 }) {})

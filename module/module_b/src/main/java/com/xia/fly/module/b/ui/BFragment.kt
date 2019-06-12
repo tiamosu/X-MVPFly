@@ -1,5 +1,6 @@
 package com.xia.fly.module.b.ui
 
+import android.os.Handler
 import android.view.View
 import com.xia.fly.module.b.R
 import com.xia.fly.module.b.mvp.presenter.BPresenter
@@ -37,14 +38,14 @@ class BFragment : BaseFragment<BPresenter>(), BView {
     }
 
     override fun onLazyLoadData() {
-        p?.load(1)
-//        p.load(2)
-//        p.load(3)
-//        p.load(4)
-//        p.load(5)
+        p.detachView()
+        Handler().postDelayed({ p.load(1) }, 1000)
     }
 
     override fun setContent(content: String?) {
         tv_content?.text = content ?: ""
     }
+
+    override val boolean: Boolean
+        get() = true
 }

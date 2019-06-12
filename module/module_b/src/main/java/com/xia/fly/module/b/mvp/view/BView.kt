@@ -10,4 +10,6 @@ import com.xia.fly.mvp.BaseMvpView
 interface BView : BaseMvpView<BPresenter> {
 
     fun setContent(content: String?)
+
+    val boolean: Boolean
 }

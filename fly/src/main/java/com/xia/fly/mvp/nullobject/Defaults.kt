@@ -11,7 +11,7 @@ import java.util.Collections.unmodifiableMap
 @Suppress("UNCHECKED_CAST")
 object Defaults {
 
-    private val DEFAULTS = unmodifiableMap(object : HashMap<Class<*>, Any?>() {
+    private val DEFAULTS = unmodifiableMap(object : HashMap<Class<*>, Any>() {
         init {
             put(java.lang.Boolean.TYPE, false)
             put(java.lang.Byte.TYPE, 0.toByte())
