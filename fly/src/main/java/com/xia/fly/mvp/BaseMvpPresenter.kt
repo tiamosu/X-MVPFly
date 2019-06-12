@@ -1,14 +1,12 @@
 package com.xia.fly.mvp
 
 import android.content.Context
-
-import com.xia.fly.mvp.nullobject.MvpNullObjectBasePresenter
-import com.xia.fly.utils.FlyUtils
-
 import androidx.annotation.CallSuper
 import androidx.annotation.MainThread
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
+import com.xia.fly.mvp.nullobject.MvpNullObjectBasePresenter
+import com.xia.fly.utils.FlyUtils
 
 /**
  * @author weixia
@@ -16,14 +14,13 @@ import androidx.lifecycle.LifecycleOwner
  */
 abstract class BaseMvpPresenter<V : BaseMvpView<*>> : MvpNullObjectBasePresenter<V>() {
     protected lateinit var mLifecycleOwner: LifecycleOwner
-    @JvmField
-    protected var mContext: Context? = null
+    protected lateinit var mContext: Context
 
     @CallSuper
     @MainThread
     override fun onCreate(owner: LifecycleOwner) {
         mLifecycleOwner = owner
-        mContext = FlyUtils.getContext(owner)
+        mContext = FlyUtils.getContext(owner)!!
     }
 
     @CallSuper
