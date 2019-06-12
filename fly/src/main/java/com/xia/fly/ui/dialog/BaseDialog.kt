@@ -21,7 +21,7 @@ abstract class BaseDialog @JvmOverloads constructor(
 
     protected abstract fun getLayoutId(): Int
 
-    protected open fun onWidgetClick(view: View) {}
+    protected abstract fun onWidgetClick(view: View)
 
     init {
         apply {
