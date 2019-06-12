@@ -40,6 +40,7 @@ abstract class MvpNullObjectBasePresenter<V : IMvpView<*>> protected constructor
                 for (type in types) {
                     val genericType = type as Class<*>
                     if (genericType.isInterface && isSubTypeOfMvpView(genericType)) {
+                        @Suppress("UNCHECKED_CAST")
                         viewClass = genericType as Class<V>
                         break
                     }

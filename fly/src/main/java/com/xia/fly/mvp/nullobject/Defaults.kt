@@ -1,7 +1,6 @@
 package com.xia.fly.mvp.nullobject
 
-import java.util.HashMap
-
+import java.util.*
 import java.util.Collections.unmodifiableMap
 
 /**
@@ -25,7 +24,8 @@ object Defaults {
     })
 
     @JvmStatic
-    fun <T> defaultValue(type: Class<T>): T? {
+    fun <T> defaultValue(type: Class<T>?): T? {
+        type ?: return null
         return DEFAULTS[type] as? T
     }
 }
