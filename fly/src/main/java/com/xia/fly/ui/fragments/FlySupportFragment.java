@@ -31,20 +31,18 @@ import me.yokeyword.fragmentation.SupportFragment;
  */
 @SuppressWarnings({"WeakerAccess", "unused"})
 public abstract class FlySupportFragment<P extends BaseMvpPresenter>
-        extends SupportFragment implements IFragment, BaseMvpView<P>, View.OnClickListener {
+        extends SupportFragment implements IFragment, BaseMvpView<P> {
 
     private final FlySupportFragmentDelegate mDelegate = new FlySupportFragmentDelegate(this);
     private P mPresenter;
-    private Cache<String, Object> mCache;
+    private Cache mCache;
     private WeakReference<View> mRootView;
-
-    protected void onWidgetClick(View view) {
-    }
 
     protected View getRootView() {
         return mRootView != null ? mRootView.get() : null;
     }
 
+    @SuppressWarnings("unchecked")
     @NonNull
     @Override
     public synchronized Cache<String, Object> provideCache() {

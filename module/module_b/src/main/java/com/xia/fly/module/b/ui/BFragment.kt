@@ -48,4 +48,7 @@ class BFragment : BaseFragment<BPresenter>(), BView {
 
     override val boolean: Boolean
         get() = true
+
+    override fun onWidgetClick(view: View) {
+    }
 }

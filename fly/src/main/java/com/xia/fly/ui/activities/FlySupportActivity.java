@@ -27,15 +27,13 @@ import me.yokeyword.fragmentation.SupportActivity;
  */
 @SuppressWarnings("unused")
 public abstract class FlySupportActivity<P extends BaseMvpPresenter>
-        extends SupportActivity implements IActivity, BaseMvpView<P>, View.OnClickListener {
+        extends SupportActivity implements IActivity, BaseMvpView<P> {
 
     private final FlySupportActivityDelegate mDelegate = new FlySupportActivityDelegate(this);
     private P mPresenter;
-    private Cache<String, Object> mCache;
+    private Cache mCache;
 
-    protected void onWidgetClick(View view) {
-    }
-
+    @SuppressWarnings("unchecked")
     @NonNull
     @Override
     public synchronized Cache<String, Object> provideCache() {

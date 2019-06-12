@@ -2,7 +2,7 @@ package com.xia.fly.demo.ui.activities
 
 import android.content.Intent
 import android.util.Log
-import butterknife.OnClick
+import android.view.View
 import com.blankj.utilcode.constant.PermissionConstants
 import com.blankj.utilcode.util.ActivityUtils
 import com.blankj.utilcode.util.PermissionUtils
@@ -10,6 +10,7 @@ import com.xia.fly.demo.R
 import com.xia.fly.demo.helper.DialogHelper
 import com.xia.fly.mvp.BaseMvpPresenter
 import com.xia.fly.ui.activities.FlySupportActivity
+import kotlinx.android.synthetic.main.activity_splash.*
 
 /**
  * @author xia
@@ -33,7 +34,9 @@ class SplashActivity<P : BaseMvpPresenter<*>> : FlySupportActivity<P>() {
 
     override fun initView() {}
 
-    override fun initEvent() {}
+    override fun initEvent() {
+        splash_jump_btn.setOnClickListener(this)
+    }
 
     override fun onLazyLoadData() {}
 
@@ -80,8 +83,11 @@ class SplashActivity<P : BaseMvpPresenter<*>> : FlySupportActivity<P>() {
         }
     }
 
-    @OnClick(R.id.splash_jump_btn)
-    fun onViewClicked() {
-        ActivityUtils.startActivity(MainActivity::class.java)
+    override fun onWidgetClick(view: View) {
+        when (view.id) {
+            R.id.splash_jump_btn -> {
+                ActivityUtils.startActivity(MainActivity::class.java)
+            }
+        }
     }
 }

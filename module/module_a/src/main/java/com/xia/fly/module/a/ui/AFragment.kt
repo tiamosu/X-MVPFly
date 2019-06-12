@@ -25,7 +25,7 @@ import java.lang.ref.WeakReference
  * @author weixia
  * @date 2019/3/15.
  */
-class AFragment : BaseFragment<APresenter>(), AView, View.OnClickListener {
+class AFragment : BaseFragment<APresenter>(), AView {
 
     override fun isLoadTitleBar(): Boolean {
         return false
@@ -129,8 +129,8 @@ class AFragment : BaseFragment<APresenter>(), AView, View.OnClickListener {
     override val num: Int
         get() = 99
 
-    override fun onClick(view: View?) {
-        when (view?.id) {
+    override fun onWidgetClick(view: View) {
+        when (view.id) {
             R.id.jump_btn -> {
                 val bundle = Bundle()
                 bundle.putString("Hello", "你好")

@@ -1,14 +1,12 @@
 package com.xia.fly.demo.ui.fragments
 
 import android.view.View
-import androidx.appcompat.widget.AppCompatEditText
-import butterknife.BindView
-import butterknife.OnClick
 import com.xia.fly.demo.R
 import com.xia.fly.module.common.base.BaseFragment
 import com.xia.fly.module.common.router.Router
 import com.xia.fly.mvp.BaseMvpPresenter
 import com.xia.fly.utils.FragmentUtils
+import kotlinx.android.synthetic.main.fragment_main.*
 import me.yokeyword.fragmentation.ISupportFragment
 
 /**
@@ -16,10 +14,6 @@ import me.yokeyword.fragmentation.ISupportFragment
  * @date 2018/7/3.
  */
 class MainFragment : BaseFragment<BaseMvpPresenter<*>>() {
-    @BindView(R.id.main_user_id_edit)
-    lateinit var mUserIdEditText: AppCompatEditText
-    @BindView(R.id.main_user_psd_edit)
-    lateinit var mUserPsdEditText: AppCompatEditText
 
     private val mFragments = arrayOfNulls<ISupportFragment>(1)
 
@@ -52,10 +46,12 @@ class MainFragment : BaseFragment<BaseMvpPresenter<*>>() {
 
     override fun initView() {}
 
-    override fun initEvent() {}
+    override fun initEvent() {
+        main_login_btn.setOnClickListener(this)
+        main_open_btn.setOnClickListener(this)
+    }
 
-    @OnClick(R.id.main_login_btn, R.id.main_open_btn)
-    fun onViewClicked(view: View) {
+    override fun onWidgetClick(view: View) {
         when (view.id) {
             R.id.main_login_btn -> {
             }

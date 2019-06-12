@@ -43,12 +43,13 @@ class BPresenter : BaseMvpPresenter<BView>() {
                     override fun onResponse(response: Friend?) {
                         val data = response?.getData()
                         if (data?.isNotEmpty() == true) {
-                            Log.e("susu", "data:${data[0]}")
+                            val result = "tag:$index   \ndata:${data[0]}"
+                            Log.e("susu", result)
 
                             val bol = getV().boolean
                             Log.e("susu", "bol:$bol")
-//                            Log.e("susu", "getV:" + (getV() ?: "null"))
-                            getV().setContent(data[0].toString())
+
+                            getV().setContent(result)
                         }
                     }
                 }) {})
