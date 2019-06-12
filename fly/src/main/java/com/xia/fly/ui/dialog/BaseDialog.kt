@@ -7,6 +7,7 @@ import android.view.View
 import android.view.WindowManager
 import androidx.annotation.StyleRes
 import butterknife.ButterKnife
+import com.blankj.utilcode.util.AntiShakeUtils
 import com.blankj.utilcode.util.ScreenUtils
 import com.xia.fly.R
 
@@ -15,9 +16,12 @@ import com.xia.fly.R
  * @date 2018/7/29.
  */
 abstract class BaseDialog @JvmOverloads constructor(
-        context: Context, @StyleRes themeResId: Int = R.style.baseDialogStyle) : Dialog(context, themeResId) {
+        context: Context, @StyleRes themeResId: Int = R.style.baseDialogStyle)
+    : Dialog(context, themeResId), View.OnClickListener {
 
     protected abstract fun getLayoutId(): Int
+
+    protected open fun onWidgetClick(view: View) {}
 
     init {
         apply {
@@ -43,6 +47,13 @@ abstract class BaseDialog @JvmOverloads constructor(
             setDimAmount(0.2f)
             setGravity(Gravity.CENTER)
             setWindowAnimations(R.style.dialogEmptyAnimation)
+        }
+    }
+
+    override fun onClick(view: View?) {
+        view ?: return
+        if (AntiShakeUtils.isValid(view)) {
+            onWidgetClick(view)
         }
     }
 

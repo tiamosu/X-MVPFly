@@ -2,9 +2,11 @@ package com.xia.fly.ui.activities;
 
 import android.os.Bundle;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 
+import com.blankj.utilcode.util.AntiShakeUtils;
 import com.xia.fly.integration.cache.Cache;
 import com.xia.fly.integration.cache.CacheType;
 import com.xia.fly.integration.rxbus.IRxBusCallback;
@@ -25,11 +27,14 @@ import me.yokeyword.fragmentation.SupportActivity;
  */
 @SuppressWarnings("unused")
 public abstract class FlySupportActivity<P extends BaseMvpPresenter>
-        extends SupportActivity implements IActivity, BaseMvpView<P> {
+        extends SupportActivity implements IActivity, BaseMvpView<P>, View.OnClickListener {
 
     private final FlySupportActivityDelegate mDelegate = new FlySupportActivityDelegate(this);
     private P mPresenter;
     private Cache<String, Object> mCache;
+
+    protected void onWidgetClick(View view) {
+    }
 
     @NonNull
     @Override
@@ -68,6 +73,13 @@ public abstract class FlySupportActivity<P extends BaseMvpPresenter>
     protected void onDestroy() {
         mDelegate.onDestroy(mPresenter);
         super.onDestroy();
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (AntiShakeUtils.isValid(view)) {
+            onWidgetClick(view);
+        }
     }
 
     @Override

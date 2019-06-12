@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import com.blankj.utilcode.util.AntiShakeUtils;
 import com.xia.fly.integration.cache.Cache;
 import com.xia.fly.integration.cache.CacheType;
 import com.xia.fly.integration.rxbus.IRxBusCallback;
@@ -30,12 +31,15 @@ import me.yokeyword.fragmentation.SupportFragment;
  */
 @SuppressWarnings({"WeakerAccess", "unused"})
 public abstract class FlySupportFragment<P extends BaseMvpPresenter>
-        extends SupportFragment implements IFragment, BaseMvpView<P> {
+        extends SupportFragment implements IFragment, BaseMvpView<P>, View.OnClickListener {
 
     private final FlySupportFragmentDelegate mDelegate = new FlySupportFragmentDelegate(this);
     private P mPresenter;
     private Cache<String, Object> mCache;
     private WeakReference<View> mRootView;
+
+    protected void onWidgetClick(View view) {
+    }
 
     protected View getRootView() {
         return mRootView != null ? mRootView.get() : null;
@@ -110,6 +114,13 @@ public abstract class FlySupportFragment<P extends BaseMvpPresenter>
     public void onDestroy() {
         mDelegate.onDestroy(mPresenter);
         super.onDestroy();
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (AntiShakeUtils.isValid(view)) {
+            onWidgetClick(view);
+        }
     }
 
     protected P getP() {
