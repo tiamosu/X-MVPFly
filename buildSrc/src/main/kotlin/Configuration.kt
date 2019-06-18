@@ -35,7 +35,7 @@ object Publish {
 object Deps {
     //support
     const val support_annotations = "com.android.support:support-annotations:28.0.0"
-    const val androidx_annotation = "androidx.annotation:annotation:1.0.1"
+    const val androidx_annotation = "androidx.annotation:annotation:1.1.0"
     const val androidx_appcompat = "androidx.appcompat:appcompat:1.0.2"
     const val androidx_recyclerview = "androidx.recyclerview:recyclerview:1.0.0"
     const val androidx_multidex = "androidx.multidex:multidex:2.0.1"

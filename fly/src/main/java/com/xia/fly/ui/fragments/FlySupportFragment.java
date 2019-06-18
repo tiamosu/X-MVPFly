@@ -114,6 +114,7 @@ public abstract class FlySupportFragment<P extends BaseMvpPresenter>
         super.onDestroy();
     }
 
+    @CallSuper
     @Override
     public void onClick(View view) {
         if (AntiShakeUtils.isValid(view)) {

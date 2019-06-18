@@ -5,6 +5,7 @@ import android.content.Context
 import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
+import androidx.annotation.CallSuper
 import androidx.annotation.StyleRes
 import butterknife.ButterKnife
 import com.blankj.utilcode.util.AntiShakeUtils
@@ -50,8 +51,8 @@ abstract class BaseDialog @JvmOverloads constructor(
         }
     }
 
-    override fun onClick(view: View?) {
-        view ?: return
+    @CallSuper
+    override fun onClick(view: View) {
         if (AntiShakeUtils.isValid(view)) {
             onWidgetClick(view)
         }

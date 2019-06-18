@@ -17,6 +17,7 @@ import com.xia.fly.ui.activities.delegate.FlySupportActivityDelegate;
 import com.xia.fly.utils.FlyUtils;
 import com.xia.fly.utils.KeyboardHelper;
 
+import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import me.yokeyword.fragmentation.SupportActivity;
@@ -73,6 +74,7 @@ public abstract class FlySupportActivity<P extends BaseMvpPresenter>
         super.onDestroy();
     }
 
+    @CallSuper
     @Override
     public void onClick(View view) {
         if (AntiShakeUtils.isValid(view)) {
