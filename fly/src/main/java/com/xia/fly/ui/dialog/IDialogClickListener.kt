@@ -1,5 +1,7 @@
 package com.xia.fly.ui.dialog
 
+import android.view.View
+
 /**
  * @author xia
  * @date 2018/7/30.
@@ -7,5 +9,5 @@ package com.xia.fly.ui.dialog
 @Suppress("unused")
 interface IDialogClickListener {
 
-    fun onClick()
+    fun onClick(view: View)
 }
