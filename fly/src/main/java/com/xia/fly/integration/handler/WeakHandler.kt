@@ -31,6 +31,15 @@ class WeakHandler {
         mExec = ExecHandler(WeakReference(callback))
     }
 
+    constructor(callback: (msg: Message) -> Unit) {
+        val callbackImpl = Handler.Callback { msg ->
+            callback(msg)
+            true
+        }
+        mCallback = callbackImpl
+        mExec = ExecHandler(WeakReference(callbackImpl))
+    }
+
     constructor(looper: Looper) {
         mCallback = null
         mExec = ExecHandler(looper)
@@ -39,6 +48,15 @@ class WeakHandler {
     constructor(looper: Looper, callback: Handler.Callback) {
         mCallback = callback
         mExec = ExecHandler(looper, WeakReference(callback))
+    }
+
+    constructor(looper: Looper, callback: (msg: Message) -> Unit) {
+        val callbackImpl = Handler.Callback { msg ->
+            callback(msg)
+            true
+        }
+        mCallback = callbackImpl
+        mExec = ExecHandler(looper, WeakReference(callbackImpl))
     }
 
     fun getLooper(): Looper {
@@ -134,13 +152,13 @@ class WeakHandler {
     }
 
     private class ExecHandler : Handler {
-        private val mCallback: WeakReference<Handler.Callback>?
+        private val mCallback: WeakReference<Callback>?
 
         internal constructor() {
             mCallback = null
         }
 
-        internal constructor(callback: WeakReference<Handler.Callback>) {
+        internal constructor(callback: WeakReference<Callback>) {
             mCallback = callback
         }
 
@@ -148,7 +166,7 @@ class WeakHandler {
             mCallback = null
         }
 
-        internal constructor(looper: Looper, callback: WeakReference<Handler.Callback>) : super(looper) {
+        internal constructor(looper: Looper, callback: WeakReference<Callback>) : super(looper) {
             mCallback = callback
         }
 
