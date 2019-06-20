@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import com.blankj.utilcode.util.AntiShakeUtils;
 import com.xia.fly.integration.cache.Cache;
 import com.xia.fly.integration.cache.CacheType;
 import com.xia.fly.integration.rxbus.IRxBusCallback;
@@ -14,6 +13,7 @@ import com.xia.fly.integration.rxbus.RxBusHelper;
 import com.xia.fly.mvp.BaseMvpPresenter;
 import com.xia.fly.mvp.BaseMvpView;
 import com.xia.fly.ui.fragments.delegate.FlySupportFragmentDelegate;
+import com.xia.fly.utils.AntiShakeUtils;
 import com.xia.fly.utils.FlyUtils;
 
 import java.lang.ref.WeakReference;

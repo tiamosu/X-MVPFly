@@ -8,9 +8,9 @@ import android.view.WindowManager
 import androidx.annotation.CallSuper
 import androidx.annotation.StyleRes
 import butterknife.ButterKnife
-import com.blankj.utilcode.util.AntiShakeUtils
 import com.blankj.utilcode.util.ScreenUtils
 import com.xia.fly.R
+import com.xia.fly.utils.AntiShakeUtils
 
 /**
  * @author xia
