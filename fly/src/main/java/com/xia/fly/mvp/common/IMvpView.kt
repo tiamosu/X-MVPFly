@@ -6,7 +6,7 @@ import android.view.View
  * @author weixia
  * @date 2019/3/19.
  */
-interface IMvpView<P> : View.OnClickListener {
+interface IMvpView<P> {
 
     fun newP(): P?
 

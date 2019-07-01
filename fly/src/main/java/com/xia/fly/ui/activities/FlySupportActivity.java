@@ -28,7 +28,7 @@ import me.yokeyword.fragmentation.SupportActivity;
  */
 @SuppressWarnings("unused")
 public abstract class FlySupportActivity<P extends BaseMvpPresenter>
-        extends SupportActivity implements IActivity, BaseMvpView<P> {
+        extends SupportActivity implements IActivity, BaseMvpView<P>, View.OnClickListener {
 
     private final FlySupportActivityDelegate mDelegate = new FlySupportActivityDelegate(this);
     private P mPresenter;
@@ -129,5 +129,17 @@ public abstract class FlySupportActivity<P extends BaseMvpPresenter>
 
     protected void subscribeStickyWithTags(final IRxBusCallback callback, final String... tags) {
         RxBusHelper.subscribeStickyWithTags(this, callback, tags);
+    }
+
+    protected void applyClickListener(final View... views) {
+        if (views == null || views.length == 0) {
+            return;
+        }
+        for (View view : views) {
+            if (view == null) {
+                continue;
+            }
+            view.setOnClickListener(this);
+        }
     }
 }

@@ -31,7 +31,7 @@ import me.yokeyword.fragmentation.SupportFragment;
  */
 @SuppressWarnings({"WeakerAccess", "unused"})
 public abstract class FlySupportFragment<P extends BaseMvpPresenter>
-        extends SupportFragment implements IFragment, BaseMvpView<P> {
+        extends SupportFragment implements IFragment, BaseMvpView<P>, View.OnClickListener {
 
     private final FlySupportFragmentDelegate mDelegate = new FlySupportFragmentDelegate(this);
     private P mPresenter;
@@ -167,5 +167,17 @@ public abstract class FlySupportFragment<P extends BaseMvpPresenter>
 
     protected void subscribeStickyWithTags(final IRxBusCallback callback, final String... tags) {
         RxBusHelper.subscribeStickyWithTags(this, callback, tags);
+    }
+
+    protected void applyClickListener(final View... views) {
+        if (views == null || views.length == 0) {
+            return;
+        }
+        for (View view : views) {
+            if (view == null) {
+                continue;
+            }
+            view.setOnClickListener(this);
+        }
     }
 }

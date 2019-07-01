@@ -16,6 +16,7 @@ import com.xia.fly.utils.AntiShakeUtils
  * @author xia
  * @date 2018/7/29.
  */
+@Suppress("unused")
 abstract class BaseDialog @JvmOverloads constructor(
         context: Context, @StyleRes themeResId: Int = R.style.baseDialogStyle)
     : Dialog(context, themeResId), View.OnClickListener {
@@ -55,6 +56,12 @@ abstract class BaseDialog @JvmOverloads constructor(
     override fun onClick(view: View) {
         if (AntiShakeUtils.isValid(view)) {
             onWidgetClick(view)
+        }
+    }
+
+    protected fun applyClickListener(vararg views: View?) {
+        for (view in views) {
+            view?.setOnClickListener(this)
         }
     }
 
