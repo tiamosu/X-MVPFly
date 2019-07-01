@@ -65,8 +65,10 @@ class AFragment : BaseFragment<APresenter>(), AView {
     }
 
     override fun initEvent() {
-        jump_btn.setOnClickListener(this)
-        test_btn.setOnClickListener(this)
+        applyClickListener(
+                rootView?.findViewById(R.id.jump_btn),
+                rootView?.findViewById(R.id.test_btn)
+        )
     }
 
     override fun onVisibleLazyLoad() {

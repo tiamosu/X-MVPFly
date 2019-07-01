@@ -32,8 +32,7 @@ class BFragment : BaseFragment<BPresenter>(), BView {
     }
 
     override fun initEvent() {
-        view?.findViewById<View>(R.id.btn_jump)
-                ?.setOnClickListener { start(BFragment()) }
+        applyClickListener(rootView?.findViewById(R.id.btn_jump))
     }
 
     override fun onLazyLoadData() {
@@ -52,5 +51,10 @@ class BFragment : BaseFragment<BPresenter>(), BView {
         get() = true
 
     override fun onWidgetClick(view: View) {
+        when (view.id) {
+            R.id.btn_jump -> {
+                start(BFragment())
+            }
+        }
     }
 }

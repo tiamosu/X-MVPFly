@@ -6,7 +6,6 @@ import com.xia.fly.module.common.base.BaseFragment
 import com.xia.fly.module.common.router.Router
 import com.xia.fly.mvp.BaseMvpPresenter
 import com.xia.fly.utils.FragmentUtils
-import kotlinx.android.synthetic.main.fragment_main.*
 import me.yokeyword.fragmentation.ISupportFragment
 
 /**
@@ -47,8 +46,10 @@ class MainFragment : BaseFragment<BaseMvpPresenter<*>>() {
     override fun initView() {}
 
     override fun initEvent() {
-        main_login_btn.setOnClickListener(this)
-        main_open_btn.setOnClickListener(this)
+        applyClickListener(
+                rootView?.findViewById(R.id.main_login_btn),
+                rootView?.findViewById(R.id.main_open_btn)
+        )
     }
 
     override fun onWidgetClick(view: View) {
