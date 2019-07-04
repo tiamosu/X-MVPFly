@@ -19,13 +19,13 @@ object Versions {
     const val glide = "4.9.0"
     const val dagger2 = "2.23.2"
     const val fragmentation = "1.1.1"
-    const val fly = "2.8.8"
+    const val fly = "2.9.6"
 }
 
 object Publish {
     const val userOrg = "weixia" //bintray.com用户名
     const val groupId = "me.xia" //jcenter上的路径
-    const val publishVersion = "2.9.5" //版本号
+    const val publishVersion = "2.9.6" //版本号
     const val desc = "Oh hi, this is a nice description for a project, right?"
     const val website = "https://github.com/tiamosu/X-MVPFly"
     const val gitUrl = "https://github.com/tiamosu/X-MVPFly.git"
