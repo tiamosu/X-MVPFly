@@ -12,14 +12,9 @@ import com.bumptech.glide.request.target.Target
  * @date 2018/9/17.
  */
 open class ImageConfig {
-    @JvmField
-    var mObject: Any? = null//所要加载的资源
-    @JvmField
-    var mImageView: ImageView? = null
-    @JvmField
-    var mTarget: Target<out Any>? = null
-    @JvmField
-    var mPlaceholder: Int = 0//占位符
-    @JvmField
-    var mError: Int = 0//错误占位符
+    var `object`: Any? = null//所要加载的资源
+    var imageView: ImageView? = null
+    var target: Target<out Any>? = null
+    var placeholder: Int = 0//占位符
+    var error: Int = 0//错误占位符
 }

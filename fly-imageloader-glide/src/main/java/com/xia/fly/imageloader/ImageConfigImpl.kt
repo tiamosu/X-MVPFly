@@ -28,55 +28,34 @@ import java.net.URL
  */
 @Suppress("unused")
 class ImageConfigImpl private constructor(builder: Builder) : ImageConfig() {
-    @JvmField
     var mRequestOptions: RequestOptions? = null//加载配置
-    @JvmField
     var mRequestListener: RequestListener<Any>? = null//加载监听
-    @JvmField
     var mTransformation: BitmapTransformation? = null//glide用它来改变图形的形状
-    @JvmField
-    var mImageViews: Array<ImageView>? = null//视图控件数组
-    @JvmField
+    var mImageViews: Array<ImageView?>? = null//视图控件数组
     var mCacheStrategy: Int = 0//缓存策略
-    @JvmField
     var mTranscodeType: Int = 0
-    @JvmField
     var mFallback: Int = 0 //请求 url 为空,则使用此图片作为占位符
-    @JvmField
     var mRoundingRadius: Int = 0//图片每个圆角的大小
-    @JvmField
     var mBlurValue: Int = 0//高斯模糊值, 值越大模糊效果越大
-    @JvmField
     var mTargetWidth: Int = 0
-    @JvmField
     var mTargetHeight: Int = 0//重新设定图片大小
-    @JvmField
     var mIsCrossFade: Boolean = false//是否使用淡入淡出过渡动画
-    @JvmField
     var mIsCenterCrop: Boolean = false//是否将图片剪切为 CenterCrop
-    @JvmField
     var mIsCenterInside: Boolean = false//是否将图片剪切为 CenterInside
-    @JvmField
     var mIsCircleCrop: Boolean = false//是否将图片剪切为圆形
-    @JvmField
     var mIsClearMemory: Boolean = false//清理内存缓存
-    @JvmField
     var mIsClearDiskCache: Boolean = false//清理本地缓存
-    @JvmField
     var mIsDontAnimate: Boolean = false//不显示动画
-    @JvmField
     var mPlaceholderDrawable: Drawable? = null
-    @JvmField
     var mErrorDrawable: Drawable? = null
-    @JvmField
     var mFallbackDrawable: Drawable? = null
 
     init {
-        this.mObject = builder.mObject
-        this.mImageView = builder.mImageView
-        this.mTarget = builder.mTarget
-        this.mPlaceholder = builder.mPlaceholder
-        this.mError = builder.mError
+        this.`object` = builder.mObject
+        this.imageView = builder.mImageView
+        this.target = builder.mTarget
+        this.placeholder = builder.mPlaceholder
+        this.error = builder.mError
         this.mFallback = builder.mFallback
         this.mPlaceholderDrawable = builder.mPlaceholderDrawable
         this.mErrorDrawable = builder.mErrorDrawable
@@ -113,7 +92,7 @@ class ImageConfigImpl private constructor(builder: Builder) : ImageConfig() {
         var mRequestOptions: RequestOptions? = null//加载配置
         var mRequestListener: RequestListener<Any>? = null//加载监听
         var mTransformation: BitmapTransformation? = null//glide用它来改变图形的形状
-        var mImageViews: Array<ImageView>? = null//视图控件数组
+        var mImageViews: Array<ImageView?>? = null//视图控件数组
         var mCacheStrategy: Int = 0//缓存策略
         var mTranscodeType: Int = 0
         var mRoundingRadius: Int = 0//图片每个圆角的大小
@@ -138,7 +117,7 @@ class ImageConfigImpl private constructor(builder: Builder) : ImageConfig() {
             return this
         }
 
-        fun into(imageViews: Array<ImageView>?): Builder {
+        fun into(imageViews: Array<ImageView?>?): Builder {
             this.mImageViews = imageViews
             return this
         }

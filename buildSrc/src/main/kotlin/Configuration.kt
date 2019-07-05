@@ -60,7 +60,7 @@ object Deps {
     const val dagger2_apt = "com.google.dagger:dagger-compiler:${Versions.dagger2}"
 
     //leakcanary
-    const val leakcanary_android = "com.squareup.leakcanary:leakcanary-android:2.0-alpha-2"
+    const val leakcanary_android = "com.squareup.leakcanary:leakcanary-android:2.0-alpha-3"
 
     //rx
     const val retrofit2 = "com.squareup.retrofit2:retrofit:${Versions.retrofit2}"

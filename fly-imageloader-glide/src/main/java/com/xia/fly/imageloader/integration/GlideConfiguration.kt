@@ -39,8 +39,8 @@ class GlideConfiguration : AppGlideModule() {
         val appComponent = FlyUtils.getAppComponent()
         builder.setDiskCache {
             // Careful: the external cache directory doesn't enforce permissions
-            DiskLruCacheWrapper.create(
-                    FileUtils.createOrExistsDir(File(appComponent.cacheFile(), "Glide")), IMAGE_DISK_CACHE_MAX_SIZE.toLong())
+            DiskLruCacheWrapper.create(FileUtils.createOrExistsDir(
+                    File(appComponent.cacheFile(), "Glide")), IMAGE_DISK_CACHE_MAX_SIZE.toLong())
         }
 
         val calculator = MemorySizeCalculator.Builder(context).build()
@@ -68,14 +68,15 @@ class GlideConfiguration : AppGlideModule() {
         //因为只有成为 GlideAppliesOptions 的实现类,这里才能调用 applyGlideOptions(),让你具有配置 Glide 的权利
         val loadImgStrategy = appComponent.imageLoader().getLoadImgStrategy()
         if (loadImgStrategy is GlideAppliesOptions) {
-            (loadImgStrategy as GlideAppliesOptions).applyGlideOptions(context, builder)
+            loadImgStrategy.applyGlideOptions(context, builder)
         }
     }
 
     override fun registerComponents(context: Context, glide: Glide, registry: Registry) {
         //Glide 默认使用 HttpURLConnection 做网络请求,在这切换成 Okhttp 请求
         val appComponent = FlyUtils.getAppComponent()
-        registry.replace(GlideUrl::class.java, InputStream::class.java, OkHttpUrlLoader.Factory(appComponent.okHttpClient()))
+        registry.replace(GlideUrl::class.java, InputStream::class.java,
+                OkHttpUrlLoader.Factory(appComponent.okHttpClient()))
     }
 
     /**

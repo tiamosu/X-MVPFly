@@ -1,6 +1,7 @@
 package com.xia.fly.imageloader.integration
 
 import android.util.Log
+import com.blankj.utilcode.util.CloseUtils
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.HttpException
@@ -61,18 +62,12 @@ class OkHttpStreamFetcher(private val client: Call.Factory, private val url: Gli
     }
 
     override fun cleanup() {
-        try {
-            stream?.close()
-        } catch (ignored: IOException) {
-        }
-
-        responseBody?.close()
+        CloseUtils.closeIO(stream, responseBody)
         callback = null
     }
 
     override fun cancel() {
-        val local = call
-        local?.cancel()
+        call?.cancel()
     }
 
     override fun getDataClass(): Class<InputStream> {

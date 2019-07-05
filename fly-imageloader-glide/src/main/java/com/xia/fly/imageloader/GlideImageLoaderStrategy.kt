@@ -31,7 +31,7 @@ class GlideImageLoaderStrategy : BaseImageLoaderStrategy<ImageConfigImpl>, Glide
 
     @SuppressLint("CheckResult")
     override fun loadImage(context: Context, config: ImageConfigImpl) {
-        val glideRequest = getGlideRequest(context, config)
+        val glideRequest = getGlideRequest(context, config) ?: return
 
         //缓存策略
         when (config.mCacheStrategy) {
@@ -71,15 +71,15 @@ class GlideImageLoaderStrategy : BaseImageLoaderStrategy<ImageConfigImpl>, Glide
         }
 
         //设置占位符
-        if (config.mPlaceholder != 0) {
-            glideRequest.placeholder(config.mPlaceholder)
+        if (config.placeholder != 0) {
+            glideRequest.placeholder(config.placeholder)
         } else if (config.mPlaceholderDrawable != null) {
             glideRequest.placeholder(config.mPlaceholderDrawable)
         }
 
         //设置错误的图片
-        if (config.mError != 0) {
-            glideRequest.error(config.mError)
+        if (config.error != 0) {
+            glideRequest.error(config.error)
         } else if (config.mErrorDrawable != null) {
             glideRequest.error(config.mErrorDrawable)
         }
@@ -126,27 +126,28 @@ class GlideImageLoaderStrategy : BaseImageLoaderStrategy<ImageConfigImpl>, Glide
             }
         }
 
-        if (config.mImageView != null) {
-            glideRequest.into(config.mImageView!!)
-        } else if (config.mTarget != null) {
-            (glideRequest as? GlideRequest<in Any>)?.into(config.mTarget!!)
+        if (config.imageView != null) {
+            glideRequest.into(config.imageView!!)
+        } else if (config.target != null) {
+            (glideRequest as? GlideRequest<in Any>)?.into(config.target!!)
         }
     }
 
-    private fun getGlideRequest(context: Context, config: ImageConfigImpl): GlideRequest<Any> {
+    private fun getGlideRequest(context: Context, config: ImageConfigImpl): GlideRequest<Any>? {
         val request = GlideApp.with(context)
-        val glideRequest: GlideRequest<Any> = when (config.mTranscodeType) {
-            TranscodeType.AS_BITMAP -> request.asBitmap() as GlideRequest<Any>
-            TranscodeType.AS_FILE -> request.asFile() as GlideRequest<Any>
-            TranscodeType.AS_GIF -> request.asGif() as GlideRequest<Any>
-            else -> request.asDrawable() as GlideRequest<Any>
+        val glideRequest = when (config.mTranscodeType) {
+            TranscodeType.AS_BITMAP -> request.asBitmap() as? GlideRequest<Any>
+            TranscodeType.AS_FILE -> request.asFile() as? GlideRequest<Any>
+            TranscodeType.AS_GIF -> request.asGif() as? GlideRequest<Any>
+            else -> request.asDrawable() as? GlideRequest<Any>
         }
+        glideRequest ?: return null
 
-        return when (val o = config.mObject) {
-            is Bitmap -> glideRequest.load(o as Bitmap?)
-            is Drawable -> glideRequest.load(o as Drawable?)
-            is Int -> glideRequest.load(o as Int?)
-            is ByteArray -> glideRequest.load(o as ByteArray?)
+        return when (val o = config.`object`) {
+            is Bitmap -> glideRequest.load(o as? Bitmap)
+            is Drawable -> glideRequest.load(o as? Drawable)
+            is Int -> glideRequest.load(o as? Int)
+            is ByteArray -> glideRequest.load(o as? ByteArray)
             else -> glideRequest.load(o)
         }
     }
@@ -154,12 +155,13 @@ class GlideImageLoaderStrategy : BaseImageLoaderStrategy<ImageConfigImpl>, Glide
     override fun clear(context: Context, config: ImageConfigImpl) {
         val glide = GlideApp.get(context)
         val requestManager = glide.requestManagerRetriever.get(context)
-        if (config.mImageView != null) {
-            requestManager.clear(config.mImageView!!)
+        if (config.imageView != null) {
+            requestManager.clear(config.imageView!!)
         }
 
-        if (config.mImageViews != null && config.mImageViews!!.isNotEmpty()) {//取消在执行的任务并且释放资源
+        if (config.mImageViews?.isNotEmpty() == true) {//取消在执行的任务并且释放资源
             for (imageView in config.mImageViews!!) {
+                imageView ?: continue
                 requestManager.clear(imageView)
             }
         }
