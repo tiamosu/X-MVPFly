@@ -28,9 +28,8 @@ object ParamsUtils {
         if (map?.isNotEmpty() == true) {
             val mapTemp = hashMapOf<String, File>()
             for ((key, value) in map) {
-                if (value != null) {
-                    mapTemp[key] = value
-                }
+                value ?: continue
+                mapTemp[key] = value
             }
             return mapTemp
         }
