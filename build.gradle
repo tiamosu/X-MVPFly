@@ -1,10 +1,23 @@
 buildscript {
     repositories {
+        maven {
+            url 'https://maven.aliyun.com/repository/public'
+            name '代替 jcenter()及 mavenCentral()'
+        }
+        maven {
+            url 'https://maven.aliyun.com/repository/jcenter'
+            name '代替 jcenter()'
+        }
+        maven {
+            url 'https://maven.aliyun.com/repository/google'
+            name '代替 google()'
+        }
+
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.1'
+        classpath 'com.android.tools.build:gradle:3.4.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
         classpath "com.jakewharton:butterknife-gradle-plugin:${Versions.butterknife}"
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
@@ -14,8 +27,22 @@ buildscript {
 
 allprojects {
     repositories {
+        maven {
+            url 'https://maven.aliyun.com/repository/public'
+            name '代替 jcenter()及 mavenCentral()'
+        }
+        maven {
+            url 'https://maven.aliyun.com/repository/jcenter'
+            name '代替 jcenter()'
+        }
+        maven {
+            url 'https://maven.aliyun.com/repository/google'
+            name '代替 google()'
+        }
+
         google()
         jcenter()
+
         maven { url "https://jitpack.io" }
     }
 
