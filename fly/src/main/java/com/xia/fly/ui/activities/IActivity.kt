@@ -1,9 +1,7 @@
 package com.xia.fly.ui.activities
 
 import android.app.Activity
-import android.widget.EditText
 import android.widget.FrameLayout
-
 import com.xia.fly.integration.cache.Cache
 import com.xia.fly.integration.cache.LruCache
 
@@ -23,11 +21,6 @@ interface IActivity {
      * @return 是否检查网络状态，默认为true
      */
     fun isCheckNetWork(): Boolean
-
-    /**
-     * @return 是否点击空白区域隐藏软键盘，默认为true
-     */
-    fun isDispatchTouchHideKeyboard(): Boolean
 
     /**
      * 提供在 [Activity] 生命周期内的缓存容器, 可向此 [Activity] 存取一些必要的数据
@@ -86,9 +79,4 @@ interface IActivity {
      * 用于网络连接恢复后加载
      */
     fun onNetReConnect()
-
-    /**
-     * 点击空白区域，隐藏软键盘时，EditText进行相关设置
-     */
-    fun onDispatchTouchHideKeyboard(editText: EditText)
 }

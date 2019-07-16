@@ -1,8 +1,6 @@
 package com.xia.fly.ui.activities;
 
 import android.os.Bundle;
-import android.view.MotionEvent;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 
 import com.xia.fly.integration.cache.Cache;
@@ -13,7 +11,6 @@ import com.xia.fly.mvp.BaseMvpPresenter;
 import com.xia.fly.mvp.BaseMvpView;
 import com.xia.fly.ui.activities.delegate.FlySupportActivityDelegate;
 import com.xia.fly.utils.FlyUtils;
-import com.xia.fly.utils.KeyboardHelper;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -71,12 +68,6 @@ public abstract class FlySupportActivity<P extends BaseMvpPresenter>
         super.onDestroy();
     }
 
-    @Override
-    public boolean dispatchTouchEvent(@NonNull MotionEvent ev) {
-        KeyboardHelper.dispatchTouchEvent(this, ev);
-        return super.dispatchTouchEvent(ev);
-    }
-
     protected P getP() {
         return mPresenter != null ? mPresenter : newP();
     }
@@ -101,15 +92,6 @@ public abstract class FlySupportActivity<P extends BaseMvpPresenter>
 
     @Override
     public void onNetReConnect() {
-    }
-
-    @Override
-    public boolean isDispatchTouchHideKeyboard() {
-        return true;
-    }
-
-    @Override
-    public void onDispatchTouchHideKeyboard(@NonNull EditText editText) {
     }
 
     protected void subscribeWithTags(final IRxBusCallback callback, final String... tags) {

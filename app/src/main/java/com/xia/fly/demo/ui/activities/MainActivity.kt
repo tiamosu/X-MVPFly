@@ -2,7 +2,6 @@ package com.xia.fly.demo.ui.activities
 
 import android.graphics.Color
 import android.util.Log
-import android.widget.EditText
 import com.xia.fly.demo.R
 import com.xia.fly.demo.ui.fragments.MainFragment
 import com.xia.fly.mvp.BaseMvpPresenter
@@ -15,10 +14,6 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator
  * @author xia
  */
 class MainActivity<P : BaseMvpPresenter<*>> : ProxyActivity<P>() {
-
-    override fun isDispatchTouchHideKeyboard(): Boolean {
-        return true
-    }
 
     override fun getLayoutId(): Int {
         return R.layout.activity_main
@@ -39,10 +34,6 @@ class MainActivity<P : BaseMvpPresenter<*>> : ProxyActivity<P>() {
     override fun initView() {
         val layout = getContainerLayout()
         layout?.setBackgroundColor(Color.GRAY)
-    }
-
-    override fun onDispatchTouchHideKeyboard(editText: EditText) {
-        editText.isFocusable = false
     }
 
     override fun onCreateFragmentAnimator(): FragmentAnimator {
