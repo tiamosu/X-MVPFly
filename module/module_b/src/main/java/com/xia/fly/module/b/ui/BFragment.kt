@@ -1,11 +1,11 @@
 package com.xia.fly.module.b.ui
 
 import android.view.View
+import androidx.appcompat.widget.AppCompatTextView
 import com.xia.fly.module.b.R
 import com.xia.fly.module.b.mvp.presenter.BPresenter
 import com.xia.fly.module.b.mvp.view.BView
 import com.xia.fly.module.common.base.BaseFragment
-import kotlinx.android.synthetic.main.fragment_b.*
 
 /**
  * @author weixia
@@ -32,7 +32,7 @@ class BFragment : BaseFragment<BPresenter>(), BView {
     }
 
     override fun initEvent() {
-        applyWidgetClickListener(rootView?.findViewById(R.id.btn_jump))
+        applyWidgetClickListener(getView(viewId = R.id.btn_jump))
     }
 
     override fun onLazyLoadData() {
@@ -44,7 +44,7 @@ class BFragment : BaseFragment<BPresenter>(), BView {
     }
 
     override fun setContent(content: String?) {
-        tv_content?.text = content ?: ""
+        getView<AppCompatTextView>(viewId = R.id.tv_content)?.text = content ?: ""
     }
 
     override val boolean: Boolean

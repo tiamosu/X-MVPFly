@@ -47,8 +47,8 @@ class MainFragment : BaseFragment<BaseMvpPresenter<*>>() {
 
     override fun initEvent() {
         applyWidgetClickListener(
-                rootView?.findViewById(R.id.main_login_btn),
-                rootView?.findViewById(R.id.main_open_btn)
+                getView(viewId = R.id.main_login_btn),
+                getView(viewId = R.id.main_open_btn)
         )
     }
 

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.View
+import androidx.appcompat.widget.AppCompatButton
 import com.bumptech.glide.request.target.DrawableImageViewTarget
 import com.bumptech.glide.request.transition.Transition
 import com.xia.fly.imageloader.ImageConfigImpl
@@ -17,7 +18,6 @@ import com.xia.fly.module.common.base.BaseFragment
 import com.xia.fly.module.common.router.Router
 import com.xia.fly.ui.imageloader.ImageLoader
 import com.xia.fly.utils.FragmentUtils
-import kotlinx.android.synthetic.main.fragment_a.*
 import me.yokeyword.fragmentation.SupportFragment
 import java.lang.ref.WeakReference
 
@@ -61,13 +61,13 @@ class AFragment : BaseFragment<APresenter>(), AView {
     }
 
     override fun initView() {
-        jump_btn.text = "跳转下一页"
+        getView<AppCompatButton>(viewId = R.id.jump_btn)?.text = "跳转下一页"
     }
 
     override fun initEvent() {
         applyWidgetClickListener(
-                rootView?.findViewById(R.id.jump_btn),
-                rootView?.findViewById(R.id.test_btn)
+                getView(viewId = R.id.jump_btn),
+                getView(viewId = R.id.test_btn)
         )
     }
 
@@ -83,10 +83,10 @@ class AFragment : BaseFragment<APresenter>(), AView {
                         .crossFade()
                         .centerCrop()
                         .circleCrop()
-                        .into(object : DrawableImageViewTarget(photo_iv) {
+                        .into(object : DrawableImageViewTarget(getView(viewId = R.id.photo_iv)) {
                             override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
                                 super.onResourceReady(resource, transition)
-                                jump_btn.text = "加载完毕，点击进入下一页"
+                                getView<AppCompatButton>(viewId = R.id.jump_btn)?.text = "加载完毕，点击进入下一页"
                             }
                         })
                         .build()
