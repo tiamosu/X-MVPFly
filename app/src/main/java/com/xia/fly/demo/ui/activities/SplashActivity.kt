@@ -10,7 +10,6 @@ import com.xia.fly.demo.R
 import com.xia.fly.demo.helper.DialogHelper
 import com.xia.fly.module.common.base.BaseActivity
 import com.xia.fly.mvp.BaseMvpPresenter
-import kotlinx.android.synthetic.main.activity_splash.*
 
 /**
  * @author xia
@@ -35,7 +34,7 @@ class SplashActivity<P : BaseMvpPresenter<*>> : BaseActivity<P>() {
     override fun initView() {}
 
     override fun initEvent() {
-        applyWidgetClickListener(splash_jump_btn)
+        applyWidgetClickListener(findViewById(R.id.splash_jump_btn))
     }
 
     override fun onLazyLoadData() {}
