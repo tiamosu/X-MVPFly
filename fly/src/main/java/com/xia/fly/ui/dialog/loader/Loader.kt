@@ -1,7 +1,7 @@
 package com.xia.fly.ui.dialog.loader
 
 import android.app.Dialog
-import com.xia.fly.ui.dialog.BaseDialog
+import com.xia.fly.ui.dialog.FlySupportDialog
 import java.util.*
 
 /**
@@ -15,14 +15,14 @@ object Loader {
     fun showLoading(dialog: Dialog?) {
         if (dialog != null) {
             LOADERS.add(dialog)
-            BaseDialog.safeShowDialog(dialog)
+            FlySupportDialog.safeShowDialog(dialog)
         }
     }
 
     @JvmStatic
     fun stopLoading() {
         for (dialog in LOADERS) {
-            BaseDialog.safeCloseDialog(dialog)
+            FlySupportDialog.safeCloseDialog(dialog)
         }
         LOADERS.clear()
     }

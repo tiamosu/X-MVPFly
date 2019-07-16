@@ -5,25 +5,21 @@ import android.content.Context
 import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
-import androidx.annotation.CallSuper
 import androidx.annotation.StyleRes
 import butterknife.ButterKnife
 import com.blankj.utilcode.util.ScreenUtils
 import com.xia.fly.R
-import com.xia.fly.utils.AntiShakeUtils
 
 /**
  * @author xia
  * @date 2018/7/29.
  */
 @Suppress("unused")
-abstract class BaseDialog @JvmOverloads constructor(
+abstract class FlySupportDialog @JvmOverloads constructor(
         context: Context, @StyleRes themeResId: Int = R.style.baseDialogStyle)
-    : Dialog(context, themeResId), View.OnClickListener {
+    : Dialog(context, themeResId) {
 
     protected abstract fun getLayoutId(): Int
-
-    protected abstract fun onWidgetClick(view: View)
 
     init {
         apply {
@@ -49,19 +45,6 @@ abstract class BaseDialog @JvmOverloads constructor(
             setDimAmount(0.2f)
             setGravity(Gravity.CENTER)
             setWindowAnimations(R.style.dialogEmptyAnimation)
-        }
-    }
-
-    @CallSuper
-    override fun onClick(view: View) {
-        if (AntiShakeUtils.isValid(view)) {
-            onWidgetClick(view)
-        }
-    }
-
-    protected fun applyClickListener(vararg views: View?) {
-        for (view in views) {
-            view?.setOnClickListener(this)
         }
     }
 

@@ -18,7 +18,7 @@ import com.xia.fly.ui.dialog.loader.LoaderStyles
  */
 class LoadingDialog @JvmOverloads constructor(
         context: Context, @LoaderStyles.LoaderStyle type: String = DEFAULT_LOADER,
-        private var mMessage: String = "") : BaseDialog(context) {
+        private var mMessage: String = "") : FlySupportDialog(context) {
 
     @BindView(R2.id.dialog_loading_iv)
     lateinit var mAVLoadingIndicatorView: AVLoadingIndicatorView
@@ -53,9 +53,6 @@ class LoadingDialog @JvmOverloads constructor(
     override fun cancel() {
         mAVLoadingIndicatorView.smoothToHide()
         super.cancel()
-    }
-
-    override fun onWidgetClick(view: View) {
     }
 
     companion object {
