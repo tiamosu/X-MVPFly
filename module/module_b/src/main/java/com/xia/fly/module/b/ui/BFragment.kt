@@ -32,7 +32,7 @@ class BFragment : BaseFragment<BPresenter>(), BView {
     }
 
     override fun initEvent() {
-        applyClickListener(rootView?.findViewById(R.id.btn_jump))
+        applyWidgetClickListener(rootView?.findViewById(R.id.btn_jump))
     }
 
     override fun onLazyLoadData() {

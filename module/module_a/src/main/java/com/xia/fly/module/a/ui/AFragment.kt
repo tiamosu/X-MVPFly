@@ -65,7 +65,7 @@ class AFragment : BaseFragment<APresenter>(), AView {
     }
 
     override fun initEvent() {
-        applyClickListener(
+        applyWidgetClickListener(
                 rootView?.findViewById(R.id.jump_btn),
                 rootView?.findViewById(R.id.test_btn)
         )

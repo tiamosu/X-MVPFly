@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.FrameLayout;
 
 import com.xia.fly.integration.cache.Cache;
@@ -13,7 +14,6 @@ import com.xia.fly.integration.rxbus.RxBusHelper;
 import com.xia.fly.mvp.BaseMvpPresenter;
 import com.xia.fly.mvp.BaseMvpView;
 import com.xia.fly.ui.fragments.delegate.FlySupportFragmentDelegate;
-import com.xia.fly.utils.AntiShakeUtils;
 import com.xia.fly.utils.FlyUtils;
 
 import java.lang.ref.WeakReference;
@@ -29,9 +29,9 @@ import me.yokeyword.fragmentation.SupportFragment;
  * @author xia
  * @date 2018/8/1.
  */
-@SuppressWarnings({"WeakerAccess", "unused"})
+@SuppressWarnings("unused")
 public abstract class FlySupportFragment<P extends BaseMvpPresenter>
-        extends SupportFragment implements IFragment, BaseMvpView<P>, View.OnClickListener {
+        extends SupportFragment implements IFragment, BaseMvpView<P> {
 
     private final FlySupportFragmentDelegate mDelegate = new FlySupportFragmentDelegate(this);
     private P mPresenter;
@@ -66,8 +66,9 @@ public abstract class FlySupportFragment<P extends BaseMvpPresenter>
             mRootView = new WeakReference<>(view);
         } else {
             // 缓存的rootView需要判断是否已经被加过parent， 如果有parent需要从parent删除，要不然会发生这个rootview已经有parent的错误。
-            final ViewGroup parent = (ViewGroup) getRootView().getParent();
-            if (parent != null) {
+            ViewParent viewParent;
+            if ((viewParent = getRootView().getParent()) instanceof ViewGroup) {
+                final ViewGroup parent = (ViewGroup) viewParent;
                 parent.removeView(getRootView());
             }
         }
@@ -114,14 +115,6 @@ public abstract class FlySupportFragment<P extends BaseMvpPresenter>
         super.onDestroy();
     }
 
-    @CallSuper
-    @Override
-    public void onClick(View view) {
-        if (AntiShakeUtils.isValid(view)) {
-            onWidgetClick(view);
-        }
-    }
-
     protected P getP() {
         return mPresenter != null ? mPresenter : newP();
     }
@@ -132,7 +125,7 @@ public abstract class FlySupportFragment<P extends BaseMvpPresenter>
 
     @Override
     public boolean isLoadTitleBar() {
-        return false;
+        return true;
     }
 
     @Override
@@ -167,17 +160,5 @@ public abstract class FlySupportFragment<P extends BaseMvpPresenter>
 
     protected void subscribeStickyWithTags(final IRxBusCallback callback, final String... tags) {
         RxBusHelper.subscribeStickyWithTags(this, callback, tags);
-    }
-
-    protected void applyClickListener(final View... views) {
-        if (views == null || views.length == 0) {
-            return;
-        }
-        for (View view : views) {
-            if (view == null) {
-                continue;
-            }
-            view.setOnClickListener(this);
-        }
     }
 }

@@ -37,7 +37,7 @@ class FlySupportFragmentDelegate(private var mFragment: FlySupportFragment<*>) {
     private var mIsOnEnterAnimationEnd: Boolean = false
 
     fun onCreateView(inflater: LayoutInflater, container: ViewGroup?): View? {
-        if (mFragment.getLayoutId() == 0) {
+        if (mFragment.getLayoutId() <= 0) {
             return null
         }
 

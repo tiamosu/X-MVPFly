@@ -2,7 +2,6 @@ package com.xia.fly.ui.activities
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.View
 import androidx.annotation.CallSuper
 import androidx.appcompat.widget.ContentFrameLayout
 import com.xia.fly.R
@@ -90,6 +89,4 @@ abstract class ProxyActivity<P : BaseMvpPresenter<*>> : FlySupportActivity<P>() 
     override fun initEvent() {}
 
     override fun onLazyLoadData() {}
-
-    override fun onWidgetClick(view: View) {}
 }

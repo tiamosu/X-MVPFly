@@ -8,15 +8,15 @@ import com.blankj.utilcode.util.ActivityUtils
 import com.blankj.utilcode.util.PermissionUtils
 import com.xia.fly.demo.R
 import com.xia.fly.demo.helper.DialogHelper
+import com.xia.fly.module.common.base.BaseActivity
 import com.xia.fly.mvp.BaseMvpPresenter
-import com.xia.fly.ui.activities.FlySupportActivity
 import kotlinx.android.synthetic.main.activity_splash.*
 
 /**
  * @author xia
  * @date 2018/8/16.
  */
-class SplashActivity<P : BaseMvpPresenter<*>> : FlySupportActivity<P>() {
+class SplashActivity<P : BaseMvpPresenter<*>> : BaseActivity<P>() {
     private var mIsRequestPermission = true
     private var mIsToAppSetting = false
 
@@ -35,7 +35,7 @@ class SplashActivity<P : BaseMvpPresenter<*>> : FlySupportActivity<P>() {
     override fun initView() {}
 
     override fun initEvent() {
-        splash_jump_btn.setOnClickListener(this)
+        applyWidgetClickListener(splash_jump_btn)
     }
 
     override fun onLazyLoadData() {}

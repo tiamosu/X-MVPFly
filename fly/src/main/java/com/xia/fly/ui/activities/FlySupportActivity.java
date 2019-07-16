@@ -2,7 +2,6 @@ package com.xia.fly.ui.activities;
 
 import android.os.Bundle;
 import android.view.MotionEvent;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 
@@ -13,11 +12,9 @@ import com.xia.fly.integration.rxbus.RxBusHelper;
 import com.xia.fly.mvp.BaseMvpPresenter;
 import com.xia.fly.mvp.BaseMvpView;
 import com.xia.fly.ui.activities.delegate.FlySupportActivityDelegate;
-import com.xia.fly.utils.AntiShakeUtils;
 import com.xia.fly.utils.FlyUtils;
 import com.xia.fly.utils.KeyboardHelper;
 
-import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import me.yokeyword.fragmentation.SupportActivity;
@@ -28,7 +25,7 @@ import me.yokeyword.fragmentation.SupportActivity;
  */
 @SuppressWarnings("unused")
 public abstract class FlySupportActivity<P extends BaseMvpPresenter>
-        extends SupportActivity implements IActivity, BaseMvpView<P>, View.OnClickListener {
+        extends SupportActivity implements IActivity, BaseMvpView<P> {
 
     private final FlySupportActivityDelegate mDelegate = new FlySupportActivityDelegate(this);
     private P mPresenter;
@@ -72,14 +69,6 @@ public abstract class FlySupportActivity<P extends BaseMvpPresenter>
     protected void onDestroy() {
         mDelegate.onDestroy(mPresenter);
         super.onDestroy();
-    }
-
-    @CallSuper
-    @Override
-    public void onClick(View view) {
-        if (AntiShakeUtils.isValid(view)) {
-            onWidgetClick(view);
-        }
     }
 
     @Override
@@ -129,17 +118,5 @@ public abstract class FlySupportActivity<P extends BaseMvpPresenter>
 
     protected void subscribeStickyWithTags(final IRxBusCallback callback, final String... tags) {
         RxBusHelper.subscribeStickyWithTags(this, callback, tags);
-    }
-
-    protected void applyClickListener(final View... views) {
-        if (views == null || views.length == 0) {
-            return;
-        }
-        for (View view : views) {
-            if (view == null) {
-                continue;
-            }
-            view.setOnClickListener(this);
-        }
     }
 }
