@@ -5,10 +5,8 @@ import android.text.TextUtils
 import android.view.Gravity
 import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
-import butterknife.BindView
 import com.wang.avi.AVLoadingIndicatorView
 import com.xia.fly.R
-import com.xia.fly.R2
 import com.xia.fly.ui.dialog.loader.LoaderCreator
 import com.xia.fly.ui.dialog.loader.LoaderStyles
 
@@ -16,17 +14,20 @@ import com.xia.fly.ui.dialog.loader.LoaderStyles
  * @author xia
  * @date 2018/7/29.
  */
-class LoadingDialog @JvmOverloads constructor(
-        context: Context, @LoaderStyles.LoaderStyle type: String = DEFAULT_LOADER,
-        private var mMessage: String = "") : FlySupportDialog(context) {
+class LoadingDialog constructor(context: Context) : FlySupportDialog(context) {
+    private lateinit var mAVLoadingIndicatorView: AVLoadingIndicatorView
+    private lateinit var mLoadingTv: AppCompatTextView
 
-    @BindView(R2.id.dialog_loading_iv)
-    lateinit var mAVLoadingIndicatorView: AVLoadingIndicatorView
-    @BindView(R2.id.dialog_loading_show_tv)
-    lateinit var mLoadingTv: AppCompatTextView
+    fun setMessage(message: String?) {
+        if (!TextUtils.isEmpty(message)) {
+            mLoadingTv.text = message
+            mLoadingTv.visibility = View.VISIBLE
+        }
+    }
 
-    init {
-        LoaderCreator.create(type, mAVLoadingIndicatorView)
+    fun setType(@LoaderStyles.LoaderStyle type: String?) {
+        val typeTemp = type ?: DEFAULT_LOADER
+        LoaderCreator.create(typeTemp, mAVLoadingIndicatorView)
     }
 
     override fun getLayoutId(): Int {
@@ -39,13 +40,12 @@ class LoadingDialog @JvmOverloads constructor(
             setGravity(Gravity.CENTER)
             setDimAmount(0.2f)
         }
+
+        mAVLoadingIndicatorView = findViewById(R.id.dialog_loading_iv)
+        mLoadingTv = findViewById(R.id.dialog_loading_show_tv)
     }
 
     override fun show() {
-        if (!TextUtils.isEmpty(mMessage)) {
-            mLoadingTv.text = mMessage
-            mLoadingTv.visibility = View.VISIBLE
-        }
         mAVLoadingIndicatorView.smoothToShow()
         super.show()
     }

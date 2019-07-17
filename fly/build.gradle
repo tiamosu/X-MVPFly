@@ -1,6 +1,5 @@
 apply {
     from "${rootDir.path}/config_lib.gradle"
-    plugin "com.jakewharton.butterknife"
 }
 
 dependencies {

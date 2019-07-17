@@ -12,14 +12,15 @@ object LoaderCreator {
 
     private val LOADING_MAP = WeakHashMap<String, Indicator>()
 
-    fun create(type: String, avLoadingIndicatorView: AVLoadingIndicatorView): AVLoadingIndicatorView {
+    fun create(@LoaderStyles.LoaderStyle type: String,
+               indicatorView: AVLoadingIndicatorView): AVLoadingIndicatorView {
         var indicator = LOADING_MAP[type]
         if (indicator == null) {
             indicator = getIndicator(type)
             LOADING_MAP[type] = indicator
         }
-        avLoadingIndicatorView.indicator = indicator
-        return avLoadingIndicatorView
+        indicatorView.indicator = indicator
+        return indicatorView
     }
 
     private fun getIndicator(name: String?): Indicator? {
