@@ -18,7 +18,7 @@ import com.xia.fly.ui.fragments.FlySupportFragment
  * @author xia
  * @date 2018/7/3.
  */
-abstract class BaseFragment<out P : BaseMvpPresenter<BaseMvpView<P>>> : FlySupportFragment<P>() {
+abstract class BaseFragment<P : BaseMvpPresenter<BaseMvpView<P>>> : FlySupportFragment<P>() {
     private var mUnbinder: Unbinder? = null
     private val mOnClickListener = View.OnClickListener { view -> onWidgetClick(view) }
 

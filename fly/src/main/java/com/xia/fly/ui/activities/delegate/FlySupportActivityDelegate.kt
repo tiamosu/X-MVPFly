@@ -11,7 +11,6 @@ import com.xia.fly.integration.ConnectionLiveData
 import com.xia.fly.integration.rxbus.RxBusEventTag
 import com.xia.fly.integration.rxbus.RxBusHelper
 import com.xia.fly.mvp.BaseMvpPresenter
-import com.xia.fly.mvp.BaseMvpView
 import com.xia.fly.ui.activities.FlySupportActivity
 import com.xia.fly.ui.activities.ProxyActivity
 import com.xia.fly.utils.FlyUtils
@@ -22,7 +21,7 @@ import com.xia.flyrxbus.RxBusMessage
  * @author weixia
  * @date 2019/2/25.
  */
-class FlySupportActivityDelegate<P : BaseMvpPresenter<BaseMvpView<P>>>(private var mActivity: FlySupportActivity<P>) {
+class FlySupportActivityDelegate(private var mActivity: FlySupportActivity<*>) {
     //网络状态监听广播
     private var mConnectionLiveData: ConnectionLiveData? = null
     //记录上一次网络连接状态
@@ -31,7 +30,7 @@ class FlySupportActivityDelegate<P : BaseMvpPresenter<BaseMvpView<P>>>(private v
     private var mNetReConnect: Boolean = false
 
     fun onCreate(savedInstanceState: Bundle?) {
-        var proxyActivity: ProxyActivity<P>? = null
+        var proxyActivity: ProxyActivity<*>? = null
         if (mActivity is ProxyActivity) {
             proxyActivity = mActivity as ProxyActivity
             if (savedInstanceState != null && !proxyActivity.isRestartRestore()) {
