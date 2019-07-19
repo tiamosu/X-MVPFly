@@ -6,7 +6,6 @@ import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
 import androidx.annotation.StyleRes
-import butterknife.ButterKnife
 import com.blankj.utilcode.util.ScreenUtils
 import com.xia.fly.R
 
@@ -21,12 +20,13 @@ abstract class FlySupportDialog @JvmOverloads constructor(
 
     protected abstract fun getLayoutId(): Int
 
+    protected abstract fun onBindAny(view: View)
+
     init {
         apply {
             val view = View.inflate(context, getLayoutId(), null)
             setContentView(view)
-            ButterKnife.bind(this, view)
-
+            onBindAny(view)
             initDialog()
         }
     }

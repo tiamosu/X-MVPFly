@@ -50,13 +50,6 @@ dependencies {
     //okhttp
     api Deps.okhttp3
 
-    //butterknife
-    api(Deps.butterknife) {
-        exclude group: 'androidx.annotation'
-        exclude group: 'androidx.core'
-    }
-    kapt Deps.butterknife_apt
-
     //dagger2
     api Deps.dagger2
     kapt Deps.dagger2_apt

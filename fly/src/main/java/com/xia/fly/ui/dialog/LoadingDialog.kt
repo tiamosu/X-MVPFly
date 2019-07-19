@@ -18,20 +18,11 @@ class LoadingDialog constructor(context: Context) : FlySupportDialog(context) {
     private lateinit var mAVLoadingIndicatorView: AVLoadingIndicatorView
     private lateinit var mLoadingTv: AppCompatTextView
 
-    fun setMessage(message: String?) {
-        if (!TextUtils.isEmpty(message)) {
-            mLoadingTv.text = message
-            mLoadingTv.visibility = View.VISIBLE
-        }
-    }
-
-    fun setType(@LoaderStyles.LoaderStyle type: String?) {
-        val typeTemp = type ?: DEFAULT_LOADER
-        LoaderCreator.create(typeTemp, mAVLoadingIndicatorView)
-    }
-
     override fun getLayoutId(): Int {
         return R.layout.base_dialog_loading
+    }
+
+    override fun onBindAny(view: View) {
     }
 
     override fun initDialog() {
@@ -43,6 +34,18 @@ class LoadingDialog constructor(context: Context) : FlySupportDialog(context) {
 
         mAVLoadingIndicatorView = findViewById(R.id.dialog_loading_iv)
         mLoadingTv = findViewById(R.id.dialog_loading_show_tv)
+    }
+
+    fun setMessage(message: String?) {
+        if (!TextUtils.isEmpty(message)) {
+            mLoadingTv.text = message
+            mLoadingTv.visibility = View.VISIBLE
+        }
+    }
+
+    fun setType(@LoaderStyles.LoaderStyle type: String?) {
+        val typeTemp = type ?: DEFAULT_LOADER
+        LoaderCreator.create(typeTemp, mAVLoadingIndicatorView)
     }
 
     override fun show() {

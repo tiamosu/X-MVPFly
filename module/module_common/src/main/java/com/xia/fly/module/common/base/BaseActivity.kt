@@ -5,6 +5,8 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import butterknife.ButterKnife
+import butterknife.Unbinder
 import com.blankj.utilcode.util.ClickUtils
 import com.xia.fly.mvp.BaseMvpPresenter
 import com.xia.fly.ui.activities.FlySupportActivity
@@ -14,13 +16,25 @@ import com.xia.fly.ui.activities.FlySupportActivity
  * @date 2019/7/16.
  */
 abstract class BaseActivity<P : BaseMvpPresenter<*>> : FlySupportActivity<P>() {
-
+    private var mUnbinder: Unbinder? = null
     private val mOnClickListener = View.OnClickListener { view -> onWidgetClick(view) }
 
     protected abstract fun onWidgetClick(view: View)
 
-    protected fun applyWidgetClickListener(vararg views: View?) {
-        ClickUtils.applySingleDebouncing(views, mOnClickListener)
+    override fun onBindAny(view: View) {
+        mUnbinder = ButterKnife.bind(this, view)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (mUnbinder != null && mUnbinder !== Unbinder.EMPTY) {
+            try {
+                //fix Bindings already cleared
+                mUnbinder!!.unbind()
+            } catch (ignored: IllegalStateException) {
+            }
+            mUnbinder = null
+        }
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
@@ -52,5 +66,9 @@ abstract class BaseActivity<P : BaseMvpPresenter<*>> : FlySupportActivity<P>() {
                     && event.y > top && event.y < bottom)
         }
         return false
+    }
+
+    protected fun applyWidgetClickListener(vararg views: View?) {
+        ClickUtils.applySingleDebouncing(views, mOnClickListener)
     }
 }

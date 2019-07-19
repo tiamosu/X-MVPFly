@@ -1,6 +1,7 @@
 package com.xia.fly.ui.activities
 
 import android.app.Activity
+import android.view.View
 import android.widget.FrameLayout
 import com.xia.fly.integration.cache.Cache
 import com.xia.fly.integration.cache.LruCache
@@ -30,6 +31,11 @@ interface IActivity {
      * @return like [LruCache]
      */
     fun provideCache(): Cache<String, Any>
+
+    /**
+     * 用于绑定控件等
+     */
+    fun onBindAny(view: View)
 
     /**
      * 用于初始化MVP

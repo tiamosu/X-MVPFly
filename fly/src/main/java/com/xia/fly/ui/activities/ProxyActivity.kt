@@ -2,6 +2,7 @@ package com.xia.fly.ui.activities
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.View
 import androidx.annotation.CallSuper
 import androidx.appcompat.widget.ContentFrameLayout
 import com.xia.fly.R
@@ -56,6 +57,7 @@ abstract class ProxyActivity<P : BaseMvpPresenter<*>> : FlySupportActivity<P>() 
             mContainerLayout = ContentFrameLayout(getContext())
             mContainerLayout!!.id = containerId
             setContentView(mContainerLayout)
+            onBindAny(mContainerLayout!!)
         }
 
         loadProxyRootFragment(containerId)
@@ -64,6 +66,9 @@ abstract class ProxyActivity<P : BaseMvpPresenter<*>> : FlySupportActivity<P>() 
         initView()
         initEvent()
         onLazyLoadData()
+    }
+
+    override fun onBindAny(view: View) {
     }
 
     @CallSuper

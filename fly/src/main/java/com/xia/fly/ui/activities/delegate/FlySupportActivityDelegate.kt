@@ -5,8 +5,6 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import androidx.lifecycle.Observer
-import butterknife.ButterKnife
-import butterknife.Unbinder
 import com.blankj.utilcode.util.NetworkUtils
 import com.xia.fly.constant.NetworkState
 import com.xia.fly.integration.ConnectionLiveData
@@ -24,7 +22,6 @@ import com.xia.flyrxbus.RxBusMessage
  * @date 2019/2/25.
  */
 class FlySupportActivityDelegate(private var mActivity: FlySupportActivity<*>) {
-    private var mUnbinder: Unbinder? = null
     //网络状态监听广播
     private var mConnectionLiveData: ConnectionLiveData? = null
     //记录上一次网络连接状态
@@ -40,7 +37,7 @@ class FlySupportActivityDelegate(private var mActivity: FlySupportActivity<*>) {
                 return
             }
         }
-        if (mActivity.getLayoutId() != 0) {
+        if (mActivity.getLayoutId() > 0) {
             val rootView: View
             if (!mActivity.isLoadTitleBar()) {
                 rootView = mActivity.layoutInflater.inflate(mActivity.getLayoutId(), null)
@@ -63,7 +60,7 @@ class FlySupportActivityDelegate(private var mActivity: FlySupportActivity<*>) {
                 View.inflate(mActivity, mActivity.getLayoutId(), contentContainer)
             }
             mActivity.setContentView(rootView)
-            mUnbinder = ButterKnife.bind(mActivity, rootView)
+            mActivity.onBindAny(rootView)
         }
         //Activity为ProxyActivity时，下面方法置于ProxyActivity中执行
         if (proxyActivity == null) {
@@ -121,14 +118,6 @@ class FlySupportActivityDelegate(private var mActivity: FlySupportActivity<*>) {
         if (presenter != null) {
             presenter.detachView()
             mActivity.lifecycle.removeObserver(presenter)
-        }
-        if (mUnbinder != null && mUnbinder !== Unbinder.EMPTY) {
-            try {
-                //fix Bindings already cleared
-                mUnbinder!!.unbind()
-            } catch (ignored: IllegalStateException) {
-            }
-            mUnbinder = null
         }
         if (mConnectionLiveData != null) {
             mConnectionLiveData!!.removeObservers(mActivity)

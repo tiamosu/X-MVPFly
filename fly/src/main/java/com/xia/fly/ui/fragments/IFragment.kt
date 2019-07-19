@@ -1,6 +1,7 @@
 package com.xia.fly.ui.fragments
 
 import android.os.Bundle
+import android.view.View
 import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import com.xia.fly.integration.cache.Cache
@@ -31,6 +32,11 @@ interface IFragment {
      * @return like [LruCache]
      */
     fun provideCache(): Cache<String, Any>
+
+    /**
+     * 用于绑定控件等
+     */
+    fun onBindAny(view: View)
 
     /**
      * 用于初始化MVP

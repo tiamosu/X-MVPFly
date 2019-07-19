@@ -6,8 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.LinearLayout
-import butterknife.ButterKnife
-import butterknife.Unbinder
 import com.blankj.utilcode.util.NetworkUtils
 import com.xia.fly.constant.NetworkState
 import com.xia.fly.integration.rxbus.IRxBusCallback
@@ -25,7 +23,6 @@ import java.util.concurrent.atomic.AtomicBoolean
  * @date 2019/2/25.
  */
 class FlySupportFragmentDelegate(private var mFragment: FlySupportFragment<*>) {
-    private var mUnbinder: Unbinder? = null
     //防止多次初始化
     private val mInitialized = AtomicBoolean(false)
     //记录上一次网络连接状态
@@ -62,7 +59,7 @@ class FlySupportFragmentDelegate(private var mFragment: FlySupportFragment<*>) {
 
             View.inflate(mFragment.context, mFragment.getLayoutId(), contentContainer)
         }
-        mUnbinder = ButterKnife.bind(mFragment, rootView)
+        mFragment.onBindAny(rootView)
         return rootView
     }
 
@@ -140,14 +137,6 @@ class FlySupportFragmentDelegate(private var mFragment: FlySupportFragment<*>) {
         if (presenter != null) {
             presenter.detachView()
             mFragment.lifecycle.removeObserver(presenter)
-        }
-        if (mUnbinder != null && mUnbinder !== Unbinder.EMPTY) {
-            try {
-                //fix Bindings already cleared
-                mUnbinder!!.unbind()
-            } catch (ignored: IllegalStateException) {
-            }
-            mUnbinder = null
         }
     }
 }
