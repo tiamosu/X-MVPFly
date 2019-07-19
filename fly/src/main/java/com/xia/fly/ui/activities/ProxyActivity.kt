@@ -7,6 +7,7 @@ import androidx.annotation.CallSuper
 import androidx.appcompat.widget.ContentFrameLayout
 import com.xia.fly.R
 import com.xia.fly.mvp.BaseMvpPresenter
+import com.xia.fly.mvp.BaseMvpView
 import com.xia.fly.utils.FragmentUtils
 import com.xia.fly.utils.Preconditions
 import me.yokeyword.fragmentation.ISupportFragment
@@ -16,7 +17,7 @@ import me.yokeyword.fragmentation.ISupportFragment
  * @date 2018/7/3.
  */
 @Suppress("unused")
-abstract class ProxyActivity<P : BaseMvpPresenter<*>> : FlySupportActivity<P>() {
+abstract class ProxyActivity<P : BaseMvpPresenter<BaseMvpView<P>>> : FlySupportActivity<P>() {
 
     private var mContainerLayout: ContentFrameLayout? = null
 

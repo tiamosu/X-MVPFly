@@ -12,6 +12,7 @@ import com.xia.fly.integration.rxbus.IRxBusCallback
 import com.xia.fly.integration.rxbus.RxBusEventTag
 import com.xia.fly.integration.rxbus.RxBusHelper
 import com.xia.fly.mvp.BaseMvpPresenter
+import com.xia.fly.mvp.BaseMvpView
 import com.xia.fly.ui.fragments.FlySupportFragment
 import com.xia.fly.utils.FlyUtils
 import com.xia.fly.utils.Platform
@@ -22,7 +23,7 @@ import java.util.concurrent.atomic.AtomicBoolean
  * @author weixia
  * @date 2019/2/25.
  */
-class FlySupportFragmentDelegate(private var mFragment: FlySupportFragment<*>) {
+class FlySupportFragmentDelegate<P : BaseMvpPresenter<BaseMvpView<P>>>(private var mFragment: FlySupportFragment<P>) {
     //防止多次初始化
     private val mInitialized = AtomicBoolean(false)
     //记录上一次网络连接状态

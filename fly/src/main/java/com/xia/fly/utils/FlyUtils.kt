@@ -9,8 +9,9 @@ import com.blankj.utilcode.util.AppUtils
 import com.blankj.utilcode.util.Utils
 import com.xia.fly.base.App
 import com.xia.fly.di.component.AppComponent
-import com.xia.fly.ui.activities.FlySupportActivity
 import com.xia.fly.ui.fragments.FlySupportFragment
+import me.yokeyword.fragmentation.SupportActivity
+import me.yokeyword.fragmentation.SupportFragment
 
 /**
  * @author xia
@@ -31,13 +32,13 @@ object FlyUtils {
     @JvmStatic
     fun getContext(lifecycleOwner: LifecycleOwner): Context? {
         return when (lifecycleOwner) {
-            is FlySupportFragment<*> -> {
+            is SupportFragment -> {
                 lifecycleOwner.context
             }
             is Fragment -> {
                 lifecycleOwner.context
             }
-            is FlySupportActivity<*> -> {
+            is SupportActivity -> {
                 lifecycleOwner.getContext()
             }
             is Activity -> {

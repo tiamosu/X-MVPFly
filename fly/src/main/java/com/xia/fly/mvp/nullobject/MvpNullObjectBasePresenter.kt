@@ -11,7 +11,7 @@ import java.lang.reflect.Type
  * @author weixia
  * @date 2019/3/19.
  */
-abstract class MvpNullObjectBasePresenter<V : IMvpView<*>> protected constructor() : IMvpPresenter<V> {
+abstract class MvpNullObjectBasePresenter<out V : IMvpView<*>> protected constructor() : IMvpPresenter<V> {
     private var mView: WeakReference<V>? = null
     private val mNullView: V
 
@@ -84,7 +84,7 @@ abstract class MvpNullObjectBasePresenter<V : IMvpView<*>> protected constructor
     }
 
     @UiThread
-    override fun attachView(view: V) {
+    override fun attachView(view: @UnsafeVariance V) {
         this.mView = WeakReference(view)
     }
 

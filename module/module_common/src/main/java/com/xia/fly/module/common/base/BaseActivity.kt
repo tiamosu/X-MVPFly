@@ -9,13 +9,14 @@ import butterknife.ButterKnife
 import butterknife.Unbinder
 import com.blankj.utilcode.util.ClickUtils
 import com.xia.fly.mvp.BaseMvpPresenter
+import com.xia.fly.mvp.BaseMvpView
 import com.xia.fly.ui.activities.FlySupportActivity
 
 /**
  * @author weixia
  * @date 2019/7/16.
  */
-abstract class BaseActivity<P : BaseMvpPresenter<*>> : FlySupportActivity<P>() {
+abstract class BaseActivity<P : BaseMvpPresenter<BaseMvpView<P>>> : FlySupportActivity<P>() {
     private var mUnbinder: Unbinder? = null
     private val mOnClickListener = View.OnClickListener { view -> onWidgetClick(view) }
 

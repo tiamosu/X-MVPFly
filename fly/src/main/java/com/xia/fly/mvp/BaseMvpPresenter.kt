@@ -12,7 +12,7 @@ import com.xia.fly.utils.FlyUtils
  * @author weixia
  * @date 2019/3/19.
  */
-abstract class BaseMvpPresenter<V : BaseMvpView<*>> : MvpNullObjectBasePresenter<V>() {
+abstract class BaseMvpPresenter<out V : BaseMvpView<*>> : MvpNullObjectBasePresenter<V>() {
     protected lateinit var mLifecycleOwner: LifecycleOwner
     protected lateinit var mContext: Context
 

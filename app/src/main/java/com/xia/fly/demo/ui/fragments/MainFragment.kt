@@ -5,6 +5,7 @@ import com.xia.fly.demo.R
 import com.xia.fly.module.common.base.BaseFragment
 import com.xia.fly.module.common.router.Router
 import com.xia.fly.mvp.BaseMvpPresenter
+import com.xia.fly.mvp.BaseMvpView
 import com.xia.fly.utils.FragmentUtils
 import me.yokeyword.fragmentation.ISupportFragment
 
@@ -12,7 +13,7 @@ import me.yokeyword.fragmentation.ISupportFragment
  * @author xia
  * @date 2018/7/3.
  */
-class MainFragment : BaseFragment<BaseMvpPresenter<*>>() {
+class MainFragment<P : BaseMvpPresenter<BaseMvpView<P>>> : BaseFragment<P>() {
 
     private val mFragments = arrayOfNulls<ISupportFragment>(1)
 
@@ -24,7 +25,7 @@ class MainFragment : BaseFragment<BaseMvpPresenter<*>>() {
         return true
     }
 
-    override fun newP(): BaseMvpPresenter<*>? {
+    override fun newP(): P? {
         return null
     }
 

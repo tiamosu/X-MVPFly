@@ -40,7 +40,7 @@ class BFragment : BaseFragment<BPresenter>(), BView {
 //        p.detachView()
 //        Handler().postDelayed({ p.load(1) }, 1000)
 
-        p.load(0)
+        p?.load(0)
     }
 
     override fun setContent(content: String?) {

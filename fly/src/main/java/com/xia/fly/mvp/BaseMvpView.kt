@@ -6,4 +6,4 @@ import com.xia.fly.mvp.common.IMvpView
  * @author weixia
  * @date 2019/3/19.
  */
-interface BaseMvpView<P> : IMvpView<P>
+interface BaseMvpView<out P> : IMvpView<P>

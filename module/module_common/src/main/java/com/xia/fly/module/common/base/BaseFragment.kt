@@ -11,13 +11,14 @@ import com.blankj.utilcode.util.ClickUtils
 import com.xia.fly.module.common.R
 
 import com.xia.fly.mvp.BaseMvpPresenter
+import com.xia.fly.mvp.BaseMvpView
 import com.xia.fly.ui.fragments.FlySupportFragment
 
 /**
  * @author xia
  * @date 2018/7/3.
  */
-abstract class BaseFragment<P : BaseMvpPresenter<*>> : FlySupportFragment<P>() {
+abstract class BaseFragment<out P : BaseMvpPresenter<BaseMvpView<P>>> : FlySupportFragment<P>() {
     private var mUnbinder: Unbinder? = null
     private val mOnClickListener = View.OnClickListener { view -> onWidgetClick(view) }
 

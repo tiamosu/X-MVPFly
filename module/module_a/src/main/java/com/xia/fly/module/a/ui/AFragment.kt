@@ -141,7 +141,7 @@ class AFragment : BaseFragment<APresenter>(), AView {
                         .start(FragmentUtils.newInstance(fragmentB, bundle)!!)
             }
             R.id.test_btn -> {
-                p.test()
+                p?.test()
             }
         }
     }

@@ -5,6 +5,7 @@ import android.util.Log
 import com.xia.fly.demo.R
 import com.xia.fly.demo.ui.fragments.MainFragment
 import com.xia.fly.mvp.BaseMvpPresenter
+import com.xia.fly.mvp.BaseMvpView
 import com.xia.fly.ui.activities.ProxyActivity
 import com.xia.fly.ui.fragments.FlySupportFragment
 import me.yokeyword.fragmentation.anim.DefaultVerticalAnimator
@@ -13,7 +14,7 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator
 /**
  * @author xia
  */
-class MainActivity<P : BaseMvpPresenter<*>> : ProxyActivity<P>() {
+class MainActivity<P : BaseMvpPresenter<BaseMvpView<P>>> : ProxyActivity<P>() {
 
     override fun getLayoutId(): Int {
         return R.layout.activity_main

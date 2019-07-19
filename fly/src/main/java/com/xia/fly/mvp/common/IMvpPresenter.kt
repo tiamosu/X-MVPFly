@@ -10,10 +10,10 @@ import androidx.lifecycle.OnLifecycleEvent
  * @author weixia
  * @date 2019/3/19.
  */
-interface IMvpPresenter<V : IMvpView<*>> : LifecycleObserver {
+interface IMvpPresenter<out V : IMvpView<*>> : LifecycleObserver {
 
     @UiThread
-    fun attachView(view: V)
+    fun attachView(view: @UnsafeVariance V)
 
     @UiThread
     fun detachView()
