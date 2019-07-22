@@ -61,7 +61,7 @@ public abstract class FlySupportFragment<P extends BaseMvpPresenter>
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (mRootView == null || getRootView() == null) {
+        if (getRootView() == null) {
             final View view = mDelegate.onCreateView(inflater, container);
             mRootView = new WeakReference<>(view);
         } else {
@@ -73,6 +73,11 @@ public abstract class FlySupportFragment<P extends BaseMvpPresenter>
             }
         }
         return getRootView();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        onBindAny(getRootView());
     }
 
     /**

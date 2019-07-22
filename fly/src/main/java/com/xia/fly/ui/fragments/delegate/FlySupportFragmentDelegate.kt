@@ -59,7 +59,6 @@ class FlySupportFragmentDelegate(private var mFragment: FlySupportFragment<*>) {
 
             View.inflate(mFragment.context, mFragment.getLayoutId(), contentContainer)
         }
-        mFragment.onBindAny(rootView)
         return rootView
     }
 
