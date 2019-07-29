@@ -17,9 +17,8 @@ object Versions {
     const val okhttp3 = "3.12.3" //版本3.12.X，兼容Android 4
     const val autodispose = "1.3.0"
     const val glide = "4.9.0"
-    const val dagger2 = "2.23.2"
+    const val dagger2 = "2.24"
     const val fragmentation = "1.1.1"
-    const val fly = "2.9.6"
 }
 
 object Publish {
@@ -76,7 +75,7 @@ object Deps {
     const val x_rxbus = "me.xia:x-flyrxbus:1.0.5"
 
     //utilcode
-    const val utilcode = "com.blankj:utilcodex:1.25.2"
+    const val utilcode = "com.blankj:utilcodex:1.25.3"
 
     //okhttp
     const val okhttp3 = "com.squareup.okhttp3:okhttp:${Versions.okhttp3}"
@@ -94,9 +93,4 @@ object Deps {
 
     //loading各种动画样式
     const val loading_indicator_view = "com.wang.avi:library:2.1.3"
-
-    //fly
-    const val fly = "me.xia:fly:${Versions.fly}"
-    const val fly_http = "me.xia:fly-http:${Versions.fly}"
-    const val fly_imageloader_glide = "me.xia:fly-imageloader-glide:${Versions.fly}"
 }
