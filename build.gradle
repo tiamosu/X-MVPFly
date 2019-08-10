@@ -1,18 +1,5 @@
 buildscript {
     repositories {
-        maven {
-            url 'https://maven.aliyun.com/repository/public'
-            name '代替 jcenter()及 mavenCentral()'
-        }
-        maven {
-            url 'https://maven.aliyun.com/repository/jcenter'
-            name '代替 jcenter()'
-        }
-        maven {
-            url 'https://maven.aliyun.com/repository/google'
-            name '代替 google()'
-        }
-
         google()
         jcenter()
     }
@@ -27,19 +14,6 @@ buildscript {
 
 allprojects {
     repositories {
-        maven {
-            url 'https://maven.aliyun.com/repository/public'
-            name '代替 jcenter()及 mavenCentral()'
-        }
-        maven {
-            url 'https://maven.aliyun.com/repository/jcenter'
-            name '代替 jcenter()'
-        }
-        maven {
-            url 'https://maven.aliyun.com/repository/google'
-            name '代替 google()'
-        }
-
         google()
         jcenter()
 

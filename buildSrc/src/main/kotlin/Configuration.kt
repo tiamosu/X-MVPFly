@@ -1,4 +1,4 @@
-@file:Suppress("unused")
+@file:Suppress("unused", "SpellCheckingInspection")
 
 object Android {
     const val compileSdkVersion = 28
@@ -67,7 +67,7 @@ object Deps {
     const val retrofit2_converter_gson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit2}"
     const val autodispose = "com.uber.autodispose:autodispose-android:${Versions.autodispose}"
     const val autodispose_archcomponents = "com.uber.autodispose:autodispose-android-archcomponents:${Versions.autodispose}"
-    const val rxjava2 = "io.reactivex.rxjava2:rxjava:2.2.10"
+    const val rxjava2 = "io.reactivex.rxjava2:rxjava:2.2.11"
     const val rxandroid2 = "io.reactivex.rxjava2:rxandroid:2.1.1"
     const val rxcache2 = "com.github.VictorAlbertos.RxCache:runtime:1.8.3-2.x"
     const val rxcache_gson = "com.github.VictorAlbertos.Jolyglot:gson:0.0.4"
@@ -75,7 +75,7 @@ object Deps {
     const val x_rxbus = "me.xia:x-flyrxbus:1.0.5"
 
     //utilcode
-    const val utilcode = "com.blankj:utilcodex:1.25.5"
+    const val utilcode = "com.blankj:utilcodex:1.25.7"
 
     //okhttp
     const val okhttp3 = "com.squareup.okhttp3:okhttp:${Versions.okhttp3}"
