@@ -11,7 +11,7 @@ object Android {
 }
 
 object Versions {
-    const val kotlin = "1.3.31"
+    const val kotlin = "1.3.50"
     const val butterknife = "10.1.0"
     const val retrofit2 = "2.6.1"
     const val okhttp3 = "3.12.3" //版本3.12.X，兼容Android 4
@@ -59,7 +59,7 @@ object Deps {
     const val dagger2_apt = "com.google.dagger:dagger-compiler:${Versions.dagger2}"
 
     //leakcanary
-    const val leakcanary_android = "com.squareup.leakcanary:leakcanary-android:2.0-alpha-3"
+    const val leakcanary_android = "com.squareup.leakcanary:leakcanary-android:2.0-beta-3"
 
     //rx
     const val retrofit2 = "com.squareup.retrofit2:retrofit:${Versions.retrofit2}"
@@ -75,7 +75,7 @@ object Deps {
     const val x_rxbus = "me.xia:x-flyrxbus:1.0.5"
 
     //utilcode
-    const val utilcode = "com.blankj:utilcodex:1.25.8"
+    const val utilcode = "com.blankj:utilcodex:1.25.9"
 
     //okhttp
     const val okhttp3 = "com.squareup.okhttp3:okhttp:${Versions.okhttp3}"
