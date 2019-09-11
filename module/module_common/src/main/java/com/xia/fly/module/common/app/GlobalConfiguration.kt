@@ -8,7 +8,6 @@ import com.xia.fly.di.module.ClientModule
 import com.xia.fly.di.module.GlobalConfigModule
 import com.xia.fly.http.cookie.CookieJarImpl
 import com.xia.fly.http.cookie.store.MemoryCookieStore
-import com.xia.fly.http.utils.HttpsUtils
 import com.xia.fly.http.utils.RxJavaUtils
 import com.xia.fly.imageloader.GlideImageLoaderStrategy
 import com.xia.fly.integration.ConfigModule
@@ -62,9 +61,4 @@ class GlobalConfiguration : ConfigModule {
     override fun injectActivityLifecycle(context: Context, lifecycles: MutableList<Application.ActivityLifecycleCallbacks>) {}
 
     override fun injectFragmentLifecycle(context: Context, lifecycles: MutableList<FragmentManager.FragmentLifecycleCallbacks>) {}
-
-    companion object {
-
-        private val SSL_PARAMS = HttpsUtils.getSslSocketFactory()
-    }
 }
