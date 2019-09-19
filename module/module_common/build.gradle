@@ -7,7 +7,12 @@ dependencies {
     api project(':fly')
     api project(':fly-http')
     api project(':fly-imageloader-glide')
+//    api Deps.fly
+//    api Deps.fly_http
+//    api Deps.fly_imageloader_glide
 
-    implementation Deps.okhttp3_logging_interceptor
+    implementation(Deps.okhttp3_logging_interceptor) {
+        exclude module: 'okhttp'
+    }
     debugImplementation Deps.leakcanary_android
 }
