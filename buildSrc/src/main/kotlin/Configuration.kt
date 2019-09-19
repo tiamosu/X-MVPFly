@@ -15,8 +15,8 @@ object Versions {
     const val butterknife = "10.1.0"
     const val retrofit2 = "2.6.1"
     const val okhttp3 = "3.12.5" //版本3.12.X，兼容Android 4
-    const val autodispose = "1.3.0"
-    const val glide = "4.9.0"
+    const val autodispose = "1.4.0"
+    const val glide = "4.10.0"
     const val dagger2 = "2.24"
     const val fragmentation = "1.1.1"
 }
@@ -33,7 +33,6 @@ object Publish {
 
 object Deps {
     //support
-    const val support_annotations = "com.android.support:support-annotations:28.0.0"
     const val androidx_annotation = "androidx.annotation:annotation:1.1.0"
     const val androidx_appcompat = "androidx.appcompat:appcompat:1.0.2"
     const val androidx_recyclerview = "androidx.recyclerview:recyclerview:1.0.0"
