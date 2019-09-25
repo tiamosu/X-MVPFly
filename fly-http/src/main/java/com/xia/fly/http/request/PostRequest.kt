@@ -23,32 +23,32 @@ class PostRequest(url: String) : BaseBodyRequest<PostRequest>(url) {
         return this
     }
 
-    override fun generateRequest(): Observable<ResponseBody> {
+    override fun generateRequest(): Observable<ResponseBody>? {
         if (mRequestBody != null) {
-            return mRestService.postBody(mUrl, mRequestBody!!, mHeaders)
+            return mRestService?.postBody(mUrl, mRequestBody!!, mHeaders)
         }
         if (mJson != null) {
             val body = RequestBody.create(mMediaType, mJson!!)
-            return mRestService.postJson(mUrl, body, mHeaders)
+            return mRestService?.postJson(mUrl, body, mHeaders)
         }
         if (mObject != null) {
-            return mRestService.postBody(mUrl, mObject!!, mHeaders)
+            return mRestService?.postBody(mUrl, mObject!!, mHeaders)
         }
         if (mBytes != null) {
             val body = RequestBody.create(mMediaType, mBytes!!)
-            return mRestService.postBody(mUrl, body, mHeaders)
+            return mRestService?.postBody(mUrl, body, mHeaders)
         }
         if (mString != null) {
             val body = RequestBody.create(mMediaType, mString!!)
-            return mRestService.postBody(mUrl, body, mHeaders)
+            return mRestService?.postBody(mUrl, body, mHeaders)
         }
 
         return if (mFileParams.isEmpty()) {
-            mRestService.post(mUrl, mParams, mHeaders)
+            mRestService?.post(mUrl, mParams, mHeaders)
         } else {
             val builder = MultipartBody.Builder().setType(MultipartBody.FORM)
             val body = addParams(builder)
-            mRestService.uploadFiles(mUrl, body, mHeaders)
+            mRestService?.uploadFiles(mUrl, body, mHeaders)
         }
     }
 

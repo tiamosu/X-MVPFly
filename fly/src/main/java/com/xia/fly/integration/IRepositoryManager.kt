@@ -1,6 +1,8 @@
 package com.xia.fly.integration
 
 import android.content.Context
+import androidx.annotation.Nullable
+import retrofit2.Retrofit
 
 /**
  * 用来管理网络请求层,以及数据缓存层,以后可能添加数据库请求层
@@ -21,11 +23,11 @@ interface IRepositoryManager {
     /**
      * 根据传入的 Class 获取对应的 Retrofit service
      *
-     * @param service Retrofit service class
+     * @param serviceClass Retrofit service class
      * @param <T>     Retrofit service 类型
      * @return Retrofit service
     </T> */
-    fun <T> obtainRetrofitService(service: Class<T>): T
+    fun <T> obtainRetrofitService(serviceClass: Class<T>): T?
 
     /**
      * 根据传入的 Class 获取对应的 RxCache service
@@ -40,4 +42,16 @@ interface IRepositoryManager {
      * 清理所有缓存
      */
     fun clearAllCache()
+
+    /**
+     * 设置一个可以委托创建服务的接口
+     *
+     * @param delegate 委托接口，可为空
+     */
+    fun setObtainServiceDelegate(@Nullable delegate: ObtainServiceDelegate?)
+
+    interface ObtainServiceDelegate {
+        @Nullable
+        fun <T> createRetrofitService(retrofit: Retrofit?, serviceClass: Class<T>?): T?
+    }
 }

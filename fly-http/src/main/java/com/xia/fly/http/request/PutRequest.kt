@@ -10,25 +10,25 @@ import okhttp3.ResponseBody
  */
 class PutRequest(url: String) : BaseBodyRequest<PutRequest>(url) {
 
-    override fun generateRequest(): Observable<ResponseBody> {
+    override fun generateRequest(): Observable<ResponseBody>? {
         if (mRequestBody != null) {
-            return mRestService.putBody(mUrl, mRequestBody!!, mHeaders)
+            return mRestService?.putBody(mUrl, mRequestBody!!, mHeaders)
         }
         if (mJson != null) {
             val body = RequestBody.create(mMediaType, mJson!!)
-            return mRestService.putJson(mUrl, body, mHeaders)
+            return mRestService?.putJson(mUrl, body, mHeaders)
         }
         if (mObject != null) {
-            return mRestService.putBody(mUrl, mObject!!, mHeaders)
+            return mRestService?.putBody(mUrl, mObject!!, mHeaders)
         }
         if (mBytes != null) {
             val body = RequestBody.create(mMediaType, mBytes!!)
-            return mRestService.putBody(mUrl, body, mHeaders)
+            return mRestService?.putBody(mUrl, body, mHeaders)
         }
         if (mString != null) {
             val body = RequestBody.create(mMediaType, mString!!)
-            return mRestService.putBody(mUrl, body, mHeaders)
+            return mRestService?.putBody(mUrl, body, mHeaders)
         }
-        return mRestService.put(mUrl, mParams, mHeaders)
+        return mRestService?.put(mUrl, mParams, mHeaders)
     }
 }

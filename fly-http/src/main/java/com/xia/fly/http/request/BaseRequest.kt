@@ -54,7 +54,7 @@ abstract class BaseRequest<R : BaseRequest<R>>(@JvmField protected val mUrl: Str
         return this as R
     }
 
-    protected abstract fun generateRequest(): Observable<ResponseBody>
+    protected abstract fun generateRequest(): Observable<ResponseBody>?
 
     fun build(): RequestCall {
         return RequestCall(generateRequest())

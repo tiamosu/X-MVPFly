@@ -57,7 +57,7 @@ abstract class AppModule {
         @JvmStatic
         @Singleton
         @Provides
-        fun provideExtras(cacheFactory: Cache.Factory<String, Any>): Cache<String, Any> {
+        fun provideExtras(cacheFactory: Cache.Factory<String, Any?>): Cache<String, Any?> {
             return cacheFactory.build(CacheType.EXTRAS)
         }
 

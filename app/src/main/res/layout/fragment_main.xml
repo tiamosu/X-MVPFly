@@ -28,13 +28,13 @@
             android:id="@+id/main_login_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="登录"/>
+            android:text="Hello World!"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/main_open_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="开通托管账户"/>
+            android:text="Hello World!"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="wrap_content"

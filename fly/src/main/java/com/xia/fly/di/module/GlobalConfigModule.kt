@@ -43,7 +43,7 @@ class GlobalConfigModule private constructor(builder: Builder) {
     private val mOkHttpConfiguration: ClientModule.OkHttpConfiguration?
     private val mRxCacheConfiguration: ClientModule.RxCacheConfiguration?
     private val mGsonConfiguration: AppModule.GsonConfiguration?
-    private val mCacheFactory: Cache.Factory<String, Any>?
+    private val mCacheFactory: Cache.Factory<String, Any?>?
     private val mExecutorService: ExecutorService?
 
     init {
@@ -139,9 +139,9 @@ class GlobalConfigModule private constructor(builder: Builder) {
 
     @Singleton
     @Provides
-    internal fun provideCacheFactory(application: Application): Cache.Factory<String, Any> {
-        return mCacheFactory ?: object : Cache.Factory<String, Any> {
-            override fun build(type: CacheType): Cache<String, Any> {
+    internal fun provideCacheFactory(application: Application): Cache.Factory<String, Any?> {
+        return mCacheFactory ?: object : Cache.Factory<String, Any?> {
+            override fun build(type: CacheType): Cache<String, Any?> {
                 //若想自定义 LruCache 的 size, 或者不想使用 LruCache, 想使用自己自定义的策略
                 //使用 GlobalConfigModule.Builder#cacheFactory() 即可扩展
                 return when (type.getCacheTypeId()) {
@@ -182,7 +182,7 @@ class GlobalConfigModule private constructor(builder: Builder) {
         var mOkHttpConfiguration: ClientModule.OkHttpConfiguration? = null
         var mRxCacheConfiguration: ClientModule.RxCacheConfiguration? = null
         var mGsonConfiguration: AppModule.GsonConfiguration? = null
-        var mCacheFactory: Cache.Factory<String, Any>? = null
+        var mCacheFactory: Cache.Factory<String, Any?>? = null
         var mExecutorService: ExecutorService? = null
 
         fun baseurl(baseUrl: String): Builder {//基础url
@@ -246,7 +246,7 @@ class GlobalConfigModule private constructor(builder: Builder) {
             return this
         }
 
-        fun cacheFactory(cacheFactory: Cache.Factory<String, Any>): Builder {
+        fun cacheFactory(cacheFactory: Cache.Factory<String, Any?>): Builder {
             this.mCacheFactory = cacheFactory
             return this
         }

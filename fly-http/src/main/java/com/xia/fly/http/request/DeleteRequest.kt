@@ -10,25 +10,25 @@ import okhttp3.ResponseBody
  */
 class DeleteRequest(url: String) : BaseBodyRequest<DeleteRequest>(url) {
 
-    override fun generateRequest(): Observable<ResponseBody> {
+    override fun generateRequest(): Observable<ResponseBody>? {
         if (mRequestBody != null) {
-            return mRestService.deleteBody(mUrl, mRequestBody!!, mHeaders)
+            return mRestService?.deleteBody(mUrl, mRequestBody!!, mHeaders)
         }
         if (mJson != null) {
             val body = RequestBody.create(mMediaType, mJson!!)
-            return mRestService.deleteJson(mUrl, body, mHeaders)
+            return mRestService?.deleteJson(mUrl, body, mHeaders)
         }
         if (mObject != null) {
-            return mRestService.deleteBody(mUrl, mObject!!, mHeaders)
+            return mRestService?.deleteBody(mUrl, mObject!!, mHeaders)
         }
         if (mBytes != null) {
             val body = RequestBody.create(mMediaType, mBytes!!)
-            return mRestService.deleteBody(mUrl, body, mHeaders)
+            return mRestService?.deleteBody(mUrl, body, mHeaders)
         }
         if (mString != null) {
             val body = RequestBody.create(mMediaType, mString!!)
-            return mRestService.deleteBody(mUrl, body, mHeaders)
+            return mRestService?.deleteBody(mUrl, body, mHeaders)
         }
-        return mRestService.delete(mUrl, mParams, mHeaders)
+        return mRestService?.delete(mUrl, mParams, mHeaders)
     }
 }
