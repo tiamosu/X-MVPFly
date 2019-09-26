@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,39 +15,39 @@
             android:id="@+id/main_user_id_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="请输入账号"/>
+            android:hint="请输入账号" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/main_user_psd_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="请输入密码"/>
+            android:hint="请输入密码" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/main_login_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello World!"/>
+            android:text="Hello World!" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/main_open_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello World!"/>
+            android:text="Hello World!" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello World!"/>
+            android:text="Hello World!" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello World!"/>
+            android:text="Hello World!" />
 
         <FrameLayout
             android:id="@+id/main_fl"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 </ScrollView>
