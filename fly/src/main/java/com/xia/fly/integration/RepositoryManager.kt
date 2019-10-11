@@ -36,10 +36,12 @@ constructor() : IRepositoryManager {
     @JvmField
     @Inject
     internal var mCacheFactory: Cache.Factory<String, Any?>? = null
+    @JvmField
+    @Inject
+    internal var mObtainServiceDelegate: IRepositoryManager.ObtainServiceDelegate? = null
 
     private var mRetrofitServiceCache: Cache<String, Any?>? = null
     private var mCacheServiceCache: Cache<String, Any?>? = null
-    private var mDelegate: IRepositoryManager.ObtainServiceDelegate? = null
 
     /**
      * 根据传入的 Class 获取对应的 Retrofit service
@@ -55,10 +57,11 @@ constructor() : IRepositoryManager {
         }
         Preconditions.checkNotNull<Any>(mRetrofitServiceCache,
                 "Cannot return null from a Cache.Factory#build(int) method")
+
         val canonicalName = serviceClass.canonicalName ?: ""
         var retrofitService = mRetrofitServiceCache?.get(canonicalName) as T?
         if (retrofitService == null) {
-            retrofitService = mDelegate?.createRetrofitService(mRetrofit?.get(), serviceClass)
+            retrofitService = mObtainServiceDelegate?.createRetrofitService(mRetrofit?.get(), serviceClass)
             if (retrofitService == null) {
                 retrofitService = Proxy.newProxyInstance(
                         serviceClass.classLoader, arrayOf<Class<*>>(serviceClass),
@@ -84,6 +87,7 @@ constructor() : IRepositoryManager {
         }
         Preconditions.checkNotNull<Any>(mCacheServiceCache,
                 "Cannot return null from a Cache.Factory#build(int) method")
+
         val canonicalName = cache.canonicalName ?: ""
         var cacheService = mCacheServiceCache?.get(canonicalName) as T?
         if (cacheService == null) {
@@ -102,9 +106,5 @@ constructor() : IRepositoryManager {
 
     override fun getContext(): Context {
         return mApplication!!
-    }
-
-    override fun setObtainServiceDelegate(delegate: IRepositoryManager.ObtainServiceDelegate?) {
-        mDelegate = delegate
     }
 }

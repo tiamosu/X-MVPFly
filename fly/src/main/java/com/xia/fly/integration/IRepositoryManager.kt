@@ -43,13 +43,6 @@ interface IRepositoryManager {
      */
     fun clearAllCache()
 
-    /**
-     * 设置一个可以委托创建服务的接口
-     *
-     * @param delegate 委托接口，可为空
-     */
-    fun setObtainServiceDelegate(@Nullable delegate: ObtainServiceDelegate?)
-
     interface ObtainServiceDelegate {
         @Nullable
         fun <T> createRetrofitService(retrofit: Retrofit?, serviceClass: Class<T>?): T?

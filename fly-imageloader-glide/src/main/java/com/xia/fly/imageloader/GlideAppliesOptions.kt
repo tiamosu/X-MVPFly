@@ -1,13 +1,13 @@
 package com.xia.fly.imageloader
 
 import android.content.Context
-
 import com.bumptech.glide.Glide
 import com.bumptech.glide.GlideBuilder
+import com.bumptech.glide.Registry
 import com.xia.fly.ui.imageloader.BaseImageLoaderStrategy
 
 /**
- * 如果你想具有配置 @[Glide] 的权利,则需要让 [BaseImageLoaderStrategy]
+ * 如果你想具有配置 [Glide] 的权利,则需要让 [BaseImageLoaderStrategy]
  * 的实现类也必须实现 [GlideAppliesOptions]
  *
  * @author xia
@@ -22,4 +22,13 @@ interface GlideAppliesOptions {
      * @param builder [GlideBuilder] 此类被用来创建 Glide
      */
     fun applyGlideOptions(context: Context, builder: GlideBuilder)
+
+    /**
+     * 注册[Glide]的组件，参考[com.bumptech.glide.module.LibraryGlideModule]
+     *
+     * @param context  Android context
+     * @param glide    [Glide]
+     * @param registry [Registry]
+     */
+    fun registerComponents(context: Context, glide: Glide, registry: Registry)
 }

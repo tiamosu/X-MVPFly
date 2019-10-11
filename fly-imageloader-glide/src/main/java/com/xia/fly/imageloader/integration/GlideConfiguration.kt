@@ -77,6 +77,11 @@ class GlideConfiguration : AppGlideModule() {
         val appComponent = FlyUtils.getAppComponent()
         registry.replace(GlideUrl::class.java, InputStream::class.java,
                 OkHttpUrlLoader.Factory(appComponent.okHttpClient()))
+
+        val loadImgStrategy = appComponent.imageLoader().getLoadImgStrategy()
+        if (loadImgStrategy is GlideAppliesOptions) {
+            loadImgStrategy.registerComponents(context, glide, registry)
+        }
     }
 
     /**

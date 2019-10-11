@@ -5,6 +5,7 @@ import android.text.TextUtils
 import com.bumptech.glide.Glide
 import com.xia.fly.http.BaseUrl
 import com.xia.fly.http.GlobalHttpHandler
+import com.xia.fly.integration.IRepositoryManager
 import com.xia.fly.integration.cache.Cache
 import com.xia.fly.integration.cache.CacheType
 import com.xia.fly.integration.cache.IntelligentCache
@@ -45,6 +46,7 @@ class GlobalConfigModule private constructor(builder: Builder) {
     private val mGsonConfiguration: AppModule.GsonConfiguration?
     private val mCacheFactory: Cache.Factory<String, Any?>?
     private val mExecutorService: ExecutorService?
+    private var mObtainServiceDelegate: IRepositoryManager.ObtainServiceDelegate? = null
 
     init {
         this.mApiUrl = builder.mApiUrl
@@ -60,6 +62,7 @@ class GlobalConfigModule private constructor(builder: Builder) {
         this.mGsonConfiguration = builder.mGsonConfiguration
         this.mCacheFactory = builder.mCacheFactory
         this.mExecutorService = builder.mExecutorService
+        this.mObtainServiceDelegate = builder.mObtainServiceDelegate
     }
 
     @Singleton
@@ -170,6 +173,12 @@ class GlobalConfigModule private constructor(builder: Builder) {
         )
     }
 
+    @Singleton
+    @Provides
+    internal fun provideObtainServiceDelegate(): IRepositoryManager.ObtainServiceDelegate? {
+        return mObtainServiceDelegate
+    }
+
     class Builder {
         var mApiUrl: HttpUrl? = null
         var mBaseUrl: BaseUrl? = null
@@ -184,6 +193,7 @@ class GlobalConfigModule private constructor(builder: Builder) {
         var mGsonConfiguration: AppModule.GsonConfiguration? = null
         var mCacheFactory: Cache.Factory<String, Any?>? = null
         var mExecutorService: ExecutorService? = null
+        var mObtainServiceDelegate: IRepositoryManager.ObtainServiceDelegate? = null
 
         fun baseurl(baseUrl: String): Builder {//基础url
             if (TextUtils.isEmpty(baseUrl)) {
@@ -253,6 +263,11 @@ class GlobalConfigModule private constructor(builder: Builder) {
 
         fun executorService(executorService: ExecutorService): Builder {
             this.mExecutorService = executorService
+            return this
+        }
+
+        fun obtainServiceDelegate(obtainServiceDelegate: IRepositoryManager.ObtainServiceDelegate): Builder {
+            this.mObtainServiceDelegate = obtainServiceDelegate
             return this
         }
 
