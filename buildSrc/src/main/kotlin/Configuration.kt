@@ -17,7 +17,7 @@ object Versions {
     const val okhttp3 = "3.12.6" //版本3.12.X，兼容Android 4
     const val autodispose = "1.4.0"
     const val glide = "4.10.0"
-    const val dagger2 = "2.24"
+    const val dagger2 = "2.25.2"
     const val fragmentation = "1.1.1"
     const val fly = "3.0.5"
 }
@@ -67,7 +67,7 @@ object Deps {
     const val retrofit2_converter_gson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit2}"
     const val autodispose = "com.uber.autodispose:autodispose-android:${Versions.autodispose}"
     const val autodispose_archcomponents = "com.uber.autodispose:autodispose-android-archcomponents:${Versions.autodispose}"
-    const val rxjava2 = "io.reactivex.rxjava2:rxjava:2.2.12"
+    const val rxjava2 = "io.reactivex.rxjava2:rxjava:2.2.13"
     const val rxandroid2 = "io.reactivex.rxjava2:rxandroid:2.1.1"
     const val rxcache2 = "com.github.VictorAlbertos.RxCache:runtime:1.8.3-2.x"
     const val rxcache_gson = "com.github.VictorAlbertos.Jolyglot:gson:0.0.4"
