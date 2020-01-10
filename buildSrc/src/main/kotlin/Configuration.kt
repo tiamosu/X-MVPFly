@@ -16,7 +16,7 @@ object Versions {
     const val retrofit2 = "2.6.2"
     const val okhttp3 = "3.12.7" //版本3.12.X，兼容Android 4
     const val autodispose = "1.4.0"
-    const val glide = "4.10.0"
+    const val glide = "4.11.0"
     const val dagger2 = "2.25.4"
     const val fragmentation = "1.1.2"
     const val fly = "3.0.5"
