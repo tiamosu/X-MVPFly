@@ -13,7 +13,7 @@ object Android {
 object Versions {
     const val kotlin = "1.3.61"
     const val butterknife = "10.2.0"
-    const val retrofit2 = "2.6.2"
+    const val retrofit2 = "2.6.4"
     const val okhttp3 = "3.12.8" //版本3.12.X，兼容Android 4
     const val autodispose = "1.4.0"
     const val glide = "4.11.0"
