@@ -26,7 +26,7 @@ object ClipboardUtils {
     @JvmStatic
     fun copyText(text: CharSequence) {
         val cm = Utils.getApp().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        cm.primaryClip = ClipData.newPlainText("text", text)
+        cm.setPrimaryClip(ClipData.newPlainText("text", text))
     }
 
     /**
@@ -51,7 +51,7 @@ object ClipboardUtils {
     @JvmStatic
     fun copyUri(uri: Uri) {
         val cm = Utils.getApp().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        cm.primaryClip = ClipData.newUri(Utils.getApp().contentResolver, "uri", uri)
+        cm.setPrimaryClip(ClipData.newUri(Utils.getApp().contentResolver, "uri", uri))
     }
 
     /**
@@ -76,7 +76,7 @@ object ClipboardUtils {
     @JvmStatic
     fun copyIntent(intent: Intent) {
         val cm = Utils.getApp().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        cm.primaryClip = ClipData.newIntent("intent", intent)
+        cm.setPrimaryClip(ClipData.newIntent("intent", intent))
     }
 
     /**

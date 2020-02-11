@@ -1,10 +1,10 @@
 @file:Suppress("unused", "SpellCheckingInspection")
 
 object Android {
-    const val compileSdkVersion = 28
-    const val buildToolsVersion = "28.0.3"
+    const val compileSdkVersion = 29
+    const val buildToolsVersion = "29.0.2"
     const val minSdkVersion = 15
-    const val targetSdkVersion = 28
+    const val targetSdkVersion = 29
 
     const val versionName = "1.0"
     const val versionCode = 1
@@ -18,14 +18,14 @@ object Versions {
     const val autodispose = "1.4.0"
     const val glide = "4.11.0"
     const val dagger2 = "2.26"
-    const val fragmentation = "1.1.2"
+    const val fragmentation = "1.1.4"
     const val fly = "3.0.8"
 }
 
 object Publish {
     const val userOrg = "weixia" //bintray.com用户名
     const val groupId = "me.xia" //jcenter上的路径
-    const val publishVersion = "3.0.8" //版本号
+    const val publishVersion = "3.0.9" //版本号
     const val desc = "Oh hi, this is a nice description for a project, right?"
     const val website = "https://github.com/tiamosu/X-MVPFly"
     const val gitUrl = "https://github.com/tiamosu/X-MVPFly.git"
@@ -35,8 +35,8 @@ object Publish {
 object Deps {
     //support
     const val androidx_annotation = "androidx.annotation:annotation:1.1.0"
-    const val androidx_appcompat = "androidx.appcompat:appcompat:1.0.2"
-    const val androidx_recyclerview = "androidx.recyclerview:recyclerview:1.0.0"
+    const val androidx_appcompat = "androidx.appcompat:appcompat:1.1.0"
+    const val androidx_recyclerview = "androidx.recyclerview:recyclerview:1.1.0"
     const val androidx_multidex = "androidx.multidex:multidex:2.0.1"
     const val androidx_constraint_layout = "androidx.constraintlayout:constraintlayout:1.1.3"
 
@@ -44,10 +44,10 @@ object Deps {
     const val kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
     const val kotlin_stdlib_jdk7 = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
     const val kotlin_stdlib_jdk8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
-    const val kotlin_ktx = "androidx.core:core-ktx:1.0.2"
+    const val kotlin_ktx = "androidx.core:core-ktx:1.2.0"
 
     //arouter
-    const val arouter_api = "com.alibaba:arouter-api:1.4.1"
+    const val arouter_api = "com.alibaba:arouter-api:1.5.0"
     const val arouter_compiler = "com.alibaba:arouter-compiler:1.2.2"
 
     //butterknife
