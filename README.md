@@ -17,19 +17,19 @@ allprojects {
 ### fly
 [ ![Download](https://api.bintray.com/packages/weixia/maven/fly/images/download.svg) ](https://bintray.com/weixia/maven/fly/_latestVersion)
 ```groovy
-implementation 'me.xia:fly:3.0.9'
+implementation 'me.xia:fly:3.1.0'
 ```
 
 ### fly-http
 [ ![Download](https://api.bintray.com/packages/weixia/maven/fly-http/images/download.svg) ](https://bintray.com/weixia/maven/fly-http/_latestVersion)
 ```groovy
-implementation 'me.xia:fly-http:3.0.9'
+implementation 'me.xia:fly-http:3.1.0'
 ```
 
 ### fly-imageloader-glide
 [ ![Download](https://api.bintray.com/packages/weixia/maven/fly-imageloader-glide/images/download.svg) ](https://bintray.com/weixia/maven/fly-imageloader-glide/_latestVersion)
 ```groovy
-implementation 'me.xia:fly-imageloader-glide:3.0.9'
+implementation 'me.xia:fly-imageloader-glide:3.1.0'
 ```
 
 ## *特别感谢*
