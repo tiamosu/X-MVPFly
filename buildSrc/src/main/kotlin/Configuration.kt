@@ -59,7 +59,7 @@ object Deps {
     const val dagger2_apt = "com.google.dagger:dagger-compiler:${Versions.dagger2}"
 
     //leakcanary
-    const val leakcanary_android = "com.squareup.leakcanary:leakcanary-android:2.0-beta-3"
+    const val leakcanary_android = "com.squareup.leakcanary:leakcanary-android:2.2"
 
     //rx
     const val retrofit2 = "com.squareup.retrofit2:retrofit:${Versions.retrofit2}"
@@ -67,12 +67,12 @@ object Deps {
     const val retrofit2_converter_gson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit2}"
     const val autodispose = "com.uber.autodispose:autodispose-android:${Versions.autodispose}"
     const val autodispose_archcomponents = "com.uber.autodispose:autodispose-android-archcomponents:${Versions.autodispose}"
-    const val rxjava2 = "io.reactivex.rxjava2:rxjava:2.2.13"
+    const val rxjava2 = "io.reactivex.rxjava2:rxjava:2.2.17"
     const val rxandroid2 = "io.reactivex.rxjava2:rxandroid:2.1.1"
     const val rxcache2 = "com.github.VictorAlbertos.RxCache:runtime:1.8.3-2.x"
     const val rxcache_gson = "com.github.VictorAlbertos.Jolyglot:gson:0.0.4"
     const val rxerrorhandler = "me.jessyan:rxerrorhandler:2.1.1"
-    const val x_rxbus = "me.xia:x-flyrxbus:1.0.5"
+    const val x_rxbus = "me.xia:x-flyrxbus:1.0.6"
 
     //utilcode
     const val utilcode = "com.blankj:utilcodex:1.26.0"
