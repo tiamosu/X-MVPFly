@@ -1,5 +1,7 @@
 # X-MVPFly
 
+> 此框架已停止维护，可以看下新框架 [X-MVVMFly](https://github.com/tiamosu/X-MVVMFly)
+
 ## Download
 
 Gradle:
